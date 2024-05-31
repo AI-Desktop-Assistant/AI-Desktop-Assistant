@@ -1,0 +1,1584 @@
+[
+    {
+        "sentence": "Write an email to update my team on the project's progress",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Draft an email to invite my colleagues to a brainstorming session",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Compose an email to inform the client about the revised deadline",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Send an email to the school principal about arranging a parent-teacher meeting",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Create an email to thank our guest speaker for their presentation",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Can you draft an email to ask for a quote on office supplies",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Make an email to schedule a doctor's appointment for next week",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Prepare an email to confirm my attendance at the workshop",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Set up an email to discuss potential partnership opportunities",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Formulate an email to submit my article to a journal editor",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Craft an email to the tech support about the software bug i encountered",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Generate an email to inquire about the status of my job application",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Produce an email to organize a community cleanup event",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Arrange an email to delegate tasks for the upcoming project",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Author an email to negotiate a better rate with the service provider",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Initiate an email to the landlord about renewing my lease",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Develop an email to the library about reserving a meeting room",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Send out an email to collect RSVPs for the company gala",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Build an email to discuss the agenda for Monday's meeting",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Compose an email to my professor asking for feedback on my thesis",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Create an email to order catering for the office party",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Write an email to solicit donations for the local charity",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Draft an email to ask for a deadline extension from my client",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Send an email to the HR team about updating my personal details",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Compose an email to inform my contacts about my new job role",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Make an email to remind the team about the compliance training",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Prepare an email to offer a guest lecture at the local university",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Set up an email to follow up on the payment invoice I sent last week",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Formulate an email to the editor about corrections to my published article",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Craft an email to the marketing team about the upcoming campaign",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Generate an email to book a venue for the annual conference",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Produce an email to give feedback on the trial product",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Arrange an email to ask for volunteers for the weekend event",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Author an email to request a copy of the contract agreement",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Initiate an email to the web designer about updates to my website",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Develop an email to confirm plans for the holiday party",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Send out an email to discuss the budget report with stakeholders",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Build an email to coordinate a site visit for the team",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Compose an email to propose a new project idea to my boss",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Create an email to discuss internship opportunities with a university",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Write an email to the gym about freezing my membership",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Draft an email to invite friends to a surprise birthday party",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Send an email to the accountant about tax filing",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Compose an email to the customer about a delay in shipment",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Make an email to organize a virtual coffee meet with a new client",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Prepare an email to discuss safety protocols with the warehouse staff",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Set up an email to the community board about the park renovation",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Formulate an email to a colleague about exchanging conference notes",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Craft an email to my child\u2019s teacher about homework concerns",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Generate an email to confirm receipt of a document",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Produce an email to schedule a car service appointment",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Arrange an email to request information on a graduate program",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Author an email to my team about implementing new software tools",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Initiate an email to the supplier about returning defective products",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Develop an email to the city council about local traffic issues",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Send out an email to ask for an update on the policy renewal",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Build an email to invite stakeholders to a project launch",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Compose an email to remind clients about the upcoming webinar",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Create an email to ask for a reference from a previous employer",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Write an email to cancel a subscription service",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Draft an email to the clinic about changing my appointment time",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Send an email to the sales team about the quarterly targets",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Compose an email to the bank about disputing a charge",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Make an email to ask for a meeting with the school counselor",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Prepare an email to submit a warranty claim for my laptop",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Set up an email to coordinate a team retreat",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Formulate an email to discuss changes in the rental agreement",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Craft an email to ask for help with a charity event",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Generate an email to a distributor about product availability",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Produce an email to inform clients about a change in pricing",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Arrange an email to discuss collaboration with a researcher",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Author an email to the travel agency about booking a holiday package",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Initiate an email to the fitness center about group class schedules",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Develop an email to the insurance company about a claim",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Send out an email to remind the team about the data security guidelines",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Build an email to propose a new initiative to the management",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Compose an email to a potential mentor about guidance",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Create an email to the bookstore about ordering specific titles",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Write an email to organize a family reunion",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Draft an email to the newsletter subscribers about the latest issue",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Send an email to the event planner about wedding arrangements",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Compose an email to the alumni group about an upcoming meeting",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Make an email to request the latest version of a software manual",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Prepare an email to invite experts to a panel discussion",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Set up an email to ask for a review of my performance",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Formulate an email to a colleague about swapping shifts",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Craft an email to inquire about the availability of a conference room",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Generate an email to notify tenants about maintenance work",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Produce an email to confirm my participation in a trade show",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Arrange an email to discuss dietary preferences for a catering event",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Author an email to inform about a change in leadership within the company",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Initiate an email to clients about the end of year report",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Develop an email to ask for feedback on a delivered presentation",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Send out an email to arrange a networking dinner",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Build an email to clarify a misunderstanding in a previous correspondence",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Compose an email to ask for an update on a legal matter",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Create an email to inform about office hour changes during holidays",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Write an email to congratulate a colleague on their promotion",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Draft an email to the tech team about upgrading the CRM system",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    },
+    {
+        "sentence": "Send an email to request sponsorship for a community event",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS",
+            "I-EMAIL_FOCUS"
+        ]
+    }
+]

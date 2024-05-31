@@ -1,0 +1,2833 @@
+[
+    {
+        "sentence": "hey if you aren't too busy could you open opera",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "hey if you aren't too busy could you open apex legends",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "hey if you aren't too busy could you open call of duty",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "hey if you aren't too busy could you open the adobe photoshop app",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME",
+            "O"
+        ]
+    },
+    {
+        "sentence": "could you be a doll and start vlc music player",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "open the windows settings",
+        "labels": [
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "do me a favor and open my file explorer",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "please launch the uber app",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "O"
+        ]
+    },
+    {
+        "sentence": "can you open lyft",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "would you mind launching the duolingo app",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "O"
+        ]
+    },
+    {
+        "sentence": "could you start adobe after effects",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "hey can you launch the airbnb app",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "O"
+        ]
+    },
+    {
+        "sentence": "start shopify",
+        "labels": [
+            "O",
+            "B-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "do me a favor and fire up youtube",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "do me a favor and fire up docker",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "do me a favor and fire up blender",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "would you mind to open netflix",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "could you possibly start the steam application",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "O"
+        ]
+    },
+    {
+        "sentence": "could you consider starting the zoom application",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "O"
+        ]
+    },
+    {
+        "sentence": "would you mind starting the notepad application",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "O"
+        ]
+    },
+    {
+        "sentence": "open amazon",
+        "labels": [
+            "O",
+            "B-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "run logitch g hub",
+        "labels": [
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "launch adobe premiere pro",
+        "labels": [
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "run apple music application",
+        "labels": [
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME",
+            "O"
+        ]
+    },
+    {
+        "sentence": "start onedrive",
+        "labels": [
+            "O",
+            "B-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "open the slack app",
+        "labels": [
+            "O",
+            "O",
+            "B-APP_NAME",
+            "O"
+        ]
+    },
+    {
+        "sentence": "start hbo max",
+        "labels": [
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "i want to use the snipping tool",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "i'd like to use adobe premier pro",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "i want to use blender",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "i want to use the snipping tool",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "i'd like to use microsoft word",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "i'd like to use the microsoft office app",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME",
+            "O"
+        ]
+    },
+    {
+        "sentence": "i'd like to use the netflix app",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "O"
+        ]
+    },
+    {
+        "sentence": "can i use photoshop",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "please let me use the spotify app",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "O"
+        ]
+    },
+    {
+        "sentence": "would you allow me to use powerpoint",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "may i use the vlc media player",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "i need to use google chrome",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "can i use the zoom application",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "O"
+        ]
+    },
+    {
+        "sentence": "do you mind if i use skype",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "i have to use microsoft teams",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "let me use the gmail app",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "O"
+        ]
+    },
+    {
+        "sentence": "can i use word",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "i need to use zoom",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "let me use excel",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "may i use spotify",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "can i use chrome",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "help me use teams",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "please use skype",
+        "labels": [
+            "O",
+            "O",
+            "B-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "want to use netflix",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "use vlc player",
+        "labels": [
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "please let me use the quick scheduler app",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME",
+            "O"
+        ]
+    },
+    {
+        "sentence": "can i use hangout hub",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "open pro planner",
+        "labels": [
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "hey can you launch the chill beats app",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME",
+            "O"
+        ]
+    },
+    {
+        "sentence": "could you start task titan",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "would you mind starting the brew buddy application",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME",
+            "O"
+        ]
+    },
+    {
+        "sentence": "open smart sync",
+        "labels": [
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "hey can you launch the snap study app",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME",
+            "O"
+        ]
+    },
+    {
+        "sentence": "launch fit friend",
+        "labels": [
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "would you mind to open night owl",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "could you possibly start the data diver application",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME",
+            "O"
+        ]
+    },
+    {
+        "sentence": "hey can you launch the pic patch app",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME",
+            "O"
+        ]
+    },
+    {
+        "sentence": "do you mind if i use groove glide",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "please let me use the documate app",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "O"
+        ]
+    },
+    {
+        "sentence": "may i use the catchy clips",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "can you open life logger",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "could you possibly start the zoom frame application",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME",
+            "O"
+        ]
+    },
+    {
+        "sentence": "please launch the meal mate app",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME",
+            "O"
+        ]
+    },
+    {
+        "sentence": "i need to use calm cloud",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "open quiz quest",
+        "labels": [
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "would you allow me to use money minder",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "would you mind launching chill tracker",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "open burst box",
+        "labels": [
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "would you mind launching code companion",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "run flow flex",
+        "labels": [
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "do me a favor and fire up zen zone",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "can i use event explorer",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "may i use the sound space",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "could you start tune twister",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "i'd like to use art ark",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "may i use the path finder",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "could you possibly start the news nook application",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME",
+            "O"
+        ]
+    },
+    {
+        "sentence": "hey if you aren't too busy, could you open script stream",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "could you consider starting the energy edge application",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME",
+            "O"
+        ]
+    },
+    {
+        "sentence": "help me use pulse point",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "let me use the trip tracker app",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME",
+            "O"
+        ]
+    },
+    {
+        "sentence": "do you mind if i use pulse pulse",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "do you mind if i use meal wheel",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "could you possibly start the style scout application",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME",
+            "O"
+        ]
+    },
+    {
+        "sentence": "i want to use fashion fuse",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "could you be a doll and start health halo",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "open sleep suite",
+        "labels": [
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "could you be a doll and start zenith zone",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "could you consider starting the clip clap application",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME",
+            "O"
+        ]
+    },
+    {
+        "sentence": "hey can you launch the market maven app",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME",
+            "O"
+        ]
+    },
+    {
+        "sentence": "would you mind to open sales spark",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "i'd like to use click clinic",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "start agile assist",
+        "labels": [
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "would you mind to open note nest",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "could you possibly start the graph gear application",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME",
+            "O"
+        ]
+    },
+    {
+        "sentence": "open credit crunch",
+        "labels": [
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "would you mind to open gadget guide",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "let me use the fitness focus app",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME",
+            "O"
+        ]
+    },
+    {
+        "sentence": "can i use bite byte",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "hey if you aren't too busy, could you open brew brew",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "could you possibly start the skill skillet application",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME",
+            "O"
+        ]
+    },
+    {
+        "sentence": "i'd like to use peace piece",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "help me use classy clicks",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "could you start echo element",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "could you consider starting the quest qube application",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME",
+            "O"
+        ]
+    },
+    {
+        "sentence": "may i use the task tackle",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "i need to use note navigator",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "open track trace",
+        "labels": [
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "help me use buzz booster",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "launch scout spot",
+        "labels": [
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "would you mind launching snack stack",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "hey if you aren't too busy, could you open travel trail",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "would you mind to open chill chill",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "open crate create",
+        "labels": [
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "hey can you launch the draft draft app",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME",
+            "O"
+        ]
+    },
+    {
+        "sentence": "let me use the flux flow app",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME",
+            "O"
+        ]
+    },
+    {
+        "sentence": "would you allow me to use thrive drive",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "please launch the aim arc app",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME",
+            "O"
+        ]
+    },
+    {
+        "sentence": "run bolt board",
+        "labels": [
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "would you allow me to use cinema circle",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "would you mind to open pixel plot",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "please launch the doodle dash app",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME",
+            "O"
+        ]
+    },
+    {
+        "sentence": "start echo ease",
+        "labels": [
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "i need to use gear glide",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "do me a favor and fire up karma keeper",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "help me use lotus lift",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "please launch the match mingle app",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME",
+            "O"
+        ]
+    },
+    {
+        "sentence": "let me use the niche nest app",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME",
+            "O"
+        ]
+    },
+    {
+        "sentence": "i'd like to use optic oasis",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "please let me use the patch path app",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME",
+            "O"
+        ]
+    },
+    {
+        "sentence": "could you be a doll and start quirk quest",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "i'd like to use ripple rise",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "would you mind launching sketch scope",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "please let me use the tint trail app",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME",
+            "O"
+        ]
+    },
+    {
+        "sentence": "please let me use the urban unwind app",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME",
+            "O"
+        ]
+    },
+    {
+        "sentence": "could you be a doll and start vibe vault",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "please launch the wave window app",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME",
+            "O"
+        ]
+    },
+    {
+        "sentence": "let me use the zenith zoom app",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME",
+            "O"
+        ]
+    },
+    {
+        "sentence": "i want to use apex aim",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "let me use the beacon beam app",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME",
+            "O"
+        ]
+    },
+    {
+        "sentence": "do you mind if i use core cure",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "would you mind launching dash domain",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "would you allow me to use echo eats",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "launch frame forge",
+        "labels": [
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "run glide grid",
+        "labels": [
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "start chatpal",
+        "labels": [
+            "O",
+            "B-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "could you start snaptask",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "can i use zenden",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "run fitnessfreak",
+        "labels": [
+            "O",
+            "B-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "would you mind launching groovytunes",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "can i use mealmaster",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "please let me use the tasktornado app",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "O"
+        ]
+    },
+    {
+        "sentence": "start brewbros",
+        "labels": [
+            "O",
+            "B-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "let me use the shopspot app",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "O"
+        ]
+    },
+    {
+        "sentence": "i'd like to use quietquest",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "hey can you launch the chillzone app",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "O"
+        ]
+    },
+    {
+        "sentence": "hey can you launch the cloudconnect app",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "O"
+        ]
+    },
+    {
+        "sentence": "hey if you aren't too busy, could you open dreamdiary",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "could you consider starting the codecrunch application",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "O"
+        ]
+    },
+    {
+        "sentence": "could you consider starting the sketchspace application",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "O"
+        ]
+    },
+    {
+        "sentence": "i need to use gifguru",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "please let me use the chillchat app",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "O"
+        ]
+    },
+    {
+        "sentence": "hey can you launch the tracktrack app",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "O"
+        ]
+    },
+    {
+        "sentence": "do you mind if i use smartsort",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "start playplace",
+        "labels": [
+            "O",
+            "B-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "run peacepeek",
+        "labels": [
+            "O",
+            "B-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "would you mind launching clickclinic",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "do you mind if i use pulseparty",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "would you mind launching datadive",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "i'd like to use skillsphere",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "could you start flowfiesta",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "hey if you aren't too busy, could you open zenpath",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "do me a favor and fire up artarray",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "hey if you aren't too busy, could you open tunetribe",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "i want to use stylestream",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "could you possibly start the fitnessfrontier application",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "O"
+        ]
+    },
+    {
+        "sentence": "hey can you launch the moviemingle app",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "O"
+        ]
+    },
+    {
+        "sentence": "please let me use the codecompanion app",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "O"
+        ]
+    },
+    {
+        "sentence": "do you mind if i use brewbuzz",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "start tasktweaker",
+        "labels": [
+            "O",
+            "B-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "i want to use hangouthaven",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "please let me use the snapshare app",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "O"
+        ]
+    },
+    {
+        "sentence": "launch plotpoint",
+        "labels": [
+            "O",
+            "B-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "would you mind launching chillpill",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "would you mind launching syncsystem",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "do me a favor and fire up zenzen",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "hey if you aren't too busy, could you open partyplanner pro",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "hey can you launch the click and chill app",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME",
+            "I-APP_NAME",
+            "O"
+        ]
+    },
+    {
+        "sentence": "may i use the beat blender",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "run code collider",
+        "labels": [
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "hey can you launch the diet dash app",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME",
+            "O"
+        ]
+    },
+    {
+        "sentence": "would you mind starting the buzz box application",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME",
+            "O"
+        ]
+    },
+    {
+        "sentence": "hey if you aren't too busy, could you open play pen",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "start giggle guide",
+        "labels": [
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "let me use the sleep shepherd app",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME",
+            "O"
+        ]
+    },
+    {
+        "sentence": "could you consider starting the trend tracker application",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME",
+            "O"
+        ]
+    },
+    {
+        "sentence": "hey can you launch the vibe valley app",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME",
+            "O"
+        ]
+    },
+    {
+        "sentence": "i need to use task tamer",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "would you allow me to use plot planner",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "i need to use chill chum",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "let me use the snap savvy app",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME",
+            "O"
+        ]
+    },
+    {
+        "sentence": "could you consider starting the plot patch application",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME",
+            "O"
+        ]
+    },
+    {
+        "sentence": "do me a favor and fire up dream dreamer",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "may i use the gear groove",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "help me use bit boost",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "please let me use the energy envelope app",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME",
+            "O"
+        ]
+    },
+    {
+        "sentence": "hey can you launch the path pioneer app",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME",
+            "O"
+        ]
+    },
+    {
+        "sentence": "launch frame finder",
+        "labels": [
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "could you possibly start the trip tracer application",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME",
+            "O"
+        ]
+    },
+    {
+        "sentence": "start snack selector",
+        "labels": [
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "could you be a doll and start vibe venturer",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "i'd like to use beat bazaar",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "can i use sketch series",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "hey can you launch the map my meal app",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME",
+            "I-APP_NAME",
+            "O"
+        ]
+    },
+    {
+        "sentence": "could you start task trailblazer",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "could you be a doll and start budget buddy",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "hey if you aren't too busy, could you open chill-out chart",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "i need to use quick quotes",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "could you possibly start the pulse patrol application",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME",
+            "O"
+        ]
+    },
+    {
+        "sentence": "hey can you launch the calm canvas app",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME",
+            "O"
+        ]
+    },
+    {
+        "sentence": "run brew break",
+        "labels": [
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "can i use gear genius",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "launch data dojo",
+        "labels": [
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "launch goal getter",
+        "labels": [
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "hey can you launch the sync space app",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME",
+            "O"
+        ]
+    },
+    {
+        "sentence": "would you mind to open clip click",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "i need to use style scope",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "could you be a doll and start dream diver",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "start energy enhancer",
+        "labels": [
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "do me a favor and fire up laugh lounge",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "would you mind launching breeze browser",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "do me a favor and fire up patch place",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "would you mind starting the task tango application",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME",
+            "O"
+        ]
+    },
+    {
+        "sentence": "can you open bit buddy",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "hey if you aren't too busy, could you open zen zapper",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "launch vibe voyage",
+        "labels": [
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "please launch the fit factory app",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME",
+            "O"
+        ]
+    },
+    {
+        "sentence": "i'd like to use snap scraper",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "launch chill capsule",
+        "labels": [
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "i need to use craft corner",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "would you allow me to use quiz quester",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "could you be a doll and start trend trove",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "could you start sketch streak",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    },
+    {
+        "sentence": "could you be a doll and start chillax champ",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-APP_NAME",
+            "O",
+            "B-APP_NAME",
+            "I-APP_NAME"
+        ]
+    }
+]

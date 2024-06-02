@@ -1,6 +1,10 @@
+import os
 from reception_layer.speech_rec import listen
 from reception_layer.classifying_layer.classify_req import classify_user_request
 from reception_layer.classifying_layer.module_layer.launch.process_launch_req import process_launch_req
+from reception_layer.classifying_layer.module_layer.response.response import *
+
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'gcp_creds\\ai-desktop-assistant-425120-fc21e54bf79d.json'
 
 while True:
     # listen for input

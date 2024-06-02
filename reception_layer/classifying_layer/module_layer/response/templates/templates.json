@@ -1,0 +1,33 @@
+{
+    "launch": {
+        "confident":[
+            "Starting up ",
+            "Launching ",
+            "Opening ",
+            "Booting up ",
+            "Running ",
+            "Loading ",
+            "Firing up "
+        ],
+        "not confident": [
+            "I found a file named [file_name], but I'm not certain it's the one you're looking for. Is this the correct file?",
+            "Is this the file you were searching for: [file_name]? I'm not entirely sure.",
+            "There is a file named [file_name] that might match what you want, but I cant guarantee it. Can you confirm if its does.",
+            "I have a file here named [file_name], but I'm unsure if it's the right one. Can you confirm if this is the correct file?",
+            "This file, [file_name], has been located, but I'm not 100% sure it's the correct one. Can you verify?",
+            "I found something called [file_name], but my confidence in this being the right file is low. Is this your file?",
+            "I came across [file_name]. Is this the file you were expecting?"
+        ]
+    },
+    "search": [
+        "Searching for [given_name].",
+        "Looking for [given_name].",
+        "Finding [given_name].",
+        "Locating [given_name].",
+        "Scanning for [given_name].",
+        "Checking for [given_name].",
+        "Seeking [given_name].",
+        "Tracking down [given_name].",
+        "Searching the system for [given_name]."
+    ]
+}

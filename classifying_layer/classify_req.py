@@ -1,14 +1,14 @@
 import torch
-from transformers import BertTokenizer
+from transformers import BertTokenizer, BertTokenizerFast, AutoModelForCausalLM, AutoTokenizer
+from .module_layer.launch.process_launch_req import *
+from models.load_model import load_model
 
+model_path = 'models\\module_classification_model.pth'
+model, tokenizer, device = load_model(model_path, 'classification')
 
-
-def classify(req, model):
+def classify(req):
     labels_to_index = {'email': 0, 'generic': 1, 'launch': 2, 'spotify': 3, 'task': 4, 'weather': 5}
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    model = model.to(device)
     model.eval()
-    tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
     
     tokenized_input = tokenizer([req], padding=True, truncation=True, return_tensors="pt")
     
@@ -28,7 +28,18 @@ def classify(req, model):
     return predicted_module
 
 def classify_user_request(req):
-    model = torch.load('reception_layer\\models\\module_classification_model.pth')
-    module = classify(req, model)
+    module = classify(req)
     print(f'Chosen Module: {module}')
+    if module == 'launch':
+        status = process_launch_req(req)
+    # elif module == 'weather':
+    #     weather(input)
+    # elif module == 'email':
+    #     email(input)
+    # elif module == 'task':
+    #     task(input)
+    # elif module == 'spotify':
+    #     spotify(input)
+    # elif module == 'generic':
+    #     generic(input)
     return module

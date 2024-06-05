@@ -1,10 +1,14 @@
 import torch
 import os
 from transformers import BertTokenizerFast
-from .threaded_file_search import find_file
-from reception_layer.classifying_layer.module_layer.response.response import *
+from models.load_model import load_model
+from .async_file_search import find_file
+from classifying_layer.module_layer.response.response import *
 from reception_layer.speech_rec import listen
-from reception_layer.classifying_layer.module_layer.handle_confirmation import get_y_or_n
+from classifying_layer.module_layer.handle_confirmation import get_y_or_n
+
+model_path = 'models\\app_name_recognizer.pth'
+model, tokenizer, device = load_model(model_path, 'launch')
 
 def launch_best_file(top_files):
     best_match = top_files.pop()
@@ -17,10 +21,10 @@ def launch_best_file(top_files):
         output_response = handle_launch_request(full_app_name, confident=False)
         if output_response["tts"] == "google":
             time_to_say = (len(output_response["text"].split())/135) * 60
-            user_response = listen(timeout=(time_to_say+20), )
+            user_response = listen(timeout=(time_to_say+20))
         else:
             user_response = listen()
-        y_or_n = get_y_or_n(user_response["text"])
+        y_or_n = get_y_or_n(user_response)
         if y_or_n == "yes":
             handle_launch_request(full_app_name)
             os.system(f'"{best_match["file"]}"')
@@ -31,11 +35,8 @@ def launch_best_file(top_files):
                 handle_failed_launch()
 
 
-def parse_app_name(req, model):
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    model = model.to(device)
+def parse_app_name(req, model, tokenizer):
     model.eval()
-    tokenizer = BertTokenizerFast.from_pretrained('bert-base-uncased')
     tokenized_input = tokenizer([req], truncation=True, padding='max_length', is_split_into_words=True, return_tensors="pt")
 
     input_ids = tokenized_input['input_ids'].to(device)
@@ -66,8 +67,7 @@ def parse_app_name(req, model):
         return "No entities found."
 
 def process_launch_req(req):
-    model = torch.load('reception_layer\\models\\app_name_recognizer.pth')
-    app_name_from_req = " ".join(parse_app_name(req, model))
+    app_name_from_req = " ".join(parse_app_name(req, model, tokenizer))
     file_search_feedback(app_name_from_req)
     top_files = find_file(app_name_from_req)
     if len(top_files) != 0:

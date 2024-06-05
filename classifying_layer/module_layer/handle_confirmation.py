@@ -1,12 +1,12 @@
 import torch
-from transformers import BertTokenizer
+from models.load_model import load_model
 
-def classify(req, model):
+model_path = 'models\\yes_no_classification_model.pth'
+model, tokenizer, device = load_model(model_path, 'classification')
+
+def classify(req):
     labels_to_index = {'no': 0, 'yes': 1}
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    model = model.to(device)
     model.eval()
-    tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
     
     tokenized_input = tokenizer([req], padding=True, truncation=True, return_tensors="pt")
     
@@ -26,8 +26,7 @@ def classify(req, model):
     return predicted_module
 
 def get_y_or_n(req):
-    model = torch.load('reception_layer\\models\\yes_no_classification_model.pth')
-    module = classify(req, model)
+    module = classify(req)
     print(f'Chosen Module: {module}')
     return module
     

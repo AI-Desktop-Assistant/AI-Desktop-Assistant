@@ -1,5 +1,5 @@
-import torch
 import os
+import subprocess
 from transformers import BertTokenizerFast
 from models.load_model import load_model
 from .async_file_search import find_file
@@ -16,7 +16,8 @@ def launch_best_file(top_files):
     confidence = best_match["score"]
     if confidence > 0.65:
         handle_launch_request(full_app_name)
-        os.system(f'"{best_match["file"]}"')
+        # os.system(f'"{best_match["file"]}"')
+        subprocess.Popen([best_match["file"]], shell=True)
     else:
         output_response = handle_launch_request(full_app_name, confident=False)
         if output_response["tts"] == "google":
@@ -27,7 +28,8 @@ def launch_best_file(top_files):
         y_or_n = get_y_or_n(user_response)
         if y_or_n == "yes":
             handle_launch_request(full_app_name)
-            os.system(f'"{best_match["file"]}"')
+            # os.system(f'"{best_match["file"]}"')
+            subprocess.Popen([best_match["file"]], shell=True)
         else:
             if len(top_files) != 0:
                 launch_best_file(top_files)
@@ -68,10 +70,11 @@ def parse_app_name(req, model, tokenizer):
 
 def process_launch_req(req):
     app_name_from_req = " ".join(parse_app_name(req, model, tokenizer))
-    file_search_feedback(app_name_from_req)
-    top_files = find_file(app_name_from_req)
-    if len(top_files) != 0:
-        launch_best_file(top_files)
-    else:
-        handle_failed_launch()
-    
+    if app_name_from_req != "N o   e n t i t i e s   f o u n d .":    
+        file_search_feedback(app_name_from_req)
+        top_files = find_file(app_name_from_req)
+        if len(top_files) != 0:
+            launch_best_file(top_files)
+        else:
+            handle_failed_launch()
+        

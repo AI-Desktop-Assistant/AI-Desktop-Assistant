@@ -27,12 +27,12 @@ header nav {
 }
 .dashboard {
     display: flex;
-    height: calc(100% - 50px); /* Adjust based on header height */
+    height: calc(100% - 50px);
 }
 .sidebar {
     background: #424242;
     padding: 20px;
-    width: 250px; /* Sidebar width */
+    width: 250px;
     overflow-y: auto;
 }
 .main-content {
@@ -140,7 +140,7 @@ button:hover {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    max-width: 200px; /* Adjust as needed */
+    max-width: 200px;
 }
 .full-text {
     display: none;

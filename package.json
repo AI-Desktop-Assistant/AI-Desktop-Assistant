@@ -1,0 +1,44 @@
+{
+  "name": "ai-desktop-assistant",
+  "version": "1.0.0",
+  "description": "Desktop Assistant",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AI-Desktop-Assistant/AI-Desktop-Assistant.git"
+  },
+  "keywords": [
+    "ai",
+    "desktop-assistant",
+    "voice-commands",
+    "chat-bot",
+    "task-manager",
+    "weather",
+    "email",
+    "music",
+    "app-launcher"
+  ],
+  "author": "Aidan Gonzalez <aidangonzalez648@gmail.com>",
+  "contributors": [
+    {
+      "name": "Oleg Zakovyrkin",
+      "email": "zakovyrkino@wit.edu"
+    },
+    {
+      "name": "Brian Howard",
+      "email": "howardb1@wit.edu"
+    }
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AI-Desktop-Assistant/AI-Desktop-Assistant/issues"
+  },
+  "homepage": "https://github.com/AI-Desktop-Assistant/AI-Desktop-Assistant#readme",
+  "devDependencies": {
+    "electron": "^31.0.1"
+  }
+}

@@ -4,11 +4,9 @@ import difflib
 import re
 import queue
 
-best_match = {"file": None, "score": -1}
-lock = asyncio.Lock()
-top_matching_files = queue.Queue()   
+lock = asyncio.Lock()  
 
-async def compare_strings(entry, queried_file):
+async def compare_strings(entry, queried_file, best_match, top_matching_files):
     if entry.name.endswith(('.exe', '.url', '.lnk')):
         file_name = os.path.splitext(entry.name)[0].lower()
         
@@ -28,19 +26,19 @@ async def compare_strings(entry, queried_file):
                 best_match["score"] = score
                 best_match["file"] = entry.path
 
-async def search_directory(path, queried_file):
+async def search_directory(path, queried_file, best_match, top_matching_files):
     if os.path.exists(path):
         try:
             with os.scandir(path) as entries:
                 for entry in entries:
                     if entry.is_dir():
-                        await search_directory(entry.path, queried_file)
+                        await search_directory(entry.path, queried_file, best_match, top_matching_files)
                     elif entry.is_file():
-                        await compare_strings(entry, queried_file)
+                        await compare_strings(entry, queried_file, best_match, top_matching_files)
         except PermissionError:
             print(f'Permission denied: {path}')
 
-async def find_close_match(file_name):
+async def find_close_match(file_name, best_match, top_matching_files):
     home = os.path.expanduser("~")
     potential_paths = [
         "C:\\Program Files (x86)", "C:\\Program Files", 
@@ -48,7 +46,7 @@ async def find_close_match(file_name):
         home + "\\Desktop", home + "\\Downloads", home + "\\Documents"
     ]
     
-    await asyncio.gather(*(search_directory(path, file_name) for path in potential_paths))
+    await asyncio.gather(*(search_directory(path, file_name, best_match, top_matching_files) for path in potential_paths))
 
     if best_match["file"]:
         top_files = [top_matching_files.get() for i in range(top_matching_files.qsize())]
@@ -57,4 +55,6 @@ async def find_close_match(file_name):
         print("No matching .exe file found")
 
 def find_file(file_name): 
-    return asyncio.run(find_close_match(file_name))
+    best_match = {"file": None, "score": -1}
+    top_matching_files = queue.Queue() 
+    return asyncio.run(find_close_match(file_name, best_match, top_matching_files))

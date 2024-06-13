@@ -3,14 +3,14 @@ import ssl
 import smtplib
 
 # Currently only able to work with gmail
-email_sender = 'aidangonzalez648@gmail.com'
+email_sender = ''
 
 # Not the password associated with user name
 # This is an "app password" that can be created at myaccount.google.com/apppasswords
-email_password = 'wocoiehkzzincsew'
+email_password = ''
 
 # Will be either retrieved or inputted by the user
-email_reciever = 'aidangonzalezwork@gmail.com'
+email_reciever = ''
 
 subject = 'Testing python email script'
 

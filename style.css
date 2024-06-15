@@ -157,3 +157,24 @@ button:hover {
 .expand-btn:hover {
     background: #0d47a1;
 }
+/*Weather Widget*/
+#customWeatherWidget {
+    background: #f4f4f8;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: black;
+}
+#weatherIcon {
+    width: 100px;
+    height: 100px;
+    margin-right: 20px;
+    flex-shrink: 0;
+}
+.weather-detail {
+    line-height: 1.5;
+    color: #333;
+}

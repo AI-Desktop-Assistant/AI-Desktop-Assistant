@@ -41,8 +41,8 @@
   "devDependencies": {
     "electron": "^31.0.1"
   },
+  "type": "commonjs",
   "dependencies": {
     "sqlite3": "^5.1.7"
-  },
-  "type": "commonjs"
+  }
 }

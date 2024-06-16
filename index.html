@@ -70,11 +70,11 @@
                         </div>
                         <div id="composeEmail" class="tab-content tab active">
                             <h3>Compose Email</h3>
-                            <input type="text" placeholder="Subject"><br>
-                            <input type="text" placeholder="Recipient"><br>
-                            <input type="text" placeholder="CC"><br>
-                            <textarea placeholder="Body"></textarea><br>
-                            <button>Send</button>
+                            <input id="recipient" type="text" placeholder="Recipient"><br>
+                            <input id="cc" type="text" placeholder="CC"><br>
+                            <input id="subject" type="text" placeholder="Subject"><br>
+                            <textarea id="body" placeholder="Body"></textarea><br>
+                            <button id="sendEmail" onclick="sendEmail()">Send</button>
                         </div>
                         <div id="sentEmails" class="tab-content tab">
                             <h3>Sent Emails</h3>
@@ -124,11 +124,6 @@
                         </div>
                     </div>
                     <div id="weather" class="module tabbed-interface">
-                        <div class="tab-buttons">
-                            <button class="tab-button active" onclick="switchTab('currentWeather')">Current Weather</button>
-                            <button class="tab-button" onclick="switchTab('hourlyForecast')">Hourly Forecast</button>
-                            <button class="tab-button" onclick="switchTab('dailyForecast')">Daily Forecast</button>
-                        </div>
                         <div id="currentWeather" class="tab-content tab active">
                             <h3>Current Weather</h3>
                             <input type="text" id="city-input" placeholder="Enter city name" value="Boston">
@@ -137,32 +132,24 @@
                                 <option value="imperial">Fahrenheit</option>
                             </select>
                             <button onclick="getWeather()">Get Weather</button>
-                        </div>
-                        <div id="customWeatherWidget" class="weather-widget">
-                            <div>
-                                <h3>Weather in <span id="widgetCityName">City Name</span></h3>
-                                <div class="weather-detail">
-                                    <p>Temperature: <span id="widgetTemp">--</span></p>
-                                    <p>Feels Like: <span id="widgetFeelsLike">--</span></p>
-                                    <p>Humidity: <span id="widgetHumidity">--</span></p>
-                                    <p>Pressure: <span id="widgetPressure">--</span></p>
-                                    <p>Wind: <span id="widgetWind">--</span></p>
-                                    <p>Cloudiness: <span id="widgetClouds">--</span></p>
-                                    <p>Visibility: <span id="widgetVisibility">--</span></p>
-                                    <p>Sunrise: <span id="widgetSunrise">--</span></p>
-                                    <p>Sunset: <span id="widgetSunset">--</span></p>
-                                    <p>Weather Conditions: <span id="widgetDescription">--</span></p>
-                                </div>
-                            </div>    
-                            <img id="weatherIcon" src="" alt="Weather Icon" style="width: 100px; height: 100px;">
-                        </div>                        
-                        <div id="hourlyForecast" class="tab-content tab">
-                            <h3>Hourly Forecast</h3>
-                            
-                        </div>
-                        <div id="dailyForecast" class="tab-content tab">
-                            <h3>Daily Forecast</h3>
-                            
+                            <div id="customWeatherWidget" class="tab-content tab active">
+                                <div>
+                                    <h3>Weather in <span id="widgetCityName">City Name</span></h3>
+                                    <div class="weather-detail">
+                                        <p>Temperature: <span id="widgetTemp">--</span></p>
+                                        <p>Feels Like: <span id="widgetFeelsLike">--</span></p>
+                                        <p>Humidity: <span id="widgetHumidity">--</span></p>
+                                        <p>Pressure: <span id="widgetPressure">--</span></p>
+                                        <p>Wind: <span id="widgetWind">--</span></p>
+                                        <p>Cloudiness: <span id="widgetClouds">--</span></p>
+                                        <p>Visibility: <span id="widgetVisibility">--</span></p>
+                                        <p>Sunrise: <span id="widgetSunrise">--</span></p>
+                                        <p>Sunset: <span id="widgetSunset">--</span></p>
+                                        <p>Weather Conditions: <span id="widgetDescription">--</span></p>
+                                    </div>
+                                </div>    
+                                <img id="weatherIcon" src="" alt="Weather Icon" style="width: 100px; height: 100px;">
+                            </div>                        
                         </div>
                     </div>
                     <div id="tasks" class="module tabbed-interface">

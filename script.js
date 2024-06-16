@@ -43,12 +43,16 @@ function switchModule(moduleId) {
     document.getElementById(moduleId).style.display = 'block'
     const links = document.querySelectorAll('.nav-link')
     links.forEach(link => link.classList.remove('active'))
-    const selectedModule = document.querySelector(`[onclick="switchModule('${moduleId}')"]`)
+    selectedModule = document.querySelector(`[onclick="switchModule('${moduleId}')"]`)
     selectedModule.classList.add('active')
     const firstTabButton = selectedModule.querySelector('.tab-button')
     if (firstTabButton) {
         const firstTabId = firstTabButton.onclick.toString().match(/'([^']+)'/)[1]
         switchTab(firstTabId)
+    }
+    else {
+        contents = selectedModule.querySelectorAll('.tab-content')
+        contents.forEach(content => content.classList.add('active'))
     }
 }
 
@@ -261,4 +265,12 @@ function signout() {
     console.log('Going back to login page')
     document.getElementById('login-signup-screen').style.display = 'flex'
     document.getElementById('main-app').style.display = 'none'
+}
+
+function sendEmail() {
+    const recipient = document.getElementById('recipient')
+    const cc = document.getElementById('cc')
+    const subject = document.getElementById('subject')
+    const body = document.getElementById('body')
+    window.electron.sendEmail(recipient, cc, subject, body)
 }

@@ -16,6 +16,8 @@ header {
 }
 header nav {
     flex-grow: 1;
+    display: flex;
+    align-items: center;
 }
 .nav-link {
     margin-left: 20px;
@@ -24,6 +26,39 @@ header nav {
 }
 .nav-link.active, .nav-link:hover {
     color: #1e88e5;
+}
+.account-icon {
+    position: relative;
+    cursor: pointer;
+    margin-left: auto;
+    align-self: flex-end;
+}
+.account-icon .icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: #333;
+    min-width: 160px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 5px;
+}
+.dropdown-content a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+.dropdown-content a:hover {
+    background-color: #1e88e5;
+}
+.show {
+    display: block;
 }
 .dashboard {
     display: flex;
@@ -114,20 +149,20 @@ button:hover {
 .tab.active {
     display: block;
 }
-.tasks-table th, .apps-table th, .launches-table th, .history-table th, .email-table th, .contacts-table th, .reminders-table th {
+.tasks-table th, .apps-table th, .apps-table th, .history-table th, .email-table th, .contacts-table th, .reminders-table th {
     background: #333333;
     color: #e0e0e0;
 }
-.tasks-table td, .apps-table td, .launches-table td, .history-table td, .email-table td, .contacts-table td, .reminders-table td {
+.tasks-table td, .apps-table td, .apps-table td, .history-table td, .email-table td, .contacts-table td, .reminders-table td {
     background: #424242;
     color: #e0e0e0;
 }
-.apps-table, .launches-table, .history-table, .tasks-table, .email-table, .contacts-table, .reminders-table {
+.apps-table, .apps-table, .history-table, .tasks-table, .email-table, .contacts-table, .reminders-table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 10px;
 }
-.apps-table th, .apps-table td, .launches-table th, .launches-table td, .history-table th, .history-table td, .reminders-table th, .reminders-table td, .tasks-table th, .tasks-table td, .email-table th, .email-table td, .contacts-table th, .contacts-table td {
+.apps-table th, .apps-table td, .apps-table th, .apps-table td, .history-table th, .history-table td, .reminders-table th, .reminders-table td, .tasks-table th, .tasks-table td, .email-table th, .email-table td, .contacts-table th, .contacts-table td {
     padding: 10px;
     text-align: left;
     border-bottom: 1px solid #424242;
@@ -156,6 +191,87 @@ button:hover {
 }
 .expand-btn:hover {
     background: #0d47a1;
+}
+#login-signup-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #121212;
+}
+.login-container, .signup-container {
+    background: #333;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    width: 40%;
+}
+.login-container.active, .signup-container.active {
+    display: flex;
+}
+#login-signup-screen input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+    background: #424242;
+    color: #e0e0e0;
+}
+#login-signup-screen button {
+    width: 100%;
+    padding: 10px;
+    background: #1e88e5;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+#login-signup-screen button:hover {
+    background-color: #0d47a1;
+}
+#login-signup-screen .remember-me {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0;
+    width: 100%;
+}
+#login-signup-screen .remember-me input[type="checkbox"] {
+    margin-right: 10px;
+    width: 20px;
+}
+#login-signup-screen .remember-me span {
+    margin-left: 10px;
+}
+#login-signup-screen .toggle-form {
+    margin-top: 10px;
+    cursor: pointer;
+}
+#login-signup-screen .toggle-form span {
+    color: #1e88e5;
+}
+#login-signup-screen .toggle-form span:hover {
+    text-decoration: underline;
+}
+.left-aligned {
+    align-self: flex-start;
+}
+.input-error {
+    outline: 2px solid red;
+}
+.message-error {
+    color: red;
+}
+.message-success {
+    color: green;
 }
 /*Weather Widget*/
 #customWeatherWidget {

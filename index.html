@@ -8,99 +8,129 @@
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        <header>
-            <h1>AI Desktop Assistant</h1>
-            <nav>
-                <span class="nav-link active" onclick="switchModule('chat')">Chat</span>
-                <span class="nav-link" onclick="switchModule('email')">Email</span>
-                <span class="nav-link" onclick="switchModule('weather')">Weather</span>
-                <span class="nav-link" onclick="switchModule('tasks')">Tasks</span>
-                <span class="nav-link" onclick="switchModule('spotify')">Spotify</span>
-                <span class="nav-link" onclick="switchModule('launcher')">Launcher</span>
-                <span class="nav-link" onclick="switchModule('history')">History</span>
-            </nav>
-        </header>
-        <div class="dashboard">
-            <div class="main-content">
-                <div id="chat" class="module">
-                    <h2>Chat with Assistant</h2>
-                    <div class="chat-history">
-                        
+        <div id="login-signup-screen" class="center-screen">
+            <div class="login-container active">
+                <h2>Login</h2>
+                <div id="login-status-message" class="left-aligned"></div>
+                <input type="text" id="login-username" placeholder="Username">
+                <input type="password" id="login-password" placeholder="Password">
+                <label class="remember-me">
+                    <input type="checkbox" id="remember-me"> Remember Me
+                </label>
+                <button onclick="login()">Login</button>
+                <p class="toggle-form">Don't have an account? <span onclick="toggleForm()">Sign Up</span></p>
+            </div>
+            <div class="signup-container">
+                <h2>Sign Up</h2>
+                <div id="signup-status-message" class="left-aligned"></div>
+                <input type="text" id="signup-username" placeholder="Username">
+                <input type="password" id="signup-password" placeholder="Password">
+                <input type="password" id="signup-confirm-password" placeholder="Confirm Password">
+                <button onclick="signup()">Sign Up</button>
+                <p class="toggle-form">Already have an account? <span onclick="toggleForm()">Login</span></p>
+            </div>
+        </div>
+        <div id="main-app" style="display:none;">
+            <header>
+                <h1>AI Desktop Assistant</h1>
+                <nav>
+                    <span class="nav-link active" onclick="switchModule('chat')">Chat</span>
+                    <span class="nav-link" onclick="switchModule('email')">Email</span>
+                    <span class="nav-link" onclick="switchModule('weather')">Weather</span>
+                    <span class="nav-link" onclick="switchModule('tasks')">Tasks</span>
+                    <span class="nav-link" onclick="switchModule('spotify')">Spotify</span>
+                    <span class="nav-link" onclick="switchModule('launcher')">Launcher</span>
+                    <span class="nav-link" onclick="switchModule('history')">History</span>
+                    <span class="account-icon" onclick="toggleDropdown()">
+                        <img src="images\account_icon.png" alt="Account" class="icon">
+                        <div id="accountDropdown" class="dropdown-content">
+                            <a href="#" onclick="settings()">Settings</a>
+                            <a href="#" onclick="signout()">Sign Out</a>
+                            <a href="#" onclick="signoutAndQuit()">Sign Out & Quit</a>
+                        </div>
+                    </span>
+                </nav>
+            </header>
+            <div class="dashboard">
+                <div class="main-content">
+                    <div id="chat" class="module">
+                        <h2>Chat with Assistant</h2>
+                        <div class="chat-history">
+                            
+                        </div>
+                        <input type="text" placeholder="Type your command..." class="chat-input">
+                        <button class="send-button">Send</button>
                     </div>
-                    <input type="text" placeholder="Type your command..." class="chat-input">
-                    <button class="send-button">Send</button>
-                </div>
-                
-                <div id="email" class="module tabbed-interface">
-                    <div class="tab-buttons">
-                        <button class="tab-button active" onclick="switchTab('composeEmail')">Compose Email</button>
-                        <button class="tab-button" onclick="switchTab('sentEmails')">Sent Emails</button>
-                        <button class="tab-button" onclick="switchTab('contacts')">Contacts</button>
+                    
+                    <div id="email" class="module tabbed-interface">
+                        <div class="tab-buttons">
+                            <button class="tab-button active" onclick="switchTab('composeEmail')">Compose Email</button>
+                            <button class="tab-button" onclick="switchTab('sentEmails')">Sent Emails</button>
+                            <button class="tab-button" onclick="switchTab('contacts')">Contacts</button>
+                        </div>
+                        <div id="composeEmail" class="tab-content tab active">
+                            <h3>Compose Email</h3>
+                            <input type="text" placeholder="Subject"><br>
+                            <input type="text" placeholder="Recipient"><br>
+                            <input type="text" placeholder="CC"><br>
+                            <textarea placeholder="Body"></textarea><br>
+                            <button>Send</button>
+                        </div>
+                        <div id="sentEmails" class="tab-content tab">
+                            <h3>Sent Emails</h3>
+                            <table class="email-table">
+                                <thead>
+                                    <tr>
+                                        <th>Recipient</th>
+                                        <th>Subject</th>
+                                        <th>Body</th>
+                                        <th>Time Sent</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>recipient@example.com</td>
+                                        <td>Email Subject</td>
+                                        <td class="email-snippet">
+                                            <span class="snippet-text">This is a snippet of the email body...</span>
+                                            <span class="full-text" style="display: none;">This is a snippet of the email body...This is the full email body that is shown when expanded...</span>
+                                            <button class="expand-btn" onclick="toggleEmailBody(this)">Expand</button>
+                                        </td>
+                                        <td>2024-06-11 10:30 AM</td>
+                                    </tr>
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                        <div id="contacts" class="tab-content tab">
+                            <h3>Contacts</h3>
+                            <table class="contacts-table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Email Address</th>
+                                        <th>Date Added</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>John Doe</td>
+                                        <td>johndoe@example.com</td>
+                                        <td>2024-01-15</td>
+                                    </tr>
+                                    
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                    <div id="composeEmail" class="tab-content tab active">
-                        <h3>Compose Email</h3>
-                        <input type="text" placeholder="Subject"><br>
-                        <input type="text" placeholder="Recipient"><br>
-                        <input type="text" placeholder="CC"><br>
-                        <textarea placeholder="Body"></textarea><br>
-                        <button>Send</button>
-                    </div>
-                    <div id="sentEmails" class="tab-content tab">
-                        <h3>Sent Emails</h3>
-                        <table class="email-table">
-                            <thead>
-                                <tr>
-                                    <th>Recipient</th>
-                                    <th>Subject</th>
-                                    <th>Body</th>
-                                    <th>Time Sent</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>recipient@example.com</td>
-                                    <td>Email Subject</td>
-                                    <td class="email-snippet">
-                                        <span class="snippet-text">This is a snippet of the email body...</span>
-                                        <span class="full-text" style="display: none;">This is a snippet of the email body...This is the full email body that is shown when expanded...</span>
-                                        <button class="expand-btn" onclick="toggleEmailBody(this)">Expand</button>
-                                    </td>
-                                    <td>2024-06-11 10:30 AM</td>
-                                </tr>
-                                
-                            </tbody>
-                        </table>
-                    </div>
-                    <div id="contacts" class="tab-content tab">
-                        <h3>Contacts</h3>
-                        <table class="contacts-table">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Email Address</th>
-                                    <th>Date Added</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>John Doe</td>
-                                    <td>johndoe@example.com</td>
-                                    <td>2024-01-15</td>
-                                </tr>
-                                
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div id="weather" class="module tabbed-interface">
-                    <div class="tab-buttons">
-                        <button class="tab-button active" onclick="switchTab('currentWeather')">Current Weather</button>
-                        <button class="tab-button" onclick="switchTab('hourlyForecast')">Hourly Forecast</button>
-                        <button class="tab-button" onclick="switchTab('dailyForecast')">Daily Forecast</button>
-                    </div>
-                    <div id="currentWeather" class="tab-content tab active">
-                        <h3>Current Weather</h3>
-                        <div>
+                    <div id="weather" class="module tabbed-interface">
+                        <div class="tab-buttons">
+                            <button class="tab-button active" onclick="switchTab('currentWeather')">Current Weather</button>
+                            <button class="tab-button" onclick="switchTab('hourlyForecast')">Hourly Forecast</button>
+                            <button class="tab-button" onclick="switchTab('dailyForecast')">Daily Forecast</button>
+                        </div>
+                        <div id="currentWeather" class="tab-content tab active">
+                            <h3>Current Weather</h3>
                             <input type="text" id="city-input" placeholder="Enter city name" value="Boston">
                             <select id="unit-select">
                                 <option value="metric">Celsius</option>
@@ -126,199 +156,200 @@
                             </div>    
                             <img id="weatherIcon" src="" alt="Weather Icon" style="width: 100px; height: 100px;">
                         </div>                        
-                    <div id="hourlyForecast" class="tab-content tab">
-                        <h3>Hourly Forecast</h3>
-                        
+                        <div id="hourlyForecast" class="tab-content tab">
+                            <h3>Hourly Forecast</h3>
+                            
+                        </div>
+                        <div id="dailyForecast" class="tab-content tab">
+                            <h3>Daily Forecast</h3>
+                            
+                        </div>
                     </div>
-                    <div id="dailyForecast" class="tab-content tab">
-                        <h3>Daily Forecast</h3>
-                        
+                    <div id="tasks" class="module tabbed-interface">
+                        <div class="tab-buttons">
+                            <button class="tab-button active" onclick="switchTab('upcomingTasks')">Upcoming Tasks</button>
+                            <button class="tab-button" onclick="switchTab('allReminders')">All Reminders</button>
+                            <button class="tab-button" onclick="switchTab('setNewReminder')">Set New Reminder</button>
+                        </div>
+                        <div id="upcomingTasks" class="tab-content tab active">
+                            <h3>Upcoming Tasks</h3>
+                            <table class="tasks-table">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Time</th>
+                                        <th>Task</th>
+                                        <th>Repeating</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>2024-06-12</td>
+                                        <td>08:30 AM</td>
+                                        <td>Meeting with team</td>
+                                        <td>Weekly</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2024-06-13</td>
+                                        <td>10:00 AM</td>
+                                        <td>Project deadline</td>
+                                        <td>None</td>
+                                    </tr>
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                        <div id="allReminders" class="tab-content tab">
+                            <h3>All Reminders</h3>
+                            <table class="reminders-table">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Time</th>
+                                        <th>Task</th>
+                                        <th>Repeating</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>2024-06-12</td>
+                                        <td>08:30 AM</td>
+                                        <td>Meeting with team</td>
+                                        <td>Weekly</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2024-06-13</td>
+                                        <td>10:00 AM</td>
+                                        <td>Project deadline</td>
+                                        <td>None</td>
+                                    </tr>
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                        <div id="setNewReminder" class="tab-content tab">
+                            <h3>Set New Reminder</h3>
+                            <input type="text" placeholder="Task Details"><br>
+                            <input type="date"><br>
+                            <input type="time"><br>
+                            <select>
+                                <option>AM</option>
+                                <option>PM</option>
+                            </select><br>
+                            <button>Save</button>
+                        </div>
                     </div>
-                </div>
-                <div id="tasks" class="module tabbed-interface">
-                    <div class="tab-buttons">
-                        <button class="tab-button active" onclick="switchTab('upcomingTasks')">Upcoming Tasks</button>
-                        <button class="tab-button" onclick="switchTab('allReminders')">All Reminders</button>
-                        <button class="tab-button" onclick="switchTab('setNewReminder')">Set New Reminder</button>
-                    </div>
-                    <div id="upcomingTasks" class="tab-content tab active">
-                        <h3>Upcoming Tasks</h3>
-                        <table class="tasks-table">
-                            <thead>
-                                <tr>
-                                    <th>Date</th>
-                                    <th>Time</th>
-                                    <th>Task</th>
-                                    <th>Repeating</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>2024-06-12</td>
-                                    <td>08:30 AM</td>
-                                    <td>Meeting with team</td>
-                                    <td>Weekly</td>
-                                </tr>
-                                <tr>
-                                    <td>2024-06-13</td>
-                                    <td>10:00 AM</td>
-                                    <td>Project deadline</td>
-                                    <td>None</td>
-                                </tr>
-                                
-                            </tbody>
-                        </table>
-                    </div>
-                    <div id="allReminders" class="tab-content tab">
-                        <h3>All Reminders</h3>
-                        <table class="reminders-table">
-                            <thead>
-                                <tr>
-                                    <th>Date</th>
-                                    <th>Time</th>
-                                    <th>Task</th>
-                                    <th>Repeating</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>2024-06-12</td>
-                                    <td>08:30 AM</td>
-                                    <td>Meeting with team</td>
-                                    <td>Weekly</td>
-                                </tr>
-                                <tr>
-                                    <td>2024-06-13</td>
-                                    <td>10:00 AM</td>
-                                    <td>Project deadline</td>
-                                    <td>None</td>
-                                </tr>
-                                
-                            </tbody>
-                        </table>
-                    </div>
-                    <div id="setNewReminder" class="tab-content tab">
-                        <h3>Set New Reminder</h3>
-                        <input type="text" placeholder="Task Details"><br>
-                        <input type="date"><br>
-                        <input type="time"><br>
-                        <select>
-                            <option>AM</option>
-                            <option>PM</option>
-                        </select><br>
-                        <button>Save</button>
-                    </div>
-                </div>
-                <div id="spotify" class="module tabbed-interface">
-                    <div class="tab-buttons">
-                        <button class="tab-button active" onclick="switchTab('search')">Search</button>
-                        <button class="tab-button" onclick="switchTab('playlists')">Playlists</button>
-                        <button class="tab-button" onclick="switchTab('nowPlaying')">Now Playing</button>
-                    </div>
-                    <div id="search" class="tab-content tab active">
-                        <h3>Search</h3>
-                        <input type="text" placeholder="Search songs, albums, or playlists"><br>
-                        <button>Search</button>
-                    </div>
-                    <div id="playlists" class="tab-content tab">
-                        <h3>Playlists</h3>
+                    <div id="spotify" class="module tabbed-interface">
+                        <div class="tab-buttons">
+                            <button class="tab-button active" onclick="switchTab('search')">Search</button>
+                            <button class="tab-button" onclick="switchTab('playlists')">Playlists</button>
+                            <button class="tab-button" onclick="switchTab('nowPlaying')">Now Playing</button>
+                        </div>
+                        <div id="search" class="tab-content tab active">
+                            <h3>Search</h3>
+                            <input type="text" placeholder="Search songs, albums, or playlists"><br>
+                            <button>Search</button>
+                        </div>
+                        <div id="playlists" class="tab-content tab">
+                            <h3>Playlists</h3>
 
-                    </div>
-                    <div id="nowPlaying" class="tab-content tab">
-                        <h3>Now Playing</h3>
+                        </div>
+                        <div id="nowPlaying" class="tab-content tab">
+                            <h3>Now Playing</h3>
 
+                        </div>
                     </div>
-                </div>
-                <div id="launcher" class="module tabbed-interface">
-                    <div class="tab-buttons">
-                        <button class="tab-button active" onclick="switchTab('previousLaunches')">Previous Launches</button>
-                        <button class="tab-button" onclick="switchTab('recentApps')">Recent Apps</button>
+                    <div id="launcher" class="module tabbed-interface">
+                        <div class="tab-buttons">
+                            <button class="tab-button active" onclick="switchTab('rememberedApps')">Previous Launches</button>
+                            <button class="tab-button" onclick="switchTab('recentApps')">Recent Apps</button>
+                        </div>
+                        <div id="rememberedApps" class="tab-content tab active">
+                            <h3>Previous Launches</h3>
+                            <table class="apps-table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Path</th>
+                                        <th>Time</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Visual Studio Code</td>
+                                        <td>C:\Program Files\Microsoft VS Code\Code.exe</td>
+                                        <td>2024-06-11 10:30 AM</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Google Chrome</td>
+                                        <td>C:\Program Files\Google\Chrome\Application\chrome.exe</td>
+                                        <td>2024-06-11 10:30 AM</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div id="recentApps" class="tab-content tab">
+                            <h3>Recent Apps</h3>
+                            <table class="apps-table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Path</th>
+                                        <th>Time</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Visual Studio Code</td>
+                                        <td>C:\Program Files\Microsoft VS Code\Code.exe</td>
+                                        <td>2024-06-11 10:30 AM</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Google Chrome</td>
+                                        <td>C:\Program Files\Google\Chrome\Application\chrome.exe</td>
+                                        <td>2024-06-11 10:30 AM</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                    <div id="previousLaunches" class="tab-content tab active">
-                        <h3>Previous Launches</h3>
-                        <table class="launches-table">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Path</th>
-                                    <th>Time</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Visual Studio Code</td>
-                                    <td>C:\Program Files\Microsoft VS Code\Code.exe</td>
-                                    <td>2024-06-11 10:30 AM</td>
-                                </tr>
-                                <tr>
-                                    <td>Google Chrome</td>
-                                    <td>C:\Program Files\Google\Chrome\Application\chrome.exe</td>
-                                    <td>2024-06-11 10:30 AM</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div id="recentApps" class="tab-content tab">
-                        <h3>Recent Apps</h3>
-                        <table class="apps-table">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Path</th>
-                                    <th>Time</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Visual Studio Code</td>
-                                    <td>C:\Program Files\Microsoft VS Code\Code.exe</td>
-                                    <td>2024-06-11 10:30 AM</td>
-                                </tr>
-                                <tr>
-                                    <td>Google Chrome</td>
-                                    <td>C:\Program Files\Google\Chrome\Application\chrome.exe</td>
-                                    <td>2024-06-11 10:30 AM</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div id="history" class="module tabbed-interface">
-                    <div class="tab-buttons">
-                        <button class="tab-button active" onclick="switchTab('historyTab')">History</button>
-                        <button class="tab-button" onclick="switchTab('searchHistory')">Search</button>
-                    </div>
-                    <div id="historyTab" class="tab-content tab active">
-                        <h3>History</h3>
-                        <table class="history-table">
-                            <thead>
-                                <tr>
-                                    <th>Type</th>
-                                    <th>Command</th>
-                                    <th>Response</th>
-                                    <th>Time</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Launch</td>
-                                    <td>Open opera</td>
-                                    <td>File opened successfully</td>
-                                    <td>2024-06-11 09:00 AM</td>
-                                </tr>
-                                <tr>
-                                    <td>Weather</td>
-                                    <td>What's the weather?</td>
-                                    <td>The current weather is sunny, 75°F</td>
-                                    <td>2024-06-11 09:05 AM</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div id="searchHistory" class="tab-content tab">
-                        <h3>Search</h3>
-                        <input type="text" placeholder="Search commands"><br>
-                        <button>Search</button>
+                    <div id="history" class="module tabbed-interface">
+                        <div class="tab-buttons">
+                            <button class="tab-button active" onclick="switchTab('historyTab')">History</button>
+                            <button class="tab-button" onclick="switchTab('searchHistory')">Search</button>
+                        </div>
+                        <div id="historyTab" class="tab-content tab active">
+                            <h3>History</h3>
+                            <table class="history-table">
+                                <thead>
+                                    <tr>
+                                        <th>Type</th>
+                                        <th>Command</th>
+                                        <th>Response</th>
+                                        <th>Time</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Launch</td>
+                                        <td>Open opera</td>
+                                        <td>File opened successfully</td>
+                                        <td>2024-06-11 09:00 AM</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Weather</td>
+                                        <td>What's the weather?</td>
+                                        <td>The current weather is sunny, 75°F</td>
+                                        <td>2024-06-11 09:05 AM</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div id="searchHistory" class="tab-content tab">
+                            <h3>Search</h3>
+                            <input type="text" placeholder="Search commands"><br>
+                            <button>Search</button>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -1,3 +1,6 @@
 models/yes_no_classification_model.pth filter=lfs diff=lfs merge=lfs -text
 models/module_classification_model.pth filter=lfs diff=lfs merge=lfs -text
 models/app_name_recognizer.pth filter=lfs diff=lfs merge=lfs -text
+models/app_name_recognizer.pth filter=lfs diff=lfs merge=lfs -text
+models/module_classification_model.pth filter=lfs diff=lfs merge=lfs -text
+models/yes_no_classification_model.pth filter=lfs diff=lfs merge=lfs -text

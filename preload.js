@@ -9,5 +9,6 @@ contextBridge.exposeInMainWorld('electron', {
   signup: (username, password, confirmPassword) => ipcRenderer.send('signup', username, password, confirmPassword),
   onSignupResponse: (callback) => ipcRenderer.on('signup-response', callback),
   signout: () => ipcRenderer.send('signout', false),
-  signoutAndQuit: () => ipcRenderer.send('signout', true)
+  signoutAndQuit: () => ipcRenderer.send('signout', true),
+  sendEmail: (recipient, cc, subject, body) => ipcRenderer.send('send-email', recipient, cc, subject, body)
 })

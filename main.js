@@ -27,7 +27,7 @@ const createWindow = () => {
         }
         
         const createSentEmailTable = () => {
-            db.run('CREATE TABLE IF NOT EXISTS sent_emails (id INTEGER PRIMARY KEY, user_id INTEGER, subject TEXT, body TEXT, recipient TEXT, date TEXT, timestamp TEXT, FOREIGN KEY(user_id) REFERENCES users(id))', (err) => {
+            db.run("CREATE TABLE IF NOT EXISTS sent_emails (id INTEGER PRIMARY KEY, user_id INTEGER, subject TEXT, body TEXT, recipient TEXT, cc TEXT DEFAULT '', date TEXT, timestamp TEXT, FOREIGN KEY(user_id) REFERENCES users(id))", (err) => {
                 if (err) {
                     console.error(`Error creating sent_emails table: ${err.message}`)
                 }

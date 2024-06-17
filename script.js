@@ -40,19 +40,28 @@ function switchModule(moduleId) {
     console.log(`Switching module to: ${moduleId}`)
     const modules = document.querySelectorAll('.module')
     modules.forEach(mod => mod.style.display = 'none')
-    document.getElementById(moduleId).style.display = 'block'
+    console.log(`Displaying ${moduleId}`)
+    const module = document.getElementById(moduleId)
+    module.style.display = 'block'
     const links = document.querySelectorAll('.nav-link')
+    console.log('Deactivating ')
     links.forEach(link => link.classList.remove('active'))
     selectedModule = document.querySelector(`[onclick="switchModule('${moduleId}')"]`)
     selectedModule.classList.add('active')
-    const firstTabButton = selectedModule.querySelector('.tab-button')
-    if (firstTabButton) {
-        const firstTabId = firstTabButton.onclick.toString().match(/'([^']+)'/)[1]
-        switchTab(firstTabId)
+    const tabButtons = document.getElementById(moduleId).querySelector('.tab-buttons')
+    const moduleContent = module.querySelector('.module-content')
+    console.log(`Tab Buttons: ${tabButtons}`)
+    if (tabButtons) {
+        firstTab = tabButtons.querySelector('.tab-button')
+        console.log(`First tab: ${firstTab.className}`)
+        firstTab.click()
     }
-    else {
-        contents = selectedModule.querySelectorAll('.tab-content')
-        contents.forEach(content => content.classList.add('active'))
+    else if (moduleContent) {
+        console.log(`Module Content: ${moduleContent}`)
+        moduleContent.classList.add('active')
+        content = moduleContent.querySelectorAll('.tab-content')
+        content.forEach(cont => cont.classList.add('active'))
+
     }
 }
 

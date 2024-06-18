@@ -1,6 +1,7 @@
 const { app, BrowserWindow, ipcMain } = require('electron')
 const sqlite3 = require('sqlite3').verbose()
 const path = require('node:path')
+const { spawn } = require('child_process')
 
 const createWindow = () => {
     const win = new BrowserWindow({
@@ -16,7 +17,7 @@ const createWindow = () => {
 
     const db = new sqlite3.Database(path.join(__dirname, 'users.db'), (err) => {
         const createUsersTable = () => {
-            db.run('CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, username TEXT UNIQUE, password TEXT, rememberme BOOLEAN DEFAULT FALSE)', (err) => {
+            db.run("CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, username TEXT UNIQUE, password TEXT, email TEXT DEFAULT '', app_password TEXT DEFAULT '', rememberme BOOLEAN DEFAULT FALSE)", (err) => {
                 if (err) {
                     console.error(`Error creating user table: ${err.message}`)
                 }
@@ -92,7 +93,7 @@ const createWindow = () => {
             createRememberedAppsTable()
         }
     });
-
+    // save current user
     let currentUsername = null
 
     // Validate input user account details
@@ -154,6 +155,10 @@ const createWindow = () => {
         })        
     })
     
+    ipcMain.on('fill-username', (event) => {
+        event.reply('fill-username-response', { username: currentUsername })
+    })
+
     // Add user to database
     ipcMain.on('signup', (event, username, password, confirmPassword) => {
         console.log(`Attempting to sign up username: ${username} password: ${password}`)
@@ -209,7 +214,17 @@ const createWindow = () => {
                 }
             }
         )
-        
+    })
+
+    ipcMain.on('send-email', (event, recipient, cc, subject, body) => {
+        const data = {'module': 'email'}
+        const emailProcess = spawn('python', ['input_from_ui.py'])
+        // Query users email
+
+        // Query users email app password
+
+        // Send all information to email handler
+
     })
 }
 

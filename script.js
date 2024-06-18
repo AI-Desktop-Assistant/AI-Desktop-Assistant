@@ -175,6 +175,7 @@ window.electron.onLoginResponse((event, response) => {
         // remove login page from view and show the main app UI
         document.getElementById('login-signup-screen').style.display = 'none'
         document.getElementById('main-app').style.display = 'block'
+        load_user_data()
     } 
     // if login was unsuccessful
     // Alert that login was unsuccessful
@@ -188,6 +189,20 @@ window.electron.onLoginResponse((event, response) => {
         passwordInput.classList.add('input-error')
     }
 })
+
+function load_user_data() {
+    window.electron.fillUsername()
+}
+
+window.electron.onFillUsernameResponse((event, response) => {
+    const username_field = document.getElementById('current-username')
+    console.log(username_field)
+    username_field.textContent = `Current Username: ${response.username}`
+}) 
+
+function load_settings_data(settings) {
+    
+}
 
 // ran on signup button click
 function signup() {

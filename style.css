@@ -21,6 +21,7 @@ header nav {
 }
 .nav-link {
     margin-left: 20px;
+    font-size: 2em;
     cursor: pointer;
     color: #ccc;
 }
@@ -294,4 +295,52 @@ button:hover {
 .weather-detail {
     line-height: 1.5;
     color: #333;
+}
+.settings-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30%;
+    background: #333333;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    color: #e0e0e0;
+}
+.settings-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.settings-section {
+    margin-bottom: 20px;
+}
+.settings-section h3 {
+    margin-bottom: 10px;
+}
+.settings-section label {
+    display: block;
+    margin-bottom: 5px;
+}
+.settings-section input[type="text"], .settings-section input[type="password"], .settings-section input[type="email"], .settings-section select, .settings-section input[type="range"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    background: #424242;
+    color: #fff;
+    border: 1px solid #555;
+    border-radius: 5px;
+}
+.settings-section button {
+    width: 100%;
+    padding: 10px;
+    background: #1e88e5;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 5px;
+}
+.settings-section button:hover {
+    background-color: #0d47a1;
 }

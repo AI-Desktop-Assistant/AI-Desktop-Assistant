@@ -13,10 +13,12 @@ client = texttospeech.TextToSpeechClient()
 pygame.mixer.init(frequency=24000)
 pygame.mixer.music.set_volume(0.1)
 
+
+
 def google_tts(text):
     print("playing google")
     input_text = texttospeech.SynthesisInput(text=text)
-
+    selected_voice = get_selected_voice()
     voice = texttospeech.VoiceSelectionParams(
         language_code="en-US",
         name="en-US-Wavenet-B",

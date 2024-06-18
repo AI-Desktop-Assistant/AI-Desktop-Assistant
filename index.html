@@ -44,7 +44,7 @@
                     <span class="account-icon" onclick="toggleDropdown()">
                         <img src="images\account_icon.png" alt="Account" class="icon">
                         <div id="accountDropdown" class="dropdown-content">
-                            <a href="#" onclick="settings()">Settings</a>
+                            <a href="#" onclick="switchModule('settings')">Settings</a>
                             <a href="#" onclick="signout()">Sign Out</a>
                             <a href="#" onclick="signoutAndQuit()">Sign Out & Quit</a>
                         </div>
@@ -53,6 +53,51 @@
             </header>
             <div class="dashboard">
                 <div class="main-content">
+                    <div id="settings" class="module settings-container">
+                        <h2>User Settings</h2>
+                        <div class="settings-section">
+                            <h3>Account Settings</h3>
+                            <p id="current-username">Current Username: </p>
+                            <label for="username">Change Username:</label>
+                            <input type="text" id="username" placeholder="New Username">
+                            <label for="password">Change Password:</label>
+                            <input type="password" id="password" placeholder="New Password">
+                        </div>
+                        <div class="settings-section">
+                            <h3>Assistant Settings</h3>
+                            <label for="volume">Adjust Volume:</label>
+                            <input type="range" id="volume" min="1" max="100">
+                            <label for="voice">Select Voice:</label>
+                            <select id="voice">
+                                <option>Voice A</option>
+                                <option>Voice B</option>
+                                <option>Voice C</option>
+                                <option>Voice D</option>
+                                <option>Voice E</option>
+                                <option>Voice F</option>
+                                <option>Voice G</option>
+                                <option>Voice H</option>
+                                <option>Voice I</option>
+                                <option>Voice J</option>
+                            </select>
+                        </div>
+                        <div class="settings-section">
+                            <h3>Email Settings</h3>
+                            <p>Current Email: <p id="current-email"></p></p>
+                            <p>App Password Set: Yes</p>
+                            <label for="new-email">Update Email:</label>
+                            <input type="email" id="new-email" placeholder="New Email">
+                            <label for="new-app-password">Update App Password:</label>
+                            <input type="password" id="new-app-password" placeholder="New App Password">
+                        </div>
+                        <div class="settings-section">
+                            <h3>History Settings</h3>
+                            <button onclick="clearHistory('chat')">Clear Chat History</button>
+                            <button onclick="clearHistory('email')">Clear Email History</button>
+                            <button onclick="clearHistory('launch')">Clear Recent Launch History</button>
+                            <button onclick="clearHistory('command')">Clear Command History</button>
+                        </div>
+                    </div>
                     <div id="chat" class="module">
                         <h2>Chat with Assistant</h2>
                         <div class="chat-history">

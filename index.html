@@ -59,9 +59,14 @@
                             <h3>Account Settings</h3>
                             <p id="current-username">Current Username: </p>
                             <label for="username">Change Username:</label>
-                            <input type="text" id="username" placeholder="New Username">
+                            <div id="username-update-status-message" class="left-aligned"></div>
+                            <input type="text" id="new-username" placeholder="New Username">
+                            <button onclick="updateInfo('username')">Update</button>
                             <label for="password">Change Password:</label>
-                            <input type="password" id="password" placeholder="New Password">
+                            <div id="password-update-status-message" class="left-aligned"></div>
+                            <input type="password" id="new-password" placeholder="New Password">
+                            <input type="password" id="confirm-password" placeholder="Confirm Password">
+                            <button onclick="updateInfo('password')">Update</button>
                         </div>
                         <div class="settings-section">
                             <h3>Assistant Settings</h3>
@@ -83,12 +88,16 @@
                         </div>
                         <div class="settings-section">
                             <h3>Email Settings</h3>
-                            <p>Current Email: <p id="current-email"></p></p>
-                            <p>App Password Set: Yes</p>
+                            <p id="current-email">Current Email: </p>
+                            <p id="app-pass">App Password Set: </p>
                             <label for="new-email">Update Email:</label>
+                            <div id="email-update-status-message" class="left-aligned"></div>
                             <input type="email" id="new-email" placeholder="New Email">
+                            <button onclick="updateInfo('email')">Update</button>
                             <label for="new-app-password">Update App Password:</label>
+                            <div id="app-password-update-status-message" class="left-aligned"></div>
                             <input type="password" id="new-app-password" placeholder="New App Password">
+                            <button onclick="updateInfo('app-password')">Update</button>
                         </div>
                         <div class="settings-section">
                             <h3>History Settings</h3>
@@ -99,7 +108,7 @@
                         </div>
                     </div>
                     <div id="chat" class="module">
-                        <h2>Chat with Assistant</h2>
+                        <h1>Chat with Assistant</h1>
                         <div class="chat-history">
                             
                         </div>
@@ -114,7 +123,7 @@
                             <button class="tab-button" onclick="switchTab('contacts')">Contacts</button>
                         </div>
                         <div id="composeEmail" class="tab-content tab active">
-                            <h3>Compose Email</h3>
+                            <h1>Compose Email</h1>
                             <input id="recipient" type="text" placeholder="Recipient"><br>
                             <input id="cc" type="text" placeholder="CC"><br>
                             <input id="subject" type="text" placeholder="Subject"><br>

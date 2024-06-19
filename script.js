@@ -44,8 +44,16 @@ function switchModule(moduleId) {
     const module = document.getElementById(moduleId)
     module.style.display = 'block'
     const links = document.querySelectorAll('.nav-link')
-    console.log('Deactivating ')
     links.forEach(link => link.classList.remove('active'))
+    const successMessages = document.querySelectorAll('.message-success')
+    successMessages.forEach(successMessage => successMessage.textContent = null)
+    const successInputs = document.querySelectorAll('.input-success')
+    successInputs.forEach(successInput => successInput.classList.remove('input-success'))
+    console.log(`Success inputs: ${successInputs}`)
+    const errorMessages = document.querySelectorAll('.message-error')
+    errorMessages.forEach(errorMessage => errorMessage.textContent = null)
+    const errorInputs = document.querySelectorAll('.input-error')
+    errorInputs.forEach(errorInput => errorInput.classList.remove('input-error'))
     selectedModule = document.querySelector(`[onclick="switchModule('${moduleId}')"]`)
     selectedModule.classList.add('active')
     const tabButtons = document.getElementById(moduleId).querySelector('.tab-buttons')
@@ -192,6 +200,7 @@ window.electron.onLoginResponse((event, response) => {
 
 function load_user_data() {
     window.electron.fillUsername()
+    window.electron.fillEmail()
 }
 
 window.electron.onFillUsernameResponse((event, response) => {
@@ -200,9 +209,11 @@ window.electron.onFillUsernameResponse((event, response) => {
     username_field.textContent = `Current Username: ${response.username}`
 }) 
 
-function load_settings_data(settings) {
-    
-}
+window.electron.onFillEmailResponse((event, response) => {
+    const email_field = document.getElementById('current-email')
+    console.log(email_field)
+    email_field.textContent = `Current Email: ${response.email}`
+})
 
 // ran on signup button click
 function signup() {
@@ -298,3 +309,67 @@ function sendEmail() {
     const body = document.getElementById('body')
     window.electron.sendEmail(recipient, cc, subject, body)
 }
+
+function updateInfo(info) {
+    if (info === 'email') {
+        window.electron.updateEmail(document.getElementById('new-email').value)
+    }
+    else if (info === 'username'){
+        console.log('updating username')
+        window.electron.updateUsername(document.getElementById('new-username').value)
+    }
+    else if (info === 'app-password') {
+        window.electron.updateAppPassword(document.getElementById('new-app-password').value)
+    }
+    else if (info === 'password') {
+        window.electron.updatePassword(document.getElementById('new-password').value, document.getElementById('confirm-password').value)
+    }
+}
+
+window.electron.onUpdateInfoResponse((event, response) => {
+    if (response.success) {
+        console.log(response.message)
+        const successMessages = document.querySelectorAll('.message-success')
+        successMessages.forEach(successMessage => successMessage.textContent = null)
+        successMessages.forEach(successMessage => successMessage.classList.remove('message-success'))
+        const successInputs = document.querySelectorAll('.input-success')
+        successInputs.forEach(successInput => successInput.classList.remove('input-success'))
+        console.log(`Success inputs: ${successInputs}`)
+        const errorMessages = document.querySelectorAll('.message-error')
+        errorMessages.forEach(errorMessage => errorMessage.textContent = null)
+        errorMessages.forEach(errorMessage => errorMessage.classList.remove('message-error'))
+        const errorInputs = document.querySelectorAll('.input-error')
+        errorInputs.forEach(errorInput => errorInput.classList.remove('input-error'))
+        
+        document.getElementById(`new-${response.section}`).classList.add('input-success')
+        document.getElementById(`${response.section}-update-status-message`).textContent = response.message
+        document.getElementById(`${response.section}-update-status-message`).classList.add('message-success')
+        if (response.section === 'password') {
+            document.getElementById(`confirm-${response.section}`).classList.add('input-success')
+        }
+        load_user_data()
+    }
+    else {
+        console.log('Update Failed')
+        const successMessages = document.querySelectorAll('.message-success')
+        successMessages.forEach(successMessage => successMessage.textContent = null)
+        successMessages.forEach(successMessage => successMessage.classList.remove('message-success'))
+        const successInputs = document.querySelectorAll('.input-success')
+        successInputs.forEach(successInput => successInput.classList.remove('input-success'))
+        console.log(`Success inputs: ${successInputs}`)
+        const errorMessages = document.querySelectorAll('.message-error')
+        errorMessages.forEach(errorMessage => errorMessage.textContent = null)
+        errorMessages.forEach(errorMessage => errorMessage.classList.remove('message-error'))
+        const errorInputs = document.querySelectorAll('.input-error')
+        errorInputs.forEach(errorInput => errorInput.classList.remove('input-error'))
+
+        console.log(response.message)
+        console.log(response.section)
+        document.getElementById(`new-${response.section}`).classList.add('input-error')
+        document.getElementById(`${response.section}-update-status-message`).textContent = response.message
+        document.getElementById(`${response.section}-update-status-message`).classList.add('message-error')
+        if (response.section === 'password') {
+            document.getElementById(`confirm-${response.section}`).classList.add('input-error')
+        }
+    }
+})

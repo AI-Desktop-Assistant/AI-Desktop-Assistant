@@ -95,7 +95,7 @@ const createWindow = () => {
     });
     // save current user
     let currentUsername = null
-
+    
     // Validate input user account details
     ipcMain.on('login', (event, username, password, rememberMe, autoLogin) => {
         // Query username and password to check if user is signed up
@@ -159,6 +159,24 @@ const createWindow = () => {
         event.reply('fill-username-response', { username: currentUsername })
     })
 
+    ipcMain.on('fill-email', (event) => {
+        db.get('SELECT * FROM users WHERE rememberme = TRUE', (err, row) => {
+            if (err) {
+                // output error with query and send failure and error message to renderer process
+                console.error('Error querying database:', err.message);
+                event.reply('fill-email-response', { success: false, message: 'Error querying database' })
+            } 
+            else if (row){
+                // send success and user details to renderer process
+                event.reply('fill-email-response', { success: true, email: row.email })
+            } 
+            else {
+                // send failure and failure message to renderer process
+                event.reply('fill-email-response', { success: false, message: 'No Remembered Users' })
+            }
+        })        
+    })
+
     // Add user to database
     ipcMain.on('signup', (event, username, password, confirmPassword) => {
         console.log(`Attempting to sign up username: ${username} password: ${password}`)
@@ -216,11 +234,117 @@ const createWindow = () => {
         )
     })
 
+    ipcMain.on('update-email', (event, newEmail) => {
+        emailValid = false
+        if (newEmail.endsWith('@gmail.com')) {
+            emailValid = true
+        }
+
+        if (emailValid) {
+            db.run(
+                `UPDATE users SET email = ? WHERE username = ?`, [newEmail, currentUsername], (err) => {
+                    if (err) {
+                        event.reply('update-info-response', { success: false, section: 'email', message: `Failed to set rememberme to false: ${err.message}` })
+                    }
+                    else {
+                        event.reply('update-info-response', { success: true, section: 'email', message: 'Email Successfuly Updated!' })
+                    }
+                }
+            )
+        }
+        else {
+            event.reply('update-info-response', { success: false, section: 'email', message: 'Enter a Google email' })
+        }
+    })
+
+    ipcMain.on('update-username', (event, username) => {
+        console.log('Attempting username update')
+        if (username.trim().length === 0 || username.includes(' ')) {
+            console.log('update failed')
+            event.reply('update-info-response', { success: false, section: 'username', message: 'Username must not be empty or contain spaces' })
+        } 
+        else {
+            console.log('username syntax valid')
+            db.run(
+                `UPDATE users SET username = ? WHERE username = ?`, [username, currentUsername], (err) => {
+                    if (err) {
+                        // if user name exists
+                        if (err.message.includes('UNIQUE constraint failed')) {
+                            console.log('Username exists')
+                            // send failure and error message to renderer process
+                            event.reply('update-info-response', { success: false, section: 'username', message: 'Username already exists' })
+                        } 
+                        // if other error inserting
+                        else {
+                            console.log('Other error')
+                            // output error and send failure and error message to renderer process
+                            console.error('Error inserting into database:', err.message)
+                            event.reply('update-info-response', { success: false, section: 'username', message: 'Error inserting into database' })
+                        }
+                    } 
+                    // if user was successfully added to db
+                    else {
+                        console.log('successfully updated username')
+                        // send success to renderer process
+                        event.reply('update-info-response', { success: true, section: 'username', message: 'Username Successfully Updated!' })
+                        currentUsername = username
+                    }
+                }
+            )
+        }
+    })
+
+    ipcMain.on('update-app-password', (event, appPassword) => {
+        console.log('Attempting update app password')
+        db.run(
+            `UPDATE users SET app_password = ? WHERE username = ?`, [appPassword, currentUsername], (err) => {
+                if (err) {
+                    // output error and send failure and error message to renderer process
+                    console.error('Error inserting into database:', err.message)
+                    event.reply('update-info-response', { success: false, section: 'app-password', message: 'Error inserting into database' })
+                } 
+                // if user was successfully added to db
+                else {
+                    console.log('successfully updated app password')
+                    // send success to renderer process
+                    event.reply('update-info-response', { success: true, section: 'app-password', message: 'App Password Successfully Set!' })
+                }
+            }
+        )
+    })
+
+    ipcMain.on('update-password', (event, password, confirmPassword) => {
+        console.log(`Pass: ${password}, Conf: ${confirmPassword}`)
+        if (password.trim().length === 0 ||  password.includes(' ')) {
+            event.reply('update-info-response', { success: false, section: 'password', message: 'Password must not be empty or contain spaces' })
+        }
+        else if (password !== confirmPassword) {
+            event.reply('update-info-response', { success: false, section: 'password', message: "Passwords don't match." })
+        }
+        else {
+            db.run(
+                `UPDATE users SET password = ? WHERE username = ?`, [password, currentUsername], (err) => {
+                    if (err) {
+                        // output error and send failure and error message to renderer process
+                        console.error('Error inserting into database:', err.message)
+                        event.reply('update-info-response', { success: false, section: 'password', message: 'Error inserting into database' })
+                    } 
+                    // if user was successfully added to db
+                    else {
+                        console.log('successfully updated password')
+                        // send success to renderer process
+                        event.reply('update-info-response', { success: true, section: 'password', message: 'Password Successfully Set!' })
+                    }
+                }
+            )
+        }
+    })
+
     ipcMain.on('send-email', (event, recipient, cc, subject, body) => {
-        const data = {'module': 'email'}
+        data = {module: 'email'}
         const emailProcess = spawn('python', ['input_from_ui.py'])
         // Query users email
-
+        
         // Query users email app password
 
         // Send all information to email handler

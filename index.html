@@ -288,18 +288,19 @@
                         </div>
                         <div id="search" class="tab-content tab active">
                             <h3>Search</h3>
-                            <input type="text" placeholder="Search songs, albums, or playlists"><br>
-                            <button>Search</button>
+                            <input type="text" id="search-input" placeholder="Search songs, albums, or playlists" onkeypress="searchSpotify(event)">
+                            <button onclick="searchSpotify()">Search</button>
+                            <div id="search-results"></div>
                         </div>
                         <div id="playlists" class="tab-content tab">
                             <h3>Playlists</h3>
-
+                            <div id="playlist-results"></div>
                         </div>
                         <div id="nowPlaying" class="tab-content tab">
                             <h3>Now Playing</h3>
-
+                            <div id="now-playing-info"></div>
                         </div>
-                    </div>
+                    </div>                    
                     <div id="launcher" class="module tabbed-interface">
                         <div class="tab-buttons">
                             <button class="tab-button active" onclick="switchTab('rememberedApps')">Remembered Applications</button>

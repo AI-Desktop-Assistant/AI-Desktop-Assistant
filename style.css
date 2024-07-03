@@ -92,7 +92,7 @@ header nav {
     padding: 10px;
     box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
 }
-.chat-input, button, .settings-section input[type="text"], .settings-section input[type="password"], .settings-section input[type="email"], .settings-section select, .settings-section input[type="range"] {
+.chat-input, button, .settings-section input[type="text"], .settings-section input[type="password"], .settings-section input[type="email"], .settings-section select, .settings-section input[type="range"], .settings-section textarea {
     width: 100%;
     padding: 10px;
     margin-top: 10px;
@@ -325,7 +325,7 @@ button:hover {
     display: block;
     margin-bottom: 5px;
 }
-.settings-section input[type="text"], .settings-section input[type="password"], .settings-section input[type="email"], .settings-section select, .settings-section input[type="range"] {
+.settings-section input[type="text"], .settings-section input[type="password"], .settings-section input[type="email"], .settings-section select, .settings-section input[type="range"], .settings-section textarea {
     margin-top: 0px;
     margin-bottom: 0px;
 }
@@ -342,4 +342,8 @@ button:hover {
 }
 .settings-section button:hover {
     background-color: #0d47a1;
+}
+.settings-section textarea {
+    height: 100px; 
+    resize: vertical;
 }

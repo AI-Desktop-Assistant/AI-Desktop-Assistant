@@ -3,7 +3,7 @@ import random
 import json
 from models.load_model import load_model
 from huggingface_hub import login
-from reception_layer.speech_rec import say
+from reception_layer.speech_rec import *
 
 login(token="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", add_to_git_credential=True)
 
@@ -45,6 +45,50 @@ def handle_launch_request(full_app_name, confident=True):
 def handle_failed_launch():
     response = "Sorry, I couldnt find the file you wanted."
     return say(response)
+
+def alert_creating_contact(recipient, recipient_email):
+    response = f'Creating a contact for {recipient}, with email {recipient_email}'
+    say(response)
+
+def ask_to_create_contact(recipient, recipient_email):
+    response = f'Would you like to create a contact for {recipient} with email address {recipient_email}'
+    say(response)
+    user_response = listen()
+    return user_response
+
+def get_email_from_user(recipient):
+    response = f"I couldn't find a contact for {recipient}, can you tell me their email?"
+    say(response)
+    user_response = listen()
+    return user_response
+
+def get_recipients_from_user():
+    response = "Sorry I couldn't find an email recipient, can you tell me who this email intended for?"
+    say(response)
+    user_response = listen()
+    return user_response
+
+def get_intent_from_user():
+    response = 'Could you provide some more detail on the intent of the email?'
+    say(response)
+    user_response = listen()
+    return user_response
+
+def prompt_to_update_footer():
+    response = 'It looks like you have not set an email signature, please go to your settings and set an email signature to send emails.'
+    say(response)
+
+def alert_not_understood():
+    response = 'Sorry I didnt catch that.'
+    say(response)
+
+def prompt_user_to_retry():
+    response = 'Try requesting again'
+    say(response)
+
+def prompt_user_to_update_email():
+    response = 'Please update your email in your settings to send an email'
+    say(response)
 
 def file_search_feedback(given_name):
     with open('classifying_layer\\module_layer\\response\\templates\\templates.json') as f:

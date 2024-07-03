@@ -21,8 +21,7 @@ def launch_best_file(top_files):
     else:
         output_response = handle_launch_request(full_app_name, confident=False)
         if output_response["tts"] == "google":
-            time_to_say = (len(output_response["text"].split())/135) * 60
-            user_response = listen(timeout=(time_to_say+20))
+            user_response = listen()
         else:
             user_response = listen()
         y_or_n = get_y_or_n(user_response)

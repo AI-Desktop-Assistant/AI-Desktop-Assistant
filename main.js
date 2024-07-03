@@ -2,6 +2,7 @@ const { app, BrowserWindow, ipcMain } = require('electron')
 const sqlite3 = require('sqlite3').verbose()
 const path = require('node:path')
 const { spawn } = require('child_process')
+const axios = require('axios')
 
 const createWindow = () => {
     const win = new BrowserWindow({
@@ -17,7 +18,7 @@ const createWindow = () => {
 
     const db = new sqlite3.Database(path.join(__dirname, 'users.db'), (err) => {
         const createUsersTable = () => {
-            db.run("CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, username TEXT UNIQUE, password TEXT, email TEXT DEFAULT '', app_password TEXT DEFAULT '', rememberme BOOLEAN DEFAULT FALSE)", (err) => {
+            db.run("CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, username TEXT UNIQUE, password TEXT, email TEXT DEFAULT '', app_password TEXT DEFAULT '', rememberme BOOLEAN DEFAULT FALSE, footer TEXT DEFAULT '')", (err) => {
                 if (err) {
                     console.error(`Error creating user table: ${err.message}`)
                 }
@@ -25,8 +26,8 @@ const createWindow = () => {
                     console.log('Successfully created users table')
                 }
             });
+            
         }
-        
         const createSentEmailTable = () => {
             db.run("CREATE TABLE IF NOT EXISTS sent_emails (id INTEGER PRIMARY KEY, user_id INTEGER, subject TEXT, body TEXT, recipient TEXT, cc TEXT DEFAULT '', date TEXT, timestamp TEXT, FOREIGN KEY(user_id) REFERENCES users(id))", (err) => {
                 if (err) {
@@ -92,12 +93,25 @@ const createWindow = () => {
             createChatHistoryTable()
             createRememberedAppsTable()
         }
-    });
+    })
+    
+    let mainPythonProcess = null
+
+    function sendUpdateToPython(endpoint, data) {
+        axios.post(`http://localhost:5000/${endpoint}`, data)
+            .then(response => {
+                console.log(response.data.message);
+            })
+            .catch(error => {
+                console.error(`Error updating ${endpoint}: ${error.message}`);
+            });
+    }
+
     // save current user
     let currentUsername = null
-    
     // Validate input user account details
     ipcMain.on('login', (event, username, password, rememberMe, autoLogin) => {
+        console.log('testing credentials')
         // Query username and password to check if user is signed up
         db.get('SELECT * FROM users WHERE username = ? AND password = ?', [username, password], (err, row) => {
             // if an error occured with the query
@@ -108,9 +122,29 @@ const createWindow = () => {
             }
             // if username and password are present
             else if (row) {
+                console.log('credentials valid')
                 // send success and user details back to renderer
                 event.reply('login-response', { success: true, message: 'Login Successful', rememberMe, username, password, autoLogin })
                 currentUsername = username
+                if (!mainPythonProcess){
+                    console.log('starting python process')
+                    const main = path.join(__dirname, 'main.py')
+                    
+                    mainPythonProcess = spawn('python', ['-u', main, row.id, username, row.email])
+
+                    mainPythonProcess.stdout.on('data', (data) => {
+                        console.log(`Python stdout: ${data}`)
+                    })
+                    
+                    mainPythonProcess.stderr.on('data', (data) => {
+                        console.error(`Python stderr: ${data}`)
+                    })
+
+                    mainPythonProcess.on('close', (code) => {
+                        console.log(`Python process exited with code ${code}`)
+                        mainPythonProcess = null
+                    })
+                }
             }
             // if user and password were not found
             else {
@@ -119,7 +153,7 @@ const createWindow = () => {
             }
         })
     })
-
+    
     // Remember user login
     ipcMain.on('set-rem-user', (event) => {
         // set rememberme status to true
@@ -175,6 +209,21 @@ const createWindow = () => {
                 event.reply('fill-email-response', { success: false, message: 'No Remembered Users' })
             }
         })        
+    })
+
+    ipcMain.on('fill-app-pass', (event) => {
+        console.log('Querying app password')
+        db.get('SELECT * FROM users WHERE username = ?', [currentUsername], (err, row) => {
+            if (err) {
+                console.log(`Error Querying Database: ${err}`)
+                event.reply('fill-app-pass-response', { success: false })
+            }
+            else {
+                const app_password = row.app_password
+                console.log(`found app pass: ${app_password.trim().length !== 0}`)
+                event.reply('fill-app-pass-response', { success: true, app_password: app_password.trim().length !== 0 })
+            }
+        })
     })
 
     // Add user to database
@@ -248,6 +297,7 @@ const createWindow = () => {
                     }
                     else {
                         event.reply('update-info-response', { success: true, section: 'email', message: 'Email Successfuly Updated!' })
+                        sendUpdateToPython('update_email', { email: newEmail });
                     }
                 }
             )
@@ -257,12 +307,35 @@ const createWindow = () => {
         }
     })
 
+    ipcMain.on('update-signature', (event, signature) => {
+        console.log('Attempting signature update')
+        if (signature.trim().length === 0) {
+            console.log('update failed')
+            event.reply('update-info-response', { success: false, section: 'signature', message: 'Signature must not be empty' })
+        }
+        else {
+            console.log('signature syntax valid')
+            db.run(`UPDATE users SET footer = ? WHERE username = ?`, [signature, currentUsername], (err) => {
+                if (err) {
+                    console.log('Error updating signature')
+                    event.reply('update-info-response', { success: false, section: 'signature', message: 'Error updating signature' })
+                } 
+                // if user was successfully added to db
+                else {
+                    console.log('successfully updated signature')
+                    // send success to renderer process
+                    event.reply('update-info-response', { success: true, section: 'signature', message: 'Signature Successfully Updated!' })
+                }
+            })
+        }
+    })
+
     ipcMain.on('update-username', (event, username) => {
         console.log('Attempting username update')
         if (username.trim().length === 0 || username.includes(' ')) {
             console.log('update failed')
             event.reply('update-info-response', { success: false, section: 'username', message: 'Username must not be empty or contain spaces' })
-        } 
+        }
         else {
             console.log('username syntax valid')
             db.run(
@@ -288,6 +361,7 @@ const createWindow = () => {
                         // send success to renderer process
                         event.reply('update-info-response', { success: true, section: 'username', message: 'Username Successfully Updated!' })
                         currentUsername = username
+                        sendUpdateToPython('update_username', { username });
                     }
                 }
             )
@@ -340,11 +414,47 @@ const createWindow = () => {
         }
     })
 
-    ipcMain.on('send-email', (event, recipient, cc, subject, body) => {
-        data = {module: 'email'}
-        const emailProcess = spawn('python', ['input_from_ui.py'])
-        // Query users email
+    function sendToPython(dataToSend) {
+        const toPython = spawn('python', ['input_from_ui.py'])
         
+        toPython.stdin.write(JSON.stringify(dataToSend))
+        toPython.stdin.end()
+
+        toPython.stdout.on('data', (data) => {
+            console.log(`Python Output: ${data}`)
+        })
+
+        toPython.stderr.on('data', (data) => {
+            console.error(`Error from python script: ${data}`)
+        })
+
+        toPython.on('close', (code) => {
+            console.log(`Python script exited with code: ${code}`)
+        })
+    }
+
+    ipcMain.on('send-email', (event, recipient, cc, bcc, subject, body) => {
+        console.log('Attempting Send Email')
+        // Query users email
+        db.get('SELECT * FROM users WHERE username = ?', [currentUsername], (err, row) => {
+            if (err) {
+                console.log(`Error Querying Database: ${err}`)
+            }
+            else {
+                appPassword = row.app_password
+                email = row.email
+                console.log(`Query Successful: ${appPassword.trim().length === 0} App Password: ${appPassword} Trimmed Pass: ${appPassword.trim()}`)
+
+                if (appPassword.trim().length === 0) {
+                    event.reply('send-email-response', {success: false, message: 'App Password Not Set'})
+                }
+                else {
+                    console.log('App Password')
+                    sendToPython({module: 'email', email, appPassword, recipient, cc, bcc, subject, body})
+                    event.reply('send-email-response', {success: true})
+                }
+            }
+        })
         // Query users email app password
 
         // Send all information to email handler

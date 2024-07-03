@@ -89,7 +89,7 @@
                         <div class="settings-section">
                             <h3>Email Settings</h3>
                             <p id="current-email">Current Email: </p>
-                            <p id="app-pass">App Password Set: </p>
+                            <p id="current-app-password">App Password Set: </p>
                             <label for="new-email">Update Email:</label>
                             <div id="email-update-status-message" class="left-aligned"></div>
                             <input type="email" id="new-email" placeholder="New Email">
@@ -98,6 +98,10 @@
                             <div id="app-password-update-status-message" class="left-aligned"></div>
                             <input type="password" id="new-app-password" placeholder="New App Password">
                             <button onclick="updateInfo('app-password')">Update</button>
+                            <label for="new-signature">Update Email Signature:</label>
+                            <div id="signature-update-status-message" class="left-aligned"></div>
+                            <textarea id="new-signature" placeholder="Enter your email signature here..."></textarea>
+                            <button onclick="updateInfo('signature')">Update</button>
                         </div>
                         <div class="settings-section">
                             <h3>History Settings</h3>
@@ -126,12 +130,13 @@
                             <h1>Compose Email</h1>
                             <input id="recipient" type="text" placeholder="Recipient"><br>
                             <input id="cc" type="text" placeholder="CC"><br>
+                            <input id="bcc" type="text" placeholder="BCC"><br>
                             <input id="subject" type="text" placeholder="Subject"><br>
                             <textarea id="body" placeholder="Body"></textarea><br>
-                            <button id="sendEmail" onclick="sendEmail()">Send</button>
+                            <button id="sendEmail" onclick="sendEmail()" class="send-button">Send</button>
                         </div>
                         <div id="sentEmails" class="tab-content tab">
-                            <h3>Sent Emails</h3>
+                            <h1>Sent Emails</h1>
                             <table class="email-table">
                                 <thead>
                                     <tr>
@@ -157,7 +162,7 @@
                             </table>
                         </div>
                         <div id="contacts" class="tab-content tab">
-                            <h3>Contacts</h3>
+                            <h1>Contacts</h1>
                             <table class="contacts-table">
                                 <thead>
                                     <tr>
@@ -179,7 +184,7 @@
                     </div>
                     <div id="weather" class="module tabbed-interface">
                         <div id="currentWeather" class="module-content tab active">
-                            <h3>Current Weather</h3>
+                            <h1>Current Weather</h1>
                             <input type="text" id="city-input" placeholder="Enter city name" value="Boston">
                             <select id="unit-select">
                                 <option value="metric">Celsius</option>
@@ -213,7 +218,7 @@
                             <button class="tab-button" onclick="switchTab('setNewReminder')">Set New Reminder</button>
                         </div>
                         <div id="upcomingTasks" class="tab-content tab active">
-                            <h3>Upcoming Tasks</h3>
+                            <h1>Upcoming Tasks</h1>
                             <table class="tasks-table">
                                 <thead>
                                     <tr>
@@ -241,7 +246,7 @@
                             </table>
                         </div>
                         <div id="allReminders" class="tab-content tab">
-                            <h3>All Reminders</h3>
+                            <h1>All Reminders</h1>
                             <table class="reminders-table">
                                 <thead>
                                     <tr>
@@ -269,7 +274,7 @@
                             </table>
                         </div>
                         <div id="setNewReminder" class="tab-content tab">
-                            <h3>Set New Reminder</h3>
+                            <h1>Set New Reminder</h1>
                             <input type="text" placeholder="Task Details"><br>
                             <input type="date"><br>
                             <input type="time"><br>
@@ -287,16 +292,16 @@
                             <button class="tab-button" onclick="switchTab('nowPlaying')">Now Playing</button>
                         </div>
                         <div id="search" class="tab-content tab active">
-                            <h3>Search</h3>
+                            <h1>Search</h1>
                             <input type="text" placeholder="Search songs, albums, or playlists"><br>
                             <button>Search</button>
                         </div>
                         <div id="playlists" class="tab-content tab">
-                            <h3>Playlists</h3>
+                            <h1>Playlists</h1>
 
                         </div>
                         <div id="nowPlaying" class="tab-content tab">
-                            <h3>Now Playing</h3>
+                            <h1>Now Playing</h1>
 
                         </div>
                     </div>
@@ -306,7 +311,7 @@
                             <button class="tab-button" onclick="switchTab('recentApps')">Recently Used Applications</button>
                         </div>
                         <div id="rememberedApps" class="tab-content tab active">
-                            <h3>Remembered Applications</h3>
+                            <h1>Remembered Applications</h1>
                             <table class="apps-table">
                                 <thead>
                                     <tr>
@@ -330,7 +335,7 @@
                             </table>
                         </div>
                         <div id="recentApps" class="tab-content tab">
-                            <h3>Recently Used Applications</h3>
+                            <h1>Recently Used Applications</h1>
                             <table class="apps-table">
                                 <thead>
                                     <tr>
@@ -360,7 +365,7 @@
                             <button class="tab-button" onclick="switchTab('searchHistory')">Search</button>
                         </div>
                         <div id="historyTab" class="tab-content tab active">
-                            <h3>History</h3>
+                            <h1>History</h1>
                             <table class="history-table">
                                 <thead>
                                     <tr>
@@ -387,7 +392,7 @@
                             </table>
                         </div>
                         <div id="searchHistory" class="tab-content tab">
-                            <h3>Search</h3>
+                            <h1>Search</h1>
                             <input type="text" placeholder="Search commands"><br>
                             <button>Search</button>
                         </div>

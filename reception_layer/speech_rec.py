@@ -4,6 +4,7 @@ from google.cloud import texttospeech
 import pygame
 import io
 import os
+import time
 
 recognizer = sr.Recognizer()
 tts_engine = pyttsx3.init()
@@ -18,7 +19,7 @@ pygame.mixer.music.set_volume(0.1)
 def google_tts(text):
     print("playing google")
     input_text = texttospeech.SynthesisInput(text=text)
-    selected_voice = get_selected_voice()
+    # selected_voice = get_selected_voice()
     voice = texttospeech.VoiceSelectionParams(
         language_code="en-US",
         name="en-US-Wavenet-B",
@@ -51,10 +52,13 @@ def say(text):
     except:
         py_tts(text)
         tts = "py"
+    if tts == "google":
+        time_to_say = (len(text.split())/185) * 60
+        time.sleep(time_to_say)
     print(f"returning text: {text}")
     return {"text": text, "tts": tts}
 
-def listen(timeout=10, phrase_time_limit=5):
+def listen(timeout=10, phrase_time_limit=10, response=None):
     with sr.Microphone() as source:
         recognizer.adjust_for_ambient_noise(source, duration=1)
         print(f"Say something:")
@@ -64,6 +68,8 @@ def listen(timeout=10, phrase_time_limit=5):
             print(f"You said: {text}")
         except sr.UnknownValueError:
             print("Speech Recognition could not understand audio")
+            text = ''
         except sr.RequestError as e:
             print(f"Could not request results from Speech Recognition service; {e}")
+            text = ''
         return text

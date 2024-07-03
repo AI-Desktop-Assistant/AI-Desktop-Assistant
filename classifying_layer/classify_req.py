@@ -2,6 +2,7 @@ import torch
 from transformers import BertTokenizer, BertTokenizerFast, AutoModelForCausalLM, AutoTokenizer
 from .module_layer.launch.process_launch_req import *
 from models.load_model import load_model
+from .module_layer.email.process_email_request import process_email_req
 
 model_path = 'models\\module_classification_model.pth'
 model, tokenizer, device = load_model(model_path, 'classification')
@@ -27,15 +28,15 @@ def classify(req):
         
     return predicted_module
 
-def classify_user_request(req):
+def classify_user_request(req, user_id):
     module = classify(req)
     print(f'Chosen Module: {module}')
     if module == 'launch':
         status = process_launch_req(req)
     # elif module == 'weather':
     #     weather(input)
-    # elif module == 'email':
-    #     email(input)
+    elif module == 'email':
+        status = process_email_req(req, user_id)
     # elif module == 'task':
     #     task(input)
     # elif module == 'spotify':

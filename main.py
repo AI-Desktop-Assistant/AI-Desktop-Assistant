@@ -1,6 +1,7 @@
 import os
 import sys
 from flask import Flask, request, jsonify
+from flask_socketio import SocketIO, emit
 from threading import Thread
 from reception_layer.speech_rec import listen
 from classifying_layer.classify_req import classify_user_request
@@ -12,11 +13,25 @@ current_username = ''
 current_email = ''
 
 app = Flask(__name__)
+socketio = SocketIO(app, cors_allowed_origins='*')
+
+@socketio.on('connect')
+def handle_connect():
+    print('Client connected')
+
+@socketio.on('disconnect')
+def handle_disconnect():
+    print('Client disconnected')
+
+@socketio.on('message')
+def handle_message(data):
+    print(f'Received message: {data}')
+    emit('response', {'data': 'Message received'})
 
 def run_flask():
-    app.run(port=5000, debug=False)
+    socketio.run(app, port=5000, debug=False, allow_unsafe_werkzeug=True)
 
-def main_loop(user_id, username, email):
+def main_loop(user_id, username, email, socket):
     global current_user_id
     global current_username
     global current_email
@@ -34,7 +49,7 @@ def main_loop(user_id, username, email):
                 continue
             # input = "Compose an update email to the customer service team and CC the support manager and quality assurance lead and BCC the technical support lead and IT manager"
             # after getting input classify the model
-            module = classify_user_request(input, current_user_id)
+            module = classify_user_request(input, current_user_id, socket)
             # delve into selected module deeper
 
 @app.route('/update_email', methods=['POST'])
@@ -81,4 +96,4 @@ if __name__ == "__main__":
     print("\nStarting flask\n")
     flask_thread = Thread(target=run_flask)
     flask_thread.start()
-    main_loop(current_user_id, current_username, current_email)
+    main_loop(current_user_id, current_username, current_email, socketio)

@@ -90,6 +90,23 @@ def prompt_user_to_update_email():
     response = 'Please update your email in your settings to send an email'
     say(response)
 
+def ask_to_show_email(op=''):
+    if op == 'send':
+        response = 'Would you like to see the email before sending?'
+    else:
+        response = 'Would you like to see the drafted email?'
+    say(response)
+    user_response = listen()
+    return user_response
+
+def respond_showing_email():
+    response = 'Ok, displaying your email.'
+    say(response)
+
+def respond_ending_request_chain():
+    response = 'Ok, let me know if i can help you with anything else.'
+    say(response)
+
 def file_search_feedback(given_name):
     with open('classifying_layer\\module_layer\\response\\templates\\templates.json') as f:
         templates = json.load(f)["search"]

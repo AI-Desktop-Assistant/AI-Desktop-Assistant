@@ -122,8 +122,11 @@ def clean_body_and_sub(body, subject):
 
 def gen_body_and_subject(body_gen_agent, subject_gen_agent, signature_remover_agent, req, context):
     body = gen_body(body_gen_agent, req, context)
+    print(f'Body: {body}')
     cleaned_body = gen_clean_body(signature_remover_agent, body)
+    print(f'Cleaned Body: {cleaned_body}')
     subject = gen_subject(subject_gen_agent, req, context)
+    print(f'Subject: {subject}')
     return cleaned_body, subject
 
 def generate_email(req, context):

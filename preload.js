@@ -23,5 +23,7 @@ contextBridge.exposeInMainWorld('electron', {
   updateAppPassword: (appPassword) => ipcRenderer.send('update-app-password', appPassword),
   updatePassword: (password, confirmPassword) => ipcRenderer.send('update-password', password, confirmPassword),
   updateSignature: (signature) => ipcRenderer.send('update-signature', signature),
-  onUpdateInfoResponse: (callback) => ipcRenderer.on('update-info-response', callback)
+  onUpdateInfoResponse: (callback) => ipcRenderer.on('update-info-response', callback),
+  sendMessage: (data) => ipcRenderer.send('send-message', data),
+  toRenderer: (data) => ipcRenderer.on('to-renderer', data)
 })

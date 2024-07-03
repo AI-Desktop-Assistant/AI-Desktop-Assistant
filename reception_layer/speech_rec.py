@@ -53,7 +53,7 @@ def say(text):
         py_tts(text)
         tts = "py"
     if tts == "google":
-        time_to_say = (len(text.split())/185) * 60
+        time_to_say = (len(text.split())/170) * 60
         time.sleep(time_to_say)
     print(f"returning text: {text}")
     return {"text": text, "tts": tts}

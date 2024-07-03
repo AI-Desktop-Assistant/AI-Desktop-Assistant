@@ -28,7 +28,7 @@ def classify(req):
         
     return predicted_module
 
-def classify_user_request(req, user_id):
+def classify_user_request(req, user_id, socket):
     module = classify(req)
     print(f'Chosen Module: {module}')
     if module == 'launch':
@@ -36,7 +36,7 @@ def classify_user_request(req, user_id):
     # elif module == 'weather':
     #     weather(input)
     elif module == 'email':
-        status = process_email_req(req, user_id)
+        status = process_email_req(req, user_id, socket)
     # elif module == 'task':
     #     task(input)
     # elif module == 'spotify':

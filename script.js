@@ -278,6 +278,43 @@ window.electron.onSignupResponse((event, response) => {
     }
 })
 
+function delimit_array(array) {
+    arrayAsStr = ''
+    for (let i = 0; i < array.length; i++) {
+        arrayAsStr += array[i]
+        if (array.length - 1 != i) {
+            arrayAsStr += ', '
+        }
+    }
+
+    return arrayAsStr
+}
+
+function showEmail(data) {
+    body = data.body
+    subject = data.subject
+    recipients = data.recipients
+    cc = data.cc
+    bcc = data.bcc
+    recipientsAsStr = delimit_array(recipients)
+    ccAsStr = delimit_array(cc)
+    bccAsStr = delimit_array(bcc)
+    document.getElementById('recipient').value = recipientsAsStr
+    document.getElementById('cc').value = ccAsStr
+    document.getElementById('bcc').value = bccAsStr
+    document.getElementById('subject').value = subject 
+    document.getElementById('body').value = body
+    switchModule('email')
+    switchTab('composeEmail')
+}
+
+window.electron.toRenderer((event, data) => {
+    const purpose = data.purpose
+    if (purpose === 'show-email') {
+        showEmail(data.data)
+    }
+})
+
 function toggleDropdown() {
     document.getElementById("accountDropdown").classList.toggle("show")
 }
@@ -308,30 +345,38 @@ function signout() {
 }
 
 function sendEmail() {
-    const recipient = document.getElementById('recipient')
-    const cc = document.getElementById('cc')
-    const subject = document.getElementById('subject')
-    const body = document.getElementById('body')
+    const recipient = document.getElementById('recipient').value
+    const cc = document.getElementById('cc').value
+    const subject = document.getElementById('subject').value
+    const body = document.getElementById('body').value
     window.electron.sendEmail(recipient, cc, subject, body)
 }
 
 function updateInfo(info) {
     if (info === 'email') {
+        console.log('Updating email')
         window.electron.updateEmail(document.getElementById('new-email').value)
     }
-    else if (info === 'username'){
-        console.log('updating username')
+    else if (info === 'username') {
+        console.log('Updating username')
         window.electron.updateUsername(document.getElementById('new-username').value)
     }
     else if (info === 'app-password') {
+        console.log('Updating app password')
         window.electron.updateAppPassword(document.getElementById('new-app-password').value)
     }
     else if (info === 'password') {
+        console.log('Updating password')
         window.electron.updatePassword(document.getElementById('new-password').value, document.getElementById('confirm-password').value)
+    }
+    else if (info === 'signature') {
+        console.log('Updating signature')
+        window.electron.updateSignature(document.getElementById('new-signature').value)
     }
 }
 
 window.electron.onUpdateInfoResponse((event, response) => {
+    console.log(`Response: ${response}`)
     if (response.success) {
         console.log(response.message)
         const successMessages = document.querySelectorAll('.message-success')

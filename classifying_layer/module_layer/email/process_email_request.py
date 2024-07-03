@@ -55,6 +55,14 @@ def prompt_user_for_email(recipient, attempt=0):
         prompt_user_for_email(recipient, attempt)
     return email
 
+def get_contact_emails(recipients, cc, bcc):
+    recipient_contact_names, cc_contact_names, bcc_contact_names = get_contact_names(recipients, cc, bcc)
+    recipient_emails, cc_emails, bcc_emails, recipients_found, ccs_found, bccs_found = get_emails_from_contacts(recipient_contact_names, cc_contact_names, bcc_contact_names)
+    found_recipients, found_ccs, found_bccs = find_unknown_recipients(recipients, cc, bcc, recipients_found, ccs_found, bccs_found)
+    recipient_emails.append(found_recipients)
+    cc_emails.append(found_ccs)
+    bcc_emails.append(found_bccs)
+    return recipient_emails, cc_emails, bcc_emails
 
 def find_unknown_recipients(recipients, cc, bcc, recipients_found, ccs_found, bccs_found):
     found_recipients = []
@@ -384,7 +392,7 @@ def parse_email_intent(req):
                 predictions['O'].append(token)
     return predictions
         
-def process_email_req(req, user_id):
+def process_email_req(req, user_id, socket):
     global current_user_id
     current_user_id = user_id
     
@@ -416,20 +424,20 @@ def process_email_req(req, user_id):
     body += footer
     print(body)
     # if user requested an email draft ask if they want to see the email
+    recipient_emails, cc_emails, bcc_emails = get_contact_emails(recipients, cc, bcc)
     if 'send' in intents['A-INTENT']:
-        recipient_contact_names, cc_contact_names, bcc_contact_names = get_contact_names(recipients, cc, bcc)
-        recipient_emails, cc_emails, bcc_emails, recipients_found, ccs_found, bccs_found = get_emails_from_contacts(recipient_contact_names, cc_contact_names, bcc_contact_names)
-        found_recipients, found_ccs, found_bccs = find_unknown_recipients(recipients, cc, bcc, recipients_found, ccs_found, bccs_found)
-        recipient_emails.append(found_recipients)
-        cc_emails.append(found_ccs)
-        bcc_emails.append(found_bccs)
         user_email, app_password = get_email_and_app_password(user_id)
         if user_email == '':
             prompt_user_to_update_email()
             return ''
         send_email(user_email, app_password, recipient_emails, subject, body, cc=cc_emails, bcc=bcc_emails)
-
-        
-        
-
-                
+    else:
+        response = ask_to_show_email()
+        y_or_n = get_y_or_n(response)
+        if y_or_n == 'yes':
+            respond_showing_email()
+            data = {'body': body, 'subject': subject, 'recipients': recipients, 'cc': cc, 'bcc': bcc}
+            socket.emit('response', { 'purpose': 'show-email', 'data': data })
+        else:
+            respond_ending_request_chain()
+            return ''

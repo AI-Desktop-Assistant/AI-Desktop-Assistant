@@ -3,9 +3,12 @@ const sqlite3 = require('sqlite3').verbose()
 const path = require('node:path')
 const { spawn } = require('child_process')
 const axios = require('axios')
+const io = require('socket.io-client')
+
+let win
 
 const createWindow = () => {
-    const win = new BrowserWindow({
+    win = new BrowserWindow({
         width: 800,
         height: 600,
         webPreferences: {
@@ -390,12 +393,15 @@ const createWindow = () => {
     ipcMain.on('update-password', (event, password, confirmPassword) => {
         console.log(`Pass: ${password}, Conf: ${confirmPassword}`)
         if (password.trim().length === 0 ||  password.includes(' ')) {
+            console.log('Empty Password')
             event.reply('update-info-response', { success: false, section: 'password', message: 'Password must not be empty or contain spaces' })
         }
         else if (password !== confirmPassword) {
+            console.log('Passwords not equal')
             event.reply('update-info-response', { success: false, section: 'password', message: "Passwords don't match." })
         }
         else {
+            console.log('Password valid')
             db.run(
                 `UPDATE users SET password = ? WHERE username = ?`, [password, currentUsername], (err) => {
                     if (err) {
@@ -412,6 +418,7 @@ const createWindow = () => {
                 }
             )
         }
+        console.log('Replied to event')
     })
 
     function sendToPython(dataToSend) {
@@ -448,8 +455,7 @@ const createWindow = () => {
                 if (appPassword.trim().length === 0) {
                     event.reply('send-email-response', {success: false, message: 'App Password Not Set'})
                 }
-                else {
-                    console.log('App Password')
+                else {0
                     sendToPython({module: 'email', email, appPassword, recipient, cc, bcc, subject, body})
                     event.reply('send-email-response', {success: true})
                 }
@@ -498,6 +504,32 @@ app.whenReady().then(() => {
     })
     createWindow()
     
+    socket = io('http://localhost:5000')
+
+    socket.on('connect', () => {
+        console.log('Connected to Flask-SocketIO server')
+    })
+
+    socket.on('disconnect', () => {
+        console.log('Disconnected from Flask-SocketIO server')
+    })
+
+    socket.on('response', (data) => {
+        console.log('Received response from server:', data)
+        purpose = data.purpose
+        if (purpose === 'show-email') {
+            if (win.isMinimized()) {
+                win.restore()
+            }
+            win.focus()
+            win.webContents.send('to-renderer', data)
+        }
+    })
+
+    ipcMain.on('send-message', (event, message) => {
+        socket.emit('message', message)
+    })
+
     app.on('activate', () => {
         if (BrowserWindow.getAllWindows().length === 0) createWindow()
     })

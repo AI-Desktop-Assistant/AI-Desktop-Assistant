@@ -56,6 +56,11 @@ function switchModule(moduleId) {
     errorInputs.forEach(errorInput => errorInput.classList.remove('input-error'))
     selectedModule = document.querySelector(`[onclick="switchModule('${moduleId}')"]`)
     selectedModule.classList.add('active')
+
+    if (moduleId === 'spotify') {
+        getCurrentPlayingTrack();
+    }
+
     const tabButtons = document.getElementById(moduleId).querySelector('.tab-buttons')
     const moduleContent = module.querySelector('.module-content')
     console.log(`Tab Buttons: ${tabButtons}`)
@@ -373,3 +378,73 @@ window.electron.onUpdateInfoResponse((event, response) => {
         }
     }
 })
+
+function searchSpotify() {
+    const query = document.getElementById('search-input').value;
+    if (!query) return;
+
+    const token = localStorage.getItem('spotify_access_token');
+    if (!token) {
+        console.error('Spotify access token is missing');
+        return;
+    }
+
+    fetch(`https://api.spotify.com/v1/search?type=track,album,playlist&q=${encodeURIComponent(query)}`, {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById('search-results').innerHTML = JSON.stringify(data);
+        // Process and display search results appropriately
+    })
+    .catch(error => console.error('Error searching Spotify:', error));
+}
+
+function getCurrentPlayingTrack() {
+    console.log('Attempting to retrieve access token...');
+    const token = localStorage.getItem('spotify_access_token');
+    console.log('Retrieved token:', token);
+    if (!token) {
+        console.error('Spotify access token is missing');
+        document.getElementById('now-playing-info').innerHTML = 'Access token is missing.';
+        return;
+    }
+    fetch('https://api.spotify.com/v1/me/player/currently-playing', {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log(data); // Debug: Log the data to see what is received.
+        if (data && data.is_playing) {
+            document.getElementById('now-playing-info').innerHTML = `Playing: ${data.item.name} by ${data.item.artists.map(artist => artist.name).join(', ')}`;
+        } else {
+            document.getElementById('now-playing-info').innerHTML = 'Nothing is currently playing.';
+        }
+    })
+    .catch(error => {
+        console.error('Error fetching currently playing track:', error);
+        document.getElementById('now-playing-info').innerHTML = 'Error fetching data.';
+    });
+}
+
+function getUserPlaylists() {
+    fetch('https://api.spotify.com/v1/me/playlists', {
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem('spotify_access_token')}`
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById('playlist-results').innerHTML = JSON.stringify(data);
+        // Process and display playlists appropriately
+    });
+}

@@ -188,16 +188,16 @@ def get_contact_names(recipients, cc, bcc):
     cc_contact_names = []
     bcc_contact_names = []
     for recipient in recipients:
-        if not recipient.endswith('@gmail.com'):
+        if not recipient.endswith('.com'):
             recipient_contact_names.append(recipient)
     if len(cc) > 0:
         for cc_recipient in cc:
-            if not cc_recipient.endswith('@gmail.com'):
+            if not cc_recipient.endswith('.com'):
                 cc_contact_names.append(cc_recipient)
 
     if len(bcc) > 0:
         for bcc_recipient in bcc:
-            if not bcc_recipient.endswith('@gmail.com'):
+            if not bcc_recipient.endswith('.com'):
                 bcc_contact_names.append(bcc_recipient)
     return recipient_contact_names, cc_contact_names, bcc_contact_names
 

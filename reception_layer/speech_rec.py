@@ -39,6 +39,8 @@ def google_tts(text):
 
     pygame.mixer.music.load(io.BytesIO(response.audio_content))
     pygame.mixer.music.play()
+    while pygame.mixer.music.get_busy():
+        pygame.time.Clock().tick(10)
 
 def py_tts(text):
     print("Saying: ", text)
@@ -52,15 +54,15 @@ def say(text):
     except:
         py_tts(text)
         tts = "py"
-    if tts == "google":
-        time_to_say = (len(text.split())/170) * 60
-        time.sleep(time_to_say)
+    # if tts == "google":
+    #     time_to_say = (len(text.split())/170) * 60
+    #     time.sleep(time_to_say)
     print(f"returning text: {text}")
     return {"text": text, "tts": tts}
 
 def listen(timeout=10, phrase_time_limit=10, response=None):
     with sr.Microphone() as source:
-        recognizer.adjust_for_ambient_noise(source, duration=1)
+        recognizer.adjust_for_ambient_noise(source, duration=0.3)
         print(f"Say something:")
         audio = recognizer.listen(source, timeout=timeout, phrase_time_limit=phrase_time_limit)
         try:

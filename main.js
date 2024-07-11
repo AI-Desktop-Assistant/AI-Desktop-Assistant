@@ -468,40 +468,7 @@ const createWindow = () => {
     })
 }
 
-function fetchAccessToken(authCode) {
-    const body = new URLSearchParams();
-    body.append('grant_type', 'authorization_code');
-    body.append('code', authCode);
-    body.append('redirect_uri', 'aiassistant://callback');
-
-    fetch('https://accounts.spotify.com/api/token', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'Authorization': 'Basic ' + btoa(`${clientId}:${clientSecret}`)
-        },
-        body: body
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log('Access Token:', data.access_token);
-        // Further actions based on the access token
-    })
-    .catch(error => {
-        console.error('Error fetching access token', error);
-    });
-}
-
 app.whenReady().then(() => {
-    protocol.registerHttpProtocol('aiassistant', (request, callback) => {
-        console.log('Received callback from Spotify:', request.url);
-        // Extract the code from the callback URL
-        const url = new URL(request.url);
-        const authCode = url.searchParams.get('code');
-        if (authCode) {
-            fetchAccessToken(authCode);  // Make sure this function is securely implemented
-        }
-    })
     createWindow()
     
     socket = io('http://localhost:5000')

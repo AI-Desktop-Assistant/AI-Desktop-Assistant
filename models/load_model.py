@@ -55,5 +55,6 @@ def load_model(model_name_or_path, purpose):
         model, tokenizer, device = load_entity_recognition_model(model_name_or_path)
     elif purpose == 'email':
         model, tokenizer, device = load_email_info_recognizer_model(model_name_or_path)
-    
+        # model, tokenizer, device = "","",""
+
     return model, tokenizer, device

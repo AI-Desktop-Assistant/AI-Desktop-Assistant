@@ -415,6 +415,7 @@ def process_email_req(req, user_id, socket):
     print(f'Intents: {str(intents)}')
     # Have email writing agent generate a subject and body with no footer
     body, subject = generate_email(req, intents)
+    # body, subject = "",""
     print(f'{body}\n{subject}')
     # Get the users footer
     footer = get_footer()

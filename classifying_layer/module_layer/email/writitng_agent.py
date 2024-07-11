@@ -1,5 +1,10 @@
 from crewai import Agent, Task
 from langchain_openai import ChatOpenAI
+from dotenv import load_dotenv
+import os
+
+load_dotenv(dotenv_path='.env')
+openai_api_key = os.getenv("OPENAI_API_KEY")
 
 llm = ChatOpenAI(model_name="gpt-3.5-turbo-0125", temperature=0.2)
 

@@ -310,8 +310,11 @@ window.electron.toRenderer((event, data) => {
     if (purpose === 'show-email') {
         showEmail(data.data)
     }
-    if (data.purpose === 'spotify') {
+    else if (data.purpose === 'spotify') {
         updateSpotifyUI(data.data);
+    }
+    else if (data.purpose === 'get-token') {
+        window.electron.getCurrentlyPlaying()
     }
 })
 
@@ -427,7 +430,7 @@ window.electron.onUpdateInfoResponse((event, response) => {
 function searchSpotify() {
     console.log("Search button has been hit")
     let userSearch = document.getElementById("spotifySearch").value
-    data = {module:"spotify",data:userSearch}
+    data = {purpose:"search",data:userSearch}
     window.electron.sendMessage(data)
 }
 
@@ -436,3 +439,16 @@ function updateSpotifyUI(spotifyData) {
     artistElement.innerHTML = `Name: ${spotifyData.name}<br>Genre: ${spotifyData.genres.join(', ')}<br>Followers: ${spotifyData.followers.total}`;
 }
 
+function fetchCurrentlyPlaying() {
+    data = {purpose:"get-token"}
+    window.electron.sendMessage(data)
+}
+
+window.electron.onGetCurrentlyPlayingResponse((event, trackInfo) => {
+    if (trackInfo) {
+        const nowPlayingElement = document.getElementById('nowPlayingInfo');
+        nowPlayingElement.innerHTML = `Playing: ${trackInfo.name} by ${trackInfo.artists.map(artist => artist.name).join(', ')}`;
+    } else {
+        console.log('No track currently playing.');
+    }
+});

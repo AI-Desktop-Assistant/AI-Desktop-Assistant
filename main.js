@@ -1,9 +1,11 @@
-const { app, protocol, BrowserWindow, ipcMain } = require('electron')
+const { app, protocol, BrowserWindow, ipcMain, shell } = require('electron')
 const sqlite3 = require('sqlite3').verbose()
 const path = require('node:path')
 const { spawn } = require('child_process')
 const axios = require('axios')
 const io = require('socket.io-client')
+
+let spotifyToken
 
 let win
 
@@ -490,13 +492,26 @@ app.whenReady().then(() => {
             }
             win.focus()
             win.webContents.send('to-renderer', data)
-        } else if (purpose === 'spotify') {
+        } else if (purpose === 'search') {
             if (win.isMinimized()) {
                 win.restore()
             }
             win.focus()
             win.webContents.send('to-renderer', data)
-        }
+        } else if (purpose === 'get-token') {
+            if (win.isMinimized()) {
+                win.restore()
+            }
+            win.focus()
+            openSpotifyLogin(data.data)
+            // spotifyToken = data.data
+            // win.webContents.send('get-currently-playing-response', data.data)
+        } else if (purpose === 'get-track-info')
+            if (win.isMinimized()) {
+                win.restore()
+            }
+            win.focus()
+            win.webContents.send("get-currently-playing-response", data)
     })
 
     ipcMain.on('send-message', (event, message) => {
@@ -508,6 +523,20 @@ app.whenReady().then(() => {
         if (BrowserWindow.getAllWindows().length === 0) createWindow()
     })
 })
+
+ipcMain.handle('get-currently-playing', async (event) => {
+    try {
+        const trackInfo = spotify.get_currently_playing_track(spotifyToken);
+        return trackInfo;
+    } catch (error) {
+        console.error('Error in get-currently-playing handler:', error);
+        throw error; // rethrow the error to send it to the renderer
+    }
+});
+
+function openSpotifyLogin(auth_url) {
+    shell.openExternal(auth_url);
+}
 
 app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') app.quit()

@@ -3,6 +3,7 @@ import os
 import base64
 from requests import post,get
 import json
+from main import socketio
 
 load_dotenv()
 
@@ -61,3 +62,63 @@ def search(artist_name):
         return result
     else:
         print("Artist not found.")
+
+def get_currently_playing_track(token):
+    url = "https://api.spotify.com/v1/me/player/currently-playing"
+    headers = get_auth_header(token)
+    response = get(url, headers=headers)
+    print(f"Response:{response}\n:Response:{response.status_code}")
+    if response.status_code == 200:
+        track_info = json.loads(response.content)
+        return track_info
+    else:
+        return None
+
+import requests
+
+def get_user_authorization():
+    # Your client details
+    spotify_client_id = client_id
+    redirect_uri = 'http://localhost:8888/aiassistant/callback'
+    # Scopes enable your application to access specific API endpoints on the user’s behalf
+    scope = 'user-read-currently-playing user-read-playback-state'
+
+    # Construct the URL
+    auth_url = f"https://accounts.spotify.com/authorize?response_type=code&client_id={spotify_client_id}&scope={scope}&redirect_uri={redirect_uri}"
+
+    return auth_url
+
+def get_access_token(code):
+    token_url = 'https://accounts.spotify.com/api/token'
+    spotify_client_id = client_id
+    spotify_client_secret = client_secret
+    redirect_uri = 'http://localhost:8888/aiassistant/callback'
+
+    # Request body
+    body = {
+        "grant_type": "authorization_code",
+        "code": code,
+        "redirect_uri": redirect_uri,
+        "client_id": spotify_client_id,
+        "client_secret": spotify_client_secret
+    }
+
+    # Make the POST request
+    response = requests.post(token_url, data=body)
+    token_info = response.json()
+    return token_info['access_token'], token_info['refresh_token']
+
+def spotify_callback(request):
+    error = request.args.get('error')
+    code = request.args.get('code')
+    state = request.args.get('state')
+    
+    if error:
+        return f"Error received: {error}", 400
+    if not code:
+        return "Code not found in the request", 400
+
+    access_token, refresh_token = get_access_token(code)
+    print(access_token, refresh_token)
+    track_info = get_currently_playing_track(access_token)
+    socketio.emit("response", {"data":track_info, "purpose":"get-track-info"})

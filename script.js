@@ -306,12 +306,12 @@ function showEmail(data) {
 
 window.electron.toRenderer((event, data) => {
     const purpose = data.purpose
-    console.log("Recieved renderer data..........")
+    console.log("Recieved renderer data..........", data)
     if (purpose === 'show-email') {
         showEmail(data.data)
     }
-    if (purpose === 'spotify') {
-        console.log(data.data)
+    if (data.purpose === 'spotify') {
+        updateSpotifyUI(data.data);
     }
 })
 
@@ -430,3 +430,9 @@ function searchSpotify() {
     data = {module:"spotify",data:userSearch}
     window.electron.sendMessage(data)
 }
+
+function updateSpotifyUI(spotifyData) {
+    const artistElement = document.getElementById('artistInfo');
+    artistElement.innerHTML = `Name: ${spotifyData.name}<br>Genre: ${spotifyData.genres.join(', ')}<br>Followers: ${spotifyData.followers.total}`;
+}
+

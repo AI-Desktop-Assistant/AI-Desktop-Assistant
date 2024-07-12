@@ -57,10 +57,6 @@ function switchModule(moduleId) {
     selectedModule = document.querySelector(`[onclick="switchModule('${moduleId}')"]`)
     selectedModule.classList.add('active')
 
-    if (moduleId === 'spotify') {
-        getCurrentPlayingTrack();
-    }
-
     const tabButtons = document.getElementById(moduleId).querySelector('.tab-buttons')
     const moduleContent = module.querySelector('.module-content')
     console.log(`Tab Buttons: ${tabButtons}`)
@@ -310,8 +306,12 @@ function showEmail(data) {
 
 window.electron.toRenderer((event, data) => {
     const purpose = data.purpose
+    console.log("Recieved renderer data..........")
     if (purpose === 'show-email') {
         showEmail(data.data)
+    }
+    if (purpose === 'spotify') {
+        console.log(data.data)
     }
 })
 
@@ -423,3 +423,10 @@ window.electron.onUpdateInfoResponse((event, response) => {
         }
     }
 })
+
+function searchSpotify() {
+    console.log("Search button has been hit")
+    let userSearch = document.getElementById("spotifySearch").value
+    data = {module:"spotify",data:userSearch}
+    window.electron.sendMessage(data)
+}

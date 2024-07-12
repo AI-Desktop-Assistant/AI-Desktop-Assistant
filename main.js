@@ -490,10 +490,17 @@ app.whenReady().then(() => {
             }
             win.focus()
             win.webContents.send('to-renderer', data)
+        } else if (purpose === 'spotify') {
+            if (win.isMinimized()) {
+                win.restore()
+            }
+            win.focus()
+            win.webContents.send('to-renderer', data)
         }
     })
 
     ipcMain.on('send-message', (event, message) => {
+        console.log("Sending message............")
         socket.emit('message', message)
     })
 

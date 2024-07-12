@@ -5,6 +5,7 @@ from flask_socketio import SocketIO, emit
 from threading import Thread
 from reception_layer.speech_rec import listen
 from classifying_layer.classify_req import classify_user_request
+from classifying_layer.module_layer.spotify.spotify import search
 
 os.environ['USE_FLASH_ATTENTION'] = '1'
 logged_in = True
@@ -24,9 +25,11 @@ def handle_disconnect():
     print('Client disconnected')
 
 @socketio.on('message')
-def handle_message(data):
+def handle_message(data):   
     print(f'Received message: {data}')
-    emit('response', {'data': 'Message received'})
+    if data['module'] == 'spotify':
+        result = search(data['data'])
+        emit('response', {'data': result,'purpose':'spotify'})
 
 def run_flask():
     socketio.run(app, port=5000, debug=False, allow_unsafe_werkzeug=True)

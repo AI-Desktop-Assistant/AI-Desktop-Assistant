@@ -50,10 +50,14 @@ def get_songs_by_artist(token, artist_id):
     json_result = json.loads(result.content)["tracks"]
     return json_result
 
-token = get_token()
-result = search_for_artist(token, "lil")
-artist_id = result["id"]
-songs = get_songs_by_artist(token, artist_id)
-
-for idx, song in enumerate(songs):
-    print(f"{idx + 1}. {song['name']}")
+def search(artist_name):
+    token = get_token()
+    result = search_for_artist(token, artist_name)
+    if result:
+        artist_id = result["id"]
+        songs = get_songs_by_artist(token, artist_id)
+        for idx, song in enumerate(songs):
+            print(f"{idx + 1}. {song['name']}")
+        return result
+    else:
+        print("Artist not found.")

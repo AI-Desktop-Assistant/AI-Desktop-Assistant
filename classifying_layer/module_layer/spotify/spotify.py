@@ -3,7 +3,9 @@ import os
 import base64
 from requests import post,get
 import json
-from config_socketio import socketio
+from config_socketio import socketio, app
+
+from flask import request
 
 load_dotenv()
 
@@ -67,11 +69,14 @@ def get_currently_playing_track(token):
     url = "https://api.spotify.com/v1/me/player/currently-playing"
     headers = get_auth_header(token)
     response = get(url, headers=headers)
-    print(f"Response:{response}\n:Response:{response.status_code}")
     if response.status_code == 200:
         track_info = json.loads(response.content)
         return track_info
+    elif response.status_code == 204:
+        print("No track currently playing.")
+        return None
     else:
+        print(f"Failed to get currently playing track: {response.status_code}")
         return None
 
 import requests
@@ -109,16 +114,47 @@ def get_access_token(code):
     return token_info['access_token'], token_info['refresh_token']
 
 def spotify_callback(request):
-    error = request.args.get('error')
-    code = request.args.get('code')
-    state = request.args.get('state')
-    
-    if error:
-        return f"Error received: {error}", 400
-    if not code:
-        return "Code not found in the request", 400
+    try:
+        print("Callback request received")
+        error = request.args.get('error')
+        code = request.args.get('code')
+        state = request.args.get('state')
 
-    access_token, refresh_token = get_access_token(code)
-    print(access_token, refresh_token)
-    track_info = get_currently_playing_track(access_token)
-    socketio.emit("response", {"data":track_info, "purpose":"get-track-info"})
+        if error:
+            print(f"Error in Spotify authorization: {error}")
+            return f"Error received: {error}", 400
+        if not code:
+            print("No code found in the request")
+            return "Code not found in the request", 400
+
+        access_token, refresh_token = get_access_token(code)
+        print(f"Access Token: {access_token}")
+        print(f"Refresh Token: {refresh_token}")
+
+        track_info = get_currently_playing_track(access_token)
+        if track_info:
+            # Extracting necessary information
+            simplified_info = {
+                'track_name': track_info['item']['name'],
+                'artist_name': ", ".join([artist['name'] for artist in track_info['item']['artists']]),
+                'album_name': track_info['item']['album']['name'],
+                'album_image': track_info['item']['album']['images'][0]['url'],
+                'progress_ms': track_info['progress_ms'],
+                'duration_ms': track_info['item']['duration_ms'],
+                'is_playing': track_info['is_playing']
+            }
+
+            print(f"Simplified Track Info: {simplified_info}")
+
+            socketio.emit("get-currently-playing-response", {"data": simplified_info, "purpose": "get-track-info"})
+        else:
+            print("No track currently playing")
+            socketio.emit("response", {"data": "No track currently playing", "purpose": "get-track-info"})
+        return "Callback handled successfully", 200
+    except Exception as e:
+        print(f"Error in callback: {e}")
+        return f"Internal Server Error: {e}", 500
+
+@app.route('/aiassistant/callback')
+def callback():
+    return spotify_callback(request)

@@ -103,7 +103,7 @@ const createWindow = () => {
     let mainPythonProcess = null
 
     function sendUpdateToPython(endpoint, data) {
-        axios.post(`http://localhost:5000/${endpoint}`, data)
+        axios.post(`http://localhost:8888/${endpoint}`, data)
             .then(response => {
                 console.log(response.data.message);
             })
@@ -473,7 +473,7 @@ const createWindow = () => {
 app.whenReady().then(() => {
     createWindow()
     
-    socket = io('http://localhost:5000')
+    socket = io('http://localhost:8888')
 
     socket.on('connect', () => {
         console.log('Connected to Flask-SocketIO server')

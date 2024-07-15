@@ -442,15 +442,37 @@ function updateSpotifyUI(spotifyData) {
 }
 
 function fetchCurrentlyPlaying() {
+    console.log("Fetching currently playing track");
     data = {purpose:"get-token"}
     window.electron.sendMessage(data)
 }
 
-window.electron.onGetCurrentlyPlayingResponse((event, trackInfo) => {
-    if (trackInfo) {
-        const nowPlayingElement = document.getElementById('nowPlayingInfo');
-        nowPlayingElement.innerHTML = `Playing: ${trackInfo.name} by ${trackInfo.artists.map(artist => artist.name).join(', ')}`;
+function updateNowPlayingUI(trackData) {
+    console.log("Updating Now Playing UI with:", trackData);
+    const nowPlayingElement = document.getElementById('nowPlayingInfo');
+    if (trackData && trackData.track_name) {
+        nowPlayingElement.innerHTML = `
+            <div>
+                <img src="${trackData.album_image}" alt="Album cover" style="width: 100px; height: 100px;">
+                <div>
+                    <p><strong>Track:</strong> ${trackData.track_name}</p>
+                    <p><strong>Artist:</strong> ${trackData.artist_name}</p>
+                    <p><strong>Album:</strong> ${trackData.album_name}</p>
+                    <p><strong>Progress:</strong> ${Math.floor(trackData.progress_ms / 1000)}s / ${Math.floor(trackData.duration_ms / 1000)}s</p>
+                    <p><strong>Status:</strong> ${trackData.is_playing ? 'Playing' : 'Paused'}</p>
+                </div>
+            </div>
+        `;
     } else {
-        console.log('No track currently playing.');
+        nowPlayingElement.innerHTML = 'No track currently playing.';
+    }
+}
+
+window.electron.on('get-currently-playing-response', (event, data) => {
+    console.log("Received currently playing response:", data);
+    if (data && data.data) {
+        updateNowPlayingUI(data.data);
+    } else {
+        updateNowPlayingUI(null);
     }
 });

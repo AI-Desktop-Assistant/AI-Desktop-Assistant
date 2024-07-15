@@ -38,7 +38,7 @@ def handle_message(data):
         emit('response', {'data': auth_url,'purpose':'get-token'})
 
 def run_flask():
-    socketio.run(app, port=5000, debug=False, allow_unsafe_werkzeug=True)
+    socketio.run(app, port=8888, debug=False, allow_unsafe_werkzeug=True)
 
 def main_loop(user_id, username, email, socket):
     global current_user_id
@@ -94,9 +94,9 @@ def update_login_status():
         return jsonify(success=True, message="Login status updated successfully!")
     return jsonify(success=False, message="Unable to update login_status in main.py")
 
-@app.route('/callback')
+@app.route('/aiassistant/callback')
 def callback():
-    spotify_callback(request)
+    return spotify_callback(request)
 
 if __name__ == "__main__":
     if len(sys.argv) != 4:

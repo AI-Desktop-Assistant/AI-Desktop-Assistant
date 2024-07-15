@@ -310,7 +310,8 @@ window.electron.toRenderer((event, data) => {
     if (purpose === 'show-email') {
         showEmail(data.data)
     }
-    else if (data.purpose === 'spotify') {
+    else if (data.purpose === 'search') {
+        console.log("Updating Spotify UI with data")
         updateSpotifyUI(data.data);
     }
     else if (data.purpose === 'get-token') {
@@ -435,6 +436,7 @@ function searchSpotify() {
 }
 
 function updateSpotifyUI(spotifyData) {
+    console.log('Updating UI with Spotify data')
     const artistElement = document.getElementById('artistInfo');
     artistElement.innerHTML = `Name: ${spotifyData.name}<br>Genre: ${spotifyData.genres.join(', ')}<br>Followers: ${spotifyData.followers.total}`;
 }

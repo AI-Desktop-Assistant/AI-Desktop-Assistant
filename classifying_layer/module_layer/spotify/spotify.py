@@ -3,7 +3,7 @@ import os
 import base64
 from requests import post,get
 import json
-from main import socketio
+from config_socketio import socketio
 
 load_dotenv()
 

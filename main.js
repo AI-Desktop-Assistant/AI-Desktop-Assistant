@@ -496,6 +496,7 @@ app.whenReady().then(() => {
             if (win.isMinimized()) {
                 win.restore()
             }
+            console.log('Sending data to renderer');
             win.focus()
             win.webContents.send('to-renderer', data)
         } else if (purpose === 'get-token') {

@@ -6,6 +6,7 @@ from threading import Thread
 from reception_layer.speech_rec import listen
 from classifying_layer.classify_req import classify_user_request
 from classifying_layer.module_layer.spotify.spotify import search, get_user_authorization, get_currently_playing_track, spotify_callback
+from config_socketio import socketio, app
 
 os.environ['USE_FLASH_ATTENTION'] = '1'
 logged_in = True

@@ -443,23 +443,22 @@ function updateSpotifyUI(spotifyData) {
 
 function fetchCurrentlyPlaying() {
     console.log("Fetching currently playing track");
-    data = {purpose:"get-token"}
-    window.electron.sendMessage(data)
+    window.electron.sendMessage({purpose: "get-token"});
 }
 
 function updateNowPlayingUI(trackData) {
-    console.log("Updating Now Playing UI with:", trackData);
+    console.log("Updating now playing UI with data:", trackData);
     const nowPlayingElement = document.getElementById('nowPlayingInfo');
     if (trackData && trackData.track_name) {
         nowPlayingElement.innerHTML = `
             <div>
                 <img src="${trackData.album_image}" alt="Album cover" style="width: 100px; height: 100px;">
                 <div>
-                    <p><strong>Track:</strong> ${trackData.track_name}</p>
-                    <p><strong>Artist:</strong> ${trackData.artist_name}</p>
-                    <p><strong>Album:</strong> ${trackData.album_name}</p>
-                    <p><strong>Progress:</strong> ${Math.floor(trackData.progress_ms / 1000)}s / ${Math.floor(trackData.duration_ms / 1000)}s</p>
-                    <p><strong>Status:</strong> ${trackData.is_playing ? 'Playing' : 'Paused'}</p>
+                    <strong>Track:</strong> ${trackData.track_name}<br>
+                    <strong>Artist:</strong> ${trackData.artist_name}<br>
+                    <strong>Album:</strong> ${trackData.album_name}<br>
+                    <strong>Progress:</strong> ${Math.floor(trackData.progress_ms / 1000)}s / ${Math.floor(trackData.duration_ms / 1000)}s<br>
+                    <strong>Status:</strong> ${trackData.is_playing ? 'Playing' : 'Paused'}
                 </div>
             </div>
         `;
@@ -468,11 +467,7 @@ function updateNowPlayingUI(trackData) {
     }
 }
 
-window.electron.on('get-currently-playing-response', (event, data) => {
-    console.log("Received currently playing response:", data);
-    if (data && data.data) {
-        updateNowPlayingUI(data.data);
-    } else {
-        updateNowPlayingUI(null);
-    }
+require('electron').ipcRenderer.on('get-currently-playing-response', (event, data) => {
+    console.log("Received data in renderer:", data);
+    updateNowPlayingUI(data);
 });

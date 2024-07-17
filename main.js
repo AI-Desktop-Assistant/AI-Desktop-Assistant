@@ -507,16 +507,20 @@ app.whenReady().then(() => {
             openSpotifyLogin(data.data)
             // spotifyToken = data.data
             // win.webContents.send('get-currently-playing-response', data.data)
-        } else if (purpose === 'get-track-info')
-            if (win.isMinimized()) {
-                win.restore()
-            }
-            win.focus()
-            win.webContents.send("get-currently-playing-response", data)
+        }
     })
 
+    socket.on('get-currently-playing-response', (data) => {
+        console.log("Received currently playing response from Flask:", data);
+        if (win.isMinimized()) {
+            win.restore();
+        }
+        win.focus();
+        win.webContents.send("get-currently-playing-response", data);
+    });
+
     ipcMain.on('send-message', (event, message) => {
-        console.log("Sending message............")
+        console.log("Sending message............:", message.purpose);
         socket.emit('message', message)
     })
 

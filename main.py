@@ -5,7 +5,7 @@ from flask_socketio import SocketIO, emit
 from threading import Thread
 from reception_layer.speech_rec import listen
 from classifying_layer.classify_req import classify_user_request
-from classifying_layer.module_layer.spotify.spotify import search, get_user_authorization, get_currently_playing_track, spotify_callback
+from classifying_layer.module_layer.spotify.spotify import search, get_user_authorization, get_currently_playing_track, spotify_callback, get_token
 from config_socketio import socketio, app
 
 os.environ['USE_FLASH_ATTENTION'] = '1'
@@ -36,6 +36,12 @@ def handle_message(data):
         auth_url = get_user_authorization()
         # track_info = get_currently_playing_track(token)
         emit('response', {'data': auth_url,'purpose':'get-token'})
+    elif data['purpose'] == 'get-currently-playing':
+        token = get_token()
+        print(f"Access Token: {token}")
+        track_info = get_currently_playing_track(token)
+        if track_info:
+            emit("get-currently-playing-response", {"data": track_info, "purpose": "get-track-info"})
 
 def run_flask():
     socketio.run(app, port=8888, debug=False, allow_unsafe_werkzeug=True)

@@ -40,11 +40,15 @@ def search_for_artist(token, artist_name):
     result = get(query_url, headers=headers)
     json_result = json.loads(result.content)["artists"]["items"]
 
-    if len(json_result) == 0:
-        print("No artist with this name exists...")
+    if 'artists' in json_result and 'items' in json_result['artists']:
+        if len(json_result['artists']['items']) == 0:
+            print("No artist with this name exists...")
+            return None
+        
+        return json_result['artists']['items'][0]
+    else:
+        print("Unexpected JSON structure:", json_result)
         return None
-    
-    return json_result[0]
 
 def get_songs_by_artist(token, artist_id):
     url = f"https://api.spotify.com/v1/artists/{artist_id}/top-tracks?country=US"

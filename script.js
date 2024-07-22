@@ -467,7 +467,7 @@ function updateNowPlayingUI(trackData) {
     }
 }
 
-require('electron').ipcRenderer.on('get-currently-playing-response', (event, data) => {
+window.electron.onGetCurrentlyPlayingResponse((event, data) => {
     console.log("Received data in renderer:", data);
-    updateNowPlayingUI(data);
+    updateNowPlayingUI(data.data);
 });

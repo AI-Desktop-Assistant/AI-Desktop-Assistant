@@ -5,17 +5,17 @@ from flask_socketio import SocketIO, emit
 from threading import Thread
 from reception_layer.speech_rec import listen
 from classifying_layer.classify_req import classify_user_request
+from config_socketio import create_app_socket
+
+app, socketio = create_app_socket()
+
 from classifying_layer.module_layer.spotify.spotify import search, get_user_authorization, get_currently_playing_track, spotify_callback, get_token
-from config_socketio import socketio, app
 
 os.environ['USE_FLASH_ATTENTION'] = '1'
 logged_in = True
 current_user_id = ''
 current_username = ''
 current_email = ''
-
-app = Flask(__name__)
-socketio = SocketIO(app, cors_allowed_origins='*')
 
 @socketio.on('connect')
 def handle_connect():

@@ -3,11 +3,13 @@ import os
 import base64
 from requests import post,get
 import json
-from config_socketio import socketio, app
+from config_socketio import get_app_socket
 
 from flask import request
 
 load_dotenv()
+
+app, socketio = get_app_socket()
 
 client_id = os.getenv("CLIENT_ID")
 client_secret = os.getenv("CLIENT_SECRET")
@@ -38,7 +40,7 @@ def search_for_artist(token, artist_name):
 
     query_url = url + query
     result = get(query_url, headers=headers)
-    json_result = json.loads(result.content)["artists"]["items"]
+    json_result = json.loads(result.content)
 
     if 'artists' in json_result and 'items' in json_result['artists']:
         if len(json_result['artists']['items']) == 0:
@@ -158,7 +160,3 @@ def spotify_callback(request):
     except Exception as e:
         print(f"Error in callback: {e}")
         return f"Internal Server Error: {e}", 500
-
-@app.route('/aiassistant/callback')
-def callback():
-    return spotify_callback(request)

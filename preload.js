@@ -27,5 +27,5 @@ contextBridge.exposeInMainWorld('electron', {
   sendMessage: (data) => ipcRenderer.send('send-message', data),
   toRenderer: (data) => ipcRenderer.on('to-renderer', data),
   getCurrentlyPlaying: () => ipcRenderer.invoke('get-currently-playing'),
-  onGetCurrentlyPlayingResponse: (trackInfo) => ipcRenderer.on('get-currently-playing-response', data)
+  onGetCurrentlyPlayingResponse: (data) => ipcRenderer.on('get-currently-playing-response', data)
 })

@@ -1,0 +1,124 @@
+text,category
+remind me to pay the electricity bill,set
+add a meeting at noon,set
+remind me to call john tomorrow,set
+add yoga class to my monday routine,set
+put a car service on my schedule for friday,set
+remind me to buy groceries tomorrow,set
+set a reminder for my anniversary,set
+schedule a dentist appointment next wednesday,set
+schedule a date night for saturday,set
+set an alarm for 7 am tomorrow,set
+would you be able to set a task for 5 pm,set
+can you schedule a task for tomorrow at 8,set
+add buy groceries to my to-do list,set
+remind me to call mom at 5 pm,set
+would you be able to create a task to finish the project report,set
+set a reminder for my dentist appointment,set
+add send birthday card to my tasks,set
+remind me to water the plants every monday,set
+would you mind creating a task to review the budget,set
+would you mind setting a reminder to exercise at 7 pm,set
+add book flight tickets to my to-do list,set
+add wash the car to my to-do list,set
+remind me to take out the trash,set
+would you create a task to clean the house,set
+mark the grocery shopping task as completed,set
+would you be able to set a reminder for my annual checkup,set
+add plan the vacation to my tasks,set
+remind me to send the report every friday,set
+create a task to finish reading the book,set
+could you set a reminder to call the bank,set
+add schedule a meeting with the team to my to-do list,set
+add organize my desk to my tasks,set
+remind me to pay the rent on the first,set
+create a task to update my resume,set
+can you set a reminder to check the mail,set
+add write a blog post to my to-do list,set
+can you add fix the leaking faucet to my tasks,set
+would you be able to remind me to check the tire pressure monthly,set
+could you create a task to backup my computer,set
+set a reminder to go for a run at 6 AM,set
+add buy a new phone to my to-do list,set
+add plan the birthday party to my tasks,set
+remind me to review the contract,set
+create a task to design the new logo,set
+set a reminder to meditate daily,set
+can you add paint the living room to my to-do list,set
+can you add clean the garage to my tasks,set
+would you mind reminding me to pick up the dry cleaning,set
+create a task to call the electrician,set
+set a reminder to visit grandma on sunday,set
+What time is my weekly team update,query
+Are there any reminders for meetings with clients next Tuesday,query
+What are my reminders for taking medication,query
+Can you show me my tasks related to the home renovation project,query
+What reminders do I have set for my yoga classes,query
+Can you show me my tasks related to the home renovation project,query
+What reminders do I have set for my yoga classes,query
+How many tasks are scheduled for this weekend,query
+Do I have any reminders to call suppliers this week,query
+Can you show me the tasks I have due for the marketing campaign,query
+what are my next 3 tasks,query
+what's the next task i have,query
+how many tasks do i have today,query
+what tasks do i have today,query
+what are my tasks for today,query
+what are the tasks i have today,query
+what are my upcoming tasks,query
+what tasks do i have to do today,query
+do i have any tasks later,query
+do i have any tasks coming up later,query
+do i have anything to be reminded about today,query
+when is my next doctors appointment,query
+what time do i have to be at my moms birthday,query
+when is my next reservation for maestros dinner,query
+when am i scheduled to meet with my real estate agent,query
+when am i scheduled to meet with my realtor,query
+what tasks do i have for tomorrow,query
+what reminders do i have for tomorrow,query
+what is my next reminder,query
+Can you tell me what my reminders for next week are,query
+What do I need to remember for this weekend,query
+Are there any reminders set for my anniversary,query
+Show me the reminders for the kids school events this month,query
+Do I have reminders set for any upcoming holidays,query
+Can you list the reminders I have for car maintenance,query
+What reminders do I have about project deadlines,query
+Are there any reminders to check on the house renovation progress,query
+Do I have any reminders set for veterinary appointments,query
+Are there any reminders to renew subscriptions or memberships,query
+mark my last task as complete,update
+Check off grocery shopping from my task list,update
+Confirm that I've attended the team meeting,update
+Done with sending the emails can you mark that complete,update
+Complete the task for booking the flight tickets,update
+Just mowed the lawn can you check that off,update
+Finalize the task of calling the plumber,update
+Mark the schedule dentist appointment task as complete,update
+I have paid the utility bills please check that off,update
+Done with the car service can you update my tasks?,update
+Check off organize the garage from my to do list,update
+Complete the task for booking the flight tickets,update
+Check off prepare the guest room,update
+Can you update the reminder for the doctor's appointment to next Wednesday at 3 PM,update
+Change my reminder for the team meeting from 10 AM to 11 AM tomorrow,update
+Adjust the time for my daily workout reminder to 7 AM instead of 6 AM,update
+Move the reminder for taking out the trash to Sunday evening,update
+Update my reminder to call mom to every Sunday at 4 PM,update
+Change the reminder for vet visit to the first Monday of every month,update
+Update my reminder to call mom to every Sunday at 4 PM,update
+Change the reminder for vet visit to the first Monday of every month,update
+Can you reschedule the reminder for the project deadline to two days earlier,update
+Modify the reminder to review the budget reports to the last Friday of each month,update
+Please change the alarm for morning yoga from 6:30 AM to 7:15 AM,update
+mark the laundry task as completed,update
+Mark the task write the weekly newsletter as complete,update
+I've finished drafting the agreement check it off my list,update
+Done with the software upgrade can you update my tasks,update
+Check off arrange the client portfolio,update
+I have completed the meal prep for this week mark it complete,update
+mark that I've backed up all critical data this month as complete,update
+Mark assemble the new desk as done on my task list,update
+I've completed the performance reviews please check that off,update
+Finalize the task of redecorating the office lobby and mark it complete,update

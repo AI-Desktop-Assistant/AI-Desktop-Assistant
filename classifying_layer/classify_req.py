@@ -3,6 +3,7 @@ from transformers import BertTokenizer, BertTokenizerFast, AutoModelForCausalLM,
 from .module_layer.launch.process_launch_req import *
 from models.load_model import load_model
 from .module_layer.email.process_email_request import process_email_req
+from .module_layer.task.process_task_req import process_task_req
 
 model_path = 'models\\module_classification_model.pth'
 model, tokenizer, device = load_model(model_path, 'classification')
@@ -28,7 +29,7 @@ def classify(req):
         
     return predicted_module
 
-def classify_user_request(req, user_id, socket):
+def classify_user_request(req, socket):
     module = classify(req)
     print(f'Chosen Module: {module}')
     if module == 'launch':
@@ -36,9 +37,9 @@ def classify_user_request(req, user_id, socket):
     # elif module == 'weather':
     #     weather(input)
     elif module == 'email':
-        status = process_email_req(req, user_id, socket)
-    # elif module == 'task':
-    #     task(input)
+        status = process_email_req(req, socket)
+    elif module == 'task':
+        process_task_req(req)
     # elif module == 'spotify':
     #     spotify(input)
     # elif module == 'generic':

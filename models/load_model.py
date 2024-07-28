@@ -1,10 +1,11 @@
 import torch
 import os
-from transformers import BertTokenizer, BertTokenizerFast, AutoModelForCausalLM, AutoTokenizer, AutoConfig
+from transformers import BertModel, BertTokenizer, BertTokenizerFast, AutoModelForCausalLM, AutoTokenizer, AutoConfig
 from accelerate import init_empty_weights, infer_auto_device_map, load_checkpoint_and_dispatch
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model, tokenizer, = None, None
+bert_name = 'bert-base-uncased'
 
 def load_language_model(model_name):
     # model = AutoModelForCausalLM.from_pretrained(model_name, torch_dtype=torch.bfloat16)
@@ -25,7 +26,7 @@ def load_language_model(model_name):
 
 def load_classification(model_path):
     model = torch.load(model_path)
-    tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
+    tokenizer = BertTokenizer.from_pretrained(bert_name)
 
     model.to(device)
 
@@ -33,7 +34,7 @@ def load_classification(model_path):
 
 def load_entity_recognition_model(model_path):
     model = torch.load(model_path)
-    tokenizer = BertTokenizerFast.from_pretrained('bert-base-uncased')
+    tokenizer = BertTokenizerFast.from_pretrained(bert_name)
     
     model.to(device)
 
@@ -41,12 +42,26 @@ def load_entity_recognition_model(model_path):
 
 def load_email_info_recognizer_model(model_path):
     model = torch.load(model_path)
-    tokenizer = BertTokenizerFast.from_pretrained('bert-base-uncased')
+    tokenizer = BertTokenizerFast.from_pretrained(bert_name)
 
     model.to(device)
     return model, tokenizer, device
 
-def load_model(model_name_or_path, purpose):
+def load_fine_tuned_model(model_path):
+    model = torch.load(model_path)
+    tokenizer = BertTokenizerFast.from_pretrained(bert_name)
+
+    model.to(device)
+    return model, tokenizer, device
+
+def load_bert():
+    model = BertModel.from_pretrained(bert_name)
+    tokenizer = BertTokenizer.from_pretrained(bert_name)
+    
+    model.to(device)
+    return model, tokenizer, device
+
+def load_model(model_name_or_path, purpose=''):
     if purpose == 'response':
         model, tokenizer, device = load_language_model(model_name_or_path)
     elif purpose == 'classification':
@@ -55,6 +70,9 @@ def load_model(model_name_or_path, purpose):
         model, tokenizer, device = load_entity_recognition_model(model_name_or_path)
     elif purpose == 'email':
         model, tokenizer, device = load_email_info_recognizer_model(model_name_or_path)
-        # model, tokenizer, device = "","",""
-
+    elif model_name_or_path == 'bert':
+        model, tokenizer, device = load_bert()
+    else:
+        model, tokenizer, device = load_fine_tuned_model(model_name_or_path)
+    
     return model, tokenizer, device

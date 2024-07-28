@@ -5,6 +5,7 @@ from flask_socketio import SocketIO, emit
 from threading import Thread
 from reception_layer.speech_rec import listen
 from classifying_layer.classify_req import classify_user_request
+from user_config import *
 from config_socketio import create_app_socket
 
 app, socketio = create_app_socket()
@@ -64,7 +65,7 @@ def main_loop(user_id, username, email, socket):
                 continue
             # input = "Compose an update email to the customer service team and CC the support manager and quality assurance lead and BCC the technical support lead and IT manager"
             # after getting input classify the model
-            module = classify_user_request(input, current_user_id, socket)
+            module = classify_user_request(input, socket)
             # delve into selected module deeper
 
 @app.route('/update_email', methods=['POST'])
@@ -74,6 +75,7 @@ def update_username():
     new_username = request.json.get('username')
     if new_username:
         print('updated email')
+        set_username(new_username)
         current_username = new_username
         return jsonify(success=True, message="Username updated successfully!")
     return jsonify(success=False, message="Unable to update username in main.py")
@@ -85,6 +87,7 @@ def update_email():
     new_email = request.json.get('email')
     if new_email:
         print('updated email')
+        set_user_email(new_email)
         current_email = new_email
         return jsonify(success=True, message="Email updated successfully!")
     return jsonify(success=False, message="Unable to update email in main.py")
@@ -115,4 +118,5 @@ if __name__ == "__main__":
     print("\nStarting flask\n")
     flask_thread = Thread(target=run_flask)
     flask_thread.start()
+    configure_user(current_user_id, current_email, current_username)
     main_loop(current_user_id, current_username, current_email, socketio)

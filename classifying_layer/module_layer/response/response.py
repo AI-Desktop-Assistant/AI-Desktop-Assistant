@@ -1,3 +1,4 @@
+from datetime import datetime, timedelta
 import time
 import random
 import json
@@ -41,6 +42,82 @@ def handle_launch_request(full_app_name, confident=True):
     else:
         response = random.choice(templates["not confident"]).replace("[file_name]", full_app_name)
     return say(response)
+
+def handle_invalid_time():
+    response = 'When would you like this reminder to be set for?'
+    return say(response)
+
+def prompt_for_missing_date_or_time(val_date, val_time):
+    user_input = 'date '
+    if not val_time and not val_date:
+        user_input += 'and time '
+    elif not val_time:
+        user_input = 'time '
+    
+    response = f'Could you provide me with the {user_input} for your reminder'
+    say(response)
+    user_response = listen()
+
+    return user_response
+
+def output_tasks_to_user(response, confirm=False):
+    say(response)
+    user_response = ''
+    if confirm:
+        user_response = listen()
+    return user_response
+
+def alert_reading_remaining_tasks(plural):
+    plural_str = 'remaining tasks are, ' if plural else 'last task is, '
+    response = f'Ok. Your {plural_str}'
+    say(response)
+    
+def alert_task_set(intent, task_date, hour, minute, is_am, repeat, task_ref):
+    response = f'I have set a {task_ref} '
+    first_word = intent.split()[0]
+    if first_word.endswith('ing'):
+        response += 'for '
+    else:
+        response += 'to '
+    print(f'Intent: {intent}')
+    if intent == 'alarm':
+        response = 'I have set an '
+    elif 'my' in intent:
+        print('Replacing my')
+        intent = intent.replace('my', 'your')
+    print(f'Intent: {intent}')
+    response += intent
+    if 'remind' in task_ref and intent != 'alarm':
+        response = f'Reminding you to {intent} '
+    today = datetime.today()
+    two_weeks_date = today + timedelta(weeks=2)
+    if task_date <= two_weeks_date:
+        one_week_date = today + timedelta(weeks=1)
+        if repeat:
+            response += 'every '
+        elif task_date >= one_week_date:
+            response += 'next '
+        days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+        response += f'{days[task_date.weekday()]} '
+    else:
+        response += f'on '
+        months = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'november', 'december']
+        month = months[task_date.month - 1]
+        response += f'{month} {task_date.day} '
+        if task_date.year != today.year:
+            response += f'{task_date.year} '
+    response += 'at '
+    response += f'{hour}:{minute} '
+    if is_am:
+        response += 'in the morning'
+    else:
+        if hour < 6:
+            response += 'in the afternoon'
+        elif hour < 9:
+            response += 'in the evening'
+        else:
+            response += 'at night'
+    say(response)
 
 def handle_failed_launch():
     response = "Sorry, I couldnt find the file you wanted."

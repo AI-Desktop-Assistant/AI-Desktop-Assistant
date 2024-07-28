@@ -1,0 +1,3812 @@
+[
+  {
+    "sentence": "remind me to pay the electricity bill",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT"
+    ]
+  },
+  {
+    "sentence": "can you remind me to pay the electricity bill",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "INTENT"
+    ]
+  },
+  {
+    "sentence": "can you remind me to go to bed in 2 hours",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "can you remind me to go for a checkup in 2 hours",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "add a meeting at noon",
+    "labels": [
+      "O",
+      "O",
+      "INTENT",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "remind me to call john in 5 hours",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "can you remind me to call john in 20 minutes",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "add yoga class to my monday routine",
+    "labels": [
+      "O",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "put a car service on my schedule for friday",
+    "labels": [
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "remind me to buy groceries tomorrow",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "O"
+    ]
+  },
+  {
+    "sentence": "can you remind me in 3 hours to buy groceries",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT"
+    ]
+  },
+  {
+    "sentence": "set a reminder for my anniversary in 4 weeks",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "schedule a dentist appointment next wednesday",
+    "labels": [
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "schedule an office visit for next friday",
+    "labels": [
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "schedule a date night in 3 weeks",
+    "labels": [
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "set an alarm for 7 am tomorrow",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "would you be able to set a task for 5 pm",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "can you schedule a task for tomorrow at 8",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "add buy groceries to my to-do list",
+    "labels": [
+      "O",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "remind me to call mom at 5 pm",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "could you remind me to call mom at 5 pm",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "would you be able to create a task to finish the project report",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "INTENT"
+    ]
+  },
+  {
+    "sentence": "set a reminder for my dentist appointment",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT"
+    ]
+  },
+  {
+    "sentence": "add send birthday card to my tasks",
+    "labels": [
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "remind me to water the plants every monday",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "can you remind me to water the plants every monday",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "would you mind creating a task to review the budget",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT"
+    ]
+  },
+  {
+    "sentence": "would you mind setting a reminder to exercise at 7 pm",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "add book flight tickets to my to-do list",
+    "labels": [
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "add wash the car to my to-do list",
+    "labels": [
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "remind me to take out the trash at 5",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "can you remind me to take out the trash at 4 o'clock",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "could you create a task to clean the house in 2 hours",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "mark the grocery shopping task as completed",
+    "labels": [
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "would you be able to set a reminder for my annual checkup",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "add plan the vacation to my tasks",
+    "labels": [
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "remind me to send the report every friday",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "can you remind me to send the report every friday",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "create a task to finish reading the book",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "INTENT"
+    ]
+  },
+  {
+    "sentence": "could you set a reminder to call the bank",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT"
+    ]
+  },
+  {
+    "sentence": "add schedule a meeting with the team to my todo list",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "add organize my desk to my tasks",
+    "labels": [
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "remind me to pay the rent on the first",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "can you remind me to pay the rent on the first",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "create a task to update my resume",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT"
+    ]
+  },
+  {
+    "sentence": "can you set a reminder to check the mail",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT"
+    ]
+  },
+  {
+    "sentence": "add write a blog post to my to-do list",
+    "labels": [
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "can you add fix the leaking faucet to my tasks",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "would you be able to remind me to check the tire pressure monthly",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "O"
+    ]
+  },
+  {
+    "sentence": "could you create a task to backup my computer",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT"
+    ]
+  },
+  {
+    "sentence": "set a reminder to go for a run at 6 AM",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "add buy a new phone to my to-do list",
+    "labels": [
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "add plan the birthday party to my tasks",
+    "labels": [
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "remind me to review the contract",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT"
+    ]
+  },
+  {
+    "sentence": "can you remind me to review the contract",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT"
+    ]
+  },
+  {
+    "sentence": "create a task to design the new logo",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "INTENT"
+    ]
+  },
+  {
+    "sentence": "set a reminder to meditate daily",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "O"
+    ]
+  },
+  {
+    "sentence": "can you add paint the living room to my to-do list",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "can you add clean the garage to my tasks",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "would you mind reminding me to pick up the dry cleaning",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "INTENT"
+    ]
+  },
+  {
+    "sentence": "create a task to call the electrician",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT"
+    ]
+  },
+  {
+    "sentence": "set a reminder to visit grandma on sunday",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "What time is my weekly team update",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT"
+    ]
+  },
+  {
+    "sentence": "Are there any reminders for meetings with clients next Tuesday",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "What are my reminders for taking medication",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "Can you show me my tasks related to the home renovation project",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT"
+    ]
+  },
+  {
+    "sentence": "What reminders do I have set for my yoga classes",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT"
+    ]
+  },
+  {
+    "sentence": "Can you show me my tasks related to the home renovation project",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT"
+    ]
+  },
+  {
+    "sentence": "What reminders do I have set for my yoga classes",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT"
+    ]
+  },
+  {
+    "sentence": "How many tasks are scheduled for this weekend",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "Do I have any reminders to call suppliers this week",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "Can you show me the tasks I have due for the marketing campaign",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT"
+    ]
+  },
+  {
+    "sentence": "what are my next 3 tasks",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "what's the next task i have",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "how many tasks do i have today",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "what tasks do i have today",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "what are my tasks for today",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "what are the tasks i have today",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "what are my upcoming tasks",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "what tasks do i have to do today",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "do i have any tasks later",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "do i have any tasks coming up later",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "do i have anything to be reminded about today",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "when is my next doctors appointment",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT"
+    ]
+  },
+  {
+    "sentence": "what time do i have to be at my moms birthday",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT"
+    ]
+  },
+  {
+    "sentence": "when is my next reservation for maestros dinner",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "INTENT"
+    ]
+  },
+  {
+    "sentence": "when am i scheduled to meet with my real estate agent",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "INTENT"
+    ]
+  },
+  {
+    "sentence": "when am i scheduled to meet with my realtor",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "INTENT"
+    ]
+  },
+  {
+    "sentence": "what tasks do i have for tomorrow",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "what reminders do i have for tomorrow",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "what is my next reminder",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "Can you tell me what my reminders for next week are",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "What do I need to remember for this weekend",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "Are there any reminders set for my anniversary",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT"
+    ]
+  },
+  {
+    "sentence": "Show me the reminders for the kids school events this month",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "Do I have reminders set for any upcoming holidays",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT"
+    ]
+  },
+  {
+    "sentence": "Can you list the reminders I have for car maintenance",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT"
+    ]
+  },
+  {
+    "sentence": "What reminders do I have about project deadlines",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT"
+    ]
+  },
+  {
+    "sentence": "Are there any reminders to check on the house renovation progress",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT"
+    ]
+  },
+  {
+    "sentence": "Do I have any reminders set for veterinary appointments",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT"
+    ]
+  },
+  {
+    "sentence": "Are there any reminders to renew subscriptions or memberships",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "O",
+      "INTENT"
+    ]
+  },
+  {
+    "sentence": "mark my last task as complete",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "Check off grocery shopping from my task list",
+    "labels": [
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "Confirm that I've attended the team meeting",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT"
+    ]
+  },
+  {
+    "sentence": "Done with sending the emails can you mark that complete",
+    "labels": [
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "Complete the task for booking the flight tickets",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "INTENT"
+    ]
+  },
+  {
+    "sentence": "Just mowed the lawn can you check that off",
+    "labels": [
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "Finalize the task of calling the plumber",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT"
+    ]
+  },
+  {
+    "sentence": "Mark the schedule dentist appointment task as complete",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "I have paid the utility bills please check that off",
+    "labels": [
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "Done with the car service can you update my tasks?",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "Check off organize the garage from my to do list",
+    "labels": [
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "Complete the task for booking the flight tickets",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "Check off prepare the guest room",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "Can you update the reminder for the doctor's appointment to next Wednesday at 3 PM",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "Change my reminder for the team meeting from 10 AM to 11 AM tomorrow",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "Adjust the time for my daily workout reminder to 7 AM instead of 6 AM",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "Move the reminder for taking out the trash to Sunday evening",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "Update my reminder to call mom to every Sunday at 4 PM",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "Change the reminder for vet visit to the first Monday of every month",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "Update my reminder to call mom to every Sunday at 4 PM",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "Change the reminder for vet visit to the first Monday of every month",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "Can you reschedule the reminder for the project deadline to two days earlier",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "Modify the reminder to review the budget reports to the last Friday of each month",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "Please change the alarm for morning yoga from 6:30 AM to 7:15 AM",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "mark the laundry task as completed",
+    "labels": [
+      "O",
+      "O",
+      "INTENT",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "Mark the task write the weekly newsletter as complete",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "I've finished drafting the agreement check it off my list",
+    "labels": [
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "Done with the software upgrade can you update my tasks",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "Check off arrange the client portfolio",
+    "labels": [
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "INTENT"
+    ]
+  },
+  {
+    "sentence": "I have completed the meal prep for this week mark it complete",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "mark that I've backed up all critical data this month as complete",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "Mark assemble the new desk as done on my task list",
+    "labels": [
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "I've completed the performance reviews please check that off",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "Finalize the task of redecorating the office lobby and mark it complete",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "remind me to pay the electricity bill",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT"
+    ]
+  },
+  {
+    "sentence": "can you remind me to pay the electricity bill",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "INTENT"
+    ]
+  },
+  {
+    "sentence": "can you remind me to go to bed in 2 hours",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "can you remind me to go for a checkup in 2 hours",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "add a meeting at noon",
+    "labels": [
+      "O",
+      "O",
+      "INTENT",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "remind me to call john in 5 hours",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "can you remind me to call john in 20 minutes",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "add yoga class to my monday routine",
+    "labels": [
+      "O",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "put a car service on my schedule for friday",
+    "labels": [
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "remind me to buy groceries tomorrow",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "O"
+    ]
+  },
+  {
+    "sentence": "can you remind me in 3 hours to buy groceries",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT"
+    ]
+  },
+  {
+    "sentence": "set a reminder for my anniversary in 4 weeks",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "schedule a dentist appointment next wednesday",
+    "labels": [
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "schedule an office visit for next friday",
+    "labels": [
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "schedule a date night in 3 weeks",
+    "labels": [
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "set an alarm for 7 am tomorrow",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "would you be able to set a task for 5 pm",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "can you schedule a task for tomorrow at 8",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "add buy groceries to my to-do list",
+    "labels": [
+      "O",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "remind me to call mom at 5 pm",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "could you remind me to call mom at 5 pm",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "would you be able to create a task to finish the project report",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "INTENT"
+    ]
+  },
+  {
+    "sentence": "set a reminder for my dentist appointment",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT"
+    ]
+  },
+  {
+    "sentence": "add send birthday card to my tasks",
+    "labels": [
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "remind me to water the plants every monday",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "can you remind me to water the plants every monday",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "would you mind creating a task to review the budget",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT"
+    ]
+  },
+  {
+    "sentence": "would you mind setting a reminder to exercise at 7 pm",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "add book flight tickets to my to-do list",
+    "labels": [
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "add wash the car to my to-do list",
+    "labels": [
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "remind me to take out the trash at 5",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "can you remind me to take out the trash at 4 o'clock",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "could you create a task to clean the house in 2 hours",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "mark the grocery shopping task as completed",
+    "labels": [
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "would you be able to set a reminder for my annual checkup",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "add plan the vacation to my tasks",
+    "labels": [
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "remind me to send the report every friday",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "can you remind me to send the report every friday",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "create a task to finish reading the book",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "INTENT"
+    ]
+  },
+  {
+    "sentence": "could you set a reminder to call the bank",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT"
+    ]
+  },
+  {
+    "sentence": "add schedule a meeting with the team to my todo list",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "add organize my desk to my tasks",
+    "labels": [
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "remind me to pay the rent on the first",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "can you remind me to pay the rent on the first",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "create a task to update my resume",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT"
+    ]
+  },
+  {
+    "sentence": "can you set a reminder to check the mail",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT"
+    ]
+  },
+  {
+    "sentence": "add write a blog post to my to-do list",
+    "labels": [
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "can you add fix the leaking faucet to my tasks",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "would you be able to remind me to check the tire pressure monthly",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "O"
+    ]
+  },
+  {
+    "sentence": "could you create a task to backup my computer",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT"
+    ]
+  },
+  {
+    "sentence": "set a reminder to go for a run at 6 AM",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "add buy a new phone to my to-do list",
+    "labels": [
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "add plan the birthday party to my tasks",
+    "labels": [
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "remind me to review the contract",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT"
+    ]
+  },
+  {
+    "sentence": "can you remind me to review the contract",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT"
+    ]
+  },
+  {
+    "sentence": "create a task to design the new logo",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "INTENT"
+    ]
+  },
+  {
+    "sentence": "set a reminder to meditate daily",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "O"
+    ]
+  },
+  {
+    "sentence": "can you add paint the living room to my to-do list",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "can you add clean the garage to my tasks",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "would you mind reminding me to pick up the dry cleaning",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "INTENT"
+    ]
+  },
+  {
+    "sentence": "create a task to call the electrician",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT"
+    ]
+  },
+  {
+    "sentence": "set a reminder to visit grandma on sunday",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "What time is my weekly team update",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT"
+    ]
+  },
+  {
+    "sentence": "Are there any reminders for meetings with clients next Tuesday",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "What are my reminders for taking medication",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "Can you show me my tasks related to the home renovation project",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT"
+    ]
+  },
+  {
+    "sentence": "What reminders do I have set for my yoga classes",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT"
+    ]
+  },
+  {
+    "sentence": "Can you show me my tasks related to the home renovation project",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT"
+    ]
+  },
+  {
+    "sentence": "What reminders do I have set for my yoga classes",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT"
+    ]
+  },
+  {
+    "sentence": "How many tasks are scheduled for this weekend",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "Do I have any reminders to call suppliers this week",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "Can you show me the tasks I have due for the marketing campaign",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT"
+    ]
+  },
+  {
+    "sentence": "what are my next 3 tasks",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "what's the next task i have",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "how many tasks do i have today",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "what tasks do i have today",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "what are my tasks for today",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "what are the tasks i have today",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "what are my upcoming tasks",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "what tasks do i have to do today",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "do i have any tasks later",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "do i have any tasks coming up later",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "do i have anything to be reminded about today",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "when is my next doctors appointment",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT"
+    ]
+  },
+  {
+    "sentence": "what time do i have to be at my moms birthday",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT"
+    ]
+  },
+  {
+    "sentence": "when is my next reservation for maestros dinner",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "INTENT"
+    ]
+  },
+  {
+    "sentence": "when am i scheduled to meet with my real estate agent",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "INTENT"
+    ]
+  },
+  {
+    "sentence": "when am i scheduled to meet with my realtor",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "INTENT"
+    ]
+  },
+  {
+    "sentence": "what tasks do i have for tomorrow",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "what reminders do i have for tomorrow",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "what is my next reminder",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "Can you tell me what my reminders for next week are",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "What do I need to remember for this weekend",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "Are there any reminders set for my anniversary",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT"
+    ]
+  },
+  {
+    "sentence": "Show me the reminders for the kids school events this month",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "Do I have reminders set for any upcoming holidays",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT"
+    ]
+  },
+  {
+    "sentence": "Can you list the reminders I have for car maintenance",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT"
+    ]
+  },
+  {
+    "sentence": "What reminders do I have about project deadlines",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT"
+    ]
+  },
+  {
+    "sentence": "Are there any reminders to check on the house renovation progress",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT"
+    ]
+  },
+  {
+    "sentence": "Do I have any reminders set for veterinary appointments",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT"
+    ]
+  },
+  {
+    "sentence": "Are there any reminders to renew subscriptions or memberships",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "O",
+      "INTENT"
+    ]
+  },
+  {
+    "sentence": "mark my last task as complete",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "Check off grocery shopping from my task list",
+    "labels": [
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "Confirm that I've attended the team meeting",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT"
+    ]
+  },
+  {
+    "sentence": "Done with sending the emails can you mark that complete",
+    "labels": [
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "Complete the task for booking the flight tickets",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "INTENT"
+    ]
+  },
+  {
+    "sentence": "Just mowed the lawn can you check that off",
+    "labels": [
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "Finalize the task of calling the plumber",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT"
+    ]
+  },
+  {
+    "sentence": "Mark the schedule dentist appointment task as complete",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "I have paid the utility bills please check that off",
+    "labels": [
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "Done with the car service can you update my tasks?",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "Check off organize the garage from my to do list",
+    "labels": [
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "Complete the task for booking the flight tickets",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "Check off prepare the guest room",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "Can you update the reminder for the doctor's appointment to next Wednesday at 3 PM",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "Change my reminder for the team meeting from 10 AM to 11 AM tomorrow",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "Adjust the time for my daily workout reminder to 7 AM instead of 6 AM",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "Move the reminder for taking out the trash to Sunday evening",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "Update my reminder to call mom to every Sunday at 4 PM",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "Change the reminder for vet visit to the first Monday of every month",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "Update my reminder to call mom to every Sunday at 4 PM",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "Change the reminder for vet visit to the first Monday of every month",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "Can you reschedule the reminder for the project deadline to two days earlier",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "Modify the reminder to review the budget reports to the last Friday of each month",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "Please change the alarm for morning yoga from 6:30 AM to 7:15 AM",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "mark the laundry task as completed",
+    "labels": [
+      "O",
+      "O",
+      "INTENT",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "Mark the task write the weekly newsletter as complete",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "I've finished drafting the agreement check it off my list",
+    "labels": [
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "Done with the software upgrade can you update my tasks",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "Check off arrange the client portfolio",
+    "labels": [
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "INTENT"
+    ]
+  },
+  {
+    "sentence": "I have completed the meal prep for this week mark it complete",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "mark that I've backed up all critical data this month as complete",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "Mark assemble the new desk as done on my task list",
+    "labels": [
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "I've completed the performance reviews please check that off",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  },
+  {
+    "sentence": "Finalize the task of redecorating the office lobby and mark it complete",
+    "labels": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "INTENT",
+      "O",
+      "O",
+      "O",
+      "O"
+    ]
+  }
+]

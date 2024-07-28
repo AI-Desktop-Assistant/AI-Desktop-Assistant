@@ -57,7 +57,7 @@ def say(text):
     # if tts == "google":
     #     time_to_say = (len(text.split())/170) * 60
     #     time.sleep(time_to_say)
-    print(f"returning text: {text}")
+    print(f"Said: {text}")
     return {"text": text, "tts": tts}
 
 def listen(timeout=10, phrase_time_limit=10, response=None):

@@ -195,3 +195,7 @@ def file_search_feedback(given_name):
     # ]
     # response = generate_response(messages)
     return say(response)    
+
+def report_weather(city, temperature):
+    response = f'The weather in {city} is {temperature} degrees.'
+    say(response)

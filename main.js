@@ -505,11 +505,16 @@ app.whenReady().then(() => {
             }
             win.focus()
             openSpotifyLogin(data.data)
-            // spotifyToken = data.data
-            // win.webContents.send('get-currently-playing-response', data.data)
         }
     })
-
+    socket.on('get-weather', (data) => {
+        console.log("Received weather response from Flask:", data);
+        if (win.isMinimized()) {
+            win.restore();
+        }
+        win.focus();
+        win.webContents.send("get-weather", data);
+    });
     socket.on('get-currently-playing-response', (data) => {
         console.log("Received currently playing response from Flask:", data);
         if (win.isMinimized()) {
@@ -527,6 +532,16 @@ app.whenReady().then(() => {
     app.on('activate', () => {
         if (BrowserWindow.getAllWindows().length === 0) createWindow()
     })
+})
+
+ipcMain.on('get-weather-response', (event, weatherData) => {
+    try {
+        console.log("Received weather response: ", weatherData)
+        socket.emit('message', weatherData)
+    } catch (error) {
+        console.error('Error in get-weather handler:', error);
+        throw error; // rethrow the error to send it to the renderer
+    }
 })
 
 ipcMain.handle('get-currently-playing', async (event) => {

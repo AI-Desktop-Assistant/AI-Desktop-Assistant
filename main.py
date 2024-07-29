@@ -7,6 +7,8 @@ from reception_layer.speech_rec import listen
 from classifying_layer.classify_req import classify_user_request
 from user_config import *
 from config_socketio import create_app_socket
+from classifying_layer.module_layer.weather.process_weather_req import receive_weather_data
+from classifying_layer.module_layer.response.response import report_weather
 
 app, socketio = create_app_socket()
 
@@ -28,7 +30,6 @@ def handle_disconnect():
 
 @socketio.on('message')
 def handle_message(data):   
-    print(f'Received message: {data}')
     if data['purpose'] == 'search':
         result = search(data['data'])
         emit('response', {'data': result,'purpose':'search'})
@@ -43,12 +44,14 @@ def handle_message(data):
         track_info = get_currently_playing_track(token)
         if track_info:
             emit("get-currently-playing-response", {"data": track_info, "purpose": "get-track-info"})
+    elif data['purpose'] == 'get-weather-data':
+        receive_weather_data(data)
 
 def run_flask():
     socketio.run(app, port=8888, debug=False, allow_unsafe_werkzeug=True)
 
 def main_loop(user_id, username, email, socket):
-    global current_user_id
+    global current_user_idS
     global current_username
     global current_email
 
@@ -106,6 +109,16 @@ def update_login_status():
 @app.route('/aiassistant/callback')
 def callback():
     return spotify_callback(request)
+
+@app.route('/report_weather', methods=['POST'])
+def report_weather_route():
+    data = request.json
+    city = data.get('city')
+    temperature = data.get('temperature')
+    if city and temperature:
+        report_weather(city, temperature)
+        return jsonify({'status': 'success'})
+    return jsonify({'status': 'error', 'message': 'Invalid data'}), 400
 
 if __name__ == "__main__":
     if len(sys.argv) != 4:

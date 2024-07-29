@@ -4,6 +4,7 @@ from .module_layer.launch.process_launch_req import *
 from models.load_model import load_model
 from .module_layer.email.process_email_request import process_email_req
 from .module_layer.task.process_task_req import process_task_req
+from .module_layer.weather.process_weather_req import process_weather_request
 
 model_path = 'models\\module_classification_model.pth'
 model, tokenizer, device = load_model(model_path, 'classification')
@@ -34,8 +35,8 @@ def classify_user_request(req, socket):
     print(f'Chosen Module: {module}')
     if module == 'launch':
         status = process_launch_req(req)
-    # elif module == 'weather':
-    #     weather(input)
+    elif module == 'weather':
+        status = process_weather_request(req)
     elif module == 'email':
         status = process_email_req(req, socket)
     elif module == 'task':

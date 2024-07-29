@@ -61,6 +61,13 @@ def load_bert():
     model.to(device)
     return model, tokenizer, device
 
+def load_weather_intent_model(model_path):
+    model = torch.load(model_path)
+    tokenizer = BertTokenizerFast.from_pretrained('bert-base-uncased')
+
+    model.to(device)
+    return model, tokenizer, device
+
 def load_model(model_name_or_path, purpose=''):
     if purpose == 'response':
         model, tokenizer, device = load_language_model(model_name_or_path)
@@ -70,6 +77,8 @@ def load_model(model_name_or_path, purpose=''):
         model, tokenizer, device = load_entity_recognition_model(model_name_or_path)
     elif purpose == 'email':
         model, tokenizer, device = load_email_info_recognizer_model(model_name_or_path)
+    elif purpose == 'weather':
+        model, tokenizer, device = load_weather_intent_model(model_name_or_path)
     elif model_name_or_path == 'bert':
         model, tokenizer, device = load_bert()
     else:

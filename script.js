@@ -84,23 +84,71 @@ function switchTab(tabId) {
     document.querySelector(`[onclick="switchTab('${tabId}')"]`).classList.add('active')
 }
 
-function getWeather() {
-    const apiKey = "714a7b0b20794a4aa3eaac01c8d888ad";
-    const city = document.getElementById("city-input").value;
-    const unit = document.getElementById("unit-select").value;
-    const weatherUrl = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${unit}`;
+window.electron.getWeather(async (event, data) => {
+    console.log(data.data);
+    const weatherData = await getWeather(false, data.data, 'imperial');
+    weatherData['purpose'] = 'get-weather-data';
+    // window.electron.getWeatherResponse({'data': weatherData, 'purpose': 'get-weather-data'})
+    window.electron.getWeatherResponse(weatherData);
+});
 
-    fetch(weatherUrl)
-        .then(response => response.json())
-        .then(data => {
-            if (data.cod === 200) {
-                updateWeatherWidget(data);
+async function getWeather(fromUi, city = '', unit = '') { 
+    const apiKey = "714a7b0b20794a4aa3eaac01c8d888ad";
+    if (fromUi) {
+        city = document.getElementById("city-input").value;
+        unit = document.getElementById("unit-select").value;
+    }
+    console.log(`Fetching weather for city: ${city} with unit: ${unit}`);
+    const weatherUrl = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${unit || 'standard'}`;
+    try {
+        const response = await fetch(weatherUrl);
+        const data = await response.json();
+
+        if (data.cod === 200) {
+            console.log('Weather data retrieved:', data);
+            if (fromUi) {
+                updateWeatherWidget(data, unit);
             } else {
-                console.error('Failed to retrieve weather data:', data.message);
+                if (unit === 'standard' || !unit) {
+                    // Convert from Kelvin to Fahrenheit
+                    data.main.temp = (data.main.temp - 273.15) * 9/5 + 32;
+                    data.main.feels_like = (data.main.feels_like - 273.15) * 9/5 + 32;
+                    data.main.temp_min = (data.main.temp_min - 273.15) * 9/5 + 32;
+                    data.main.temp_max = (data.main.temp_max - 273.15) * 9/5 + 32;
+                // const weatherDict = {};
+                // for (let property in data) {
+                    // const value = data[property];
+                    // weatherDict[property] = value;
+                }   else if (unit === 'metric') {
+                    // Convert from Celsius to Fahrenheit
+                    data.main.temp = (data.main.temp * 9/5) + 32;
+                    data.main.feels_like = (data.main.feels_like * 9/5) + 32;
+                    data.main.temp_min = (data.main.temp_min * 9/5) + 32;
+                    data.main.temp_max = (data.main.temp_max * 9/5) + 32;
+                }   else if (unit === 'imperial') {
+                    // No conversion needed for Fahrenheit (imperial)
+                }
+                fetch('http://localhost:8888/report_weather', { // Update this URL
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        city: data.name,
+                        temperature: data.main.temp
+                    })
+                });
+                // return weatherDict;
+                return data;
             }
-        })
-        .catch(error => console.error('Network or other error:', error));
+        } else {
+            console.error('Failed to retrieve weather data:', data.message);
+        }
+    } catch (error) {
+        console.error('Network or other error:', error);
+    }
 }
+
 function updateWeatherWidget(data) {
     function updateWeatherWidget(data) {
         if (!data || data.cod !== 200) {

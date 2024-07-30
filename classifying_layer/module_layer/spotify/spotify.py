@@ -1,9 +1,10 @@
 from dotenv import load_dotenv    
 import os
 import base64
-from requests import post,get
+from requests import post,get,put
 import json
 from config_socketio import get_app_socket
+from json import JSONDecodeError
 
 from flask import request
 
@@ -13,6 +14,22 @@ app, socketio = get_app_socket()
 
 client_id = os.getenv("CLIENT_ID")
 client_secret = os.getenv("CLIENT_SECRET")
+
+user_tokens = {}
+current_user_id = None
+
+def set_current_user_id(user_id):
+    global current_user_id
+    current_user_id = user_id
+
+def store_tokens(user_id, access_token, refresh_token):
+    user_tokens[user_id] = {
+        'access_token': access_token,
+        'refresh_token': refresh_token
+    }
+
+def get_stored_tokens(user_id):
+    return user_tokens.get(user_id)
 
 def get_token():
     auth_string = client_id + ":" + client_secret
@@ -92,7 +109,7 @@ def get_user_authorization():
     spotify_client_id = client_id
     redirect_uri = 'http://localhost:8888/aiassistant/callback'
     # Scopes enable your application to access specific API endpoints on the user’s behalf
-    scope = 'user-read-currently-playing user-read-playback-state'
+    scope = 'user-read-currently-playing user-read-playback-state user-modify-playback-state app-remote-control'
 
     # Construct the URL
     auth_url = f"https://accounts.spotify.com/authorize?response_type=code&client_id={spotify_client_id}&scope={scope}&redirect_uri={redirect_uri}"
@@ -134,6 +151,8 @@ def spotify_callback(request):
             return "Code not found in the request", 400
 
         access_token, refresh_token = get_access_token(code)
+        store_tokens(current_user_id, access_token, refresh_token)  # Use global current_user_id
+        
         print(f"Access Token: {access_token}")
         print(f"Refresh Token: {refresh_token}")
 
@@ -160,3 +179,40 @@ def spotify_callback(request):
     except Exception as e:
         print(f"Error in callback: {e}")
         return f"Internal Server Error: {e}", 500
+    
+def pause_playback(token):
+    url = "https://api.spotify.com/v1/me/player/pause"
+    headers = get_auth_header(token)
+    response = put(url, headers=headers)
+    if response.status_code in [200, 204]:
+        return "Playback paused."
+    else:
+        try:
+            error_message = response.json().get('error', {}).get('message', 'No error message')
+        except ValueError:
+            error_message = 'Invalid response received'
+        return f"Failed to pause playback: {response.status_code} - {error_message}"
+
+def resume_playback(token):
+    url = "https://api.spotify.com/v1/me/player/play"
+    headers = get_auth_header(token)
+    response = put(url, headers=headers)
+    if response.status_code in [200, 204]:
+        return "Playback resumed."
+    else:
+        try:
+            error_message = response.json().get('error', {}).get('message', 'No error message')
+        except ValueError:
+            error_message = 'Invalid response received'
+        return f"Failed to resume playback: {response.status_code} - {error_message}"
+
+def play_next_track(token):
+    url = "https://api.spotify.com/v1/me/player/next"
+    headers = get_auth_header(token)
+    response = post(url, headers=headers)
+    if response.status_code == 204:
+        return "Playing next track."
+    elif response.status_code == 200:
+        return "Playing next track."
+    else:
+        return f"Failed to play next track: {response.status_code}"

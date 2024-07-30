@@ -129,7 +129,7 @@ const createWindow = () => {
             else if (row) {
                 console.log('credentials valid')
                 // send success and user details back to renderer
-                event.reply('login-response', { success: true, message: 'Login Successful', rememberMe, username, password, autoLogin })
+                event.reply('login-response', { success: true, message: 'Login Successful', rememberMe, username, password, autoLogin, userId: row.id })
                 currentUsername = username
                 if (!mainPythonProcess){
                     console.log('starting python process')
@@ -523,6 +523,10 @@ app.whenReady().then(() => {
         win.focus();
         win.webContents.send("get-currently-playing-response", data);
     });
+
+    socket.on('control-playback-response', (data) => {
+        console.log('Playback control response:', data);
+    });    
 
     ipcMain.on('send-message', (event, message) => {
         console.log("Sending message............:", message.purpose);

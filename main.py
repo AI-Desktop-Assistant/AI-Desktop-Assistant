@@ -12,7 +12,7 @@ from classifying_layer.module_layer.response.response import report_weather
 
 app, socketio = create_app_socket()
 
-from classifying_layer.module_layer.spotify.spotify import search, get_user_authorization, get_currently_playing_track, spotify_callback, get_token
+from classifying_layer.module_layer.spotify.spotify import search, get_user_authorization, get_currently_playing_track, spotify_callback, get_token, pause_playback, resume_playback, play_next_track, get_stored_tokens, set_current_user_id
 
 os.environ['USE_FLASH_ATTENTION'] = '1'
 logged_in = True
@@ -30,6 +30,7 @@ def handle_disconnect():
 
 @socketio.on('message')
 def handle_message(data):   
+    global current_user_id
     if data['purpose'] == 'search':
         result = search(data['data'])
         emit('response', {'data': result,'purpose':'search'})
@@ -39,25 +40,41 @@ def handle_message(data):
         # track_info = get_currently_playing_track(token)
         emit('response', {'data': auth_url,'purpose':'get-token'})
     elif data['purpose'] == 'get-currently-playing':
-        token = get_token()
-        print(f"Access Token: {token}")
-        track_info = get_currently_playing_track(token)
-        if track_info:
-            emit("get-currently-playing-response", {"data": track_info, "purpose": "get-track-info"})
+        tokens = get_stored_tokens(current_user_id)
+        if tokens:
+            track_info = get_currently_playing_track(tokens['access_token'])
+            if track_info:
+                emit("get-currently-playing-response", {"data": track_info, "purpose": "get-track-info"})
+        else:
+            emit("response", {"data": "No token found for user", "purpose": "get-currently-playing"})
     elif data['purpose'] == 'get-weather-data':
         receive_weather_data(data)
-
+    elif data['purpose'] == 'control-playback':
+        tokens = get_stored_tokens(current_user_id)
+        if tokens:
+            action = data['action']
+            if action == 'pause':
+                result = pause_playback(tokens['access_token'])
+            elif action == 'resume':
+                result = resume_playback(tokens['access_token'])
+            elif action == 'next':
+                result = play_next_track(tokens['access_token'])
+            emit("control-playback-response", {"data": result, "purpose": "control-playback"})
+        else:
+            emit("control-playback-response", {"data": "No token found for user", "purpose": "control-playback"})
+            
 def run_flask():
     socketio.run(app, port=8888, debug=False, allow_unsafe_werkzeug=True)
 
 def main_loop(user_id, username, email, socket):
-    global current_user_idS
+    global current_user_id
     global current_username
     global current_email
 
     current_user_id = user_id
     current_username = username
     current_email = email
+    set_current_user_id(current_user_id)
     print('Starting Main Loop')
     while True:
         if logged_in:
@@ -119,6 +136,18 @@ def report_weather_route():
         report_weather(city, temperature)
         return jsonify({'status': 'success'})
     return jsonify({'status': 'error', 'message': 'Invalid data'}), 400
+
+@app.route('/pause', methods=['POST'])
+def pause_route():
+    token = request.json.get('token')
+    result = pause_playback(token)
+    return jsonify({"message": result})
+
+@app.route('/resume', methods=['POST'])
+def resume_route():
+    token = request.json.get('token')
+    result = resume_playback(token)
+    return jsonify({"message": result})
 
 if __name__ == "__main__":
     if len(sys.argv) != 4:

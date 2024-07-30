@@ -515,6 +515,22 @@ function updateNowPlayingUI(trackData) {
     }
 }
 
+document.getElementById("playNextButton").addEventListener("click", function() {
+    controlPlayback("next");
+});
+
+document.getElementById("pauseButton").addEventListener("click", function() {
+    controlPlayback("pause");
+});
+
+document.getElementById("resumeButton").addEventListener("click", function() {
+    controlPlayback("resume");
+});
+
+function controlPlayback(action) {
+    window.electron.sendMessage({purpose: "control-playback", action: action});
+}
+
 window.electron.onGetCurrentlyPlayingResponse((event, data) => {
     console.log("Received data in renderer:", data);
     updateNowPlayingUI(data.data);

@@ -389,3 +389,15 @@ button:hover {
     height: 100px; 
     resize: vertical;
 }
+
+.small-album-cover {
+    width: 100px;
+    height: 100px;
+}
+
+.weather-module {
+    background-color: black;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+}

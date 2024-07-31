@@ -594,7 +594,7 @@ function updateSearchUI(trackInfo) {
     const searchContainer = document.getElementById('search-container');
     searchContainer.innerHTML = `
         <h2>${trackInfo.name}</h2>
-        <img src="${trackInfo.album_image}" alt="${trackInfo.name}">
+        <img src="${trackInfo.album_image}" alt="${trackInfo.name}" class="small-album-cover">
         <p>Artists: ${trackInfo.artists.join(', ')}</p>
         <p>Album: ${trackInfo.album}</p>
     `;

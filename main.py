@@ -12,7 +12,7 @@ from classifying_layer.module_layer.response.response import report_weather
 
 app, socketio = create_app_socket()
 
-from classifying_layer.module_layer.spotify.spotify import search, get_user_authorization, get_currently_playing_track, spotify_callback, get_token, pause_playback, resume_playback, play_next_track, get_stored_tokens, set_current_user_id
+from classifying_layer.module_layer.spotify.spotify import search, get_user_authorization, get_currently_playing_track, spotify_callback, get_token, pause_playback, resume_playback, play_next_track, get_stored_tokens, set_current_user_id, get_user_playlists
 
 os.environ['USE_FLASH_ATTENTION'] = '1'
 logged_in = True
@@ -148,6 +148,15 @@ def resume_route():
     token = request.json.get('token')
     result = resume_playback(token)
     return jsonify({"message": result})
+
+@app.route('/get_playlists', methods=['POST'])
+def get_playlists():
+    tokens = get_stored_tokens(current_user_id)
+    if tokens:
+        playlists = get_user_playlists(tokens['access_token'])
+        return jsonify(playlists=playlists)
+    else:
+        return jsonify(error="No token found for user"), 400
 
 if __name__ == "__main__":
     if len(sys.argv) != 4:

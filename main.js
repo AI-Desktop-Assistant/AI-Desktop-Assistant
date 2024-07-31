@@ -558,6 +558,16 @@ ipcMain.handle('get-currently-playing', async (event) => {
     }
 });
 
+ipcMain.handle('fetch-playlists', async () => {
+    try {
+        const response = await axios.post('http://localhost:8888/get_playlists');
+        return response.data.playlists;
+    } catch (error) {
+        console.error('Error fetching playlists:', error);
+        return [];
+    }
+})
+
 function openSpotifyLogin(auth_url) {
     shell.openExternal(auth_url);
 }

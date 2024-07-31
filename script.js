@@ -18,6 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
             document.querySelector(".login-container").classList.add("active")
         }
     })
+    document.getElementById('load-playlists-button').addEventListener('click', fetchPlaylists);
 })
 
 function toggleEmailBody(button) {
@@ -535,3 +536,27 @@ window.electron.onGetCurrentlyPlayingResponse((event, data) => {
     console.log("Received data in renderer:", data);
     updateNowPlayingUI(data.data);
 });
+
+async function fetchPlaylists() {
+    try {
+        const playlists = await window.electron.fetchPlaylists();
+        updatePlaylistsUI(playlists);
+    } catch (error) {
+        console.error('Error fetching playlists:', error);
+    }
+}
+
+function updatePlaylistsUI(playlists) {
+    const playlistContainer = document.getElementById('playlist-container');
+    playlistContainer.innerHTML = '';
+    playlists.forEach(playlist => {
+        const playlistElement = document.createElement('div');
+        playlistElement.className = 'playlist';
+        playlistElement.innerHTML = `
+            <h2>${playlist.name}</h2>
+            <img src="${playlist.images[0]?.url || 'default-image.png'}" alt="${playlist.name}">
+            <p>${playlist.tracks.total} songs</p>
+        `;
+        playlistContainer.appendChild(playlistElement);
+    });
+}

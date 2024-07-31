@@ -216,3 +216,13 @@ def play_next_track(token):
         return "Playing next track."
     else:
         return f"Failed to play next track: {response.status_code}"
+    
+def get_user_playlists(token):
+    url = "https://api.spotify.com/v1/me/playlists"
+    headers = get_auth_header(token)
+    response = get(url, headers=headers)
+    if response.status_code == 200:
+        playlists = response.json()
+        return playlists['items']
+    else:
+        return []

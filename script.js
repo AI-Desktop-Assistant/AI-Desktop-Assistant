@@ -19,6 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     })
     document.getElementById('load-playlists-button').addEventListener('click', fetchPlaylists);
+    document.getElementById('spotifySearchButton').addEventListener('click', searchTrack);
 })
 
 function toggleEmailBody(button) {
@@ -557,6 +558,44 @@ function updatePlaylistsUI(playlists) {
             <img src="${playlist.images[0]?.url || 'default-image.png'}" alt="${playlist.name}">
             <p>${playlist.tracks.total} songs</p>
         `;
+        playlistElement.addEventListener('click', () => startPlayback(playlist.uri, 'playlist'));
         playlistContainer.appendChild(playlistElement);
     });
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById('load-playlists-button').addEventListener('click', fetchPlaylists);
+});
+
+async function startPlayback(uri, uriType) {
+    try {
+        const message = await window.electron.startPlayback(uri, uriType);
+        console.log(message);
+    } catch (error) {
+        console.error('Error starting playback:', error);
+    }
+}
+
+async function searchTrack() {
+    const trackName = document.getElementById('spotifySearch').value;
+    try {
+        const response = await window.electron.searchTrack(trackName);
+        if (response.data) {
+            updateSearchUI(response.data);
+        } else {
+            console.error('Track not found');
+        }
+    } catch (error) {
+        console.error('Error searching track:', error);
+    }
+}
+
+function updateSearchUI(trackInfo) {
+    const searchContainer = document.getElementById('search-container');
+    searchContainer.innerHTML = `
+        <h2>${trackInfo.name}</h2>
+        <img src="${trackInfo.album_image}" alt="${trackInfo.name}">
+        <p>Artists: ${trackInfo.artists.join(', ')}</p>
+        <p>Album: ${trackInfo.album}</p>
+    `;
 }

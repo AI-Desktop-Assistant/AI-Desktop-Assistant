@@ -12,7 +12,8 @@ from classifying_layer.module_layer.response.response import report_weather
 
 app, socketio = create_app_socket()
 
-from classifying_layer.module_layer.spotify.spotify import search, get_user_authorization, get_currently_playing_track, spotify_callback, get_token, pause_playback, resume_playback, play_next_track, get_stored_tokens, set_current_user_id, get_user_playlists
+from classifying_layer.module_layer.spotify.spotify import search_for_track, get_user_authorization, get_currently_playing_track, spotify_callback, get_token, pause_playback, resume_playback, play_next_track, get_stored_tokens, set_current_user_id, get_user_playlists, start_playback
+
 
 os.environ['USE_FLASH_ATTENTION'] = '1'
 logged_in = True
@@ -32,8 +33,21 @@ def handle_disconnect():
 def handle_message(data):   
     global current_user_id
     if data['purpose'] == 'search':
-        result = search(data['data'])
-        emit('response', {'data': result,'purpose':'search'})
+        tokens = get_stored_tokens(current_user_id)
+        if tokens:
+            result = search_for_track(tokens['access_token'], data['data'])
+            if result:
+                track_uri = result['uri']
+                track_info = {
+                    'name': result['name'],
+                    'artists': [artist['name'] for artist in result['artists']],
+                    'album': result['album']['name'],
+                    'album_image': result['album']['images'][0]['url']
+                }
+                start_playback(tokens['access_token'], track_uri)
+                emit('response', {'data': track_info, 'purpose':'search'})
+            else:
+                emit('response', {'data': 'Track not found', 'purpose':'search'})
     elif data['purpose'] == "get-token":
         # token = get_token()
         auth_url = get_user_authorization()
@@ -157,6 +171,44 @@ def get_playlists():
         return jsonify(playlists=playlists)
     else:
         return jsonify(error="No token found for user"), 400
+    
+@app.route('/start_playback', methods=['POST'])
+def start_playback_route():
+    tokens = get_stored_tokens(current_user_id)
+    if tokens:
+        uri = request.json.get('uri')
+        uri_type = request.json.get('uri_type', 'track')
+        result = start_playback(tokens['access_token'], uri, uri_type)
+        return jsonify(message=result)
+    else:
+        return jsonify(error="No token found for user"), 400
+    
+@app.route('/search', methods=['POST'])
+def search():
+    data = request.json
+    purpose = data.get('purpose')
+    search_query = data.get('data')
+    
+    if purpose == 'search':
+        tokens = get_stored_tokens(current_user_id)
+        if tokens:
+            result = search_for_track(tokens['access_token'], search_query)
+            if result:
+                track_uri = result['uri']
+                track_info = {
+                    'name': result['name'],
+                    'artists': [artist['name'] for artist in result['artists']],
+                    'album': result['album']['name'],
+                    'album_image': result['album']['images'][0]['url']
+                }
+                playback_result = start_playback(tokens['access_token'], track_uri, uri_type="track")
+                if "Playback started" in playback_result:
+                    return jsonify(data=track_info)
+                else:
+                    return jsonify(error=playback_result)
+            else:
+                return jsonify(data='Track not found')
+    return jsonify(error='Invalid request'), 400
 
 if __name__ == "__main__":
     if len(sys.argv) != 4:

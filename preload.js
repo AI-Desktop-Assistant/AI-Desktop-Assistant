@@ -30,5 +30,7 @@ contextBridge.exposeInMainWorld('electron', {
   onGetCurrentlyPlayingResponse: (data) => ipcRenderer.on('get-currently-playing-response', data),
   getWeather: (data) => ipcRenderer.on('get-weather', data),
   getWeatherResponse: (data) => ipcRenderer.send('get-weather-response', data),
-  fetchPlaylists: () => ipcRenderer.invoke('fetch-playlists')
+  fetchPlaylists: () => ipcRenderer.invoke('fetch-playlists'),
+  startPlayback: (uri, uriType) => ipcRenderer.invoke('start-playback', uri, uriType),
+  searchTrack: (trackName) => ipcRenderer.invoke('search-track', trackName)
 })

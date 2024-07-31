@@ -568,6 +568,26 @@ ipcMain.handle('fetch-playlists', async () => {
     }
 })
 
+ipcMain.handle('start-playback', async (event, uri, uriType) => {
+    try {
+        const response = await axios.post('http://localhost:8888/start_playback', { uri: uri, uri_type: uriType });
+        return response.data.message;
+    } catch (error) {
+        console.error('Error starting playback:', error);
+        return 'Error starting playback';
+    }
+});
+
+ipcMain.handle('search-track', async (event, trackName) => {
+    try {
+        const response = await axios.post('http://localhost:8888/search', { data: trackName, purpose: 'search' });
+        return response.data;
+    } catch (error) {
+        console.error('Error searching track:', error);
+        return { error: 'Error searching track' };
+    }
+});
+
 function openSpotifyLogin(auth_url) {
     shell.openExternal(auth_url);
 }

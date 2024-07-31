@@ -50,21 +50,21 @@ def get_token():
 def get_auth_header(token):
     return {"Authorization": "Bearer " + token}
 
-def search_for_artist(token, artist_name):
+def search_for_track(token, track_name):
     url = "https://api.spotify.com/v1/search"
     headers = get_auth_header(token)
-    query = f"?q={artist_name}&type=artist&limit=1"
+    query = f"?q={track_name}&type=track&limit=1"
 
     query_url = url + query
     result = get(query_url, headers=headers)
     json_result = json.loads(result.content)
 
-    if 'artists' in json_result and 'items' in json_result['artists']:
-        if len(json_result['artists']['items']) == 0:
-            print("No artist with this name exists...")
+    if 'tracks' in json_result and 'items' in json_result['tracks']:
+        if len(json_result['tracks']['items']) == 0:
+            print("No track with this name exists...")
             return None
         
-        return json_result['artists']['items'][0]
+        return json_result['tracks']['items'][0]
     else:
         print("Unexpected JSON structure:", json_result)
         return None
@@ -78,7 +78,7 @@ def get_songs_by_artist(token, artist_id):
 
 def search(artist_name):
     token = get_token()
-    result = search_for_artist(token, artist_name)
+    result = search_for_track(token, artist_name)
     if result:
         artist_id = result["id"]
         songs = get_songs_by_artist(token, artist_id)
@@ -226,3 +226,20 @@ def get_user_playlists(token):
         return playlists['items']
     else:
         return []
+    
+def start_playback(token, uri, uri_type="track"):
+    url = "https://api.spotify.com/v1/me/player/play"
+    headers = get_auth_header(token)
+    data = {
+        "uris": [uri] if uri_type == "track" else None,
+        "context_uri": uri if uri_type == "playlist" else None
+    }
+    response = put(url, headers=headers, json=data)
+    if response.status_code in [200, 204]:
+        return "Playback started."
+    else:
+        try:
+            error_message = response.json().get('error', {}).get('message', 'No error message')
+        except ValueError:
+            error_message = 'Invalid response received'
+        return f"Failed to start playback: {response.status_code} - {error_message}"

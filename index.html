@@ -292,10 +292,12 @@
                             <button class="tab-button" onclick="switchTab('nowPlaying')">Now Playing</button>
                         </div>
                         <div id="search" class="tab-content tab active">
-                            <h1>Search</h1>
-                            <input id="spotifySearch" type="text" placeholder="Search songs, albums, or playlists"><br>
-                            <button onclick="searchSpotify()">Search</button>
-                            <div id="artistInfo"></div>
+                            <h1>Spotify Search</h1>
+                            <input type="text" id="spotifySearch" placeholder="Search for a track">
+                            <button id="spotifySearchButton">Search</button>
+                            <div id="search-container">
+                                <!-- Search results will be dynamically inserted here -->
+                            </div>
                         </div>
                         <div id="playlists" class="tab-content tab">
                             <h1>Playlists</h1>

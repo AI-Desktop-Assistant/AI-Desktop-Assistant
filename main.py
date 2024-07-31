@@ -4,7 +4,9 @@ from flask import Flask, request, jsonify
 from flask_socketio import SocketIO, emit
 from threading import Thread
 from reception_layer.speech_rec import listen
+from classifying_layer.module_layer.response.response import *
 from classifying_layer.classify_req import classify_user_request
+from classifying_layer.module_layer.task.process_task_req import output_tasks_today, remind_tasks
 from user_config import *
 from config_socketio import create_app_socket
 from classifying_layer.module_layer.weather.process_weather_req import receive_weather_data
@@ -90,17 +92,35 @@ def main_loop(user_id, username, email, socket):
     current_email = email
     set_current_user_id(current_user_id)
     print('Starting Main Loop')
+    first_iter = True
     while True:
         if logged_in:
             # listen for input
             try:
-                input = listen()
-            except:
-                continue
+                print('Checking remind tasks')
+                remind_tasks()
+                if first_iter:
+                    print('Listening For Wake Word First Iteration')
+                    wake_word_detected = listen_for_wake_word(ready='I am ready to provide assistance')
+                    first_iter = False
+                else:
+                    print('Listening For Wake Word')
+                    wake_word_detected = listen_for_wake_word()
+                if wake_word_detected:
+                    print('Wake Word Detected')
+                    input = listen(ready='How can I help?')
+                    if input != '':
+                        module = classify_user_request(input, socket)
+                    wake_word_detected = False
+                else:
+                    print('No wake word detected')
+            except Exception as e:
+                print(e)
             # input = "Compose an update email to the customer service team and CC the support manager and quality assurance lead and BCC the technical support lead and IT manager"
             # after getting input classify the model
-            module = classify_user_request(input, socket)
+            
             # delve into selected module deeper
+
 
 @app.route('/update_email', methods=['POST'])
 def update_username():
@@ -221,5 +241,10 @@ if __name__ == "__main__":
     print("\nStarting flask\n")
     flask_thread = Thread(target=run_flask)
     flask_thread.start()
+    print('Configuring user')
     configure_user(current_user_id, current_email, current_username)
+    print(f'Greeting User: {current_username}')
+    greeting(current_username)
+    print('Outputting Tasks Today')
+    output_tasks_today()
     main_loop(current_user_id, current_username, current_email, socketio)

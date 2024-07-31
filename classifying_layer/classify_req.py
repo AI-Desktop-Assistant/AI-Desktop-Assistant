@@ -44,5 +44,5 @@ def classify_user_request(req, socket):
     # elif module == 'spotify':
     #     spotify(input)
     # elif module == 'generic':
-    #     generic(input)
+    #     process_generic_req(req)
     return module

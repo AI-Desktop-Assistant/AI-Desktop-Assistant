@@ -61,6 +61,7 @@ def prompt_for_missing_date_or_time(val_date, val_time):
     return user_response
 
 def output_tasks_to_user(response, confirm=False):
+    print('Outputting tasks')
     say(response)
     user_response = ''
     if confirm:
@@ -80,24 +81,31 @@ def alert_task_set(intent, task_date, hour, minute, is_am, repeat, task_ref):
     else:
         response += 'to '
     print(f'Intent: {intent}')
-    if intent == 'alarm':
-        response = 'I have set an '
-    elif 'my' in intent:
-        print('Replacing my')
-        intent = intent.replace('my', 'your')
-    print(f'Intent: {intent}')
-    response += intent
-    if 'remind' in task_ref and intent != 'alarm':
+    if intent == '':
+        response = 'I have set an alarm'
+    else:
+        if 'my' in intent:
+            print('Replacing my')
+            intent = intent.replace('my', 'your')
+        print(f'Intent: {intent}')
+        response += f'{intent} '
+    if 'remind' in task_ref and intent != '':
         response = f'Reminding you to {intent} '
     today = datetime.today()
+    tomorrow = today + timedelta(days=1)
     two_weeks_date = today + timedelta(weeks=2)
-    if task_date <= two_weeks_date:
+    if today.year == task_date.year and today.month == task_date.month and today.day == task_date.day and not repeat:
+        response += 'today'
+    elif tomorrow.year == task_date.year and tomorrow.month == task_date.month and tomorrow.day == task_date.day and not repeat:
+        response += 'tomorrow' 
+    elif task_date <= two_weeks_date:
         one_week_date = today + timedelta(weeks=1)
         if repeat:
-            response += 'every '
+            response += ' every '
         elif task_date >= one_week_date:
             response += 'next '
         days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+        print(f'Weekday num: {task_date.weekday()}')
         response += f'{days[task_date.weekday()]} '
     else:
         response += f'on '
@@ -111,7 +119,7 @@ def alert_task_set(intent, task_date, hour, minute, is_am, repeat, task_ref):
     if is_am:
         response += 'in the morning'
     else:
-        if hour < 6:
+        if hour < 6 and hour == 12:
             response += 'in the afternoon'
         elif hour < 9:
             response += 'in the evening'
@@ -198,4 +206,17 @@ def file_search_feedback(given_name):
 
 def report_weather(city, temperature):
     response = f'The weather in {city} is {temperature} degrees.'
+    say(response)
+    
+def greeting(username):
+    hour = datetime.now().hour
+    if hour < 12:
+        response = 'Good Morning '
+    elif hour >= 12 and hour < 18:
+        response = 'Good Afternoon '    
+    elif hour >= 18 and hour < 21:
+        response = 'Good Evening '
+    else:
+        response = 'Hope your night is well '
+    response += username
     say(response)

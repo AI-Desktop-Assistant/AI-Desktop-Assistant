@@ -26,6 +26,8 @@ def classify(req):
     return predicted_module
 
 def get_y_or_n(req):
+    if req == 'Sorry, I didnt understand your request':
+        return 'no'
     module = classify(req)
     print(f'Chosen Module: {module}')
     return module

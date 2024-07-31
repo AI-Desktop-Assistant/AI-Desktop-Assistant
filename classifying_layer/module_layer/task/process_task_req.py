@@ -1,3 +1,4 @@
+from nltk.corpus import wordnet as wn
 from classifying_layer.module_layer.task.dates_and_times import *
 from classifying_layer.module_layer.response.response import *
 from models.load_model import load_model
@@ -12,6 +13,11 @@ db_path = 'users.db'
 req_model, tokenizer, device = load_model('models\\task_req_classification_model.pth')
 task_intent_model, tokenizer, device = load_model('models\\task_intent_model.pth')
 bert_model, tokenizer, device = load_model('bert') 
+reminded_task = ''
+remind_two_hours = ''
+remind_thirty_mins = ''
+remind_on_time = ''
+check_tasks = True
 
 def get_tasks_within_date_range(start_date, end_date):
     with sqlite3.connect(db_path) as conn:
@@ -33,46 +39,89 @@ def update_task_complete(task_purpose):
 def complete_task(intent):
     task, confidence = get_task_intent(intent)
     update_task_complete(task[4])
+    
 
 # handle mark req
 def handle_mark(req, intent):
     # find task to be marked and mark as complete
     complete_task(intent)
     
-def update_task(task_purpose, tf, date, time, day_repeat):
+def update_task(task_purpose, date, time, day_repeat):
+    print('Updating task')
+    task_updated = False
     rows_to_update = ''
     values = []
+    
     if date != '':
-        rows_to_update += 'date = ? AND '
+        print(f'Appending Date to values: {date}')
+        rows_to_update += 'date = ?, '
         values.append(date)
-    elif time != '':
-        rows_to_update += 'time = ? AND '
+    if time != '':
+        print(f'Appending Time to values: {time}')
+        rows_to_update += 'time = ?, '
         values.append(time)
-    elif day_repeat != '':
+    if day_repeat != '':
+        print(f'Appending Day Repeat to values: {day_repeat}')
         rows_to_update += 'repetition = ? '
         values.append(day_repeat)
-    if rows_to_update.endswith('AND '):
-        rows_to_update = rows_to_update[:-4]
+    print('Checking update rows_to_update string')
+    if rows_to_update.endswith(', '):
+        rows_to_update = rows_to_update[:-2]
+        print(f'Updated Rows To Update')
+    print(f'Rows To Update: {rows_to_update}')
     user_id = get_user_id()
     values.append(user_id)
     values.append(task_purpose)
-    with sqlite3.connect('users.db') as conn:
-        query = f'UPDATE tasks SET {rows_to_update}WHERE user_id = ? AND task = ?'
-        conn.execute(query, values)
-        conn.commit()
+    print(f'Values: {values}')
+    if rows_to_update != '':
+        with sqlite3.connect('users.db') as conn:
+            query = f'UPDATE tasks SET {rows_to_update}WHERE user_id = ? AND task = ?'
+            print(f'Query: {query}')
+            conn.execute(query, values)
+            conn.commit()
+            task_updated = True
+    return task_updated, rows_to_update, values
 
-def handle_updating_task(intent, tf, date, time, day_repeat):
+def output_task_updated(intent, rows_to_update, values):
+    response = f'I have updated your task {intent_as_response(intent)} '
+
+    if 'date' in rows_to_update:
+        response += f'to {date_to_response(values[0])} '
+        for value in values:
+            time = value.split(':')
+            if len(time) == 2:
+                response += f'at {value} '
+                break
+    elif 'time' in rows_to_update:
+        for value in values:
+            time = value.split(':')
+            if len(time) == 2:
+                response += f'to {value} '
+                break
+    if 'repetition' in rows_to_update:
+        response += f'every {values[-1]}'
+    output_tasks_to_user(response)
+
+def handle_updating_task(intent, date, time, is_am, day_repeat):
+    print('Attempting Update Task')
     task, confidence = get_task_intent(intent)
-    update_task(task, tf, date, time, day_repeat)
+    print(f'Got task: {task}, Confidence: {confidence}')
+    date_str = f'{date.month}/{date.day}/{date.year}'
+    time_str = time_to_string(time, is_am)[0]
+    task_intent = task[4]
+    task_updated, rows_to_update, values = update_task(task_intent, date_str, time_str, day_repeat)
+    output_task_updated(intent, rows_to_update, values)
+    refresh_next_task_list()
 
 # handle move req
 def handle_move(req, intent):
     # parse updated time for task
     tf = get_date_and_time_from_req(req)
     # interpret time from user
-    date, time, day_repeat = interpret_time(tf)
+    date, time, day_repeat, is_am = interpret_time(tf)
+    print(f'Retrieved time information: date: {date}, time: {time}, day_repeat: {day_repeat}, is_am: {is_am}')
     # handle updating task
-    handle_updating_task(intent, tf, date, time, day_repeat)
+    handle_updating_task(intent, date, time, is_am, day_repeat)
 
 def predict_class_tokens(req, model):
     labels_to_index = {'query': 0, 'set': 1, 'update': 2}
@@ -131,21 +180,24 @@ def get_intent(req):
     tokens, predicted_token_classes = predict_ner_tokens(req, task_intent_model)
     predicted_tokens = get_intent_tokens(tokens, predicted_token_classes)
     if len(predicted_tokens) == 0:
-        intent = 'alarm'
+        intent = ''
     else:
         intent = ' '.join(predicted_tokens)
 
     return intent
 
 def interpret_time(time):
+    print('Interpretting Time')
     task_date = ''
     task_time = ''
+    day_repeat = ''
+    is_am = False
+    if time == None:
+        return task_date, task_time, day_repeat, is_am
     num = time['num']
     time_spec = time['time']
     day = time['day']
     repeat = time['repeat']
-    day_repeat = ''
-    is_am = False
     print(f'Num: {num}')
     print(f'Time Spec: {time_spec}')
     print(f'Day: {day}')
@@ -173,18 +225,17 @@ def interpret_time(time):
             task_time = get_time_now_to_x_minutes(num)[1]
             print('Num, Minutes')
     elif day != '':
-        task_date = get_dates_by_day_name(day, next=time['next'])
         print(f'Day: {day}, Next: {time["next"]}')
+        task_date = get_dates_by_day_name(day, next=time.get('next'))
         if repeat:
-            day_repeat = day
             print(f'Day Repeat: {day_repeat}')
+            day_repeat = day
     print(f'Task Date: {task_date}')
 
     if time_spec != '':
         task_time, is_am = get_time_from_spec(time_spec, time['am'], time['pm'])
     
     print(f'Task Time: {task_time}\n')
-
 
     return task_date, task_time, day_repeat, is_am
 
@@ -242,6 +293,7 @@ def get_date_and_time_from_req(req):
     print(f'Time Frame: {tf_item}')
     print(f'Time Frame Copy : {tf_item_copy}')
     if tf_item == tf_item_copy:
+        print('No Change Returning None')
         return None
     return tf_item
 
@@ -273,7 +325,7 @@ def handle_missing_info(task_date, task_time, val_date, val_time, chances=3):
         handle_missing_info(task_date, task_time, val_date, val_time, chances=new_chances)
     else:
         tf = get_date_and_time_from_req(response)
-        task_date, task_time, day_repeat = interpret_time(tf)
+        task_date, task_time, day_repeat, is_am = interpret_time(tf)
         print(f'Task Date: {task_date}, Task Time: {task_time}, Reapeating Day: {day_repeat}')
         new_val_date = new_val_time = True
         if not val_date and not val_time:
@@ -303,7 +355,7 @@ def insert_new_task(intent, date_str, time_str, day_reapeat):
         task = intent
         user_id = get_user_id()
         conn.execute(query, (user_id, date_str, time_str, task,  day_reapeat))
-        print(f'Inserting: user_id: {user_id}, date_str: {date_str}, time_str: {time_str}, task: {task},  day_reapeat: {day_reapeat}')
+        print(f'Executing Inserting: user_id: {user_id}, date_str: {date_str}, time_str: {time_str}, task: {task},  day_reapeat: {day_reapeat}')
         if day_reapeat != '':
             date_obj = datetime.strptime(date_str, '%m/%d/%Y')
             new_date_obj = date_obj + timedelta(weeks=1)
@@ -312,16 +364,25 @@ def insert_new_task(intent, date_str, time_str, day_reapeat):
             print(f'Inserting: user_id: {user_id}, date_str: {date_str}, time_str: {time_str}, task: {task},  day_reapeat: {day_reapeat}')
             conn.execute(new_query, (user_id, new_date, time_str, task, day_reapeat))
         conn.commit()
-        
+        print(f'Committing Inserted: user_id: {user_id}, date_str: {date_str}, time_str: {time_str}, task: {task},  day_reapeat: {day_reapeat}')
 
-def set_task(intent, date, time, day_reapeat, is_am):
-    if date == '':
-        date = datetime.today()
-    date_str = f'{date.month}/{date.day}/{date.year}'
+def refresh_next_task_list():
+    print('Refreshing Task List')
+    tasks = get_next_tasks(3)
+    set_next_task_list(tasks)
+    first_task = tasks[0]
+    date_str, time_str = first_task[2], first_task[3]
+    print(f'First Task Date and Time: Date: {date_str}, Time: {time_str}')
+    date = datetime.strptime(' '.join([date_str, time_str]), '%m/%d/%Y %I:%M %p')
+    set_next_task_datetime(date)
+
+def time_to_string(time, is_am):
+    print(f'Converting time to string: {time}, is_am: {is_am}')
     if time.minute < 10:
         minute = f'0{time.minute}'
     else:
         minute = time.minute
+    print(f'Minute: {minute}')
     if is_am:
         if time.hour == 0:
             hour = 12
@@ -331,10 +392,24 @@ def set_task(intent, date, time, day_reapeat, is_am):
     else:
         if time.hour > 12:
             hour = time.hour - 12
+        else:
+            hour = time.hour
         am_or_pm = ' PM'
-    
     time_str = f'{hour}:{minute} {am_or_pm}'
+    print(f'Time as String: {time_str}')
+    return time_str, hour, minute
+
+def set_task(intent, date, time, day_reapeat, is_am):
+    print('Setting Task')
+    if date == '':
+        date = datetime.today()
+    date_str = f'{date.month}/{date.day}/{date.year}'
+    print(f'Date String: {date_str}')
+    time_str, hour, minute = time_to_string(time, is_am)
+    print(f'Time String: {time_str}, Hour: {hour}, Minute: {minute}')
     insert_new_task(intent, date_str, time_str, day_reapeat)
+    print(f'Inserted New Task: Date: {date_str}, Time: {time_str}, Task Purpose: {intent}')
+    refresh_next_task_list()
     return hour, minute
 
 def query_tasks_at_date(date):
@@ -365,57 +440,97 @@ def handle_get_tasks_date(date):
     return tasks
 
 def get_bert_embedding(text):
-    inputs = tokenizer(text, return_tensors="pt", max_length=512, truncation=True, padding='max_length')
-    with torch.no_grad():
-        outputs = bert_model(**inputs)
-    embeddings = outputs.last_hidden_state.mean(dim=1)
+    try:
+        print(f'Tokenizing text: {text}')
+        inputs = tokenizer(text, return_tensors="pt", max_length=512, truncation=True, padding='max_length')
+        inputs.to(device)
+        print('Getting output from bert')
+        with torch.no_grad():
+            outputs = bert_model(**inputs)
+        print('Getting embeddings from bert output')
+        embeddings = outputs.last_hidden_state.mean(dim=1)
+        print('Returning embeddings')
+    except Exception as e:
+        print(e)
     return embeddings
 
 def cosine_similarity(embedding1, embedding2):
-    similarity = 1 - cosine(embedding1.squeeze().numpy(), embedding2.squeeze().numpy())
+    try:
+        embedding1 = embedding1.cpu()
+        embedding2 = embedding2.cpu()
+        similarity = 1 - cosine(embedding1.squeeze().numpy(), embedding2.squeeze().numpy())
+    except Exception as e:
+        print(e)
     return similarity
 
 def compare_strings(str1, str2):
+    print(f'Getting embeddings Str1: {str1}')
     emb_1 = get_bert_embedding(str1)
+    print(f'Getting embeddings Str2: {str2}')
     emb_2 = get_bert_embedding(str2)
+    print('Calculating cosine similarity')
     similarity = cosine_similarity(emb_1, emb_2)
+    print(f'Similarity: {similarity}')
     return similarity
 
-def get_next_tasks(num=-1):
+def get_ordered_tasks():
     with sqlite3.connect('users.db') as conn:
         cursor = conn.cursor()
         query = 'SELECT * FROM tasks WHERE user_id = ? ORDER BY date, time'
         user_id = get_user_id()
         cursor.execute(query, (user_id))
         rows = cursor.fetchall()
-        tasks_num = 3
-        if num != -1:
-            tasks_num = num
-        tasks = rows[:tasks_num]
+        now = datetime.now()
+        tasks_after_now = []
+        for task in rows:
+            print(f'Task: {task}')
+            task_datetime = datetime.strptime(' '.join([task[2], task[3]]), '%m/%d/%Y %I:%M %p')
+            print(f'Task Date Time: {task_datetime}')
+            print(f'Now Date Time: {now}')
+            diff = task_datetime - now
+            zero = timedelta(0)
+            print(f'Difference: {diff}')
+            if diff > zero:
+                print(f'Appending Task: {task}')
+                tasks_after_now.append(task)
+    return tasks_after_now
+
+def get_next_tasks(num=-1):
+    print(f'Getting Next {num} tasks')
+    tasks_after_now = get_ordered_tasks()
+    tasks_num = 3
+    if num != -1:
+        tasks_num = num
+    tasks = tasks_after_now[:tasks_num]
+    print(f'Got Tasks: {tasks}')
     return tasks
 
 def get_max_similarity(rows, similarities):
+    print('Getting max similarity')
     max_idx = similarities.index(max(similarities))
     return rows[max_idx], similarities[max_idx]
 
 def get_task_intent(intent):
-    with sqlite3.connect('users.db') as conn:
-        query = 'SELECT * FROM tasks WHERE user_id = ?'
-        cursor = conn.cursor()
-        user_id = get_user_id()
-        cursor.execute(query, (user_id, intent))
-        rows = cursor.fetchall()
+    print(f'Getting task by intent: {intent}')
+    tasks_after_now = get_ordered_tasks()
+    print(f'Got tasks: {tasks_after_now}')
     similarities = []
-    for row in rows:
-        task = row[4]
-        similarity = compare_strings(task, intent)
+    print(f'\nGetting Similarities')
+    for task in tasks_after_now:
+        print('Getting intent')
+        task_intent = task[4]
+        print('Comparing strings')
+        similarity = compare_strings(task_intent, intent)
+        print(f'Appending Similarity: {similarity}')
         similarities.append(similarity)
-    task, confidence = get_max_similarity(rows, similarities)
-
+    print(f'\nGot similarities: {similarities}')
+    task, confidence = get_max_similarity(tasks_after_now, similarities)
+    print(f'Most similar task: {task}, Confidence: {confidence}')
     return task, confidence
 
-def handle_get_tasks_num(num, next):
-    if next:
+def handle_get_tasks_num(num):
+    print('Handling get tasks num')
+    if num:
         tasks = get_next_tasks(num=num)
     else:
         tasks = get_next_tasks()
@@ -427,48 +542,101 @@ def handle_get_tasks_month(month):
     return tasks
 
 def handle_get_tasks_intent(intent):
-    task = get_task_intent(intent)
-
+    task, confidence = get_task_intent(intent)
     return task
 
 def date_to_response(date):
-    month, day, year = date.split('/')
-    months = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december']
-    idx = int(month)-1
-    month_word = months[idx]
-    day_as_word = f'{day}st' if day.endswith('1') and day != '11' else f'{day}nd' if day.endswith('2') and day != '12' else f'{day}rd' if day.endswith('3') and day != '13' else f'{day}th'
-    date_as_response = f'{month_word} {day_as_word}'
-    return date_as_response
-
-def task_intent_to_response(task_intent):
-    first_word = task_intent.split()[0]
-    if first_word.endswith('ing'):
-        response = 'for '
+    print(f'Getting Date as response')
+    today = datetime.today()
+    tomorrow = today + timedelta(days=1)
+    if isinstance(date, str):
+        if date == 'today':
+            date_obj = today
+        elif tomorrow == 'tomorrow':
+            date_obj = tomorrow
+        else:
+            date_obj = datetime.strptime(date, '%m/%d/%Y')
     else:
-        response = 'to '
-    response += task_intent
+        date_obj = date
+    one_week = today + timedelta(weeks=1)
+    two_weeks = today + timedelta(weeks=2)
+    diff_ow = date_obj - one_week
+    diff_tw = date_obj - two_weeks
+    zero = timedelta(0)
+    response = ''
+    print(f'Date: {date}, Today: {today}, Tomorrow: {tomorrow}, One Week: {one_week}, Two Weeks: {two_weeks}')
+    if today.month == date_obj.month and today.day == date_obj.day and today.year == date_obj.year:
+        print('Returning Today')
+        return 'Today'
+    elif tomorrow.month == date_obj.month and tomorrow.day == date_obj.day and tomorrow.year == date_obj.year:
+        print('Returning Tomorrow')
+        return 'Tomorrow'
+    print(f'Two Week Difference: {diff_tw}')
+    if diff_tw <= zero:
+        print('Within 2 Weeks')
+        print(f'One Week Difference: {diff_ow}')
+        if diff_ow >= zero:
+            print('After One week')
+            response += 'next '
+        print(f'Response: {response}')
+        days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+        print(f'Weekday Num: {date_obj.weekday()}')
+        response += f'{days[date_obj.weekday()]} '
+        print(f'Response: {response}')
+    else:
+        print('Past 2 Weeks')
+        response += f'On '
+        months = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'november', 'december']
+        month = months[date_obj.month - 1]
+        print(f'Month: {month}')
+        day_as_word = f'{date_obj.day}st' if str(date_obj.day).endswith('1') and date_obj.day != '11' else f'{date_obj.day}nd' if date_obj.day.endswith('2') and date_obj.day != '12' else f'{date_obj.day}rd' if date_obj.day.endswith('3') and date_obj.day != '13' else f'{date_obj.day}th'
+        print(f'Day as word: {day_as_word}')
+        response += f'{month} {day_as_word} '
+        print(f'Response: {response}')
+        if date_obj.year != today.year:
+            print('Adding year to response')
+            response += f'{date_obj.year} '
+        print(f'Response: {response}')
     return response
 
 def list_tasks(tasks, task_ref='task', list_all=False):
+    print(f'Listing Tasks: {tasks}')
+    print('Building Response')
     response = ''
     tasks_listed = 0
     confirm = False
     for task in tasks:
+        print(f'Building Response with task: {task}')
         if not list_all:
+            print(f'Checking Listed Tasks is 3: {tasks_listed}')
             if tasks_listed == 3 and len(tasks) > 3:
-                strs = ['are' if len(tasks[:3]) > 1 else 'is', f'{task_ref} ' if len(tasks[:3]) == 1 else f'{task_ref}s ', 'they are' if len(tasks[:3]) > 1 else 'it is']
-                response += f'There {strs[0]} {len(tasks[:3])} other {strs[1]}, do you want to know what {strs[2]}?'
+                print('Adding confirmation to response')
+                strs = ['are' if len(tasks[3:]) > 1 else 'is', f'{task_ref} ' if len(tasks[3:]) == 1 else f'{task_ref}s ', 'they are' if len(tasks[3:]) > 1 else 'it is']
+                print(f'Strs: {strs}')
+                response += f'There {strs[0]} {len(tasks[3:])} other {strs[1]}, do you want to know what {strs[2]}?'
                 confirm = True
+                print(f'Response')
+                break
+            print(f'Building Response: {response}')
+        print(f'Checking listed Tasks > 0: {tasks_listed}')
         if tasks_listed > 0:
+            print('Adding another/(and) to response')
             if len(tasks) - 1 == tasks_listed or (tasks_listed == 2 and not list_all):
+                print('Adding and to response')
                 response += 'and '
             response += f'another {task_ref if len(task_ref.split()) == 1 else task_ref.split()[1]} '
+            print(f'Building Response: {response}')
+        print(f'Building Task Response')
         date = task[2]
+        print(f'Date: {date}')
         time = task[3]
+        print(f'Time: {time}')
         task_intent = task[4]
-        response += f'On {date_to_response(date)} at {time} you have a {task_ref if len(task_ref.split()) == 1 else task_ref.split()[1]} set {task_intent_to_response(task_intent)}. '
-
+        print(f'Intent: {task_intent}')
+        response += f'{date_to_response(date)} at {time} {intent_as_response(task_intent)}. '
+        print(f'Building Response: {response}')
         tasks_listed += 1
+    print(f'Built Response: {response}')
     return response, confirm
 
 def handle_confirmation_response(tasks, task_ref, user_response):
@@ -477,11 +645,213 @@ def handle_confirmation_response(tasks, task_ref, user_response):
     else:
         y_or_n = get_y_or_n(user_response)
     if y_or_n == 'yes':
-        alert_reading_remaining_tasks(True if len(tasks[:3]) > 1 else False)
-        listed_tasks = list_tasks(tasks[:3], task_ref, list_all=True)[0]
+        alert_reading_remaining_tasks(True if len(tasks[3:]) > 1 else False)
+        listed_tasks = list_tasks(tasks[3:], task_ref, list_all=True)[0]
         user_response = output_tasks_to_user(listed_tasks)
     else:
         respond_ending_request_chain()
+
+def get_tasks_today():
+    print('Getting Tasks Today')
+    today = datetime.today()
+    print(f'Today Datetime: {today}')
+    month, day, year = today.month, today.day, today.year
+    print(f'Month, Day, Year: {month}, {day}, {year}')
+    date = f'{month}/{day}/{year}'
+    print(f'Date: {date}')
+    with sqlite3.connect('users.db') as conn:
+        cursor = conn.cursor()
+        query = 'SELECT * FROM tasks WHERE user_id = ? AND date = ?'
+        user_id = get_user_id()
+        cursor.execute(query, (user_id, date))
+        rows = cursor.fetchall()
+        print(f'Rows: {rows}')
+    return rows
+
+def output_tasks_today():
+    response = 'You have '
+    print('Getting todays tasks')
+    tasks = get_tasks_today()
+    print(f'Got Tasks: {tasks}')
+    num_tasks = len(tasks)
+    print(f'Num Tasks: {tasks}')
+    if num_tasks == 0:
+        response += f'{num_tasks} tasks to complete today'
+        output_tasks_to_user(response)
+        return
+    elif num_tasks == 1:
+        response += f'{num_tasks} task to complete today. Would you like to hear what it is?'
+    else:
+        response += f'{num_tasks} tasks to complete today. Would you like to hear what they are?'
+    print('Outputting Todays Tasks')
+    user_response = output_tasks_to_user(response, True)
+    y_or_n = get_y_or_n(user_response)
+    if y_or_n == 'yes':
+        response, confirm = list_tasks(tasks)
+        user_response = output_tasks_to_user(response, confirm)
+        if confirm:
+            y_or_n = get_y_or_n(user_response)            
+            if y_or_n == 'yes':
+                response = list_tasks(tasks[3:], list_all=True)[0]
+                output_tasks_to_user(response)
+    else:
+        return
+    
+
+def get_task_proximity(date):
+    now = datetime.now()
+    proximity = date - now
+    print(f'Proximity: {proximity}')
+    return proximity
+    
+def get_pos(word):
+    synsets = wn.synsets(word)
+    if not synsets:
+        return None
+    return synsets[0].pos()
+
+def intent_as_response(intent):
+    first_word = intent.split()[0]
+    pos = get_pos(first_word)
+    if pos == 'n':
+        response = 'for '
+    elif pos == 'v':
+        response = 'to ' if not first_word.endswith('ing') else 'for '
+    else:
+        response = 'to '
+        
+    if 'my' in intent:
+        intent = intent.replace('my', 'your')
+    response += intent
+    return response
+
+def remind_task(tasks, when):
+    init_task = tasks[0]
+    print(f'Reminding task in {when}: {init_task}')
+    if when == 'now':
+        response = f'This is your {task[3]} reminder {intent_as_response(init_task[4])}. '
+    else:
+        response = f'This is a reminder {intent_as_response(init_task[4])} in {when}. '
+    print(f'Response: {response}')
+    task_date_str = init_task[2]
+    task_date = datetime.strptime(task_date_str, '%m/%d/%Y')
+    previous_task = init_task
+    for task in tasks[1:]:
+        date_str = task[2]
+        date = datetime.strptime(date_str, '%m/%d/%Y')
+        today = datetime.today()
+        if date.month == today.month and date.day == today.day and date.year == today.year:
+            proximity = date - task_date
+            hours_diff, min_diff = proximity.hour, proximity.minute
+            if hours_diff != 0:
+                response += f'{hours_diff} hour'
+                if hours_diff != 1:
+                    response += 's '
+                else:
+                    response += ' '
+            else:
+                response += f'{min_diff} minute'
+                if min_diff != 1:
+                    response += 's '
+                else:
+                    response += ' '
+            
+            response += f'after completing your task {intent_as_response(previous_task[4])}, you have another task set {intent_as_response(task[4])}. '
+            previous_task = task
+    output_tasks_to_user(response)
+
+def check_remind_on_time(tasks, proximity):
+    print('Checking task is now')
+    remind_on_time = False
+    print(f'Proximity Seconds: {proximity.seconds}')
+    if proximity.seconds <= 1:
+        print('Task is occuring now')
+        remind_on_time = True
+        print('Reminding Task is now')
+        remind_task(tasks, 'now') 
+        if len(tasks) > 1:
+            set_next_task_datetime(tasks[1:])
+            next_three_tasks = get_next_tasks(4)[1:]
+            set_next_task_list(next_three_tasks)
+        else:
+            set_next_task_datetime('')
+            set_next_task_list('')
+
+    return remind_on_time
+
+def check_remind_thirty_mins(tasks, proximity):
+    print(f'Checking If task within 30 minutes')
+    remind_thirty_mins = False
+    print(f'Proximity Seconds: {proximity.seconds}')
+    if proximity.seconds <= 1800:
+        print('Task within 30 minutes')
+        remind_thirty_mins = True
+        if proximity.seconds >= 1680:
+            print('Remind task in 30 minutes')
+            remind_task(tasks, '30 minutes')
+    return remind_thirty_mins
+
+def check_remind_two_hours(tasks, proximity):
+    print(f'Checking If task within 2 hours')
+    remind_two_hours = False
+    print(f'Proximity Seconds: {proximity.seconds}')
+    if proximity.seconds <= 7200:
+        print('Task within 2 hours')
+        remind_two_hours = True
+        if proximity.seconds >= 7080:
+            print('Reminding task in 2 hours')
+            remind_task(tasks, '2 hours')
+    print(f'Remind Two Hours: {remind_two_hours}')
+    return remind_two_hours
+
+def remind_tasks():    
+    global remind_two_hours
+    global remind_thirty_mins
+    global remind_on_time
+    date = get_next_task_datetime()
+    if date != '':
+        print('Getting Task Proximity to today')
+        proximity = get_task_proximity(date)
+        tasks = get_next_task_list()
+        print(f'Tasks: {tasks}')
+        print(f'Remind 2 Hours: {remind_two_hours}')
+        print(f'Remind 30 Hours: {remind_thirty_mins}')
+        print(f'Remind On Time: {remind_on_time}\n')
+        if not remind_two_hours:    
+            print('Checking Remind two hours')
+            remind_two_hours = check_remind_two_hours(tasks, proximity)
+        if not remind_thirty_mins:
+            print('Checking Remind Thirty minutes')
+            remind_thirty_mins = check_remind_thirty_mins(tasks, proximity)
+        if not remind_on_time:
+            print('Checking Remind On Time')
+            remind_on_time = check_remind_on_time(tasks, proximity)
+        print(f'Remind 2 Hours: {remind_two_hours}')
+        print(f'Remind 30 Hours: {remind_thirty_mins}')
+        print(f'Remind On Time: {remind_on_time}')
+        if remind_on_time:
+            remind_two_hours = False
+            remind_thirty_mins = False
+            remind_on_time = False
+    else:
+        print('Checking Tasks to remind')
+        global check_tasks
+        print(f'Check tasks: {check_tasks}')
+        if check_tasks:
+            tasks = get_next_tasks(3)
+            print(f'Next 3 Tasks: {tasks}')
+            if len(tasks) == 0:
+                print('No Tasks Found Check Tasks False')
+                check_tasks = False
+            else:
+                print('Tasks Found to Check')
+                set_next_task_list(tasks[:3])
+                date_str = tasks[0][2]
+                time_str = tasks[0][3]
+                print(f'Date String: {date_str}, Time String: {time_str}')
+                date = datetime.strptime(' '.join([date_str, time_str]), '%m/%d/%Y %I:%M %p')
+                set_next_task_datetime(date)
+                remind_tasks()
 
 def output_tasks_month(tasks, task_ref, month, req):
     # response = ''
@@ -546,28 +916,52 @@ def output_tasks(tasks, req, task_month='', task_num=''):
         output_tasks_num(tasks, task_ref, task_num, req)
 
 def query_tasks(req, intent='', tf='', date='', time='', day_repeat=''):
+    print('Querying for task')
+    print(f'Req: {req}, Intent: {intent}, Time Frame: {tf}, date: {date}, time: {time}, Day Repeat: {day_repeat}')
     if date != '':
+        print('Query Tasks Date')
         tasks = handle_get_tasks_date(date)
+        print(f'Tasks Retrieved: {tasks}')
+        if len(tasks) != 0:
+            print('Length of Tasks Not 0')
+            response = list_tasks(tasks)[0]
+        else:
+            print('No Tasks Were Found')
+            if date != '':
+                response = f'You have no tasks {date_to_response(date)}'
+            elif intent != '':
+                response = f'You have not tasks {intent_as_response(intent)}'
+        print(f'Response: {response}')
+        output_tasks_to_user(response)
     elif time != '':
+        print('Query Tasks Time')
         tasks = handle_get_tasks_time(time)
         output_tasks(tasks, req, time)
-    elif tf['num']:
-        tasks = handle_get_tasks_num(tf['num'], tf['next'])
+    elif tf and tf['num'] != -1:
+        print('Query Tasks Num')
+        tasks = handle_get_tasks_num(tf['num'])
         output_tasks(tasks, req, task_num=tf['num'])
-    elif tf['month']:
+    elif tf and tf['month'] != '':
+        print('Query Tasks Month')
         tasks = handle_get_tasks_month(tf['month'])
         output_tasks(tasks, req, task_month=tf['month'])
     elif intent != '':
+        print('Query Tasks intent')
         task = handle_get_tasks_intent(intent)
         response = list_tasks([task])[0]
         output_tasks_to_user(response)
     else:
+        print('Query Tasks else (3)')
         tasks = handle_get_tasks_num(3)
+        print(f'Tasks Retrieved: {tasks}')
+        response = list_tasks(tasks)[0]
+        print(f'Response: {response}')
+        output_tasks_to_user(response)
 
 def handle_query_no_intent(req):
     tf = get_date_and_time_from_req(req)
     date, time, day_repeat, is_am = interpret_time(tf)
-
+    print(f'Retrieved time information: date: {date}, time: {time}, day_repeat: {day_repeat}, is_am: {is_am}')
     query_tasks(req, tf=tf, date=date, time=time, day_repeat=day_repeat)
 
 def handle_query_intent(req, intent):
@@ -608,12 +1002,13 @@ def process_task_req(req):
                 task_date = missing_info['date']
             if missing_info.get('time'):
                 task_time = missing_info['time']
-        
+        print('Setting task')
         hour, minute = set_task(intent, task_date, task_time, day_repeat, is_am)
+        print('Task set')
         alert_task_set(intent, task_date, hour, minute, is_am, tf['repeat'], task_ref)
     # elif req is query
     elif classification == 'query':
-        if intent != 'alarm':
+        if intent != '':
             # handle non-specific query
             print('Query Intent')
             handle_query_intent(req, intent)
@@ -627,8 +1022,10 @@ def process_task_req(req):
         # if req is mark
         if mark_or_move:
             # handle mark req
+            print('Marking task as complete')
             handle_mark(req, intent)
         # else if req is move
         else:
             # handle move req
+            print('Moving a task')
             handle_move(req, intent)

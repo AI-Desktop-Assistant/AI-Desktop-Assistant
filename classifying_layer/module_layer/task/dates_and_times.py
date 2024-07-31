@@ -3,14 +3,21 @@ from dateutil.relativedelta import relativedelta
 import calendar
 
 def get_dates_by_day_name(day_name, next=False):
+    print('Getting Date by day name')
     today = datetime.today()
+    if day_name == 'today':
+        return today
+    elif day_name == 'tomorrow':
+        return today + timedelta(days=1)
     target_day = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'].index(day_name)
     current_day = today.weekday()
+    print(f'Current Day: {current_day}, Today: {today}')
     if next:
         diff = (target_day - current_day + 7) % 7 + 7
     else:
         diff = (target_day - current_day + 7) % 7
     date = today + timedelta(days=diff)
+    print(f"Date: {date}")
     return date
 
 def get_this_weeks_dates_by_day_names(day_names):
@@ -158,6 +165,7 @@ def switch_am_pm(now_am_pm):
         return ' AM'
 
 def get_am_or_pm(now, hour, minute):
+    print('Calculating am or pm')
     norm_now = now.hour
     now_am_pm = ' AM' if now.hour < 12 else ' PM'
     
@@ -168,14 +176,17 @@ def get_am_or_pm(now, hour, minute):
         now_am_pm = switch_am_pm(now_am_pm)
     elif hour == norm_now and minute < now.minute:
         now_am_pm = switch_am_pm(now_am_pm)
-    
+    print(f'AM or PM: {now_am_pm}')
     return now_am_pm
 
 def get_time_from_spec(time_spec, am, pm):
+    print('Getting Time From Specification')
     now = datetime.now()
     hour = int(time_spec.split(':')[0])
     minute = int(time_spec.split(':')[1])
+    print(f'Now: {now}, Hour: {hour}, Minute: {minute}')
     is_am = False
+    print('Checking Time Specified as am or pm')
     if am:
         time_spec += ' AM'
         is_am = True
@@ -186,5 +197,5 @@ def get_time_from_spec(time_spec, am, pm):
         time_spec += am_or_pm
         if 'AM' in am_or_pm:
             is_am = True
-    
+    print(f'Is AM: {is_am}')
     return datetime.strptime(time_spec, '%I:%M %p').time(), is_am

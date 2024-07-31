@@ -44,7 +44,7 @@ function switchModule(moduleId) {
     modules.forEach(mod => mod.style.display = 'none')
     console.log(`Displaying ${moduleId}`)
     const module = document.getElementById(moduleId)
-    module.style.display = 'block'
+    module.style.display = 'flex'
     const links = document.querySelectorAll('.nav-link')
     links.forEach(link => link.classList.remove('active'))
     const successMessages = document.querySelectorAll('.message-success')
@@ -233,7 +233,7 @@ window.electron.onLoginResponse((event, response) => {
         }
         // remove login page from view and show the main app UI
         document.getElementById('login-signup-screen').style.display = 'none'
-        document.getElementById('main-app').style.display = 'block'
+        document.getElementById('main-app').style.display = 'flex'
         load_user_data()
     } 
     // if login was unsuccessful
@@ -426,6 +426,14 @@ function updateInfo(info) {
     else if (info === 'signature') {
         console.log('Updating signature')
         window.electron.updateSignature(document.getElementById('new-signature').value)
+    }
+    else if (info === 'volume') {
+        console.log('Updating volume')
+        window.electron.updateSignature(document.getElementById('new-volume').value)
+    }
+    else if (info === 'signature') {
+        console.log('Updating voice')
+        window.electron.updateSignature(document.getElementById('new-voice').value)
     }
 }
 

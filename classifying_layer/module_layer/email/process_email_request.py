@@ -4,6 +4,8 @@ from classifying_layer.module_layer.response.response import *
 from classifying_layer.module_layer.email.writitng_agent import generate_email
 from classifying_layer.module_layer.handle_confirmation import get_y_or_n
 from classifying_layer.module_layer.email.email_handler import send_email
+from user_config import *
+from config_socketio import get_app_socket
 import sqlite3
 import time
 
@@ -13,8 +15,6 @@ email_entity_model_path = 'models\\entity_recognizer.pth'
 email_info_model, tokenizer, device = load_model(email_info_model_path, 'email')
 email_intent_model, tokenizer, device = load_model(email_intent_model_path, 'email')
 email_entity_model, tokenizer, device = load_model(email_entity_model_path, 'email')
-
-current_user_id = ''
 
 def predict_tokens(req, model):
         tokenized_input = tokenizer([req], truncation=True, padding='max_length', is_split_into_words=True, return_tensors="pt")
@@ -57,11 +57,20 @@ def prompt_user_for_email(recipient, attempt=0):
 
 def get_contact_emails(recipients, cc, bcc):
     recipient_contact_names, cc_contact_names, bcc_contact_names = get_contact_names(recipients, cc, bcc)
+    print(f'Recipient Contacts: {recipient_contact_names}, CC Contact Names: {cc_contact_names}, BCC: {bcc_contact_names}')
     recipient_emails, cc_emails, bcc_emails, recipients_found, ccs_found, bccs_found = get_emails_from_contacts(recipient_contact_names, cc_contact_names, bcc_contact_names)
+    print(f'recipient_emails: {recipient_emails}, cc_emails: {cc_emails}, bcc_emails: {bcc_emails}, recipients_found: {recipients_found}, ccs_found: {ccs_found}, bccs_found: {bccs_found}')
     found_recipients, found_ccs, found_bccs = find_unknown_recipients(recipients, cc, bcc, recipients_found, ccs_found, bccs_found)
-    recipient_emails.append(found_recipients)
-    cc_emails.append(found_ccs)
-    bcc_emails.append(found_bccs)
+    print(f'Found Recipients: {found_recipients}, Found CCs: {ccs_found}, Found BCCs: {bccs_found}')
+    if len(found_recipients) > 0:
+        print(f'Appending to recipient emails: {found_recipients}')
+        recipient_emails.append(found_recipients)
+    if len(found_ccs) > 0:    
+        print(f'Appending to cc emails: {found_ccs}')
+        cc_emails.append(found_ccs)
+    if len(found_bccs) > 0:
+        print(f'Appending to bcc emails: {bccs_found}')
+        bcc_emails.append(found_bccs)
     return recipient_emails, cc_emails, bcc_emails
 
 def find_unknown_recipients(recipients, cc, bcc, recipients_found, ccs_found, bccs_found):
@@ -133,37 +142,82 @@ def add_contact(name, email):
         minute = current_time.tm_mday
         second = current_time.tm_sec
         timestamp = f'{month}/{day}/{year} {hour}:{minute}:{second}'
-        global current_user_id
-        print(f'Current User ID: {current_user_id}')
-        cursor.execute("INSERT INTO contacts (user_id, contact_name, contact_email, timestamp) VALUES (?, ?, ?, ?)", (current_user_id, name, email, timestamp))
+        user_id = get_user_id()
+        print(f'Current User ID: {user_id}')
+        cursor.execute("INSERT INTO contacts (user_id, contact_name, contact_email, timestamp) VALUES (?, ?, ?, ?)", (user_id, name, email, timestamp))
 
 def get_emails_from_contacts(recipient_names, cc_names, bcc_names):
+    print(f'Querying for contacts: Recipient Names: {recipient_names}, CC Names: {cc_names}, BCC Names: {bcc_names}')
     with sqlite3.connect('users.db') as conn:
         cursor = conn.cursor()
-        cursor.execute("SELECT * FROM contacts")
+        user_id = get_user_id()
+        cursor.execute("SELECT * FROM contacts WHERE user_id = ?", user_id)
         rows = cursor.fetchall()
-        recipient_emails = recipients_found = []
-        cc_emails = ccs_found = []
-        bcc_emails = bccs_found = []
+        recipient_emails = []
+        recipients_found = []
+        cc_emails = []
+        ccs_found = []
+        bcc_emails = []
+        bccs_found = []
         
         for row in rows:
             for recipient in recipient_names:
-                if recipient in row[2]:
-                    recipient_emails.append(row[3])
+                if not recipient.endswith('.com'):
+                    if recipient in row[2]:
+                        print(f'Appending to recipient emails: {row[3]}')
+                        recipient_emails.append(row[3])
+                        print(f'Appending to recipients found: {recipient}')
+                        recipients_found.append(recipient)
+                        print(f'Recipient Emails: {recipient_emails}')
+                        print(f'Recipients Found: {recipients_found}')
+                else:
+                    print('Ends with .com')
+                    print(f'Appending to recipient emails: {recipient}')
+                    recipient_emails.append(recipient)
+                    print(f'Appending to recipients found: {recipient}')
                     recipients_found.append(recipient)
+                    print(f'Recipient Emails: {recipient_emails}')
+                    print(f'Recipients Found: {recipients_found}')
             for cc in cc_names:
-                if cc in row[2]:
-                    cc_emails.append(row[3])
+                if not cc.endswith('.com'):
+                    if cc in row[2]:
+                        print(f'Appending to cc emails: {row[3]}')
+                        cc_emails.append(row[3])
+                        print(f'Appending to ccs found: {cc}')
+                        ccs_found.append(cc)
+                        print(f'Recipient Emails: {cc_emails}')
+                        print(f'Recipients Found: {ccs_found}')
+                else:
+                    print('Ends with .com')
+                    print(f'Appending to cc emails: {cc}')
+                    cc_emails.append(cc)
+                    print(f'Appending to ccs found: {cc}')
                     ccs_found.append(cc)
+                    print(f'Recipient Emails: {cc_emails}')
+                    print(f'Recipients Found: {ccs_found}')
             for bcc in bcc_names:
-                if bcc in row[2]:
-                    bcc_emails.append(row[3])
+                if not bcc.endswith('.com'):
+                    if bcc in row[2]:
+                        print(f'Appending to bcc emails: {row[3]}')
+                        bcc_emails.append(row[3])
+                        print(f'Appending to bccs found: {bcc}')
+                        bccs_found.append(bcc)
+                        print(f'Recipient Emails: {bcc_emails}')
+                        print(f'Recipients Found: {bccs_found}')
+                else:
+                    print('Ends with .com')
+                    print(f'Appending to bcc emails: {bcc}')
+                    bcc_emails.append(bcc)
+                    print(f'Appending to bccs found: {bcc}')
                     bccs_found.append(bcc)
+                    print(f'Recipient Emails: {bcc_emails}')
+                    print(f'Recipients Found: {bccs_found}')
         return recipient_emails, cc_emails, bcc_emails, recipients_found, ccs_found, bccs_found
 
-def get_email_and_app_password(user_id):
+def get_email_and_app_password():
     with sqlite3.connect('users.db') as conn:
         cursor = conn.cursor()
+        user_id = get_user_id()
         cursor.execute("SELECT * FROM users WHERE id=?", (user_id))
         rows = cursor.fetchall()
         row = rows[0]
@@ -172,13 +226,14 @@ def get_email_and_app_password(user_id):
         return email, app_password
 
 def get_footer():
+    print('Getting Footer')
     with sqlite3.connect('users.db') as conn:
         cursor = conn.cursor()
-        cursor.execute('SELECT * FROM users WHERE id=?', (current_user_id))
+        user_id = get_user_id()
+        cursor.execute('SELECT * FROM users WHERE id=?', (user_id))
         rows = cursor.fetchall()
         footer = rows[0][6]
         if footer == '':
-            prompt_to_update_footer()
             return ''
         footer = '\n\n' + footer
         return footer
@@ -199,9 +254,11 @@ def get_contact_names(recipients, cc, bcc):
         for bcc_recipient in bcc:
             if not bcc_recipient.endswith('.com'):
                 bcc_contact_names.append(bcc_recipient)
+    print(f'Got Contacts: {recipient_contact_names}, {cc_contact_names}, {bcc_contact_names}')
     return recipient_contact_names, cc_contact_names, bcc_contact_names
 
 def group_recipients(recipients, cc, bcc):
+    print(f'Recipients to group: Recipients: {recipients}, CC: {cc}, BCC: {bcc}')
     grouped_recipients = []
     grouped_cc = []
     grouped_bcc = []
@@ -219,9 +276,10 @@ def group_recipients(recipients, cc, bcc):
         previous_label = label
     if recipient not in grouped_recipients:
         grouped_recipients.append(recipient)
-
+    print(f'Grouped Recipients: {grouped_recipients}')
 
     if len(cc) > 0:
+        print(f'Grouping CCs: {cc}')
         cc_recipient = ''
         previous_label = ''
         for cc_token, label in cc:
@@ -237,9 +295,10 @@ def group_recipients(recipients, cc, bcc):
 
         if cc_recipient not in grouped_cc:
             grouped_cc.append(cc_recipient)
-            
+        print(f'Grouped CCs: {grouped_cc}')
 
     if len(bcc) > 0:
+        print(f'Grouping BCC: {bcc}')
         bcc_recipient = ''
         previous_label = ''
         for bcc_token, label in bcc:
@@ -254,7 +313,7 @@ def group_recipients(recipients, cc, bcc):
             previous_label = label
         if bcc_recipient not in grouped_bcc:
             grouped_bcc.append(bcc_recipient)
-
+        print(f'Grouped BCCs: {grouped_bcc}')
     return grouped_recipients, grouped_cc, grouped_bcc
 
 def handle_intent_not_sufficient():
@@ -266,8 +325,10 @@ def handle_intent_not_sufficient():
     return response
 
 def handle_no_recipients():
+    print(f'Getting Recipient from User')
     response = get_recipients_from_user()
     if response == '':
+        print(f'Getting Recipient from User')
         response = get_recipients_from_user()
         if response == '':
             return []
@@ -286,25 +347,34 @@ def validate_intent(intents):
     return intents
 
 def validate_recipients(recipients):
+    print(f'Recipients to Validate: {recipients}')
     recipients_present = False
     if len(recipients) > 0:
         recipients_present = True
     if not recipients_present:
+        print('No Recipients Found')
         recipients = handle_no_recipients()
     
     return recipients
 
 def parse_email_entities(req):
-    email_entity_model.eval()
-    tokens, predict_tokens_classes = predict_tokens(req, email_entity_model)
-    entity_predictions = []
-    for token, token_classes in zip(tokens, predict_tokens_classes):
-        if token_classes[-1] != '0' and token != '[PAD]' and token != '[CLS]' and token != '[SEP]':
-            if token.startswith("##"):
-                print(f'')
-                entity_predictions[-1] += token[2:]
-            else:
-                entity_predictions.append(token)
+    print(f'Parsing email Entities')
+    try:
+        email_entity_model.eval()
+        print(f'predicting tokens')
+        tokens, predict_tokens_classes = predict_tokens(req, email_entity_model)
+        print(f'Predicted Tokens And Classes: Tokens: {tokens}, Predicted Token Classes: {predict_tokens_classes}')
+        entity_predictions = []
+        for token, token_classes in zip(tokens, predict_tokens_classes):
+            if token_classes[-1] != '0' and token != '[PAD]' and token != '[CLS]' and token != '[SEP]':
+                print(f'Token: {token}, Token Class Entity: {token_classes}')
+                if token.startswith("##"):
+                    entity_predictions[-1] += token[2:]
+                else:
+                    entity_predictions.append(token)
+    except Exception as e:
+        print(e)
+
     return entity_predictions
 
 def parse_email_recipients(req):
@@ -391,53 +461,108 @@ def parse_email_intent(req):
             else:
                 predictions['O'].append(token)
     return predictions
-        
-def process_email_req(req, user_id, socket):
-    global current_user_id
-    current_user_id = user_id
+
+def substitute_recipients(body, recipients):
+    recipient_referral = 'Dear '
+    for recipient in recipients:
+        if recipients.index(recipient) == len(recipients) - 1 and recipients.index(recipient) != 0:
+            recipient_referral += 'and '
+        elif recipients.index(recipient) != 0:
+            recipient_referral += ', '
+        recipient_referral += f'{recipient.capitalize()}'
+    print(f'Recipients referral: {recipient_referral}')
+    split_body = body.split('\n')
+    split_body[0] = f'{recipient_referral},'
+    new_body = '\n'.join(split_body)
+    print(f'Substituted Body: {new_body}')
+    return new_body
     
+
+def process_email_req(req):
     # take in email request
     # pass email request to model
+    print('Getting Email Recipients')
     recipients, cc, bcc = parse_email_recipients(req)
     print(f'Recipients: {recipients}\nCC: {cc}\nBCC: {bcc}')
     # analyze if recipients are missing from request
+    print('Validating Recipients')
     recipients = validate_recipients(recipients)
+    print(f'Validated Recipients: {recipients}')
+    print(f'Grouping Recipients')
     recipients, cc, bcc = group_recipients(recipients, cc, bcc)
     print(f'Recipients: {recipients}\nCC: {cc}\nBCC: {bcc}')
     if len(recipients) == 0:
+        print('No Recipients Found')
         return ''
     # analyze if intent is missing from request
+    print('Parsing Email Intent')
     intents = parse_email_intent(req)
     print(f'Intents: {str(intents)}')
+    print('Validating intent')
     intents = validate_intent(intents)
     if len(intents) == 0:
+        print('intent not found')
         return ''
     print(f'Intents: {str(intents)}')
-    # Have email writing agent generate a subject and body with no footer
+    prompt_user_writing_email(recipients)
+    # Have email writing agent generate a subject and body with no footer    
+    print('Generating email')
     body, subject = generate_email(req, intents)
-    # body, subject = "",""
-    print(f'{body}\n{subject}')
+    print(f'Generated Body and Subject\nBody: {body}\nSubject: {subject}')
     # Get the users footer
+    print('Getting user footer')
     footer = get_footer()
+    print(f'Footer: {footer}')
     if footer == '':
+        print('No Footer Found')
+        prompt_to_update_footer()
         return ''
+    print(f'Substituting Recipient Name: {recipients}')
+    body = substitute_recipients(body, recipients)
+    print(f'Substituted Body: {body}')
     # combine body and footer
+    print(f'Combining body and footer')
     body += footer
-    print(body)
+    print(f'Body + Footer: {body}')
     # if user requested an email draft ask if they want to see the email
+    print('Getting Contacts')
     recipient_emails, cc_emails, bcc_emails = get_contact_emails(recipients, cc, bcc)
+    print(f'Recipient Emails: {recipient_emails}')
+    print(f'CC Emails: {cc_emails}')
+    print(f'BCC Emails: {bcc_emails}')
     if 'send' in intents['A-INTENT']:
-        user_email, app_password = get_email_and_app_password(user_id)
+        user_email, app_password = get_email_and_app_password()
         if user_email == '':
             prompt_user_to_update_email()
             return ''
-        send_email(user_email, app_password, recipient_emails, subject, body, cc=cc_emails, bcc=bcc_emails)
+        if app_password == '':
+            prompt_user_to_update_app_password()
+            return ''
+        response = ask_to_show_email()
+        y_or_n = get_y_or_n(response)
+        if y_or_n == 'yes':
+            respond_showing_email()
+            data = {'body': body, 'subject': subject, 'recipients': recipient_emails, 'cc': cc_emails, 'bcc': bcc_emails}
+            socket = get_app_socket()[1]
+            socket.emit('response', { 'purpose': 'show-email', 'data': data })
+        else:
+            response = ask_to_send_email()
+            y_or_n = get_y_or_n(response)
+            if y_or_n == 'yes':
+                prompt_user_sending_email()
+                send_email(user_email, app_password, recipient_emails, subject, body, cc=cc_emails, bcc=bcc_emails)
+            else:
+                prompt_user_showing_email()
+                data = {'body': body, 'subject': subject, 'recipients': recipient_emails, 'cc': cc_emails, 'bcc': bcc_emails}
+                socket = get_app_socket()[1]
+                socket.emit('response', { 'purpose': 'show-email', 'data': data })
     else:
         response = ask_to_show_email()
         y_or_n = get_y_or_n(response)
         if y_or_n == 'yes':
             respond_showing_email()
-            data = {'body': body, 'subject': subject, 'recipients': recipients, 'cc': cc, 'bcc': bcc}
+            data = {'body': body, 'subject': subject, 'recipients': recipient_emails, 'cc': cc_emails, 'bcc': bcc_emails}
+            socket = get_app_socket()[1]
             socket.emit('response', { 'purpose': 'show-email', 'data': data })
         else:
             respond_ending_request_chain()

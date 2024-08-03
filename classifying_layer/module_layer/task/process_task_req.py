@@ -80,6 +80,8 @@ def update_task(task_purpose, date, time, day_repeat):
             conn.execute(query, values)
             conn.commit()
             task_updated = True
+        socket = get_app_socket()
+        socket.emit('response', {'purpose': 'updated-task'})
     return task_updated, rows_to_update, values
 
 def output_task_updated(intent, rows_to_update, values):
@@ -106,12 +108,16 @@ def handle_updating_task(intent, date, time, is_am, day_repeat):
     print('Attempting Update Task')
     task, confidence = get_task_intent(intent)
     print(f'Got task: {task}, Confidence: {confidence}')
-    date_str = f'{date.month}/{date.day}/{date.year}'
+    if date != '':
+        date_str = f'{date.month}/{date.day}/{date.year}'
+    else:
+        date_str = ''
     time_str = time_to_string(time, is_am)[0]
     task_intent = task[4]
     task_updated, rows_to_update, values = update_task(task_intent, date_str, time_str, day_repeat)
     output_task_updated(intent, rows_to_update, values)
     refresh_next_task_list()
+    
 
 # handle move req
 def handle_move(req, intent):
@@ -122,6 +128,7 @@ def handle_move(req, intent):
     print(f'Retrieved time information: date: {date}, time: {time}, day_repeat: {day_repeat}, is_am: {is_am}')
     # handle updating task
     handle_updating_task(intent, date, time, is_am, day_repeat)
+    
 
 def predict_class_tokens(req, model):
     labels_to_index = {'query': 0, 'set': 1, 'update': 2}
@@ -187,7 +194,7 @@ def get_intent(req):
     return intent
 
 def interpret_time(time):
-    print('Interpretting Time')
+    print(f'Interpretting Time: {time}')
     task_date = ''
     task_time = ''
     day_repeat = ''
@@ -218,12 +225,6 @@ def interpret_time(time):
         elif time['years']:
             task_date = get_start_end_today_to_x_years(num if num != -1 else 1)[1]
             print('Num, Years')
-        if time['hours']:
-            task_time = get_time_now_to_x_hours(num)[1]
-            print('Num, Hours')
-        elif time['minutes']:
-            task_time = get_time_now_to_x_minutes(num)[1]
-            print('Num, Minutes')
     elif day != '':
         print(f'Day: {day}, Next: {time["next"]}')
         task_date = get_dates_by_day_name(day, next=time.get('next'))
@@ -233,8 +234,19 @@ def interpret_time(time):
     print(f'Task Date: {task_date}')
 
     if time_spec != '':
+        print(f'Getting Time From Spec: {time_spec}')
         task_time, is_am = get_time_from_spec(time_spec, time['am'], time['pm'])
-    
+    elif time['hours'] and time['minutes']:
+        print(f'Getting time from hours and minutes: {time["hours"]}, {time["minutes"]}')
+        task_time = get_time_now_to_x_minutes_and_x_hours(time['hours'], time['minutes'])[1]
+    elif time['hours']:
+        print(f'Getting time from hours: {time["hours"]}')
+        task_time = get_time_now_to_x_hours(time['hours'])[1]
+        print('Num, Hours')
+    elif time['minutes']:
+        print(f'Getting time from minutes: {time["minutes"]}')
+        task_time = get_time_now_to_x_minutes(time['minutes'])[1]
+        print('Num, Minutes')
     print(f'Task Time: {task_time}\n')
 
     return task_date, task_time, day_repeat, is_am
@@ -265,7 +277,13 @@ def get_date_and_time_from_req(req):
             if not key.endswith('s'):
                 key += 's'
             print(f'Setting tf[{key}] to true')
-            tf_item[key] = True
+            word_idx = words.index(word)
+            time_idx = word_idx -1 
+            time_num = words[time_idx]
+            if time_idx > 0:
+                tf_item[key] = int(time_num) if time_num.isdigit() else 1 if time_num == 'an' else 0.5 if time_num == 'half' else True
+                if 'and a half' in req:
+                    tf_item['minutes'] = 30
         elif word in am_kw:
             print(f'Adding to am: {word}')
             tf_item['am'] = word
@@ -365,6 +383,8 @@ def insert_new_task(intent, date_str, time_str, day_reapeat):
             conn.execute(new_query, (user_id, new_date, time_str, task, day_reapeat))
         conn.commit()
         print(f'Committing Inserted: user_id: {user_id}, date_str: {date_str}, time_str: {time_str}, task: {task},  day_reapeat: {day_reapeat}')
+    socket = get_app_socket()
+    socket.emit('response', {'purpose': 'updated-task'})
 
 def refresh_next_task_list():
     print('Refreshing Task List')
@@ -400,7 +420,7 @@ def time_to_string(time, is_am):
     return time_str, hour, minute
 
 def set_task(intent, date, time, day_reapeat, is_am):
-    print('Setting Task')
+    print(f'Setting Task: Intent: {intent}, Date: {date}, Time: {time}, Day Repeat: {day_reapeat}, Is AM: {is_am}')
     if date == '':
         date = datetime.today()
     date_str = f'{date.month}/{date.day}/{date.year}'
@@ -703,27 +723,6 @@ def get_task_proximity(date):
     proximity = date - now
     print(f'Proximity: {proximity}')
     return proximity
-    
-def get_pos(word):
-    synsets = wn.synsets(word)
-    if not synsets:
-        return None
-    return synsets[0].pos()
-
-def intent_as_response(intent):
-    first_word = intent.split()[0]
-    pos = get_pos(first_word)
-    if pos == 'n':
-        response = 'for '
-    elif pos == 'v':
-        response = 'to ' if not first_word.endswith('ing') else 'for '
-    else:
-        response = 'to '
-        
-    if 'my' in intent:
-        intent = intent.replace('my', 'your')
-    response += intent
-    return response
 
 def remind_task(tasks, when):
     init_task = tasks[0]

@@ -98,6 +98,8 @@ header nav {
 }
 .chat-history {
     flex: 1;
+    display: flex;
+    flex-direction: column;
     overflow-y: auto;
     margin-bottom: 10px;
     background: #424242;
@@ -105,6 +107,23 @@ header nav {
     padding: 10px;
     box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
     box-sizing: border-box;
+}
+.chat-bubble {
+    max-width: 80%;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 10px;
+}
+.chat-bubble.user {
+    background-color: #007bff;
+    align-self: flex-end;
+    color: #fff;
+    text-align: right;
+}
+.chat-bubble.assistant {
+    background-color: #5a5a5a;
+    align-self: flex-start;
+    color: #fff;
 }
 .chat-input, button, .settings-section input[type="text"], .settings-section input[type="password"], .settings-section input[type="email"], .settings-section select, .settings-section input[type="range"], .settings-section textarea, .tab-content input, .tab-content textarea {
     width: 100%;
@@ -196,6 +215,12 @@ button:hover {
 }
 .full-text {
     display: none;
+}
+#body{
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+    resize: none;
 }
 .expand-btn {
     margin-top: 5px;

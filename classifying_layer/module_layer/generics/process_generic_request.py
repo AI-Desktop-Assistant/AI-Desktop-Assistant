@@ -87,7 +87,7 @@ def process_generic(req):
     return response
 
 # Example usage
-request = "I'd like to book a flight to New York next Friday."
+request = "Whats the weather like in Miami right now ."
 response = process_generic(request)
 print(response)
 

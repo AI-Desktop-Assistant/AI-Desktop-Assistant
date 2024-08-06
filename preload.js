@@ -15,9 +15,19 @@ contextBridge.exposeInMainWorld('electron', {
   fillUsername: () => ipcRenderer.send('fill-username'),
   fillEmail: () => ipcRenderer.send('fill-email'),
   fillAppPass: () => ipcRenderer.send('fill-app-pass'),
+  fillSentEmails: () => ipcRenderer.send('fill-sent-emails'),
+  fillAppPaths: () => ipcRenderer.send('fill-app-paths'),
+  fillTasks: () => ipcRenderer.send('fill-tasks'),
   onFillUsernameResponse: (callback) => ipcRenderer.on('fill-username-response', callback),
   onFillEmailResponse: (callback) => ipcRenderer.on('fill-email-response', callback),
   onFillAppPassResponse: (callback) => ipcRenderer.on('fill-app-pass-response', callback),
+  onFillSentEmailResponse: (callback) => ipcRenderer.on('fill-sent-emails-response', callback),
+  onFillAppPathsResponse: (callback) => ipcRenderer.on('fill-app-paths-response', callback),
+  onFillTasksResponse: (callback) => ipcRenderer.on('fill-tasks-response', callback),
+  onFillContactsResponse: (callback) => ipcRenderer.on('fill-contacts-response', callback),
+  onReqFillSentEmailResponse: (callback) => ipcRenderer.on('req-fill-sent-emails', callback),
+  onReqFillAppPathsResponse: (callback) => ipcRenderer.on('req-fill-app-paths', callback),
+  onReqFillTasksResponse: (callback) => ipcRenderer.on('req-fill-tasks', callback),
   updateEmail: (newEmail) => ipcRenderer.send('update-email', newEmail),
   updateUsername: (username) => ipcRenderer.send('update-username', username),
   updateAppPassword: (appPassword) => ipcRenderer.send('update-app-password', appPassword),
@@ -32,5 +42,7 @@ contextBridge.exposeInMainWorld('electron', {
   getWeatherResponse: (data) => ipcRenderer.send('get-weather-response', data),
   fetchPlaylists: () => ipcRenderer.invoke('fetch-playlists'),
   startPlayback: (uri, uriType) => ipcRenderer.invoke('start-playback', uri, uriType),
-  searchTrack: (trackName) => ipcRenderer.invoke('search-track', trackName)
+  searchTrack: (trackName) => ipcRenderer.invoke('search-track', trackName),
+  appendAssistantChat: (data) => ipcRenderer.on('chat-assistant', data),
+  appendUserChat: (data) => ipcRenderer.on('chat-user', data)
 })

@@ -4,6 +4,7 @@ const path = require('node:path')
 const { spawn } = require('child_process')
 const axios = require('axios')
 const io = require('socket.io-client')
+const { time } = require('node:console')
 
 let spotifyToken
 
@@ -114,6 +115,7 @@ const createWindow = () => {
 
     // save current user
     let currentUsername = null
+    let currentUserId = null
     // Validate input user account details
     ipcMain.on('login', (event, username, password, rememberMe, autoLogin) => {
         console.log('testing credentials')
@@ -131,8 +133,9 @@ const createWindow = () => {
                 // send success and user details back to renderer
                 event.reply('login-response', { success: true, message: 'Login Successful', rememberMe, username, password, autoLogin, userId: row.id })
                 currentUsername = username
+                currentUserId = row.id
                 if (!mainPythonProcess){
-                    console.log('starting python process')
+                    // console.log('starting python process')
                     const main = path.join(__dirname, 'main.py')
                     
                     mainPythonProcess = spawn('python', ['-u', main, row.id, username, row.email])
@@ -142,7 +145,7 @@ const createWindow = () => {
                     })
                     
                     mainPythonProcess.stderr.on('data', (data) => {
-                        console.error(`Python stderr: ${data}`)
+                        // console.error(`Python stderr: ${data}`)
                     })
 
                     mainPythonProcess.on('close', (code) => {
@@ -227,6 +230,132 @@ const createWindow = () => {
                 const app_password = row.app_password
                 console.log(`found app pass: ${app_password.trim().length !== 0}`)
                 event.reply('fill-app-pass-response', { success: true, app_password: app_password.trim().length !== 0 })
+            }
+        })
+    })
+
+    ipcMain.on('fill-sent-emails', (event) => {
+        console.log('filling Sent Emails')
+        db.all('SELECT * FROM sent_emails WHERE user_id = ?', [currentUserId], (err, rows) => {
+            if (err) {
+                console.log(`Error Querying Database: ${err}`)
+                win.webContents.send('fill-sent-emails-response', { success: false })
+            }
+            else {
+                console.log(`Rows Queried: ${rows}`)
+                if (rows.length > 0) {
+                    // Initialize arrays for each column
+                    const subjects = []
+                    const bodies = []
+                    const recipients = []
+                    const ccs = []
+                    const bccs = []
+                    const timestamps = []
+        
+                    // Populate arrays with data from each row
+                    rows.forEach(row => {
+                        subjects.push(row.subject)
+                        bodies.push(row.body)
+                        recipients.push(row.recipient)
+                        ccs.push(row.cc)
+                        bccs.push(row.bcc)
+                        timestamps.push(row.timestamp)
+                    })
+        
+                    // Send the arrays back to the renderer process
+                    event.reply('fill-sent-emails-response', {success: true, subjects: subjects, bodies: bodies, recipients: recipients, ccs: ccs, bccs: bccs, timestamps: timestamps})
+                } else {
+                    event.reply('fill-sent-emails-response', { success: false})
+                }
+            }
+        })
+        console.log('Querying Contacts')
+        db.all('SELECT * FROM contacts WHERE user_id = ?', [currentUserId], (err, rows) => {
+            if (err) {
+                console.log(`Error Querying Database: ${err}`)
+                win.webContents.send('fill-contacts-response', { success: false })
+            }
+            else {
+                console.log(`Rows Queried: ${rows}`)
+                if (rows.length > 0) {
+                    // Initialize arrays for each column
+                    const contactNames = []
+                    const contactEmails = []
+                    const timestamps = []
+        
+                    // Populate arrays with data from each row
+                    rows.forEach(row => {
+                        contactNames.push(row.contact_name)
+                        contactEmails.push(row.contact_email)
+                        timestamps.push(row.timestamp)
+                    })
+        
+                    // Send the arrays back to the renderer process
+                    event.reply('fill-contacts-response', {success: true, contactNames: contactNames, contactEmails: contactEmails, timestamps: timestamps})
+                } else {
+                    event.reply('fill-contacts-response', { success: false})
+                }
+            }
+        })
+    })
+
+    ipcMain.on('fill-tasks', (event) => {
+        console.log('Getting All Tasks')
+        db.all('SELECT * FROM tasks WHERE user_id = ? ORDER BY date, time', [currentUserId], (err, rows) => {
+            if (err) {
+                console.log(`Error Querying Database: ${err}`)
+                event.reply('fill-tasks-response', { success: false })
+            }
+            else {
+                console.log(`Rows Queried: ${rows}`)
+                if (rows.length > 0) {
+                    // Initialize arrays for each column
+                    const dates = []
+                    const times = []
+                    const tasks = []
+                    const repeatings = []
+        
+                    // Populate arrays with data from each row
+                    rows.forEach(row => {
+                        dates.push(row.date)
+                        times.push(row.time)
+                        tasks.push(row.task)
+                        repeatings.push(row.repetion)
+                    })
+                    // Send the arrays back to the renderer process
+                    event.reply('fill-tasks-response', { success: true, dates: dates, times: times, tasks: tasks, repeatings: repeatings })
+                } else {
+                    event.reply('fill-tasks-response', { success: false })
+                }
+            }
+        })
+    })
+
+    ipcMain.on('fill-app-paths', (event) => {
+        console.log('Getting all app paths')
+        db.all('SELECT * FROM remembered_apps WHERE user_id = ?', [currentUserId], (err, rows) => {
+            if (err) {
+                console.log(`Error Querying Database: ${err}`)
+                event.reply('fill-app-paths-response', { success: false })
+            }
+            else {
+                console.log(`Rows Queried: ${rows}`)
+                if (rows.length > 0) {
+                    // Initialize arrays for each column
+                    const appNames = []
+                    const appPaths = []
+        
+                    // Populate arrays with data from each row
+                    rows.forEach(row => {
+                        appNames.push(row.app_name)
+                        appPaths.push(row.app_path)
+                    })
+        
+                    // Send the arrays back to the renderer process
+                    event.reply('fill-app-paths-response', {success: true, appNames: appNames, appPaths: appPaths})
+                } else {
+                    event.reply('fill-app-paths-response', { success: false})
+                }
             }
         })
     })
@@ -423,50 +552,58 @@ const createWindow = () => {
         console.log('Replied to event')
     })
 
-    function sendToPython(dataToSend) {
-        const toPython = spawn('python', ['input_from_ui.py'])
+    ipcMain.on('update-volume', (event, newVolume) => {
+        db.run(
+            `UPDATE users SET email = ? WHERE username = ?`, [newVolume, currentUsername], (err) => {
+                if (err) {
+                    event.reply('update-info-response', { success: false, section: 'email', message: `Failed to set rememberme to false: ${err.message}` })
+                }
+                else {
+                    event.reply('update-info-response', { success: true, section: 'email', message: 'Email Successfuly Updated!' })
+                    sendUpdateToPython('update_volume', { email: newEmail });
+                }
+            }
+        )        
+    })
+
+    ipcMain.on('update-voice', (event, newVoice) => {
+        db.run(
+            `UPDATE users SET voice = ? WHERE username = ?`, [newEmail, currentUsername], (err) => {
+                if (err) {
+                    event.reply('update-info-response', { success: false, section: 'email', message: `Failed to set rememberme to false: ${err.message}` })
+                }
+                else {
+                    event.reply('update-info-response', { success: true, section: 'email', message: 'Email Successfuly Updated!' })
+                    sendUpdateToPython('update_email', { email: newEmail });
+                }
+            }
+        )
         
-        toPython.stdin.write(JSON.stringify(dataToSend))
-        toPython.stdin.end()
+        event.reply('update-info-response', { success: false, section: 'email', message: 'Enter a Google email' })
+        
+    })    
 
-        toPython.stdout.on('data', (data) => {
-            console.log(`Python Output: ${data}`)
-        })
-
-        toPython.stderr.on('data', (data) => {
-            console.error(`Error from python script: ${data}`)
-        })
-
-        toPython.on('close', (code) => {
-            console.log(`Python script exited with code: ${code}`)
-        })
-    }
-
-    ipcMain.on('send-email', (event, recipient, cc, bcc, subject, body) => {
+    ipcMain.on('send-email', (event, recipients, cc, bcc, subject, body) => {
         console.log('Attempting Send Email')
         // Query users email
-        db.get('SELECT * FROM users WHERE username = ?', [currentUsername], (err, row) => {
+        db.get('SELECT * FROM users WHERE id = ?', [currentUserId], (err, row) => {
             if (err) {
                 console.log(`Error Querying Database: ${err}`)
             }
             else {
                 appPassword = row.app_password
                 email = row.email
-                console.log(`Query Successful: ${appPassword.trim().length === 0} App Password: ${appPassword} Trimmed Pass: ${appPassword.trim()}`)
+                console.log(`Query Successful: ${appPassword.trim().length !== 0} App Password: ${appPassword} Trimmed Pass: ${appPassword.trim()}`)
 
                 if (appPassword.trim().length === 0) {
                     event.reply('send-email-response', {success: false, message: 'App Password Not Set'})
                 }
-                else {0
-                    sendToPython({module: 'email', email, appPassword, recipient, cc, bcc, subject, body})
-                    event.reply('send-email-response', {success: true})
+                else {
+                    socket.emit('message', {purpose: 'email', email, appPassword, recipients, cc, bcc, subject, body})
+                    event.reply('send-email-response', {success: true, message: 'Email Successfully Sent'})
                 }
             }
         })
-        // Query users email app password
-
-        // Send all information to email handler
-
     })
 }
 
@@ -496,7 +633,7 @@ app.whenReady().then(() => {
             if (win.isMinimized()) {
                 win.restore()
             }
-            console.log('Sending data to renderer');
+            // console.log('Sending data to renderer');
             win.focus()
             win.webContents.send('to-renderer', data)
         } else if (purpose === 'get-token') {
@@ -505,10 +642,21 @@ app.whenReady().then(() => {
             }
             win.focus()
             openSpotifyLogin(data.data)
+        } else if (purpose == 'chat-assistant') {
+            win.webContents.send('chat-assistant', data.data)
+        } else if (purpose == 'chat-user') {
+            win.webContents.send('chat-user', data.data)
+        } else if (purpose == 'sent-email') {
+            win.webContents.send('req-fill-sent-emails')
+        } else if (purpose == 'added-path') {
+            win.webContents.send('req-fill-app-paths')
+        } else if (purpose == 'updated-task') {
+            win.webContents.send('req-fill-tasks')
         }
+
     })
     socket.on('get-weather', (data) => {
-        console.log("Received weather response from Flask:", data);
+        // console.log("Received weather response from Flask:", data);
         if (win.isMinimized()) {
             win.restore();
         }
@@ -516,7 +664,7 @@ app.whenReady().then(() => {
         win.webContents.send("get-weather", data);
     });
     socket.on('get-currently-playing-response', (data) => {
-        console.log("Received currently playing response from Flask:", data);
+        // console.log("Received currently playing response from Flask:", data);
         if (win.isMinimized()) {
             win.restore();
         }
@@ -525,11 +673,11 @@ app.whenReady().then(() => {
     });
 
     socket.on('control-playback-response', (data) => {
-        console.log('Playback control response:', data);
+        // console.log('Playback control response:', data);
     });    
 
     ipcMain.on('send-message', (event, message) => {
-        console.log("Sending message............:", message.purpose);
+        // console.log("Sending message............:", message.purpose);
         socket.emit('message', message)
     })
 

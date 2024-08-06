@@ -14,7 +14,7 @@ def create_subject_gen_agent():
         goal="""Your goal is to generate formal email subjects(NOT EMAIL BODY) using user input requests. You do not generate email bodies, footers, signatures, or any other email text, other than email subjects. When creating an email subject, ensure that the subject is concise and only pertains to the intent of the email. Your generated subject should not include information about email recipients, cc recipients, or bcc recipients, UNLESS ABSOLUTELY NECESSARY for the subject of the email to sufficiently describe what the email is about.""",
         backstory="""You are skilled at understanding the meaning and intent in user inputs. You are especially skilled in crafting professional and formal email subjects from user inputs.""",
         llm=llm,
-        verbose=True
+        verbose=False
     )
 
 def create_body_gen_agent():
@@ -32,7 +32,7 @@ def create_signature_remover_agent():
         goal="Your goal is to remove email signatures from emails and return the same email without an email signature. An email signature is the end of the email where you'll see 'Best Regards,' or 'Sincerely,' followed by a name. You remove these email signatures leaving only the email greeting at the begining of the email, and the email body.",
         backstory="""You are skilled at understanding the different parts of an email(the greeting, the body, and the signature). You are especially skilled at recognizing where the signature is in an email and at removing the signature of an email only leaving the email greeting and the email body.""",
         llm=llm,
-        verbose=True
+        verbose=False
     )
 
 def gen_clean_body(signature_remover_agent, body):
@@ -131,13 +131,24 @@ def gen_body_and_subject(body_gen_agent, subject_gen_agent, signature_remover_ag
     cleaned_body = gen_clean_body(signature_remover_agent, body)
     print(f'Cleaned Body: {cleaned_body}')
     subject = gen_subject(subject_gen_agent, req, context)
-    print(f'Subject: {subject}')
+    print(f'Subject: {subject}: {type(cleaned_body)}, {type(subject)}')
     return cleaned_body, subject
 
 def generate_email(req, context):
     subject_gen_agent = create_subject_gen_agent()
     body_gen_agent = create_body_gen_agent()
+    print('Created Writing Agents')
     signature_remover_agent = create_signature_remover_agent()
     body, subject = gen_body_and_subject(body_gen_agent, subject_gen_agent, signature_remover_agent, req, context)
+    print(f'Generating Body and Subject: {type(body)}, {type(subject)}')
     clean_body, clean_subject = clean_body_and_sub(body, subject)
+    print('Cleaned Body and subject')
+    if len(clean_body) == 0 or len(clean_subject) == 0:
+        if len(clean_body) == 0:
+            print('Body not found')
+        if len(subject) == 0:
+            print('Subject not found')
+        print('Regenerating Email')
+        clean_body, clean_subject = generate_email(req, context)
+    print('Returning Body and Subject')
     return clean_body, clean_subject

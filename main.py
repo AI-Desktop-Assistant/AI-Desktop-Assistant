@@ -1,9 +1,10 @@
 import os
 import sys
+import time
 from flask import Flask, request, jsonify
 from flask_socketio import SocketIO, emit
 from threading import Thread
-from reception_layer.speech_rec import listen
+from reception_layer.speech_rec import *
 from classifying_layer.module_layer.response.response import *
 from classifying_layer.classify_req import classify_user_request
 from classifying_layer.module_layer.task.process_task_req import output_tasks_today, remind_tasks
@@ -11,6 +12,7 @@ from user_config import *
 from config_socketio import create_app_socket
 from classifying_layer.module_layer.weather.process_weather_req import receive_weather_data
 from classifying_layer.module_layer.response.response import report_weather
+from classifying_layer.module_layer.email.email_handler import send_email
 
 app, socketio = create_app_socket()
 
@@ -32,7 +34,8 @@ def handle_disconnect():
     print('Client disconnected')
 
 @socketio.on('message')
-def handle_message(data):   
+def handle_message(data): 
+    print(f'Flask Recieved message: {data}')
     global current_user_id
     if data['purpose'] == 'search':
         tokens = get_stored_tokens(current_user_id)
@@ -78,11 +81,24 @@ def handle_message(data):
             emit("control-playback-response", {"data": result, "purpose": "control-playback"})
         else:
             emit("control-playback-response", {"data": "No token found for user", "purpose": "control-playback"})
+    elif data['purpose'] == 'chat':
+        use_audio(False)
+        req = data['data']
+        if input != '':
+            module = classify_user_request(req)
+        use_audio(True)
+    elif data['purpose'] == 'email':
+        print('Sending email')
+        try:
+            send_email(data['email'], data['appPassword'], data['recipients'], data['subject'], data['body'])
+        except Exception as e:
+            print(e)
+
             
 def run_flask():
     socketio.run(app, port=8888, debug=False, allow_unsafe_werkzeug=True)
 
-def main_loop(user_id, username, email, socket):
+def main_loop(user_id, username, email):
     global current_user_id
     global current_username
     global current_email
@@ -109,8 +125,8 @@ def main_loop(user_id, username, email, socket):
                 if wake_word_detected:
                     print('Wake Word Detected')
                     input = listen(ready='How can I help?')
-                    if input != '':
-                        module = classify_user_request(input, socket)
+                    if input != 'Sorry, I didnt understand your request':
+                        module = classify_user_request(input)
                     wake_word_detected = False
                 else:
                     print('No wake word detected')
@@ -231,20 +247,25 @@ def search():
     return jsonify(error='Invalid request'), 400
 
 if __name__ == "__main__":
-    if len(sys.argv) != 4:
-        print("Usage: python main.py <user_id> <username> <email>")
-        sys.exit(1)
-    current_user_id = sys.argv[1]
-    current_username = sys.argv[2]
-    current_email = sys.argv[3]
-    print(f'User ID: {current_user_id}, Username: {current_username}, Email: {current_email}')
-    print("\nStarting flask\n")
-    flask_thread = Thread(target=run_flask)
-    flask_thread.start()
-    print('Configuring user')
-    configure_user(current_user_id, current_email, current_username)
-    print(f'Greeting User: {current_username}')
-    greeting(current_username)
-    print('Outputting Tasks Today')
-    output_tasks_today()
-    main_loop(current_user_id, current_username, current_email, socketio)
+    try:
+        print(f'Argv: {sys.argv}')
+        if len(sys.argv) != 4:
+            print("Usage: python main.py <user_id> <username> <email>")
+            sys.exit(1)
+        current_user_id = sys.argv[1]
+        current_username = sys.argv[2]
+        current_email = sys.argv[3]
+        print(f'User ID: {current_user_id}, Username: {current_username}, Email: {current_email}')
+        print("\nStarting flask\n")
+        flask_thread = Thread(target=run_flask)
+        flask_thread.start()
+        time.sleep(18)
+        print('Configuring user')
+        configure_user(current_user_id, current_email, current_username)
+        print(f'Greeting User: {current_username}')
+        greeting(current_username)
+        print('Outputting Tasks Today')
+        output_tasks_today()
+        main_loop(current_user_id, current_username, current_email)
+    except Exception as e:
+        print(e)

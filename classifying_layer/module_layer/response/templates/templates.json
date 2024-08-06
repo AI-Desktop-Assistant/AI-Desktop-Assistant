@@ -12,7 +12,7 @@
         "not confident": [
             "I found a file named [file_name], but I'm not certain it's the one you're looking for. Is this the correct file?",
             "Is this the file you were searching for: [file_name]? I'm not entirely sure.",
-            "There is a file named [file_name] that might match what you want, but I cant guarantee it. Can you confirm if its does.",
+            "There is a file named [file_name] that might match what you want, but I cant guarantee it. Can you confirm if it does.",
             "I have a file here named [file_name], but I'm unsure if it's the right one. Can you confirm if this is the correct file?",
             "This file, [file_name], has been located, but I'm not 100% sure it's the correct one. Can you verify?",
             "I found something called [file_name], but my confidence in this being the right file is low. Is this your file?",

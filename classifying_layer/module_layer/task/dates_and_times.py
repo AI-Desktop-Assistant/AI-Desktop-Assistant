@@ -133,6 +133,12 @@ def get_time_now_to_x_hours(x):
     end = now + timedelta(hours=x)
     return start, end
 
+def get_time_now_to_x_minutes_and_x_hours(hours, minutes):
+    now = datetime.now()
+    start = now
+    end = now + timedelta(hours=hours, minutes=minutes)
+    return start, end
+
 def get_time_from_num(num, am=False, pm=False):
     now = datetime.now()
 

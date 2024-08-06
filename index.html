@@ -117,7 +117,7 @@
                             
                         </div>
                         <input type="text" placeholder="Type your command..." class="chat-input">
-                        <button class="send-button">Send</button>
+                        <button class="send-button" onclick="sendChat()">Send</button>
                     </div>
                     
                     <div id="email" class="module tabbed-interface">
@@ -128,6 +128,7 @@
                         </div>
                         <div id="composeEmail" class="tab-content tab active">
                             <h1>Compose Email</h1>
+                            <div id="email-status-message" class="left-aligned"></div>
                             <input id="recipient" type="text" placeholder="Recipient"><br>
                             <input id="cc" type="text" placeholder="CC"><br>
                             <input id="bcc" type="text" placeholder="BCC"><br>
@@ -146,18 +147,7 @@
                                         <th>Time Sent</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>recipient@example.com</td>
-                                        <td>Email Subject</td>
-                                        <td class="email-snippet">
-                                            <span class="snippet-text">This is a snippet of the email body...</span>
-                                            <span class="full-text" style="display: none;">This is a snippet of the email body...This is the full email body that is shown when expanded...</span>
-                                            <button class="expand-btn" onclick="toggleEmailBody(this)">Expand</button>
-                                        </td>
-                                        <td>2024-06-11 10:30 AM</td>
-                                    </tr>
-                                    
+                                <tbody id="email-tbody">
                                 </tbody>
                             </table>
                         </div>
@@ -171,13 +161,7 @@
                                         <th>Date Added</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>John Doe</td>
-                                        <td>johndoe@example.com</td>
-                                        <td>2024-01-15</td>
-                                    </tr>
-                                    
+                                <tbody id="contact-tbody">
                                 </tbody>
                             </table>
                         </div>
@@ -228,20 +212,7 @@
                                         <th>Repeating</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>2024-06-12</td>
-                                        <td>08:30 AM</td>
-                                        <td>Meeting with team</td>
-                                        <td>Weekly</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2024-06-13</td>
-                                        <td>10:00 AM</td>
-                                        <td>Project deadline</td>
-                                        <td>None</td>
-                                    </tr>
-                                    
+                                <tbody id="tasks-utbody">                                 
                                 </tbody>
                             </table>
                         </div>
@@ -256,20 +227,7 @@
                                         <th>Repeating</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>2024-06-12</td>
-                                        <td>08:30 AM</td>
-                                        <td>Meeting with team</td>
-                                        <td>Weekly</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2024-06-13</td>
-                                        <td>10:00 AM</td>
-                                        <td>Project deadline</td>
-                                        <td>None</td>
-                                    </tr>
-                                    
+                                <tbody id="tasks-atbody">
                                 </tbody>
                             </table>
                         </div>
@@ -330,17 +288,7 @@
                                         <th>Time</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Visual Studio Code</td>
-                                        <td>C:\Program Files\Microsoft VS Code\Code.exe</td>
-                                        <td>2024-06-11 10:30 AM</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Google Chrome</td>
-                                        <td>C:\Program Files\Google\Chrome\Application\chrome.exe</td>
-                                        <td>2024-06-11 10:30 AM</td>
-                                    </tr>
+                                <tbody id="apps-tbody">
                                 </tbody>
                             </table>
                         </div>
@@ -355,16 +303,6 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>Visual Studio Code</td>
-                                        <td>C:\Program Files\Microsoft VS Code\Code.exe</td>
-                                        <td>2024-06-11 10:30 AM</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Google Chrome</td>
-                                        <td>C:\Program Files\Google\Chrome\Application\chrome.exe</td>
-                                        <td>2024-06-11 10:30 AM</td>
-                                    </tr>
                                 </tbody>
                             </table>
                         </div>

@@ -252,6 +252,10 @@ window.electron.onLoginResponse((event, response) => {
 function load_user_data() {
     window.electron.fillUsername()
     window.electron.fillEmail()
+    window.electron.fillAppPass()
+    window.electron.fillSentEmails()
+    window.electron.fillAppPaths()
+    window.electron.fillTasks()
 }
 
 window.electron.onFillUsernameResponse((event, response) => {
@@ -266,6 +270,175 @@ window.electron.onFillEmailResponse((event, response) => {
     email_field.textContent = `Current Email: ${response.email}`
 })
 
+window.electron.onFillSentEmailResponse((event, response) => {
+    console.log(`Got Sent Email Response: ${response}`)
+    if (response.success) {
+        const tbody = document.getElementById('email-tbody')
+        tbody.innerHTML = ''
+        const recipients = response.recipients
+        const subjects = response.subjects
+        const bodies = response.bodies
+        const timestamps = response.timestamps
+        const snippets = bodies.map(body => body.slice(0, 38) + (body.length > 38 ? '...' : ''));
+        for (let i = 0; i < recipients.length; i++) {
+            const row = createEmailRow(recipients[i], subjects[i], snippets[i], bodies[i], timestamps[i]);
+            tbody.appendChild(row);
+        }
+    }
+})
+
+window.electron.onFillContactsResponse((event, response) => {
+    console.log(`Got Contacts Response: ${response}`)
+    if (response.success) {
+        const tbody = document.getElementById('contact-tbody')
+        tbody.innerHTML = ''
+        const contactNames = response.contactNames
+        const contactEmails = response.contactEmails
+        const timestamps = response.timestamps
+        for (let i = 0; i < contactNames.length; i++) {
+            const row = createContactRow(contactNames[i], contactEmails[i], timestamps[i])
+            tbody.appendChild(row)
+        }
+    }
+})
+
+window.electron.onFillAppPathsResponse((event, response) => {
+    console.log(`Got App Paths Response: ${response}`)
+    if (response.success) {
+        const tbody = document.getElementById('apps-tbody')
+        tbody.innerHTML = ''
+        const appPaths = response.appPaths
+        const appNames = response.appNames
+        for (let i = 0; i < appPaths.length; i++) {
+            const row = createAppPathRow(appNames[i], appPaths[i])
+            tbody.appendChild(row)
+        }
+    }
+})
+
+window.electron.onFillTasksResponse((event, response) => {
+    console.log(`Got Tasks Response ${response}`)
+    if (response.success) {
+        const tbody = document.getElementById('tasks-atbody')
+        tbody.innerHTML = ''
+        const dates = response.dates
+        const times = response.times
+        const tasks = response.tasks
+        const repeatings = response.repeatings
+        for (let i = 0; i < dates.length; i++) {
+            const row = createTasksRow(dates[i], times[i], tasks[i], repeatings[i])
+            tbody.appendChild(row)
+        }
+    }
+})
+
+window.electron.onReqFillTasksResponse((event) => {
+    window.electron.fillTasks()
+})
+
+window.electron.onReqFillAppPathsResponse((event) => {
+    window.electron.fillAppPaths()
+})
+
+window.electron.onReqFillSentEmailResponse((event) => {
+    window.electron.fillSentEmails()
+})
+
+function createAppPathRow(appName, appPath) {
+    const row = document.createElement('tr')
+
+    const appNameCell = document.createElement('td')
+    appNameCell.textContent = appName
+    row.appendChild(appNameCell)
+
+    const appPathCell = document.createElement('td')
+    appPathCell.textContent = appPath
+    row.appendChild(appPathCell)
+
+    return row
+}
+
+function createContactRow(contactName, contactEmail, timestamp) {
+    const row = document.createElement('tr')
+
+    const contactNameCell = document.createElement('td')
+    contactNameCell.textContent = contactName
+    row.appendChild(contactNameCell)
+
+    const contactEmailCell = document.createElement('td')
+    contactEmailCell.textContent = contactEmail
+    row.appendChild(contactEmailCell)
+
+    const timestampCell = document.createElement('td')
+    timestampCell.textContent = timestamp
+    row.appendChild(timestampCell)
+
+    return row
+}
+
+function createTasksRow(date, time, task, repeating) {
+    const row = document.createElement('tr')
+
+    const dateCell = document.createElement('td')
+    dateCell.textContent = date
+    row.appendChild(dateCell)
+
+    const timeCell = document.createElement('td')
+    timeCell.textContent = time
+    row.appendChild(timeCell)
+
+    const taskCell = document.createElement('td')
+    taskCell.textContent = task
+    row.appendChild(taskCell)
+
+    const repeatingCell = document.createElement('td')
+    repeatingCell.textContent = repeating
+    row.appendChild(repeatingCell)
+
+    return row
+}
+
+function createEmailRow(recipient, subject, snippet, fullBody, timeSent) {
+    const row = document.createElement('tr');
+
+    const recipientCell = document.createElement('td');
+    recipientCell.textContent = recipient;
+    row.appendChild(recipientCell);
+
+    const subjectCell = document.createElement('td');
+    subjectCell.textContent = subject;
+    row.appendChild(subjectCell);
+
+    const bodyCell = document.createElement('td');
+    bodyCell.classList.add('email-snippet');
+
+    const snippetSpan = document.createElement('span');
+    snippetSpan.classList.add('snippet-text');
+    snippetSpan.textContent = snippet;
+
+    const fullTextSpan = document.createElement('span');
+    fullTextSpan.classList.add('full-text');
+    fullTextSpan.style.display = 'none';
+    fullTextSpan.textContent = fullBody;
+
+    const expandButton = document.createElement('button');
+    expandButton.classList.add('expand-btn');
+    expandButton.textContent = 'Expand';
+    expandButton.onclick = function () {
+        toggleEmailBody(this);
+    };
+
+    bodyCell.appendChild(snippetSpan);
+    bodyCell.appendChild(fullTextSpan);
+    bodyCell.appendChild(expandButton);
+    row.appendChild(bodyCell);
+
+    const timeSentCell = document.createElement('td');
+    timeSentCell.textContent = timeSent;
+    row.appendChild(timeSentCell);
+
+    return row;
+}
 // ran on signup button click
 function signup() {
     const username = document.getElementById('signup-username').value
@@ -359,6 +532,7 @@ window.electron.toRenderer((event, data) => {
     console.log("Recieved renderer data..........", data)
     if (purpose === 'show-email') {
         showEmail(data.data)
+        textarea.dispatchEvent(new Event('input'))
     }
     else if (data.purpose === 'search') {
         console.log("Updating Spotify UI with data")
@@ -401,10 +575,52 @@ function signout() {
 function sendEmail() {
     const recipient = document.getElementById('recipient').value
     const cc = document.getElementById('cc').value
+    const bcc = document.getElementById('bcc').value
     const subject = document.getElementById('subject').value
     const body = document.getElementById('body').value
-    window.electron.sendEmail(recipient, cc, subject, body)
+    window.electron.sendEmail(recipient, cc, bcc, subject, body)
 }
+
+window.electron.onSendEmailResponse((event, response) => {
+    success = response.success
+    const emailStatusMessage = document.getElementById('email-status-message')
+    if (success) {
+        document.getElementById('recipient').value = ''
+        document.getElementById('cc').value = ''
+        document.getElementById('bcc').value = ''
+        document.getElementById('subject').value = ''
+        document.getElementById('body').value = ''
+        emailStatusMessage.textContent = response.message
+        emailStatusMessage.classList.remove('message-error')
+        emailStatusMessage.classList.add('message-success')
+        emailStatusMessage.style.display = 'block'
+        document.getElementById('recipient').classList.remove('input-error')
+        document.getElementById('cc').classList.remove('input-error')
+        document.getElementById('bcc').classList.remove('input-error')
+        document.getElementById('subject').classList.remove('input-error')
+        document.getElementById('body').classList.remove('input-error')
+        document.getElementById('recipient').classList.add('input-success')
+        document.getElementById('cc').classList.add('input-success')
+        document.getElementById('bcc').classList.add('input-success')
+        document.getElementById('subject').classList.add('input-success')
+        document.getElementById('body').classList.add('input-success')
+    } else {
+        emailStatusMessage.textContent = response.message
+        emailStatusMessage.classList.remove('message-success')
+        emailStatusMessage.classList.add('message-error')
+        emailStatusMessage.style.display = 'block'
+        document.getElementById('recipient').classList.remove('input-success')
+        document.getElementById('cc').classList.remove('input-success')
+        document.getElementById('bcc').classList.remove('input-success')
+        document.getElementById('subject').classList.remove('input-success')
+        document.getElementById('body').classList.remove('input-success')
+        document.getElementById('recipient').classList.add('input-error')
+        document.getElementById('cc').classList.add('input-error')
+        document.getElementById('bcc').classList.add('input-error')
+        document.getElementById('subject').classList.add('input-error')
+        document.getElementById('body').classList.add('input-error')
+    }
+})
 
 function updateInfo(info) {
     if (info === 'email') {
@@ -606,3 +822,38 @@ function updateSearchUI(trackInfo) {
         <p>Album: ${trackInfo.album}</p>
     `;
 }
+
+function sendChat() {
+    const userInput = document.querySelector('.chat-input')
+    const message = userInput.value
+    if (message.trim() !== "") {
+        appendChat('user', message);
+        userInput.value = ""
+        window.electron.sendMessage({purpose: 'chat', data:message})
+    }
+}
+
+function appendChat(sender, message) {
+    const chatBox = document.querySelector('.chat-history')
+    const chatBubble = document.createElement('div')
+    chatBubble.classList.add('chat-bubble', sender)
+    chatBubble.innerText = message
+    chatBox.appendChild(chatBubble)
+
+    // Scroll to the bottom of the chat box
+    chatBox.scrollTop = chatBox.scrollHeight;
+}
+
+window.electron.appendAssistantChat((event, data) => {
+    appendChat('assistant', data)
+})
+window.electron.appendUserChat((event, data) => {
+    appendChat('user', data)
+})
+
+const textarea = document.getElementById('body')
+
+    textarea.addEventListener('input', function () {
+        this.style.height = 'auto'
+        this.style.height = this.scrollHeight + 'px'
+    })

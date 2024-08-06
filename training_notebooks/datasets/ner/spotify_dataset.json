@@ -1,7 +1,4 @@
-import json
-
-# Step 1: Load and Prepare the Dataset
-data = [
+[
     {
         "sentence": "Can you play the next song",
         "labels": [
@@ -494,6 +491,3 @@ data = [
         ]
     }
 ]
-
-with open('spotify_dataset.json', 'w') as f:
-    json.dump(data, f, indent=4)

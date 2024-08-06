@@ -43,7 +43,7 @@ def classify_user_request(req):
     elif module == 'task':
         process_task_req(req)
     # elif module == 'spotify':
-    #     spotify(input)
+        # process_spotify_request(req)
     # elif module == 'generic':
     #     process_generic_req(req)
     return module

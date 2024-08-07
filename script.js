@@ -799,6 +799,44 @@ function updateNowPlayingUI(trackData) {
     }
 }
 
+function setTask() {
+    const taskDetails = document.getElementById('task-details').value
+    const taskDate = document.getElementById('task-date').value
+    const taskTime = document.getElementById('task-time').value
+
+    console.log('Task Details:', taskDetails)
+    console.log('Task Date:', taskDate)
+    console.log('Task Time:', taskTime)
+
+    window.electron.setTask(taskDetails, taskDate, taskTime)
+}
+
+window.electron.onSetTaskResponse((event, response) => {
+    console.log(`Recieved Task Set Response: ${response}`)
+    const success = response.success
+    console.log(`Success: ${success}`)
+    if (success) {
+        const taskDetails = document.getElementById('task-details')
+        const taskDate = document.getElementById('task-date')
+        const taskTime = document.getElementById('task-time')
+        const setTaskStatusMessage = document.getElementById('set-task-status-message')
+        
+        taskDetails.value = ''
+        taskDate.value = ''
+        taskTime.value = ''
+        taskDetails.classList.remove('input-error')
+        taskDate.classList.remove('input-error')
+        taskTime.classList.remove('input-error')
+        setTaskStatusMessage.classList.remove('message-error')
+        taskDetails.classList.add('input-success')
+        taskDate.classList.add('input-success')
+        taskTime.classList.add('input-success')
+        setTaskStatusMessage.classList.add('message-success')
+        console.log(`Response Message: ${response.message}`)
+        setTaskStatusMessage.textContent = response.message
+    }
+})
+
 document.getElementById("playNextButton").addEventListener("click", function() {
     controlPlayback("next");
 });

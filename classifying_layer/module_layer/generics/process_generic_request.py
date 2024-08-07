@@ -2,7 +2,7 @@ def process_generic_req(req):
     from models.load_model import load_model
 from classifying_layer.module_layer.response.response import *
 import sqlite3
-import time 
+import time
 
 generic_info_model_path = 'models\\generic_info_recognizer.pth'
 generic_intent_model_path = 'models\\generic_intent_recognizer.pth'

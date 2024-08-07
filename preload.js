@@ -51,5 +51,7 @@ contextBridge.exposeInMainWorld('electron', {
   appendAssistantChat: (data) => ipcRenderer.on('chat-assistant', data),
   appendUserChat: (data) => ipcRenderer.on('chat-user', data),
   volumeChanged: (volume) => ipcRenderer.send('volume-changed', volume),
-  voiceChanged: (voice) => ipcRenderer.send('voice-changed', voice)
+  voiceChanged: (voice) => ipcRenderer.send('voice-changed', voice),
+  setTask: (taskDetails, taskDate, taskTime) => ipcRenderer.send('set-task', taskDetails, taskDate, taskTime),
+  onSetTaskResponse: (callback) => ipcRenderer.on('set-task-response', callback)
 })

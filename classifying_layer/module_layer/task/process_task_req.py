@@ -399,6 +399,7 @@ def insert_new_task(intent, date_str, time_str, day_reapeat):
 def refresh_next_task_list():
     print('Refreshing Task List')
     tasks = get_next_tasks(3)
+    print(f'Got Tasks (refresh): {tasks}')
     set_next_task_list(tasks)
     first_task = tasks[0]
     date_str, time_str = first_task[2], first_task[3]
@@ -516,7 +517,7 @@ def get_ordered_tasks():
             print(f'Task Date Time: {task_datetime}')
             print(f'Now Date Time: {now}')
             diff = task_datetime - now
-            zero = timedelta(0)
+            zero = timedelta(seconds=-10)
             print(f'Difference: {diff}')
             if diff > zero:
                 print(f'Appending Task: {task}')
@@ -633,38 +634,41 @@ def list_tasks(tasks, task_ref='task', list_all=False):
     response = ''
     tasks_listed = 0
     confirm = False
-    for task in tasks:
-        print(f'Building Response with task: {task}')
-        if not list_all:
-            print(f'Checking Listed Tasks is 3: {tasks_listed}')
-            if tasks_listed == 3 and len(tasks) > 3:
-                print('Adding confirmation to response')
-                strs = ['are' if len(tasks[3:]) > 1 else 'is', f'{task_ref} ' if len(tasks[3:]) == 1 else f'{task_ref}s ', 'they are' if len(tasks[3:]) > 1 else 'it is']
-                print(f'Strs: {strs}')
-                response += f'There {strs[0]} {len(tasks[3:])} other {strs[1]}, do you want to know what {strs[2]}?'
-                confirm = True
-                print(f'Response')
-                break
+    if len(tasks) != 0:
+        for task in tasks:
+            print(f'Building Response with task: {task}')
+            if not list_all:
+                print(f'Checking Listed Tasks is 3: {tasks_listed}')
+                if tasks_listed == 3 and len(tasks) > 3:
+                    print('Adding confirmation to response')
+                    strs = ['are' if len(tasks[3:]) > 1 else 'is', f'{task_ref} ' if len(tasks[3:]) == 1 else f'{task_ref}s ', 'they are' if len(tasks[3:]) > 1 else 'it is']
+                    print(f'Strs: {strs}')
+                    response += f'There {strs[0]} {len(tasks[3:])} other {strs[1]}, do you want to know what {strs[2]}?'
+                    confirm = True
+                    print(f'Response')
+                    break
+                print(f'Building Response: {response}')
+            print(f'Checking listed Tasks > 0: {tasks_listed}')
+            if tasks_listed > 0:
+                print('Adding another/(and) to response')
+                if len(tasks) - 1 == tasks_listed or (tasks_listed == 2 and not list_all):
+                    print('Adding and to response')
+                    response += 'and '
+                response += f'another {task_ref if len(task_ref.split()) == 1 else task_ref.split()[1]} '
+                print(f'Building Response: {response}')
+            print(f'Building Task Response')
+            date = task[2]
+            print(f'Date: {date}')
+            time = task[3]
+            print(f'Time: {time}')
+            task_intent = task[4]
+            print(f'Intent: {task_intent}')
+            response += f'{date_to_response(date)} at {time} {intent_as_response(task_intent)}. '
             print(f'Building Response: {response}')
-        print(f'Checking listed Tasks > 0: {tasks_listed}')
-        if tasks_listed > 0:
-            print('Adding another/(and) to response')
-            if len(tasks) - 1 == tasks_listed or (tasks_listed == 2 and not list_all):
-                print('Adding and to response')
-                response += 'and '
-            response += f'another {task_ref if len(task_ref.split()) == 1 else task_ref.split()[1]} '
-            print(f'Building Response: {response}')
-        print(f'Building Task Response')
-        date = task[2]
-        print(f'Date: {date}')
-        time = task[3]
-        print(f'Time: {time}')
-        task_intent = task[4]
-        print(f'Intent: {task_intent}')
-        response += f'{date_to_response(date)} at {time} {intent_as_response(task_intent)}. '
-        print(f'Building Response: {response}')
-        tasks_listed += 1
-    print(f'Built Response: {response}')
+            tasks_listed += 1
+        print(f'Built Response: {response}')
+    else:
+        response = 'You have 0 tasks.'
     return response, confirm
 
 def handle_confirmation_response(tasks, task_ref, user_response):
@@ -771,8 +775,9 @@ def remind_task(tasks, when):
 def check_remind_on_time(tasks, proximity):
     print('Checking task is now')
     remind_on_time = False
+    zero = timedelta(0)
     print(f'Proximity Seconds: {proximity.seconds}')
-    if proximity.seconds <= 1:
+    if proximity <= zero:
         print('Task is occuring now')
         remind_on_time = True
         print('Reminding Task is now')

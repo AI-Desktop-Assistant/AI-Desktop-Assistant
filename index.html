@@ -234,14 +234,12 @@
                         </div>
                         <div id="setNewReminder" class="tab-content tab">
                             <h1>Set New Reminder</h1>
-                            <input type="text" placeholder="Task Details"><br>
-                            <input type="date"><br>
-                            <input type="time"><br>
-                            <select>
-                                <option>AM</option>
-                                <option>PM</option>
-                            </select><br>
-                            <button>Save</button>
+                            <div id="set-task-status-message" class="left-aligned"></div>
+                            <input type="text" placeholder="Task Details" id="task-details"><br>
+                            <input type="date" id="task-date"><br>
+                            <input type="time" id="task-time"><br>
+                            <br>
+                            <button onclick="setTask()">Save</button>
                         </div>
                     </div>
                     <div id="spotify" class="module tabbed-interface">

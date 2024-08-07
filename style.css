@@ -337,7 +337,7 @@ button:hover {
 }
 /*Weather Widget*/
 #customWeatherWidget {
-    background: #f4f4f8;
+    background: #333;
     border-radius: 8px;
     margin-top: 10px;
     padding: 20px;
@@ -345,7 +345,7 @@ button:hover {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    color: black;
+    color: white;
 }
 #weatherIcon {
     width: 100px;

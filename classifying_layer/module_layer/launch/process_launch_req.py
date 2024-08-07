@@ -30,7 +30,7 @@ def insert_path(app_name, app_path):
         print(f'Inserting: User ID: {user_id}, App Name: {app_name}, App Path: {app_path}')
         conn.execute(query, (user_id, app_name, app_path, timestamp))
         conn.commit()
-    socket = get_app_socket()
+    socket = get_app_socket()[1]
     socket.emit('response', {'purpose': 'added-path'})
 
 def launch_app(app_name, app_path, unknown=True):
@@ -46,9 +46,10 @@ def launch_best_file(top_files, app_name_from_req):
     best_match = top_files.pop()
     full_app_name = best_match["file"].split("\\")[-1].split('.')[0]
     confidence = best_match["score"]
+    print(f'Best Files: {best_match}')
     if confidence > 0.65:
         launch_app(app_name_from_req, best_match["file"])
-    elif confidence > 0.3:
+    elif confidence > 0.1:
         output_response = handle_launch_request(full_app_name, confident=False)
         if output_response["tts"] == "google":
             user_response = listen()

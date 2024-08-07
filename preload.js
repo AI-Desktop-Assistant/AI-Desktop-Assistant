@@ -3,6 +3,8 @@ const { contextBridge, ipcRenderer } = require('electron')
 contextBridge.exposeInMainWorld('electron', {
   login: (username, password, rememberMe, autoLogin) => ipcRenderer.send('login', username, password, rememberMe, autoLogin),
   onLoginResponse: (callback) => ipcRenderer.on('login-response', callback),
+  onLoading: (callback) => ipcRenderer.on('loading', callback),
+  onUndoLoading: (callback) => ipcRenderer.on('undo-loading', callback),
   setRemUser: () => ipcRenderer.send('set-rem-user'),
   getRemUser: () => ipcRenderer.send('get-rem-user'),
   onGetRemUserResponse: (callback) => ipcRenderer.on('rem-user-response', callback),
@@ -18,16 +20,19 @@ contextBridge.exposeInMainWorld('electron', {
   fillSentEmails: () => ipcRenderer.send('fill-sent-emails'),
   fillAppPaths: () => ipcRenderer.send('fill-app-paths'),
   fillTasks: () => ipcRenderer.send('fill-tasks'),
+  fillUpcomingTasks: () => ipcRenderer.send('fill-upcoming-tasks'),
   onFillUsernameResponse: (callback) => ipcRenderer.on('fill-username-response', callback),
   onFillEmailResponse: (callback) => ipcRenderer.on('fill-email-response', callback),
   onFillAppPassResponse: (callback) => ipcRenderer.on('fill-app-pass-response', callback),
   onFillSentEmailResponse: (callback) => ipcRenderer.on('fill-sent-emails-response', callback),
   onFillAppPathsResponse: (callback) => ipcRenderer.on('fill-app-paths-response', callback),
   onFillTasksResponse: (callback) => ipcRenderer.on('fill-tasks-response', callback),
+  onFillUpcomingTasksResponse: (callback) => ipcRenderer.on('fill-upcoming-tasks-response', callback),
   onFillContactsResponse: (callback) => ipcRenderer.on('fill-contacts-response', callback),
   onReqFillSentEmailResponse: (callback) => ipcRenderer.on('req-fill-sent-emails', callback),
   onReqFillAppPathsResponse: (callback) => ipcRenderer.on('req-fill-app-paths', callback),
   onReqFillTasksResponse: (callback) => ipcRenderer.on('req-fill-tasks', callback),
+  onReqFillUpcomingTasks: (callback) => ipcRenderer.on('req-fill-upcoming-tasks', callback),
   updateEmail: (newEmail) => ipcRenderer.send('update-email', newEmail),
   updateUsername: (username) => ipcRenderer.send('update-username', username),
   updateAppPassword: (appPassword) => ipcRenderer.send('update-app-password', appPassword),
@@ -44,5 +49,7 @@ contextBridge.exposeInMainWorld('electron', {
   startPlayback: (uri, uriType) => ipcRenderer.invoke('start-playback', uri, uriType),
   searchTrack: (trackName) => ipcRenderer.invoke('search-track', trackName),
   appendAssistantChat: (data) => ipcRenderer.on('chat-assistant', data),
-  appendUserChat: (data) => ipcRenderer.on('chat-user', data)
+  appendUserChat: (data) => ipcRenderer.on('chat-user', data),
+  volumeChanged: (volume) => ipcRenderer.send('volume-changed', volume),
+  voiceChanged: (voice) => ipcRenderer.send('voice-changed', voice)
 })

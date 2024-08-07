@@ -10,14 +10,15 @@
     <body>
         <div id="login-signup-screen" class="center-screen">
             <div class="login-container active">
-                <h2>Login</h2>
+                <h2 id="login-title">Login</h2>
                 <div id="login-status-message" class="left-aligned"></div>
                 <input type="text" id="login-username" placeholder="Username">
                 <input type="password" id="login-password" placeholder="Password">
                 <label class="remember-me">
                     <input type="checkbox" id="remember-me"> Remember Me
                 </label>
-                <button onclick="login()">Login</button>
+                <div id="login-loading" class="loading-circle hidden"></div>
+                <button id="login-button" onclick="login()">Login</button>
                 <p class="toggle-form">Don't have an account? <span onclick="toggleForm()">Sign Up</span></p>
             </div>
             <div class="signup-container">

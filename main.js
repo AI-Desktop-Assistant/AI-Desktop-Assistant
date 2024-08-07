@@ -5,6 +5,7 @@ const { spawn } = require('child_process')
 const axios = require('axios')
 const io = require('socket.io-client')
 const { time } = require('node:console')
+const { connected } = require('node:process')
 
 let spotifyToken
 
@@ -131,27 +132,32 @@ const createWindow = () => {
             else if (row) {
                 console.log('credentials valid')
                 // send success and user details back to renderer
-                event.reply('login-response', { success: true, message: 'Login Successful', rememberMe, username, password, autoLogin, userId: row.id })
                 currentUsername = username
                 currentUserId = row.id
-                if (!mainPythonProcess){
+                if (!mainPythonProcess) {
                     // console.log('starting python process')
                     const main = path.join(__dirname, 'main.py')
                     
                     mainPythonProcess = spawn('python', ['-u', main, row.id, username, row.email])
-
+                    
                     mainPythonProcess.stdout.on('data', (data) => {
-                        console.log(`Python stdout: ${data}`)
+                        console.log(`Python stdout: \n${data}`)
+                        if (String(data).trim() == 'Client connected') {
+                            console.log('Showing main app screen.')
+                            win.webContents.send('undo-loading', {success: true})
+                            win.webContents.send('login-response', { success: true, message: 'Login Successful', rememberMe, username, password, autoLogin, userId: row.id })
+                        }
                     })
                     
                     mainPythonProcess.stderr.on('data', (data) => {
-                        // console.error(`Python stderr: ${data}`)
+                        console.error(`Python stderr: ${data}`)
                     })
 
                     mainPythonProcess.on('close', (code) => {
                         console.log(`Python process exited with code ${code}`)
                         mainPythonProcess = null
                     })
+                    win.webContents.send('loading', {success: true, username: currentUsername})
                 }
             }
             // if user and password were not found
@@ -323,7 +329,47 @@ const createWindow = () => {
                         repeatings.push(row.repetion)
                     })
                     // Send the arrays back to the renderer process
-                    event.reply('fill-tasks-response', { success: true, dates: dates, times: times, tasks: tasks, repeatings: repeatings })
+                    event.reply('fill-tasks-response', { success: true, dates: dates, times: times, tasks: tasks, repeatings: repeatings, id: 'tasks-atbody' })
+                } else {
+                    event.reply('fill-tasks-response', { success: false })
+                }
+            }
+        })
+    })
+
+    ipcMain.on('fill-upcoming-tasks', (event) => {
+        console.log('Getting Upcoming Tasks')
+        const today = new Date()
+        const year = today.getFullYear()
+        const month = String(today.getMonth() + 1)
+        const day = String(today.getDate())
+        const formattedDate = `${month}/${day}/${year}`
+        console.log(`Formatted Date: ${formattedDate}`)
+        console.log(`Current User ID: ${currentUserId}`)
+        db.all('SELECT * FROM tasks WHERE user_id = ? AND date = ? ORDER BY date, time', [currentUserId, formattedDate], (err, rows) => {
+            if (err) {
+                console.log(`Error Querying Database: ${err}`)
+                event.reply('fill-tasks-response', { success: false })
+            }
+            else {
+                console.log(`Rows Queried Tasks Today: ${rows}`)
+                if (rows.length > 0) {
+                    // Initialize arrays for each column
+                    const dates = []
+                    const times = []
+                    const tasks = []
+                    const repeatings = []
+        
+                    // Populate arrays with data from each row
+                    rows.forEach(row => {
+                        dates.push(row.date)
+                        times.push(row.time)
+                        tasks.push(row.task)
+                        repeatings.push(row.repetion)
+                    
+                    })
+                    // Send the arrays back to the renderer process
+                    event.reply('fill-tasks-response', { success: true, dates: dates, times: times, tasks: tasks, repeatings: repeatings, id: 'tasks-utbody' })
                 } else {
                     event.reply('fill-tasks-response', { success: false })
                 }
@@ -411,6 +457,7 @@ const createWindow = () => {
                     }
                     else {
                         event.reply('signout-response')
+                        socket.emit('message', {purpose: 'signout'})
                     }
                 }
             }
@@ -552,37 +599,6 @@ const createWindow = () => {
         console.log('Replied to event')
     })
 
-    ipcMain.on('update-volume', (event, newVolume) => {
-        db.run(
-            `UPDATE users SET email = ? WHERE username = ?`, [newVolume, currentUsername], (err) => {
-                if (err) {
-                    event.reply('update-info-response', { success: false, section: 'email', message: `Failed to set rememberme to false: ${err.message}` })
-                }
-                else {
-                    event.reply('update-info-response', { success: true, section: 'email', message: 'Email Successfuly Updated!' })
-                    sendUpdateToPython('update_volume', { email: newEmail });
-                }
-            }
-        )        
-    })
-
-    ipcMain.on('update-voice', (event, newVoice) => {
-        db.run(
-            `UPDATE users SET voice = ? WHERE username = ?`, [newEmail, currentUsername], (err) => {
-                if (err) {
-                    event.reply('update-info-response', { success: false, section: 'email', message: `Failed to set rememberme to false: ${err.message}` })
-                }
-                else {
-                    event.reply('update-info-response', { success: true, section: 'email', message: 'Email Successfuly Updated!' })
-                    sendUpdateToPython('update_email', { email: newEmail });
-                }
-            }
-        )
-        
-        event.reply('update-info-response', { success: false, section: 'email', message: 'Enter a Google email' })
-        
-    })    
-
     ipcMain.on('send-email', (event, recipients, cc, bcc, subject, body) => {
         console.log('Attempting Send Email')
         // Query users email
@@ -614,6 +630,7 @@ app.whenReady().then(() => {
 
     socket.on('connect', () => {
         console.log('Connected to Flask-SocketIO server')
+        connectedFlask = true
     })
 
     socket.on('disconnect', () => {
@@ -652,6 +669,11 @@ app.whenReady().then(() => {
             win.webContents.send('req-fill-app-paths')
         } else if (purpose == 'updated-task') {
             win.webContents.send('req-fill-tasks')
+            win.webContents.send('req-fill-upcoming-tasks')
+        } else if (purpose == 'tasks-today-response') {
+            console.log(`Received Todays tasks: `)
+            console.log(`${data.dates}, ${data.times}, ${data.repeatings}, ${data.tasks}`)
+            win.webContents.send('fill-tasks-response', { success: true, dates: data.dates, times: data.times, tasks: data.tasks, repeatings: data.repeatings, id: 'tasks-utbody' })
         }
 
     })
@@ -681,8 +703,20 @@ app.whenReady().then(() => {
         socket.emit('message', message)
     })
 
+    
+
     app.on('activate', () => {
         if (BrowserWindow.getAllWindows().length === 0) createWindow()
+    })
+
+    ipcMain.on('volume-changed', (event, volume) => {
+        console.log(`Changing Volume to: ${volume}`)
+        socket.emit('message', {purpose: 'volume', data: volume})
+    })
+
+    ipcMain.on('voice-changed', (event, voice) => {
+        console.log(`Changing voice to: ${voice}`)
+        socket.emit('message', {purpose: 'voice', data: voice})
     })
 })
 
@@ -743,3 +777,18 @@ function openSpotifyLogin(auth_url) {
 app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') app.quit()
 })
+
+function order_task_rows(tasksToday) {
+    const tasks = []
+    const dates = []
+    const times = []
+    const repeatings = []
+    tasksToday.forEach(task => {
+        tasks.push(task[4])
+        dates.push(task[2])
+        times.push(task[3])
+        repeatings.push(task[5])
+        console.log(task)
+    })
+    return {tasks: tasks, dates: dates, times: times, repeatings: repeatings}
+}

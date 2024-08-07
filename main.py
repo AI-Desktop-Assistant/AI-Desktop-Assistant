@@ -7,12 +7,13 @@ from threading import Thread
 from reception_layer.speech_rec import *
 from classifying_layer.module_layer.response.response import *
 from classifying_layer.classify_req import classify_user_request
-from classifying_layer.module_layer.task.process_task_req import output_tasks_today, remind_tasks
+from classifying_layer.module_layer.task.process_task_req import *
 from user_config import *
 from config_socketio import create_app_socket
 from classifying_layer.module_layer.weather.process_weather_req import receive_weather_data
 from classifying_layer.module_layer.response.response import report_weather
 from classifying_layer.module_layer.email.email_handler import send_email
+from reception_layer.speech_rec import *
 
 app, socketio = create_app_socket()
 
@@ -35,7 +36,7 @@ def handle_disconnect():
 
 @socketio.on('message')
 def handle_message(data): 
-    print(f'Flask Recieved message: {data}')
+    print(f'Flask Received message: {data}')
     global current_user_id
     if data['purpose'] == 'search':
         tokens = get_stored_tokens(current_user_id)
@@ -82,19 +83,41 @@ def handle_message(data):
         else:
             emit("control-playback-response", {"data": "No token found for user", "purpose": "control-playback"})
     elif data['purpose'] == 'chat':
-        use_audio(False)
         req = data['data']
-        if input != '':
-            module = classify_user_request(req)
-        use_audio(True)
+        if req != '':
+            # module = classify_user_request(req)
+            set_recieved_message(req)
     elif data['purpose'] == 'email':
         print('Sending email')
         try:
             send_email(data['email'], data['appPassword'], data['recipients'], data['subject'], data['body'])
         except Exception as e:
             print(e)
+    elif data['purpose'] == 'tasks-today':
+        print('Getting Tasks Today For Table')
+        tasks_today = get_tasks_today()
+        tasks = []
+        dates = []
+        times = []
+        repeatings = []
+        print(f'Tasks Today: {tasks_today}')
+        for task in tasks_today:
+            print(f'Task: {task}')
+            tasks.append(task[4])
+            dates.append(task[2])
+            times.append(task[3])
+            repeatings.append(task[5])
+            print(f'Building Tasks Today: {tasks_today}')
+        print(f'Tasks Sending to Table: {tasks_today}')
+        socketio.emit('response', {'purpose': 'tasks-today-response', 'dates': dates, 'times': times, 'tasks': tasks, 'repeatings': repeatings})
+    elif data['purpose'] == 'volume':
+        change_volume(data['data'])
+    elif data['purpose'] == 'voice':
+        change_voice(data['data'])
+    elif data['purpose'] == 'signout':
+        os._exit(1)
 
-            
+
 def run_flask():
     socketio.run(app, port=8888, debug=False, allow_unsafe_werkzeug=True)
 
@@ -118,13 +141,18 @@ def main_loop(user_id, username, email):
                 if first_iter:
                     print('Listening For Wake Word First Iteration')
                     wake_word_detected = listen_for_wake_word(ready='I am ready to provide assistance')
+                    print(f'Listen For Wake Word Output: {wake_word_detected}')
                     first_iter = False
                 else:
                     print('Listening For Wake Word')
                     wake_word_detected = listen_for_wake_word()
+                    print(f'Listen For Wake Word Output: {wake_word_detected}')
                 if wake_word_detected:
                     print('Wake Word Detected')
-                    input = listen(ready='How can I help?')
+                    if isinstance(wake_word_detected, str):
+                        input = wake_word_detected
+                    else:
+                        input = listen(ready='How can I help?')
                     if input != 'Sorry, I didnt understand your request':
                         module = classify_user_request(input)
                     wake_word_detected = False
@@ -132,10 +160,6 @@ def main_loop(user_id, username, email):
                     print('No wake word detected')
             except Exception as e:
                 print(e)
-            # input = "Compose an update email to the customer service team and CC the support manager and quality assurance lead and BCC the technical support lead and IT manager"
-            # after getting input classify the model
-            
-            # delve into selected module deeper
 
 
 @app.route('/update_email', methods=['POST'])
@@ -259,7 +283,7 @@ if __name__ == "__main__":
         print("\nStarting flask\n")
         flask_thread = Thread(target=run_flask)
         flask_thread.start()
-        time.sleep(18)
+        time.sleep(5)
         print('Configuring user')
         configure_user(current_user_id, current_email, current_username)
         print(f'Greeting User: {current_username}')

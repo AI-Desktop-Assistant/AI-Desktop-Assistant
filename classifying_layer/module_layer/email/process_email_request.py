@@ -35,7 +35,7 @@ def predict_tokens(req, model):
 
 def format_to_email(response):
     email = ''
-    if 'at' not in response:
+    if '@' not in response:
         return ''
     for word in response.split():
         if word == 'at':
@@ -151,7 +151,7 @@ def get_emails_from_contacts(recipient_names, cc_names, bcc_names):
     with sqlite3.connect('users.db') as conn:
         cursor = conn.cursor()
         user_id = get_user_id()
-        cursor.execute("SELECT * FROM contacts WHERE user_id = ?", user_id)
+        cursor.execute("SELECT * FROM contacts WHERE user_id = ?", (user_id,))
         rows = cursor.fetchall()
         recipient_emails = []
         recipients_found = []
@@ -163,7 +163,7 @@ def get_emails_from_contacts(recipient_names, cc_names, bcc_names):
         for row in rows:
             for recipient in recipient_names:
                 if not recipient.endswith('.com'):
-                    if recipient in row[2]:
+                    if recipient in row[2] and len(recipient.strip()) > 0:
                         print(f'Appending to recipient emails: {row[3]}')
                         recipient_emails.append(row[3])
                         print(f'Appending to recipients found: {recipient}')
@@ -180,7 +180,7 @@ def get_emails_from_contacts(recipient_names, cc_names, bcc_names):
                     print(f'Recipients Found: {recipients_found}')
             for cc in cc_names:
                 if not cc.endswith('.com'):
-                    if cc in row[2]:
+                    if cc in row[2] and len(recipient.strip()) > 0:
                         print(f'Appending to cc emails: {row[3]}')
                         cc_emails.append(row[3])
                         print(f'Appending to ccs found: {cc}')
@@ -197,7 +197,7 @@ def get_emails_from_contacts(recipient_names, cc_names, bcc_names):
                     print(f'Recipients Found: {ccs_found}')
             for bcc in bcc_names:
                 if not bcc.endswith('.com'):
-                    if bcc in row[2]:
+                    if bcc in row[2] and len(recipient.strip()) > 0:
                         print(f'Appending to bcc emails: {row[3]}')
                         bcc_emails.append(row[3])
                         print(f'Appending to bccs found: {bcc}')
@@ -218,7 +218,7 @@ def get_email_and_app_password():
     with sqlite3.connect('users.db') as conn:
         cursor = conn.cursor()
         user_id = get_user_id()
-        cursor.execute("SELECT * FROM users WHERE id=?", (user_id))
+        cursor.execute("SELECT * FROM users WHERE id=?", (user_id,))
         rows = cursor.fetchall()
         row = rows[0]
         email = row[3]
@@ -230,7 +230,7 @@ def get_footer():
     with sqlite3.connect('users.db') as conn:
         cursor = conn.cursor()
         user_id = get_user_id()
-        cursor.execute('SELECT * FROM users WHERE id=?', (user_id))
+        cursor.execute('SELECT * FROM users WHERE id=?', (user_id,))
         rows = cursor.fetchall()
         footer = rows[0][6]
         if footer == '':
@@ -318,21 +318,22 @@ def group_recipients(recipients, cc, bcc):
 
 def handle_intent_not_sufficient():
     response = get_intent_from_user()
-    if response == '':
+    if response == 'Sorry, I didn\'t understand your request':
         response = get_intent_from_user()
-        if response == '':
+        if response == 'Sorry, I didn\'t understand your request':
             return ''
     return response
 
 def handle_no_recipients():
     print(f'Getting Recipient from User')
     response = get_recipients_from_user()
-    if response == '':
+    if response == 'Sorry, I didn\'t understand your request':
         print(f'Getting Recipient from User')
         response = get_recipients_from_user()
-        if response == '':
+        if response == 'Sorry, I didn\'t understand your request':
             return []
     entities = parse_email_entities(response)
+    print(f'Entity predictions: {entities}')
     return entities
 
 def validate_intent(intents):
@@ -354,7 +355,6 @@ def validate_recipients(recipients):
     if not recipients_present:
         print('No Recipients Found')
         recipients = handle_no_recipients()
-    
     return recipients
 
 def parse_email_entities(req):
@@ -365,13 +365,13 @@ def parse_email_entities(req):
         tokens, predict_tokens_classes = predict_tokens(req, email_entity_model)
         print(f'Predicted Tokens And Classes: Tokens: {tokens}, Predicted Token Classes: {predict_tokens_classes}')
         entity_predictions = []
-        for token, token_classes in zip(tokens, predict_tokens_classes):
-            if token_classes[-1] != '0' and token != '[PAD]' and token != '[CLS]' and token != '[SEP]':
-                print(f'Token: {token}, Token Class Entity: {token_classes}')
+        for token, token_class in zip(tokens, predict_tokens_classes):
+            if token_class[-1] != '0' and token != '[PAD]' and token != '[CLS]' and token != '[SEP]':
+                print(f'Token: {token}, Token Class Entity: {token_class}')
                 if token.startswith("##"):
                     entity_predictions[-1] += token[2:]
                 else:
-                    entity_predictions.append(token)
+                    entity_predictions.append((token, token_class))
     except Exception as e:
         print(e)
 

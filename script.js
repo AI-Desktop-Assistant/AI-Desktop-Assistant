@@ -20,6 +20,24 @@ document.addEventListener("DOMContentLoaded", function () {
     })
     document.getElementById('load-playlists-button').addEventListener('click', fetchPlaylists);
     document.getElementById('spotifySearchButton').addEventListener('click', searchTrack);
+    const volumeSlider = document.getElementById('volume')
+
+    if (volumeSlider) {
+        volumeSlider.addEventListener('input', (event) => {
+            const volume = event.target.value
+            console.log(`Volume changed to: ${volume}`)
+            window.electron.volumeChanged(volume)
+        })
+    }
+    const voiceSelector = document.getElementById('voice')
+
+    if (voiceSelector) {
+        voiceSelector.addEventListener('change', (event) => {
+            const voice = event.target.value
+            console.log(`Voice changed to: ${voice}`)
+            window.electron.voiceChanged(voice)
+        })
+    }
 })
 
 function toggleEmailBody(button) {
@@ -214,6 +232,7 @@ function login(username, password, rememberMe, autoLogin = false) {
 
 // handle login success and failure responses from main process
 window.electron.onLoginResponse((event, response) => {
+    console.log(`Login Response received ${response.success}`)
     const usernameInput = document.getElementById('login-username')
     const passwordInput = document.getElementById('login-password')
     const loginStatusMessage = document.getElementById('login-status-message')
@@ -232,7 +251,9 @@ window.electron.onLoginResponse((event, response) => {
             window.electron.setRemUser(response.rememberMe, response.username, response.password)
         }
         // remove login page from view and show the main app UI
+        console.log('Removing Login/Sign up Screen')
         document.getElementById('login-signup-screen').style.display = 'none'
+        console.log('Displaying Main App')
         document.getElementById('main-app').style.display = 'flex'
         load_user_data()
     } 
@@ -249,6 +270,36 @@ window.electron.onLoginResponse((event, response) => {
     }
 })
 
+window.electron.onLoading((event, response) => {
+    console.log('Showing Loading Circle')
+    document.getElementById('login-username').classList.add('hidden')
+    document.getElementById('login-password').classList.add('hidden')
+    document.getElementById('login-status-message').textContent = ''
+    document.getElementById('login-button').classList.add('hidden')
+    document.querySelector('.remember-me').classList.add('hidden')
+    document.querySelector('.remember-me').textContent = ''
+    // document.getElementById('remember-me').classList.add('hidden')
+    document.getElementById('login-title').textContent = `Logging in as ${response.username}`
+    document.getElementById('login-loading').classList.remove('hidden')
+})
+
+window.electron.onUndoLoading((event) => {
+    console.log('Hiding Loading Circle')
+    document.getElementById('login-username').classList.remove('hidden')
+    document.getElementById('login-password').classList.remove('hidden')
+    document.getElementById('login-button').classList.remove('hidden')
+    document.querySelector('.remember-me').classList.remove('hidden')
+    const remembermeBox = document.createElement('input')
+    remembermeBox.setAttribute('type', 'checkbox')
+    remembermeBox.setAttribute('id', 'remember-me')
+    document.querySelector('.remember-me').appendChild(remembermeBox)
+    const textNode = document.createTextNode(' Remember Me ')
+    document.querySelector('.remember-me').appendChild(textNode)
+    // document.getElementById('remember-me').classList.remove('hidden')
+    document.getElementById('login-title').textContent = `Login`
+    document.getElementById('login-loading').classList.add('hidden')
+})
+
 function load_user_data() {
     window.electron.fillUsername()
     window.electron.fillEmail()
@@ -256,6 +307,7 @@ function load_user_data() {
     window.electron.fillSentEmails()
     window.electron.fillAppPaths()
     window.electron.fillTasks()
+    window.electron.fillUpcomingTasks()
 }
 
 window.electron.onFillUsernameResponse((event, response) => {
@@ -319,7 +371,7 @@ window.electron.onFillAppPathsResponse((event, response) => {
 window.electron.onFillTasksResponse((event, response) => {
     console.log(`Got Tasks Response ${response}`)
     if (response.success) {
-        const tbody = document.getElementById('tasks-atbody')
+        const tbody = document.getElementById(response.id)
         tbody.innerHTML = ''
         const dates = response.dates
         const times = response.times
@@ -342,6 +394,10 @@ window.electron.onReqFillAppPathsResponse((event) => {
 
 window.electron.onReqFillSentEmailResponse((event) => {
     window.electron.fillSentEmails()
+})
+
+window.electron.onReqFillUpcomingTasks((event) => {
+    window.electron.fillUpcomingTasks()
 })
 
 function createAppPathRow(appName, appPath) {
@@ -570,6 +626,7 @@ function signout() {
     console.log('Going back to login page')
     document.getElementById('login-signup-screen').style.display = 'flex'
     document.getElementById('main-app').style.display = 'none'
+    document.getElementById('chat-history').textContent = ''
 }
 
 function sendEmail() {
@@ -670,10 +727,12 @@ window.electron.onUpdateInfoResponse((event, response) => {
         errorInputs.forEach(errorInput => errorInput.classList.remove('input-error'))
         
         document.getElementById(`new-${response.section}`).classList.add('input-success')
+        document.getElementById(`new-${response.section}`).value = ''
         document.getElementById(`${response.section}-update-status-message`).textContent = response.message
         document.getElementById(`${response.section}-update-status-message`).classList.add('message-success')
         if (response.section === 'password') {
             document.getElementById(`confirm-${response.section}`).classList.add('input-success')
+            document.getElementById(`confirm-${response.section}`).value = ''
         }
         load_user_data()
     }
@@ -828,7 +887,7 @@ function sendChat() {
     const userInput = document.querySelector('.chat-input')
     const message = userInput.value
     if (message.trim() !== "") {
-        appendChat('user', message);
+        appendChat('user', message)
         userInput.value = ""
         window.electron.sendMessage({purpose: 'chat', data:message})
     }

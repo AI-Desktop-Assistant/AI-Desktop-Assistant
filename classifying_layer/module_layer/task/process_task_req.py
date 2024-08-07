@@ -75,12 +75,12 @@ def update_task(task_purpose, date, time, day_repeat):
     print(f'Values: {values}')
     if rows_to_update != '':
         with sqlite3.connect('users.db') as conn:
-            query = f'UPDATE tasks SET {rows_to_update}WHERE user_id = ? AND task = ?'
+            query = f'UPDATE tasks SET {rows_to_update} WHERE user_id = ? AND task = ?'
             print(f'Query: {query}')
             conn.execute(query, values)
             conn.commit()
             task_updated = True
-        socket = get_app_socket()
+        socket = get_app_socket()[1]
         socket.emit('response', {'purpose': 'updated-task'})
     return task_updated, rows_to_update, values
 
@@ -239,13 +239,16 @@ def interpret_time(time):
     elif time['hours'] and time['minutes']:
         print(f'Getting time from hours and minutes: {time["hours"]}, {time["minutes"]}')
         task_time = get_time_now_to_x_minutes_and_x_hours(time['hours'], time['minutes'])[1]
+        is_am = True if task_time.hour >=0 and task_time.hour < 12 else False
     elif time['hours']:
         print(f'Getting time from hours: {time["hours"]}')
         task_time = get_time_now_to_x_hours(time['hours'])[1]
+        is_am = True if task_time.hour >=0 and time.hour < 12 else False
         print('Num, Hours')
     elif time['minutes']:
         print(f'Getting time from minutes: {time["minutes"]}')
         task_time = get_time_now_to_x_minutes(time['minutes'])[1]
+        
         print('Num, Minutes')
     print(f'Task Time: {task_time}\n')
 
@@ -279,7 +282,8 @@ def get_date_and_time_from_req(req):
             print(f'Setting tf[{key}] to true')
             word_idx = words.index(word)
             time_idx = word_idx -1 
-            time_num = words[time_idx]
+            time_num = words[time_idx-3] if 'and a half' in req else float(words[time_idx - 2] + (words[time_idx].split('/')[0]/words[time_idx].split('/')[1])) if len(words[time_idx].split('/')) == 2 and words[time_idx].split('/')[0].isdigit() and words[time_idx].split('/')[1].isdigit() and words[time_idx - 2].isdigit() else words[time_idx]
+
             if time_idx > 0:
                 tf_item[key] = int(time_num) if time_num.isdigit() else 1 if time_num == 'an' else 0.5 if time_num == 'half' else True
                 if 'and a half' in req:
@@ -310,9 +314,6 @@ def get_date_and_time_from_req(req):
             tf_item['repeat'] = True
     print(f'Time Frame: {tf_item}')
     print(f'Time Frame Copy : {tf_item_copy}')
-    if tf_item == tf_item_copy:
-        print('No Change Returning None')
-        return None
     return tf_item
 
 def validate_date(date):
@@ -333,38 +334,47 @@ def validate_date_and_time(date, time):
     return val_date, val_time
 
 def handle_missing_info(task_date, task_time, val_date, val_time, chances=3):
+    print('Handling missing info')
     new_chances = chances - 1
     missing_info = {}
     if chances == 0:
         return missing_info
     response = prompt_for_missing_date_or_time(val_date, val_time)
-    if response == '':
+
+    if response == 'Sorry, I didn\'t understand your request':
         alert_not_understood()
         handle_missing_info(task_date, task_time, val_date, val_time, chances=new_chances)
     else:
+        print('Processing Response')
         tf = get_date_and_time_from_req(response)
         task_date, task_time, day_repeat, is_am = interpret_time(tf)
         print(f'Task Date: {task_date}, Task Time: {task_time}, Reapeating Day: {day_repeat}')
-        new_val_date = new_val_time = True
-        if not val_date and not val_time:
+        new_val_date = True
+        new_val_time = True
+        print('Checking Inputs Valid')
+        if not val_time:
             new_val_date, new_val_time = validate_date_and_time(task_date, task_time)
-            if not val_date and not val_time:
-                handle_missing_info(new_val_date, new_val_time, chances=new_chances)
-            else:
-                missing_info['date'] = task_date
-                missing_info['time'] = task_time
-        elif not val_date:
-            new_val_date = validate_date(task_date)
-            if not new_val_date:
-                handle_missing_info(new_val_date, val_time, chances=new_chances)
-            else:
-                missing_info['date'] = task_date
-        elif not val_time:
-            val_time = validate_time(task_time)
+            print(f'New Val Date: {new_val_date}, New Val Time: {new_val_time}')
             if not new_val_time:
-                handle_missing_info(val_date, new_val_time, chances=new_chances)
+                print('Not Val Time')
+                handle_missing_info(task_date, task_time, new_val_date, new_val_time, chances=new_chances)
             else:
+                print('Setting missing information')
+                missing_info['date'] = task_date
                 missing_info['time'] = task_time
+                print(f'Missing Information: {missing_info}')
+        # elif not val_date:
+        #     new_val_date = validate_date(task_date)
+        #     if not new_val_date:
+        #         handle_missing_info(new_val_date, val_time, chances=new_chances)
+        #     else:
+        #         missing_info['date'] = task_date
+        # elif not val_time:
+        #     val_time = validate_time(task_time)
+        #     if not new_val_time:
+        #         handle_missing_info(val_date, new_val_time, chances=new_chances)
+        #     else:
+        #         missing_info['time'] = task_time
     return missing_info
 
 def insert_new_task(intent, date_str, time_str, day_reapeat):
@@ -383,7 +393,7 @@ def insert_new_task(intent, date_str, time_str, day_reapeat):
             conn.execute(new_query, (user_id, new_date, time_str, task, day_reapeat))
         conn.commit()
         print(f'Committing Inserted: user_id: {user_id}, date_str: {date_str}, time_str: {time_str}, task: {task},  day_reapeat: {day_reapeat}')
-    socket = get_app_socket()
+    socket = get_app_socket()[1]
     socket.emit('response', {'purpose': 'updated-task'})
 
 def refresh_next_task_list():
@@ -421,8 +431,6 @@ def time_to_string(time, is_am):
 
 def set_task(intent, date, time, day_reapeat, is_am):
     print(f'Setting Task: Intent: {intent}, Date: {date}, Time: {time}, Day Repeat: {day_reapeat}, Is AM: {is_am}')
-    if date == '':
-        date = datetime.today()
     date_str = f'{date.month}/{date.day}/{date.year}'
     print(f'Date String: {date_str}')
     time_str, hour, minute = time_to_string(time, is_am)
@@ -498,7 +506,7 @@ def get_ordered_tasks():
         cursor = conn.cursor()
         query = 'SELECT * FROM tasks WHERE user_id = ? ORDER BY date, time'
         user_id = get_user_id()
-        cursor.execute(query, (user_id))
+        cursor.execute(query, (user_id,))
         rows = cursor.fetchall()
         now = datetime.now()
         tasks_after_now = []
@@ -660,7 +668,7 @@ def list_tasks(tasks, task_ref='task', list_all=False):
     return response, confirm
 
 def handle_confirmation_response(tasks, task_ref, user_response):
-    if user_response == '':
+    if user_response == 'Sorry, I didn\'t understand your request':
         y_or_n = 'no'
     else:
         y_or_n = get_y_or_n(user_response)
@@ -683,6 +691,7 @@ def get_tasks_today():
         cursor = conn.cursor()
         query = 'SELECT * FROM tasks WHERE user_id = ? AND date = ?'
         user_id = get_user_id()
+        print(f'user id: {user_id}')
         cursor.execute(query, (user_id, date))
         rows = cursor.fetchall()
         print(f'Rows: {rows}')
@@ -728,7 +737,7 @@ def remind_task(tasks, when):
     init_task = tasks[0]
     print(f'Reminding task in {when}: {init_task}')
     if when == 'now':
-        response = f'This is your {task[3]} reminder {intent_as_response(init_task[4])}. '
+        response = f'This is your {init_task[3]} reminder {intent_as_response(init_task[4])}. '
     else:
         response = f'This is a reminder {intent_as_response(init_task[4])} in {when}. '
     print(f'Response: {response}')
@@ -809,7 +818,7 @@ def remind_tasks():
     global remind_on_time
     date = get_next_task_datetime()
     if date != '':
-        print('Getting Task Proximity to today')
+        print(f'Getting Task Proximity to today, {date}')
         proximity = get_task_proximity(date)
         tasks = get_next_task_list()
         print(f'Tasks: {tasks}')
@@ -994,13 +1003,16 @@ def process_task_req(req):
 
         if not val_time:
             missing_info = handle_missing_info(task_date, task_time, val_date, val_time)
-            if len(missing_info) != 0:
+            print(f'Missing Information: {missing_info}')
+            if len(missing_info) == 0:
                 prompt_user_to_retry()
                 return ''
             if missing_info.get('date'):
                 task_date = missing_info['date']
             if missing_info.get('time'):
                 task_time = missing_info['time']
+        if task_date == '':
+            task_date = datetime.today()
         print('Setting task')
         hour, minute = set_task(intent, task_date, task_time, day_repeat, is_am)
         print('Task set')

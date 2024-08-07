@@ -1,0 +1,2302 @@
+[
+    {
+        "sentence": "email the newsletter draft to the team",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "compose a congratulatory email for a colleague",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "ask for a project update via email",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O"
+        ]
+    },
+    {
+        "sentence": "compose an email to the manager about the meeting changes",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "O",
+            "O",
+            "O",
+            "O"
+        ]
+    },
+    {
+        "sentence": "send a follow up email to the client",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "draft an email to customer support about my refund",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O"
+        ]
+    },
+    {
+        "sentence": "send a thank you email to my professor",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "email the HR about my leave application",
+        "labels": [
+            "O",
+            "O",
+            "ENT",
+            "O",
+            "O",
+            "O",
+            "O"
+        ]
+    },
+    {
+        "sentence": "send an inquiry to tech support",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "send a greeting email to the new team member",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "send an email to the dean of my school about how i'm struggling to get classes",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O"
+        ]
+    },
+    {
+        "sentence": "can you write me an email to my boss asking if i can get rehired",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O"
+        ]
+    },
+    {
+        "sentence": "would you mind sending an email to my friend asking when he'd like to hang out",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O"
+        ]
+    },
+    {
+        "sentence": "draft an email to my boss about the meeting",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O"
+        ]
+    },
+    {
+        "sentence": "send an email to john about the project update",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "O",
+            "O",
+            "O",
+            "O"
+        ]
+    },
+    {
+        "sentence": "draft an email to my boss about the meeting",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O"
+        ]
+    },
+    {
+        "sentence": "send an email to john about the project update",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "O",
+            "O",
+            "O",
+            "O"
+        ]
+    },
+    {
+        "sentence": "compose a thank you email to sarah",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "send a reminder email about the deadline",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O"
+        ]
+    },
+    {
+        "sentence": "email the invitation to the event",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "draft an email to the support team about the issue",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O"
+        ]
+    },
+    {
+        "sentence": "schedule an email to be sent tomorrow at 9 AM about the proposal",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O"
+        ]
+    },
+    {
+        "sentence": "compose a follow up email to the customer about their order",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O"
+        ]
+    },
+    {
+        "sentence": "draft an email to my colleague about the presentation",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O"
+        ]
+    },
+    {
+        "sentence": "send an email to jane about the event details",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "O",
+            "O",
+            "O",
+            "O"
+        ]
+    },
+    {
+        "sentence": "compose a congratulatory email to mike",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "send a follow up email about the project status",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O"
+        ]
+    },
+    {
+        "sentence": "email the agenda for the meeting",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O"
+        ]
+    },
+    {
+        "sentence": "draft an email to the supplier about the order",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O"
+        ]
+    },
+    {
+        "sentence": "send an email to hr about the new policy",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "O",
+            "O",
+            "O",
+            "O"
+        ]
+    },
+    {
+        "sentence": "compose a feedback email to the vendor",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "email the travel itinerary to the team",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "draft an email to the client regarding the deliverables",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O"
+        ]
+    },
+    {
+        "sentence": "send an email to the developer regarding the bug report",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O",
+            "O"
+        ]
+    },
+    {
+        "sentence": "compose a thank you email to the mentor",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "email the conference details to the attendees",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "draft an email to the customer service about the issue",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O"
+        ]
+    },
+    {
+        "sentence": "send an email to marketing about the campaign",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "O",
+            "O",
+            "O"
+        ]
+    },
+    {
+        "sentence": "compose a reminder email for the appointment",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O"
+        ]
+    },
+    {
+        "sentence": "email the training schedule to the employees",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "draft an email to the landlord about the lease",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O"
+        ]
+    },
+    {
+        "sentence": "send an email to finance about the invoice",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "O",
+            "O",
+            "O"
+        ]
+    },
+    {
+        "sentence": "compose an update email about the construction project",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O"
+        ]
+    },
+    {
+        "sentence": "email the software update details to the users",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "draft an email to the instructor about the homework",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O"
+        ]
+    },
+    {
+        "sentence": "send an email to the board members about the meeting",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O"
+        ]
+    },
+    {
+        "sentence": "compose an email to the neighbor about the noise",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O"
+        ]
+    },
+    {
+        "sentence": "email the budget report to the manager",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "draft an email to the gym about the membership",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O"
+        ]
+    },
+    {
+        "sentence": "send an email to the principal about the event",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O"
+        ]
+    },
+    {
+        "sentence": "compose an email to the author about the book",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O"
+        ]
+    },
+    {
+        "sentence": "email the new hire details to hr",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "draft an email to the professor about the research",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O"
+        ]
+    },
+    {
+        "sentence": "Email the meeting notes to Sarah and John and CC Alex",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "O",
+            "ENT",
+            "O",
+            "O",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "Compose a project summary email for the team and BCC the manager",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "ENT",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "Ask for the budget approval via email to the finance team and CC the project lead",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "Compose an email to the IT department about the server issues and BCC the CTO",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "Send a follow up email to the marketing team and CC Jane and Mike",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "ENT",
+            "O",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "Draft an email to the client about the delay and CC the project manager and legal team",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT",
+            "O",
+            "ENT",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "Send an email to the operations team about the new process and BCC the CEO",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "Compose an email to HR about the onboarding schedule and CC the training coordinator",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "Send an email to the vendor about the shipment delay and BCC the purchasing manager",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "Draft an email to the support team about the bug report and CC the development lead",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "Email the performance report to the director and CC the entire team",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "Send a holiday greeting email to all employees and BCC the HR department",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "Compose a thank you email to the guest speaker and CC the event organizer",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "Send an email to the recruitment team about the interview schedule and CC the candidate",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "Draft an email to the supplier about the order update and BCC the inventory manager",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "Email the project milestones to the stakeholders and CC the project team",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "Send an email to the sales team about the new campaign and BCC the marketing lead",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "Compose an email to the logistics team about the delivery issues and CC the warehouse manager",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "Send a follow up email to the client about the contract renewal and BCC the account manager",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "Draft an email to the design team about the new project requirements and CC the creative director",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "Email the quarterly report to the finance team and CC the CFO",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "ENT",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "Send an email to the customer service team about the complaint and BCC the quality assurance manager",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "Compose a congratulatory email to the award winners and CC the department heads",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "Send an email to the tech support team about the software update and blind carbon copy the IT manager",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "Draft an email to the HR team about the leave policy changes and carbon copy the legal advisor",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "Email the event details to the participants and carbon copy the event coordinator",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "Send an email to the board members about the strategic meeting and blind carbon copy the CEO",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "Compose an email to the sales lead about the target achievement and copy the sales team",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "Send a reminder email to the project team about the deadline and copy the project manager",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "Draft an email to the finance department about the expense report and blind carbon copy the CFO",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "Email the training session schedule to the employees and carbon copy the training lead",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "Send an email to the security team about the new protocols and blind copy the operations manager",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "Compose an email to the client about the new product launch and carbon copy the marketing team",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "Send a follow up email to the vendor about the contract and blind copy the procurement manager",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "Draft an email to the IT department about the network issues and copy the network administrator",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "Email the meeting agenda to the attendees and carbon copy the project manager",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "Send an email to the customer service about the refund and blind carbon copy the finance department",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "Compose a feedback email to the team about the recent project and copy the team lead",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "Send an email to the operations team about the workflow changes and blind carbon copy the department head",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "Draft an email to the marketing team about the campaign results and carbon copy the marketing director",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "Email the client feedback to the product development team and carbon copy the project manager",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "Send an email to the HR team about the policy update and blind copy the legal team",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "Compose an email to the finance department about the budget allocation and copy the project manager",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "Send a reminder email to the attendees about the conference and copy the event organizer",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "Draft an email to the IT support about the software installation and blind carbon copy the IT manager",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "Email the proposal to the client and carbon copy the account manager",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "Send an email to the legal team about the contract review and blind copy the project manager",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "Compose a thank you email to the mentor and copy the training coordinator",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "Send an email to the sales team about the monthly target and blind copy the sales director and marketing team",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT",
+            "O",
+            "ENT",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "could you draft an email to my superior talking about how i am going to copy the work from the previous term and blind copy devin and mia",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "O",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "could you draft an email to my superior and the development team talking about how i am just about finished with the project and blind copy joan and george",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "O",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "could you draft an email to jennifer and sally discussing how i am just about finished with the project and blind carbon copy joan and george",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "O",
+            "ENT",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "O",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "can you blind copy hellen and austin in an email to my supervisor about the quarterly earnings",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "O",
+            "ENT",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O",
+            "O"
+        ]
+    },
+    {
+        "sentence": "can you carbon copy gabriel and fernando to an email to my supervisor and the product department about this weeks progress on the project",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "O",
+            "ENT",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O"
+        ]
+    },
+    {
+        "sentence": "Draft an email to Emily and Michael about the project status and carbon copy Lisa and James",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "O",
+            "ENT",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "O",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "Compose a thank you email to Karen and Tom for their contributions and CC Rachel and David",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "O",
+            "ENT",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "O",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "Compose an update email to the customer service team and carbon copy the support manager and quality assurance lead and blind copy the technical support lead and IT manager",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT",
+            "ENT",
+            "O",
+            "ENT",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "Send a follow up email to the client about the project and BCC the sales director and CEO",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT",
+            "O",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "Compose an email to the training department and IT manager regarding the new schedule and CC the HR manager and training coordinator and blind carbon copy the project lead and operations manager",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT",
+            "O",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT",
+            "O",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT",
+            "O",
+            "ENT",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "Draft an email to the operations team about the new process and BCC the CEO",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "Draft an email to the vendor about the shipment delay and BCC the purchasing manager",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "Draft an email to the recruitment team about the interview schedule and CC the candidate",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "Draft an email to the sales team about the new campaign and BCC the marketing lead",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "Draft an email to the customer service team about the complaint and BCC the quality assurance manager",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "Draft an email to the tech support team about the software update and blind carbon copy the IT manager",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "Draft an email to the board members about the strategic meeting and blind carbon copy the CEO",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "Draft an email to the security team about the new protocols and blind copy the operations manager",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "Draft an email to the customer service about the refund and blind carbon copy the finance department",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "Draft an email to the operations team about the workflow changes and blind carbon copy the department head",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "Draft an email to the HR team about the policy update and blind copy the legal team",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "Draft an email to the legal team about the contract review and blind copy the project manager",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT"
+        ]
+    },
+    {
+        "sentence": "Draft an email to the sales team about the monthly target and blind copy the sales director and marketing team",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "ENT",
+            "ENT",
+            "ENT",
+            "O",
+            "ENT",
+            "ENT"
+        ]
+    }
+]

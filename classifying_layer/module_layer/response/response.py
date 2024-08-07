@@ -87,18 +87,21 @@ def get_pos(word):
     return synsets[0].pos()
 
 def intent_as_response(intent):
-    first_word = intent.split()[0]
-    pos = get_pos(first_word)
-    if pos == 'n':
-        response = 'for '
-    elif pos == 'v':
-        response = 'to ' if not first_word.endswith('ing') else 'for '
+    if intent != '':
+        first_word = intent.split()[0]
+        pos = get_pos(first_word)
+        if pos == 'n':
+            response = 'for '
+        elif pos == 'v':
+            response = 'to ' if not first_word.endswith('ing') else 'for '
+        else:
+            response = 'to '
+            
+        if 'my' in intent:
+            intent = intent.replace('my', 'your')
+        response += intent
     else:
-        response = 'to '
-        
-    if 'my' in intent:
-        intent = intent.replace('my', 'your')
-    response += intent
+        response = ''
     return response
 
 def alert_task_set(intent, task_date, hour, minute, is_am, repeat, task_ref):
@@ -135,9 +138,9 @@ def alert_task_set(intent, task_date, hour, minute, is_am, repeat, task_ref):
                 response += ' '
         diff_minutes = diff.seconds % hour_in_seconds
         print(f'Seconds % hour in seconds: {diff_minutes}')
-        diff_minutes = diff_minutes // 60
+        diff_minutes = (diff_minutes // 60) + 1
         print(f'Diff Minutes: {diff_minutes}')
-        if diff_minutes > 5:
+        if diff_minutes > 0:
             if 'hour' in response:
                 response += 'and '
             response += f'{diff_minutes} minutes '
@@ -173,7 +176,7 @@ def alert_task_set(intent, task_date, hour, minute, is_am, repeat, task_ref):
     say(response)
 
 def handle_failed_launch():
-    response = "Sorry, I couldnt find the file you wanted."
+    response = "Sorry, I couldn't find the file you wanted."
     return say(response)
 
 def alert_creating_contact(recipient, recipient_email):

@@ -15,7 +15,8 @@ async def compare_strings(entry, queried_file, best_match, top_matching_files):
 
         matcher = difflib.SequenceMatcher(None, file_name_tokens, queried_file_tokens)
         score = matcher.ratio()
-        
+        if 'sp' in file_name:
+            print(f'Comparing Strings: App Name: {queried_file}, File Name: {file_name}')
         async with lock:
             if score > best_match["score"]:
                 if top_matching_files.qsize() > 3:

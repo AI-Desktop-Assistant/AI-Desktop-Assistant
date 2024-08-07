@@ -674,6 +674,9 @@ app.whenReady().then(() => {
             console.log(`Received Todays tasks: `)
             console.log(`${data.dates}, ${data.times}, ${data.repeatings}, ${data.tasks}`)
             win.webContents.send('fill-tasks-response', { success: true, dates: data.dates, times: data.times, tasks: data.tasks, repeatings: data.repeatings, id: 'tasks-utbody' })
+        } else if (purpose == 'task-set-response') {
+            console.log('Task Successfully Set')
+            win.webContents.send('set-task-response', data)
         }
 
     })
@@ -703,8 +706,10 @@ app.whenReady().then(() => {
         socket.emit('message', message)
     })
 
+    ipcMain.on('set-task', (event, taskDetails, taskDate, taskTime) => {
+        socket.emit('message', {purpose: 'set-task', taskDetails: taskDetails, taskDate: taskDate, taskTime: taskTime})
+    })
     
-
     app.on('activate', () => {
         if (BrowserWindow.getAllWindows().length === 0) createWindow()
     })
@@ -777,18 +782,3 @@ function openSpotifyLogin(auth_url) {
 app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') app.quit()
 })
-
-function order_task_rows(tasksToday) {
-    const tasks = []
-    const dates = []
-    const times = []
-    const repeatings = []
-    tasksToday.forEach(task => {
-        tasks.push(task[4])
-        dates.push(task[2])
-        times.push(task[3])
-        repeatings.push(task[5])
-        console.log(task)
-    })
-    return {tasks: tasks, dates: dates, times: times, repeatings: repeatings}
-}

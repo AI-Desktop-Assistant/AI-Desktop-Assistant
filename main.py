@@ -116,7 +116,14 @@ def handle_message(data):
         change_voice(data['data'])
     elif data['purpose'] == 'signout':
         os._exit(1)
-
+    elif data['purpose'] == 'set-task':
+        task_date = data['taskDate']
+        task_time = data['taskTime']
+        date = datetime.strptime(task_date, '%Y-%m-%d')
+        time = datetime.strptime(task_time, '%H:%M')
+        print(f"Setting Task With: {data['taskDetails']}, {date}, {time}, {True if 'AM' in data['taskTime'] else False}")
+        set_task(data['taskDetails'], date, time, '', True if 'AM' in data['taskTime'] else False)
+        socketio.emit('response', {'purpose': 'task-set-response', 'success': True, 'message': 'Task Successfully Set'})
 
 def run_flask():
     socketio.run(app, port=8888, debug=False, allow_unsafe_werkzeug=True)

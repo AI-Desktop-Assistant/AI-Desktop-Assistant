@@ -1,0 +1,56 @@
+# from models.load_model import load_model
+import torch
+from config_socketio import get_app_socket
+from transformers import BertTokenizer, BertTokenizerFast, AutoModelForCausalLM, AutoTokenizer, AutoConfig
+
+spotify_model_path = 'models\\spotify_intent.pth'
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+def predict_tokens(req, model, tokenizer):
+    tokenized_input = tokenizer([req], truncation=True, padding='max_length', is_split_into_words=True, return_tensors="pt")
+
+    input_ids = tokenized_input['input_ids'].to(device)
+    attention_mask = tokenized_input['attention_mask'].to(device)
+    
+    outputs = model(input_ids, attention_mask)
+
+    logits = outputs.logits
+    predicted_token_class_ids = logits.argmax(-1)
+
+    tokens = tokenizer.convert_ids_to_tokens(input_ids.squeeze().tolist())
+
+    predicted_tokens_classes = [model.config.id2label[t.item()] for t in predicted_token_class_ids[0]]
+
+    return tokens, predicted_tokens_classes
+
+def process_spotify_request(req):
+    weather_model, tokenizer, device = load_spotify_intent_model(spotify_model_path)
+    tokens, predicted_token_classes = predict_tokens(req, weather_model, tokenizer)
+    result = sift_output(tokens, predicted_token_classes)
+    send_sift_data(result)
+
+def load_spotify_intent_model(model_path):
+    model = torch.load(model_path)
+    tokenizer = BertTokenizerFast.from_pretrained('bert-base-uncased')
+
+    model.to(device)
+    return model, tokenizer, device
+
+def sift_output(tokens, predicted_token_classes):
+    sift = []
+    for token, predicted_token_class in zip(tokens, predicted_token_classes):
+        if token != "[CLS]" and token != "[SEP]" and token != "[PAD]" and predicted_token_class != "LABEL_0":
+            if token.startswith('##'):
+                sift[-1] += token[2:]
+            else:
+                sift.append(token)
+    return sift
+
+def send_sift_data(sift):
+    if sift:
+        print(f'Sending spotify data: {sift}')
+        app, socketio = get_app_socket()
+        socketio.emit("get-spotify", {"data": sift[0], "purpose": "get-spotify-info"})
+
+def receive_spotify_data(spotifyData):
+    print(spotifyData)

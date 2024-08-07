@@ -786,12 +786,11 @@ function updateNowPlayingUI(trackData) {
         nowPlayingElement.innerHTML = `
             <div>
                 <img src="${trackData.album_image}" alt="Album cover" style="width: 100px; height: 100px;">
-                <div>
+                <div class="track-details">
                     <strong>Track:</strong> ${trackData.track_name}<br>
                     <strong>Artist:</strong> ${trackData.artist_name}<br>
                     <strong>Album:</strong> ${trackData.album_name}<br>
                     <strong>Progress:</strong> ${Math.floor(trackData.progress_ms / 1000)}s / ${Math.floor(trackData.duration_ms / 1000)}s<br>
-                    <strong>Status:</strong> ${trackData.is_playing ? 'Playing' : 'Paused'}
                 </div>
             </div>
         `;

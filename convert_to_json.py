@@ -3,1113 +3,497 @@ import json
 # Step 1: Load and Prepare the Dataset
 data = [
     {
-        "sentence": "What is the weather in New York",
+        "sentence": "Can you play the next song",
         "labels": [
             "O",
             "O",
+            "COMMAND",
             "O",
             "O",
-            "O",
-            "PLACE",
-            "PLACE"
-        ]
-    },
-    {
-        "sentence": "Show me the forecast for Los Angeles",
-        "labels": [
-            "O",
-            "O",
-            "O",
-            "O",
-            "O",
-            "PLACE",
-            "PLACE"
-        ]
-    },
-    {
-        "sentence": "Is it raining in Chicago today",
-        "labels": [
-            "O",
-            "O",
-            "O",
-            "PLACE",
             "O"
         ]
     },
     {
-        "sentence": "Do I need an umbrella in Seattle",
+        "sentence": "Please pause the music",
         "labels": [
             "O",
+            "COMMAND",
             "O",
-            "O",
-            "O",
-            "PLACE"
-        ]
-    },
-    {
-        "sentence": "What is the temperature in Miami",
-        "labels": [
-            "O",
-            "O",
-            "O",
-            "O",
-            "PLACE"
-        ]
-    },
-    {
-        "sentence": "How hot is it in Phoenix",
-        "labels": [
-            "O",
-            "O",
-            "O",
-            "O",
-            "PLACE"
-        ]
-    },
-    {
-        "sentence": "Is there snow in Denver",
-        "labels": [
-            "O",
-            "O",
-            "O",
-            "O",
-            "PLACE"
-        ]
-    },
-    {
-        "sentence": "What is the weather forecast for San Francisco",
-        "labels": [
-            "O",
-            "O",
-            "O",
-            "O",
-            "O",
-            "O",
-            "PLACE",
-            "PLACE"
-        ]
-    },
-    {
-        "sentence": "Tell me the weather in Houston",
-        "labels": [
-            "O",
-            "O",
-            "O",
-            "O",
-            "O",
-            "PLACE"
-        ]
-    },
-    {
-        "sentence": "Will it rain tomorrow in Boston",
-        "labels": [
-            "O",
-            "O",
-            "O",
-            "O",
-            "O",
-            "PLACE"
-        ]
-    },
-    {
-        "sentence": "Is it sunny in San Diego",
-        "labels": [
-            "O",
-            "O",
-            "O",
-            "O",
-            "PLACE",
-            "PLACE"
-        ]
-    },
-    {
-        "sentence": "What will the weather be like in Las Vegas",
-        "labels": [
-            "O",
-            "O",
-            "O",
-            "O",
-            "O",
-            "PLACE",
-            "PLACE"
-        ]
-    },
-    {
-        "sentence": "Check the weather for Washington DC",
-        "labels": [
-            "O",
-            "O",
-            "O",
-            "O",
-            "PLACE",
-            "PLACE"
-        ]
-    },
-    {
-        "sentence": "What is the humidity level in Atlanta",
-        "labels": [
-            "O",
-            "O",
-            "O",
-            "O",
-            "PLACE"
-        ]
-    },
-    {
-        "sentence": "Is it cold in Minneapolis",
-        "labels": [
-            "O",
-            "O",
-            "O",
-            "O",
-            "PLACE"
-        ]
-    },
-    {
-        "sentence": "Do I need a jacket in Philadelphia",
-        "labels": [
-            "O",
-            "O",
-            "O",
-            "O",
-            "PLACE"
-        ]
-    },
-    {
-        "sentence": "How is the weather in Orlando",
-        "labels": [
-            "O",
-            "O",
-            "O",
-            "O",
-            "PLACE"
-        ]
-    },
-    {
-        "sentence": "Is it snowing in Salt Lake City",
-        "labels": [
-            "O",
-            "O",
-            "O",
-            "PLACE",
-            "PLACE",
-            "PLACE"
-        ]
-    },
-    {
-        "sentence": "What is the weather like in Austin",
-        "labels": [
-            "O",
-            "O",
-            "O",
-            "O",
-            "PLACE"
-        ]
-    },
-    {
-        "sentence": "Show me the weather report for New Orleans",
-        "labels": [
-            "O",
-            "O",
-            "O",
-            "O",
-            "O",
-            "PLACE",
-            "PLACE"
-        ]
-    },
-    {
-        "sentence": "What is the weather in Portland",
-        "labels": [
-            "O",
-            "O",
-            "O",
-            "O",
-            "O",
-            "PLACE"
-        ]
-    },
-    {
-        "sentence": "Tell me the forecast for Dallas",
-        "labels": [
-            "O",
-            "O",
-            "O",
-            "O",
-            "O",
-            "PLACE"
-        ]
-    },
-    {
-        "sentence": "How windy is it in Nashville",
-        "labels": [
-            "O",
-            "O",
-            "O",
-            "O",
-            "PLACE"
-        ]
-    },
-    {
-        "sentence": "Is it raining in Charlotte",
-        "labels": [
-            "O",
-            "O",
-            "O",
-            "O",
-            "PLACE"
-        ]
-    },
-    {
-        "sentence": "What is the temperature in San Antonio",
-        "labels": [
-            "O",
-            "O",
-            "O",
-            "PLACE",
-            "PLACE"
-        ]
-    },
-    {
-        "sentence": "Do I need an umbrella in Indianapolis",
-        "labels": [
-            "O",
-            "O",
-            "O",
-            "O",
-            "PLACE"
-        ]
-    },
-    {
-        "sentence": "Is it sunny in Kansas City",
-        "labels": [
-            "O",
-            "O",
-            "O",
-            "O",
-            "PLACE",
-            "PLACE"
-        ]
-    },
-    {
-        "sentence": "What is the weather forecast for Columbus",
-        "labels": [
-            "O",
-            "O",
-            "O",
-            "O",
-            "O",
-            "PLACE"
-        ]
-    },
-    {
-        "sentence": "Show me the weather in Detroit",
-        "labels": [
-            "O",
-            "O",
-            "O",
-            "O",
-            "O",
-            "PLACE"
-        ]
-    },
-    {
-        "sentence": "Will it rain tomorrow in Memphis",
-        "labels": [
-            "O",
-            "O",
-            "O",
-            "O",
-            "O",
-            "PLACE"
-        ]
-    },
-    {
-        "sentence": "Is it cold in Milwaukee",
-        "labels": [
-            "O",
-            "O",
-            "O",
-            "O",
-            "PLACE"
-        ]
-    },
-    {
-        "sentence": "Do I need a jacket in Baltimore",
-        "labels": [
-            "O",
-            "O",
-            "O",
-            "O",
-            "PLACE"
-        ]
-    },
-    {
-        "sentence": "How is the weather in Louisville",
-        "labels": [
-            "O",
-            "O",
-            "O",
-            "O",
-            "PLACE"
-        ]
-    },
-    {
-        "sentence": "Is it snowing in Albuquerque",
-        "labels": [
-            "O",
-            "O",
-            "O",
-            "O",
-            "PLACE"
-        ]
-    },
-    {
-        "sentence": "What is the weather like in Tucson",
-        "labels": [
-            "O",
-            "O",
-            "O",
-            "O",
-            "PLACE"
-        ]
-    },
-    {
-        "sentence": "Show me the weather report for Fresno",
-        "labels": [
-            "O",
-            "O",
-            "O",
-            "O",
-            "O",
-            "PLACE"
-        ]
-    },
-    {
-        "sentence": "What is the weather in Sacramento",
-        "labels": [
-            "O",
-            "O",
-            "O",
-            "O",
-            "O",
-            "PLACE"
-        ]
-    },
-    {
-        "sentence": "Tell me the forecast for Mesa",
-        "labels": [
-            "O",
-            "O",
-            "O",
-            "O",
-            "O",
-            "PLACE"
-        ]
-    },
-    {
-        "sentence": "How windy is it in Omaha",
-        "labels": [
-            "O",
-            "O",
-            "O",
-            "O",
-            "PLACE"
-        ]
-    },
-    {
-        "sentence": "Is it raining in Virginia Beach",
-        "labels": [
-            "O",
-            "O",
-            "O",
-            "PLACE",
-            "PLACE"
-        ]
-    },
-    {
-        "sentence": "What is the weather in Raleigh",
-        "labels": [
-            "O",
-            "O",
-            "O",
-            "O",
-            "O",
-            "PLACE"
-        ]
-    },
-    {
-        "sentence": "Tell me the forecast for Miami",
-        "labels": [
-            "O",
-            "O",
-            "O",
-            "O",
-            "O",
-            "PLACE"
-        ]
-    },
-    {
-        "sentence": "How windy is it in Oklahoma City",
-        "labels": [
-            "O",
-            "O",
-            "O",
-            "O",
-            "PLACE",
-            "PLACE"
-        ]
-    },
-    {
-        "sentence": "Is it raining in Cleveland",
-        "labels": [
-            "O",
-            "O",
-            "O",
-
-
-            "O",
-            "PLACE"
-        ]
-    },
-    {
-        "sentence": "What is the temperature in Tulsa",
-        "labels": [
-            "O",
-            "O",
-            "O",
-            "O",
-            "PLACE"
-        ]
-    },
-    {
-        "sentence": "Do I need an umbrella in Oakland",
-        "labels": [
-            "O",
-            "O",
-            "O",
-            "O",
-            "PLACE"
-        ]
-    },
-    {
-        "sentence": "Is it sunny in Long Beach",
-        "labels": [
-            "O",
-            "O",
-            "O",
-            "O",
-            "PLACE",
-            "PLACE"
-        ]
-    },
-    {
-        "sentence": "What is the weather forecast for Arlington",
-        "labels": [
-            "O",
-            "O",
-            "O",
-            "O",
-            "O",
-            "PLACE"
-        ]
-    },
-    {
-        "sentence": "Show me the weather in Miami",
-        "labels": [
-            "O",
-            "O",
-            "O",
-            "O",
-            "O",
-            "PLACE"
+            "O"
         ]
     },
     {
-        "sentence": "Will it rain tomorrow in Colorado Springs",
+        "sentence": "Skip to the next track",
         "labels": [
+            "COMMAND",
             "O",
             "O",
             "O",
-            "O",
-            "PLACE",
-            "PLACE"
+            "O"
         ]
     },
     {
-        "sentence": "Is it cold in Wichita",
+        "sentence": "Unpause the song",
         "labels": [
-            "O",
-            "O",
-            "O",
+            "COMMAND",
             "O",
-            "PLACE"
+            "O"
         ]
     },
     {
-        "sentence": "Do I need a jacket in New Orleans",
+        "sentence": "Can you pause this",
         "labels": [
             "O",
             "O",
-            "O",
-            "O",
-            "PLACE",
-            "PLACE"
+            "COMMAND",
+            "O"
         ]
     },
     {
-        "sentence": "How is the weather in Tampa",
+        "sentence": "Play that track",
         "labels": [
-            "O",
-            "O",
+            "COMMAND",
             "O",
-            "O",
-            "PLACE"
+            "O"
         ]
     },
     {
-        "sentence": "Is it snowing in Anaheim",
+        "sentence": "Skip this track",
         "labels": [
-            "O",
-            "O",
-            "O",
+            "COMMAND",
             "O",
-            "PLACE"
+            "O"
         ]
     },
     {
-        "sentence": "What is the weather like in Honolulu",
+        "sentence": "Pause the song please",
         "labels": [
+            "COMMAND",
             "O",
             "O",
-            "O",
-            "O",
-            "PLACE"
+            "O"
         ]
     },
     {
-        "sentence": "Show me the weather report for Aurora",
+        "sentence": "Play the next song",
         "labels": [
-            "O",
-            "O",
+            "COMMAND",
             "O",
             "O",
-            "O",
-            "PLACE"
+            "O"
         ]
     },
     {
-        "sentence": "What is the weather in St. Louis",
+        "sentence": "Skip this song",
         "labels": [
-            "O",
-            "O",
-            "O",
+            "COMMAND",
             "O",
-            "O",
-            "PLACE",
-            "PLACE"
+            "O"
         ]
     },
     {
-        "sentence": "Tell me the forecast for Pittsburgh",
+        "sentence": "Pause the track now",
         "labels": [
-            "O",
-            "O",
-            "O",
+            "COMMAND",
             "O",
             "O",
-            "PLACE"
+            "O"
         ]
     },
     {
-        "sentence": "How windy is it in Corpus Christi",
+        "sentence": "Play the current song",
         "labels": [
+            "COMMAND",
             "O",
             "O",
-            "O",
-            "O",
-            "PLACE",
-            "PLACE"
+            "O"
         ]
     },
     {
-        "sentence": "Is it raining in Lexington",
+        "sentence": "Pause music",
         "labels": [
-            "O",
-            "O",
-            "O",
-            "O",
-            "PLACE"
+            "COMMAND",
+            "O"
         ]
     },
     {
-        "sentence": "What is the temperature in Anchorage",
+        "sentence": "Play music",
         "labels": [
-            "O",
-            "O",
-            "O",
-            "O",
-            "PLACE"
+            "COMMAND",
+            "O"
         ]
     },
     {
-        "sentence": "Do I need an umbrella in Stockton",
+        "sentence": "Skip track",
         "labels": [
-            "O",
-            "O",
-            "O",
-            "O",
-            "PLACE"
+            "COMMAND",
+            "O"
         ]
     },
     {
-        "sentence": "Is it sunny in Cincinnati",
+        "sentence": "Can you play a song",
         "labels": [
             "O",
             "O",
+            "COMMAND",
             "O",
-            "O",
-            "PLACE"
+            "O"
         ]
     },
     {
-        "sentence": "What is the weather forecast for Henderson",
+        "sentence": "Pause this track",
         "labels": [
-            "O",
+            "COMMAND",
             "O",
-            "O",
-            "O",
-            "O",
-            "PLACE"
+            "O"
         ]
     },
     {
-        "sentence": "Show me the weather in Riverside",
+        "sentence": "Skip the song",
         "labels": [
-            "O",
+            "COMMAND",
             "O",
-            "O",
-            "O",
-            "O",
-            "PLACE"
+            "O"
         ]
     },
     {
-        "sentence": "Will it rain tomorrow in Newark",
+        "sentence": "Play a track",
         "labels": [
-            "O",
+            "COMMAND",
             "O",
-            "O",
-            "O",
-            "O",
-            "PLACE"
+            "O"
         ]
     },
     {
-        "sentence": "Is it cold in Durham",
+        "sentence": "Unpause this song",
         "labels": [
-            "O",
+            "COMMAND",
             "O",
-            "O",
-            "O",
-            "PLACE"
+            "O"
         ]
     },
     {
-        "sentence": "Do I need a jacket in Chandler",
+        "sentence": "Pause it",
         "labels": [
-            "O",
-            "O",
-            "O",
-            "O",
-            "PLACE"
+            "COMMAND",
+            "O"
         ]
     },
     {
-        "sentence": "How is the weather in Madison",
+        "sentence": "Play it",
         "labels": [
-            "O",
-            "O",
-            "O",
-            "O",
-            "PLACE"
+            "COMMAND",
+            "O"
         ]
     },
     {
-        "sentence": "Is it snowing in Lubbock",
+        "sentence": "Skip it",
         "labels": [
-            "O",
-            "O",
-            "O",
-            "O",
-            "PLACE"
+            "COMMAND",
+            "O"
         ]
     },
     {
-        "sentence": "What is the weather like in Gilbert",
+        "sentence": "Can you skip this",
         "labels": [
-            "O",
-            "O",
             "O",
             "O",
-            "PLACE"
+            "COMMAND",
+            "O"
         ]
     },
     {
-        "sentence": "Show me the weather report for Garland",
+        "sentence": "Please play that",
         "labels": [
-            "O",
-            "O",
-            "O",
-            "O",
             "O",
-            "PLACE"
+            "COMMAND",
+            "O"
         ]
     },
     {
-        "sentence": "What is the weather in Plano",
+        "sentence": "Pause the current track",
         "labels": [
+            "COMMAND",
             "O",
             "O",
-            "O",
-            "O",
-            "O",
-            "PLACE"
+            "O"
         ]
     },
     {
-        "sentence": "Tell me the forecast for Lincoln",
+        "sentence": "Skip to another song",
         "labels": [
-            "O",
+            "COMMAND",
             "O",
             "O",
-            "O",
-            "O",
-            "PLACE"
+            "O"
         ]
     },
     {
-        "sentence": "How windy is it in Buffalo",
+        "sentence": "Play this music",
         "labels": [
-            "O",
-            "O",
+            "COMMAND",
             "O",
-            "O",
-            "PLACE"
+            "O"
         ]
     },
     {
-        "sentence": "Is it raining in Fort Wayne",
+        "sentence": "Pause this music",
         "labels": [
-            "O",
-            "O",
-            "O",
+            "COMMAND",
             "O",
-            "PLACE",
-            "PLACE"
+            "O"
         ]
     },
     {
-        "sentence": "What is the temperature in Greensboro",
+        "sentence": "Unpause the track",
         "labels": [
+            "COMMAND",
             "O",
-            "O",
-            "O",
-            "O",
-            "PLACE"
+            "O"
         ]
     },
     {
-        "sentence": "Do I need an umbrella in Jersey City",
+        "sentence": "Play another song",
         "labels": [
-            "O",
+            "COMMAND",
             "O",
-            "O",
-            "O",
-            "PLACE",
-            "PLACE"
+            "O"
         ]
     },
     {
-        "sentence": "Is it sunny in Chula Vista",
+        "sentence": "Pause another track",
         "labels": [
-            "O",
-            "O",
+            "COMMAND",
             "O",
-            "O",
-            "PLACE",
-            "PLACE"
+            "O"
         ]
     },
     {
-        "sentence": "What is the weather forecast for St. Petersburg",
+        "sentence": "Skip this music",
         "labels": [
-            "O",
-            "O",
-            "O",
+            "COMMAND",
             "O",
-            "O",
-            "PLACE",
-            "PLACE"
+            "O"
         ]
     },
     {
-        "sentence": "Show me the weather in Norfolk",
+        "sentence": "Play a different track",
         "labels": [
-            "O",
-            "O",
-            "O",
+            "COMMAND",
             "O",
             "O",
-            "PLACE"
+            "O"
         ]
     },
     {
-        "sentence": "Will it rain tomorrow in Reno",
+        "sentence": "Pause a different song",
         "labels": [
+            "COMMAND",
             "O",
             "O",
-            "O",
-            "O",
-            "O",
-            "PLACE"
+            "O"
         ]
     },
     {
-        "sentence": "Is it cold in Winston-Salem",
+        "sentence": "Skip to a different track",
         "labels": [
-            "O",
+            "COMMAND",
             "O",
             "O",
             "O",
-            "PLACE",
-            "PLACE"
+            "O"
         ]
     },
     {
-        "sentence": "Do I need a jacket in Irvine",
+        "sentence": "Can you play the next track",
         "labels": [
             "O",
             "O",
+            "COMMAND",
             "O",
             "O",
-            "PLACE"
+            "O"
         ]
     },
     {
-        "sentence": "How is the weather in Chesapeake",
+        "sentence": "Pause this current song",
         "labels": [
+            "COMMAND",
             "O",
             "O",
-            "O",
-            "O",
-            "PLACE"
+            "O"
         ]
     },
     {
-        "sentence": "Is it snowing in Scottsdale",
+        "sentence": "Skip this current track",
         "labels": [
-            "O",
-            "O",
+            "COMMAND",
             "O",
             "O",
-            "PLACE"
+            "O"
         ]
     },
     {
-        "sentence": "What is the weather like in North Las Vegas",
+        "sentence": "Play the previous song",
         "labels": [
+            "COMMAND",
             "O",
             "O",
-            "O",
-            "O",
-            "PLACE",
-            "PLACE",
-            "PLACE"
+            "O"
         ]
     },
     {
-        "sentence": "Show me the weather report for Fremont",
+        "sentence": "Pause the previous track",
         "labels": [
-            "O",
-            "O",
+            "COMMAND",
             "O",
             "O",
-            "O",
-            "PLACE"
+            "O"
         ]
     },
     {
-        "sentence": "What is the weatherin Baton Rouge",
+        "sentence": "Skip the previous song",
         "labels": [
-            "O",
-            "O",
-            "O",
+            "COMMAND",
             "O",
             "O",
-            "PLACE",
-            "PLACE"
+            "O"
         ]
     },
     {
-        "sentence": "Tell me the forecast for Richmond",
+        "sentence": "Can you play another track",
         "labels": [
             "O",
             "O",
+            "COMMAND",
             "O",
             "O",
-            "O",
-            "PLACE"
+            "O"
         ]
     },
     {
-        "sentence": "How windy is it in Boise",
+        "sentence": "Pause another song",
         "labels": [
-            "O",
-            "O",
-            "O",
+            "COMMAND",
             "O",
-            "PLACE"
+            "O"
         ]
     },
     {
-        "sentence": "Is it raining in San Bernardino",
+        "sentence": "Skip another track",
         "labels": [
+            "COMMAND",
             "O",
-            "O",
-            "O",
-            "O",
-            "PLACE",
-            "PLACE"
+            "O"
         ]
     },
     {
-        "sentence": "What is the temperature in Spokane",
+        "sentence": "Play the current track",
         "labels": [
-            "O",
+            "COMMAND",
             "O",
             "O",
-            "O",
-            "PLACE"
+            "O"
         ]
     },
     {
-        "sentence": "Do I need an umbrella in Montgomery",
+        "sentence": "Unpause the current song",
         "labels": [
-            "O",
+            "COMMAND",
             "O",
             "O",
-            "O",
-            "PLACE"
+            "O"
         ]
     },
     {
-        "sentence": "Is it sunny in Des Moines",
+        "sentence": "Pause the music now",
         "labels": [
-            "O",
+            "COMMAND",
             "O",
             "O",
-            "O",
-            "PLACE",
-            "PLACE"
+            "O"
         ]
     },
     {
-        "sentence": "What is the weather forecast for Modesto",
+        "sentence": "Play the music now",
         "labels": [
-            "O",
-            "O",
-            "O",
+            "COMMAND",
             "O",
             "O",
-            "PLACE"
+            "O"
         ]
     },
     {
-        "sentence": "Show me the weather in Fayetteville",
+        "sentence": "Skip the music now",
         "labels": [
+            "COMMAND",
             "O",
             "O",
-            "O",
-            "O",
-            "O",
-            "PLACE"
+            "O"
         ]
     },
     {
-        "sentence": "Will it rain tomorrow in Shreveport",
+        "sentence": "Can you unpause the song",
         "labels": [
-            "O",
             "O",
             "O",
+            "COMMAND",
             "O",
-            "O",
-            "PLACE"
+            "O"
         ]
     },
     {
-        "sentence": "Is it cold in Akron",
+        "sentence": "Pause this song now",
         "labels": [
-            "O",
+            "COMMAND",
             "O",
             "O",
-            "O",
-            "PLACE"
+            "O"
         ]
     },
     {
-        "sentence": "Do I need a jacket in Grand Rapids",
+        "sentence": "Play this song now",
         "labels": [
-            "O",
+            "COMMAND",
             "O",
             "O",
-            "O",
-            "PLACE",
-            "PLACE"
+            "O"
         ]
     },
     {
-        "sentence": "How is the weather in Huntsville",
+        "sentence": "Skip this song now",
         "labels": [
-            "O",
+            "COMMAND",
             "O",
             "O",
-            "O",
-            "PLACE"
+            "O"
         ]
     },
     {
-        "sentence": "Is it snowing in Mobile",
+        "sentence": "Pause a song",
         "labels": [
-            "O",
+            "COMMAND",
             "O",
-            "O",
-            "O",
-            "PLACE"
+            "O"
         ]
     },
     {
-        "sentence": "What is the weather like in Augusta",
+        "sentence": "Play a song",
         "labels": [
-            "O",
-            "O",
+            "COMMAND",
             "O",
-            "O",
-            "PLACE"
+            "O"
         ]
     },
     {
-        "sentence": "Show me the weather report for Yonkers",
+        "sentence": "Skip a song",
         "labels": [
-            "O",
-            "O",
-            "O",
-            "O",
+            "COMMAND",
             "O",
-            "PLACE"
+            "O"
         ]
     }
 ]
 
-with open('weather_dataset.json', 'w') as f:
+with open('spotify_dataset.json', 'w') as f:
     json.dump(data, f, indent=4)

@@ -283,8 +283,9 @@ def file_search_feedback(given_name):
     # response = generate_response(messages)
     return say(response)    
 
-def report_weather(city, temperature):
-    response = f'The weather in {city} is {temperature} degrees.'
+def report_weather(city, temperature, unit):
+    temp_type = 'fahrenheit' if unit == 'imperial' else 'celsius'
+    response = f'The weather in {city} is {temperature} degrees {temp_type}'
     say(response)
     
 def greeting(username):

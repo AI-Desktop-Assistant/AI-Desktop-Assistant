@@ -206,8 +206,10 @@ def report_weather_route():
     data = request.json
     city = data.get('city')
     temperature = data.get('temperature')
-    if city and temperature:
-        report_weather(city, temperature)
+    unit = data.get('unit')
+    print(f"Received data: city={city}, temperature={temperature}, unit={unit}")
+    if city and temperature and unit:
+        report_weather(city, temperature, unit)
         return jsonify({'status': 'success'})
     return jsonify({'status': 'error', 'message': 'Invalid data'}), 400
 

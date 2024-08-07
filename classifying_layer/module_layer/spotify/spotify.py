@@ -5,6 +5,7 @@ from requests import post,get,put
 import json
 from config_socketio import get_app_socket
 from json import JSONDecodeError
+from user_config import get_user_id
 
 from flask import request
 
@@ -29,6 +30,8 @@ def store_tokens(user_id, access_token, refresh_token):
     }
 
 def get_stored_tokens(user_id):
+    global user_tokens
+    print(f"User tokens: {user_tokens}")
     return user_tokens.get(user_id)
 
 def get_token():
@@ -151,12 +154,14 @@ def spotify_callback(request):
             return "Code not found in the request", 400
 
         access_token, refresh_token = get_access_token(code)
-        store_tokens(current_user_id, access_token, refresh_token)  # Use global current_user_id
+        user_id = get_user_id()
+        store_tokens(user_id, access_token, refresh_token)  # Use global current_user_id
         
         print(f"Access Token: {access_token}")
         print(f"Refresh Token: {refresh_token}")
 
         track_info = get_currently_playing_track(access_token)
+        socketio = get_app_socket()[1]
         if track_info:
             # Extracting necessary information
             simplified_info = {

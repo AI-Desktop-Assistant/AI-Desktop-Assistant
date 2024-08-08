@@ -335,6 +335,13 @@ window.electron.onFillEmailResponse((event, response) => {
     email_field.textContent = `Current Email: ${response.email}`
 })
 
+window.electron.onFillAppPassResponse((event, response) => {
+    console.log('Got app pass response')
+    const app_pass_status = document.getElementById('current-app-password')
+    console.log(app_pass_status)
+    app_pass_status.textContent = `App Password Set: ${response.app_password}`
+})
+
 window.electron.onFillSentEmailResponse((event, response) => {
     console.log(`Got Sent Email Response: ${response}`)
     if (response.success) {

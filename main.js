@@ -709,7 +709,15 @@ app.whenReady().then(() => {
     ipcMain.on('set-task', (event, taskDetails, taskDate, taskTime) => {
         socket.emit('message', {purpose: 'set-task', taskDetails: taskDetails, taskDate: taskDate, taskTime: taskTime})
     })
+
+    ipcMain.on('update-task', (event, taskDate, taskTime, taskDetails, repeating) => {
+        socket.emit('message', {purpose: 'update-task', taskDate: taskDate, taskTime: taskTime, taskDetails: taskDetails, repeating: repeating})
+    })
     
+    ipcMain.on('delete-task', (event, taskDate, taskTime, taskDetails, repeating) => {
+        socket.emit('message', {purpose: 'delete-task', taskDate: taskDate, taskTime: taskTime, taskDetails: taskDetails, repeating: repeating})
+    })
+
     app.on('activate', () => {
         if (BrowserWindow.getAllWindows().length === 0) createWindow()
     })

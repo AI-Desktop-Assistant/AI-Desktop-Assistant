@@ -232,6 +232,24 @@
                                 </tbody>
                             </table>
                         </div>
+                        <div id="taskModal" class="modal">
+                            <div class="modal-content">
+                                <span class="close">&times;</span>
+                                <h2>Edit Task</h2>
+                                <form id="taskForm">
+                                    <label for="task-date">Date:</label>
+                                    <input type="date" id="task-date-update"><br><br>
+                                    <label for="task-time">Time:</label>
+                                    <input type="time" id="task-time-update"><br><br>
+                                    <label for="task-details">Task:</label>
+                                    <input type="text" id="task-details-update"><br><br>
+                                    <label for="task-repeating">Repeating:</label>
+                                    <input type="text" id="task-repeating-update"><br><br>
+                                    <button type="button" onclick="saveTask()">Save</button>
+                                    <button type="button" onclick="deleteTask()">Delete</button>
+                                </form>
+                            </div>
+                        </div>
                         <div id="setNewReminder" class="tab-content tab">
                             <h1>Set New Reminder</h1>
                             <div id="set-task-status-message" class="left-aligned"></div>

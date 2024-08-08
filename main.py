@@ -124,7 +124,27 @@ def handle_message(data):
         print(f"Setting Task With: {data['taskDetails']}, {date}, {time}, {True if 'AM' in data['taskTime'] else False}")
         set_task(data['taskDetails'], date, time, '', True if 'AM' in data['taskTime'] else False)
         socketio.emit('response', {'purpose': 'task-set-response', 'success': True, 'message': 'Task Successfully Set'})
-
+    elif data['purpose'] == 'update-task':
+        task_date = data['taskDate']
+        task_time = data['taskTime']
+        date = datetime.strptime(task_date, '%Y-%m-%d')
+        time = datetime.strptime(task_time, '%H:%M')
+        date_str = f'{date.month}/{date.day}/{date.year}'
+        time_str = time_to_string(time, True if time.hour < 12 else False)[0]
+        print(f"Updating Task With: {data['taskDetails']}, {date_str}, {time_str}, {True if 'AM' in data['taskTime'] else False}, {data['repeating']}")
+        tasks_updated, rows_to_update, values = update_task(data['taskDetails'], date_str, time_str, data['repeating'])
+        socketio.emit('response', {'purpose': 'task-set-response', 'success': True, 'message': 'Task Successfully Set'})
+    elif data['purpose'] == 'delete-task':
+        task_date = data['taskDate']
+        task_time = data['taskTime']
+        date = datetime.strptime(task_date, '%Y-%m-%d')
+        time = datetime.strptime(task_time, '%H:%M')
+        date_str = f'{date.month}/{date.day}/{date.year}'
+        time_str = time_to_string(time, True if time.hour < 12 else False)[0]
+        print(f"Deleting Task With: {data['taskDetails']}, {date_str}, {time_str}, {True if 'AM' in data['taskTime'] else False}")
+        delete_task(data['taskDetails'], date_str, time_str)
+        socketio.emit('response', {'purpose': 'updated-task'})
+        
 def run_flask():
     socketio.run(app, port=8888, debug=False, allow_unsafe_werkzeug=True)
 

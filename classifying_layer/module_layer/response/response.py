@@ -74,10 +74,33 @@ def output_tasks_to_user(response, confirm=False):
     return user_response
 
 def alert_reading_remaining_tasks(plural):
-    plural_str = 'remaining tasks are, ' if plural else 'last task is, '
+    plural_str = 'remaining tasks are:' if plural else 'last task is:'
     response = f'Ok. Your {plural_str}'
     say(response)
-    
+
+def ask_update_or_insert(intent):
+    response = f'You already have a task set {intent_as_response(intent)}, do you want to update this task?'
+    say(response)
+    user_response = listen()
+    return user_response
+
+def prompt_updating_task(intent):
+    response = f'Ok. Updating your task {intent_as_response(intent)}.'
+    say(response)
+
+def prompt_setting_new_task(intent):
+    response = f'Ok. Creating a new task {intent_as_response(intent)}.'
+
+def prompt_couldnt_find_task_to_update(intent):
+    response = f"I couldn't find a task {intent_as_response(intent)}"
+    say(response)
+
+def prompt_user_for_task_to_update():
+    response = f'Can you tell me what task you would like to update?'
+    say(response)
+    user_response = listen()
+    return user_response
+
 def get_pos(word):
     print(f'Getting Part of Speech for word: {word}')
     synsets = wn.synsets(word)

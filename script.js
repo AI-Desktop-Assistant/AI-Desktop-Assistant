@@ -458,6 +458,7 @@ function createTasksRow(date, time, task, repeating) {
     const repeatingCell = document.createElement('td')
     repeatingCell.textContent = repeating
     row.appendChild(repeatingCell)
+    row.setAttribute('onclick', 'openModal(this)')
 
     return row
 }
@@ -958,7 +959,72 @@ window.electron.appendUserChat((event, data) => {
 
 const textarea = document.getElementById('body')
 
-    textarea.addEventListener('input', function () {
-        this.style.height = 'auto'
-        this.style.height = this.scrollHeight + 'px'
-    })
+textarea.addEventListener('input', function () {
+    this.style.height = 'auto'
+    this.style.height = this.scrollHeight + 'px'
+})
+
+var modal = document.getElementById("taskModal");
+
+var span = document.getElementsByClassName("close")[0];
+
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+function openModal(row) {
+    var cells = row.getElementsByTagName("td")
+    let dateStr = cells[0].innerText
+    let timeStr = cells[1].innerText
+    let dateParts = dateStr.split('/')
+    let day = dateParts[1].padStart(2, '0')
+    let month = dateParts[0].padStart(2, '0')
+    let formattedDate = `${dateParts[2]}-${month}-${day}`
+    console.log(`Formatted Date: ${formattedDate}`)
+    let [time, modifier] = timeStr.split(' ')
+    let [hours, minutes] = time.split(':')
+    if (hours === '12') {
+        hours = '00'
+    }
+    if (modifier === 'PM') {
+        hours = parseInt(hours, 10) + 12
+    }
+    let formattedTime = `${hours}:${minutes}`
+    document.getElementById('task-date-update').value = formattedDate
+    document.getElementById('task-time-update').value = formattedTime
+    document.getElementById('task-details-update').value = cells[2].innerText
+    document.getElementById('task-repeating-update').value = cells[3].innerText
+        
+    modal.style.display = "block"
+}
+
+function saveTask() {
+    const taskDetails = document.getElementById('task-details-update').value
+    const taskDate = document.getElementById('task-date-update').value
+    const taskTime =  document.getElementById('task-time-update').value
+    const repeating = document.getElementById('task-repeating-update').value
+    console.log('Updating Task')
+    console.log(`Task Date: ${taskDate}, Task Time: ${taskTime}, Task Details: ${taskDetails}, Repetition: ${repeating}`)
+
+    window.electron.updateTask(taskDate, taskTime, taskDetails, repeating)
+    modal.style.display = "none"
+    alert("Task Updated!")
+}
+
+function deleteTask() {
+    const taskDetails = document.getElementById('task-details-update').value
+    const taskDate = document.getElementById('task-date-update').value
+    const taskTime =  document.getElementById('task-time-update').value
+    const repeating = document.getElementById('task-repeating-update').value
+    console.log('Deleting Task')
+    console.log(`Task Date: ${taskDate}, Task Time: ${taskTime}, Task Details: ${taskDetails}, Repetition: ${repeating}`)
+
+    window.electron.deleteTask(taskDate, taskTime, taskDetails, repeating)
+    modal.style.display = "none"
+    alert("Task Deleted!")
+}

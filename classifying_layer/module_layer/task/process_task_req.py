@@ -84,6 +84,12 @@ def update_task(task_purpose, date, time, day_repeat):
         socket.emit('response', {'purpose': 'updated-task'})
     return task_updated, rows_to_update, values
 
+def delete_task(task_purpose, date, time):
+    with sqlite3.connect(db_path) as conn:
+        query = 'DELETE FROM tasks WHERE task = ? AND date = ? AND time = ?'
+        conn.execute(query, (task_purpose, date, time))
+        conn.commit()
+
 def output_task_updated(intent, rows_to_update, values):
     response = f'I have updated your task {intent_as_response(intent)} '
 
@@ -108,16 +114,18 @@ def handle_updating_task(intent, date, time, is_am, day_repeat):
     print('Attempting Update Task')
     task, confidence = get_task_intent(intent)
     print(f'Got task: {task}, Confidence: {confidence}')
-    if date != '':
-        date_str = f'{date.month}/{date.day}/{date.year}'
+    if len(task) != 0:
+        if date != '':
+            date_str = f'{date.month}/{date.day}/{date.year}'
+        else:
+            date_str = ''
+        time_str = time_to_string(time, is_am)[0]
+        task_intent = task[4]
+        task_updated, rows_to_update, values = update_task(task_intent, date_str, time_str, day_repeat)
+        output_task_updated(intent, rows_to_update, values)
+        refresh_next_task_list()
     else:
-        date_str = ''
-    time_str = time_to_string(time, is_am)[0]
-    task_intent = task[4]
-    task_updated, rows_to_update, values = update_task(task_intent, date_str, time_str, day_repeat)
-    output_task_updated(intent, rows_to_update, values)
-    refresh_next_task_list()
-    
+        prompt_couldnt_find_task_to_update(intent)
 
 # handle move req
 def handle_move(req, intent):
@@ -126,6 +134,13 @@ def handle_move(req, intent):
     # interpret time from user
     date, time, day_repeat, is_am = interpret_time(tf)
     print(f'Retrieved time information: date: {date}, time: {time}, day_repeat: {day_repeat}, is_am: {is_am}')
+    if intent == '':
+        response = prompt_user_for_task_to_update()
+        if not response or response == 'Sorry, I didn\'t understand your request':
+            prompt_user_to_retry()
+            return
+        else:
+            intent = get_intent(response)
     # handle updating task
     handle_updating_task(intent, date, time, is_am, day_repeat)
     
@@ -430,15 +445,32 @@ def time_to_string(time, is_am):
     print(f'Time as String: {time_str}')
     return time_str, hour, minute
 
+def check_task_not_exist(intent):
+    tasks, confidence = get_task_intent(intent)
+    update = False
+    if len(tasks) != 0:
+        response = ask_update_or_insert(intent)
+        y_or_n = get_y_or_n(response)
+        if y_or_n == 'yes':
+            prompt_updating_task(intent)
+            update = True
+        else:
+            prompt_setting_new_task(intent)
+    return update
+
 def set_task(intent, date, time, day_reapeat, is_am):
     print(f'Setting Task: Intent: {intent}, Date: {date}, Time: {time}, Day Repeat: {day_reapeat}, Is AM: {is_am}')
     date_str = f'{date.month}/{date.day}/{date.year}'
     print(f'Date String: {date_str}')
     time_str, hour, minute = time_to_string(time, is_am)
     print(f'Time String: {time_str}, Hour: {hour}, Minute: {minute}')
-    insert_new_task(intent, date_str, time_str, day_reapeat)
-    print(f'Inserted New Task: Date: {date_str}, Time: {time_str}, Task Purpose: {intent}')
-    refresh_next_task_list()
+    update = check_task_not_exist(intent)
+    if not update:
+        insert_new_task(intent, date_str, time_str, day_reapeat)
+        print(f'Inserted New Task: Date: {date_str}, Time: {time_str}, Task Purpose: {intent}')
+        refresh_next_task_list()
+    else:
+        update_task(intent, date_str, time_str, day_reapeat)
     return hour, minute
 
 def query_tasks_at_date(date):
@@ -543,17 +575,21 @@ def get_task_intent(intent):
     print(f'Getting task by intent: {intent}')
     tasks_after_now = get_ordered_tasks()
     print(f'Got tasks: {tasks_after_now}')
-    similarities = []
-    print(f'\nGetting Similarities')
-    for task in tasks_after_now:
-        print('Getting intent')
-        task_intent = task[4]
-        print('Comparing strings')
-        similarity = compare_strings(task_intent, intent)
-        print(f'Appending Similarity: {similarity}')
-        similarities.append(similarity)
-    print(f'\nGot similarities: {similarities}')
-    task, confidence = get_max_similarity(tasks_after_now, similarities)
+    if len(tasks_after_now) != 0:
+        similarities = []
+        print(f'\nGetting Similarities')
+        for task in tasks_after_now:
+            print('Getting intent')
+            task_intent = task[4]
+            print('Comparing strings')
+            similarity = compare_strings(task_intent, intent)
+            print(f'Appending Similarity: {similarity}')
+            similarities.append(similarity)
+        print(f'\nGot similarities: {similarities}')
+        task, confidence = get_max_similarity(tasks_after_now, similarities)
+    else:
+        task, confidence = [], 0
+
     print(f'Most similar task: {task}, Confidence: {confidence}')
     return task, confidence
 

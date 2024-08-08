@@ -53,5 +53,7 @@ contextBridge.exposeInMainWorld('electron', {
   volumeChanged: (volume) => ipcRenderer.send('volume-changed', volume),
   voiceChanged: (voice) => ipcRenderer.send('voice-changed', voice),
   setTask: (taskDetails, taskDate, taskTime) => ipcRenderer.send('set-task', taskDetails, taskDate, taskTime),
-  onSetTaskResponse: (callback) => ipcRenderer.on('set-task-response', callback)
+  onSetTaskResponse: (callback) => ipcRenderer.on('set-task-response', callback),
+  updateTask: (taskDate, taskTime, taskDetails, repeating) => ipcRenderer.send('update-task', taskDate, taskTime, taskDetails, repeating),
+  deleteTask: (taskDate, taskTime, taskDetails, repeating) => ipcRenderer.send('delete-task', taskDate, taskTime, taskDetails, repeating)
 })

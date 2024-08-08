@@ -258,11 +258,13 @@ def interpret_time(time):
     elif time['hours']:
         print(f'Getting time from hours: {time["hours"]}')
         task_time = get_time_now_to_x_hours(time['hours'])[1]
-        is_am = True if task_time.hour >=0 and time.hour < 12 else False
+        is_am = True if task_time.hour >=0 and task_time.hour < 12 else False
         print('Num, Hours')
     elif time['minutes']:
         print(f'Getting time from minutes: {time["minutes"]}')
         task_time = get_time_now_to_x_minutes(time['minutes'])[1]
+        is_am = True if task_time.hour >=0 and task_time.hour < 12 else False
+        print('Num, Minutes')
         
         print('Num, Minutes')
     print(f'Task Time: {task_time}\n')
@@ -789,11 +791,13 @@ def remind_task(tasks, when):
         response = f'This is a reminder {intent_as_response(init_task[4])} in {when}. '
     print(f'Response: {response}')
     task_date_str = init_task[2]
-    task_date = datetime.strptime(task_date_str, '%m/%d/%Y')
+    task_time_str = init_task[3]
+    task_date = datetime.strptime(' '.join([task_date_str, task_time_str]), '%m/%d/%Y %I:%M %p')
     previous_task = init_task
     for task in tasks[1:]:
         date_str = task[2]
-        date = datetime.strptime(date_str, '%m/%d/%Y')
+        time_str = task[3]
+        date = datetime.strptime(' '.join([date_str, time_str]), '%m/%d/%Y %I:%M %p')
         today = datetime.today()
         if date.month == today.month and date.day == today.day and date.year == today.year:
             proximity = date - task_date

@@ -208,7 +208,7 @@ const createWindow = () => {
     })
 
     ipcMain.on('fill-email', (event) => {
-        db.get('SELECT * FROM users WHERE rememberme = TRUE', (err, row) => {
+        db.get('SELECT * FROM users WHERE id = ?', [currentUserId], (err, row) => {
             if (err) {
                 // output error with query and send failure and error message to renderer process
                 console.error('Error querying database:', err.message);
@@ -227,7 +227,7 @@ const createWindow = () => {
 
     ipcMain.on('fill-app-pass', (event) => {
         console.log('Querying app password')
-        db.get('SELECT * FROM users WHERE username = ?', [currentUsername], (err, row) => {
+        db.get('SELECT * FROM users WHERE id = ?', [currentUserId], (err, row) => {
             if (err) {
                 console.log(`Error Querying Database: ${err}`)
                 event.reply('fill-app-pass-response', { success: false })

@@ -957,12 +957,6 @@ window.electron.appendUserChat((event, data) => {
     appendChat('user', data)
 })
 
-window.electron.on("response", (event, response) => {
-    if (response.purpose === "generic-openai") {
-        appendChat("assistant", response.data);
-    }
-});
-
 const textarea = document.getElementById('body')
 
 textarea.addEventListener('input', function () {
@@ -970,17 +964,17 @@ textarea.addEventListener('input', function () {
     this.style.height = this.scrollHeight + 'px'
 })
 
-var modal = document.getElementById("taskModal");
+var modal = document.getElementById("taskModal")
 
-var span = document.getElementsByClassName("close")[0];
+var span = document.getElementsByClassName("close")[0]
 
 span.onclick = function() {
-    modal.style.display = "none";
+    modal.style.display = "none"
 }
 
 window.onclick = function(event) {
     if (event.target == modal) {
-        modal.style.display = "none";
+        modal.style.display = "none"
     }
 }
 function openModal(row) {
@@ -1000,9 +994,18 @@ function openModal(row) {
     if (modifier === 'PM') {
         hours = parseInt(hours, 10) + 12
     }
+    console.log(`Hours: ${hours}, Minutes: ${minutes}`)
+    if (hours.length < 2) {
+        hours = hours.padStart(2, '0')
+    }
+    if (minutes.length < 2) {
+        minutes = minutes.padStart(2, '0')
+    }
     let formattedTime = `${hours}:${minutes}`
+    console.log(`Formatted Time: ${formattedTime}`)
     document.getElementById('task-date-update').value = formattedDate
     document.getElementById('task-time-update').value = formattedTime
+    console.log(document.getElementById('task-time-update').value)
     document.getElementById('task-details-update').value = cells[2].innerText
     document.getElementById('task-repeating-update').value = cells[3].innerText
         

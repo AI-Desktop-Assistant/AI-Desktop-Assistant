@@ -2298,5 +2298,378 @@
             "2-BCC-ENT",
             "2-BCC-ENT"
         ]
+    },
+    {
+        "sentence": "draft an email to supplier@example.com about the order",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "1-REC-ENT",
+            "O",
+            "O",
+            "O"
+        ]
+    },
+    {
+        "sentence": "send an email to hr@example.com about the new policy",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "1-REC-ENT",
+            "O",
+            "O",
+            "O",
+            "O"
+        ]
+    },
+    {
+        "sentence": "compose a feedback email to vendor@example.com",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "1-REC-ENT"
+        ]
+    },
+    {
+        "sentence": "email the travel itinerary to team@example.com",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "1-REC-ENT"
+        ]
+    },
+    {
+        "sentence": "draft an email to client@example.com regarding the deliverables",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "1-REC-ENT",
+            "O",
+            "O",
+            "O"
+        ]
+    },
+    {
+        "sentence": "send an email to developer@example.com regarding the bug report",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "1-REC-ENT",
+            "O",
+            "O",
+            "O",
+            "O"
+        ]
+    },
+    {
+        "sentence": "compose a thank you email to mentor@example.com",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "1-REC-ENT"
+        ]
+    },
+    {
+        "sentence": "email the conference details to attendees@example.com",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "1-REC-ENT"
+        ]
+    },
+    {
+        "sentence": "draft an email to customerservice@example.com about the issue",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "1-REC-ENT",
+            "O",
+            "O",
+            "O"
+        ]
+    },
+    {
+        "sentence": "send an email to marketing@example.com about the campaign",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "1-REC-ENT",
+            "O",
+            "O",
+            "O"
+        ]
+    },
+    {
+        "sentence": "compose a reminder email for the appointment",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O"
+        ]
+    },
+    {
+        "sentence": "email the training schedule to employees@example.com",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "1-REC-ENT"
+        ]
+    },
+    {
+        "sentence": "draft an email to landlord@example.com about the lease",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "1-REC-ENT",
+            "O",
+            "O",
+            "O"
+        ]
+    },
+    {
+        "sentence": "Email the proposal to client@example.com and carbon copy accountmanager@example.com",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "1-REC-ENT",
+            "O",
+            "S-1-CC-ENT",
+            "S-1-CC-ENT",
+            "1-CC-ENT"
+        ]
+    },
+    {
+        "sentence": "Send an email to legalteam@example.com about the contract review and blind copy projectmanager@example.com",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "1-REC-ENT",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "S-1-BCC-ENT",
+            "S-1-BCC-ENT",
+            "1-BCC-ENT"
+        ]
+    },
+    {
+        "sentence": "Compose a thank you email to mentor@example.com and copy trainingcoordinator@example.com",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "1-REC-ENT",
+            "O",
+            "S-1-CC-ENT",
+            "1-CC-ENT"
+        ]
+    },
+    {
+        "sentence": "Send an email to salesteam@example.com about the monthly target and blind copy salesdirector@example.com and marketingteam@example.com",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "1-REC-ENT",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "S-1-BCC-ENT",
+            "S-1-BCC-ENT",
+            "1-BCC-ENT",
+            "O",
+            "2-BCC-ENT"
+        ]
+    },
+    {
+        "sentence": "could you draft an email to superior@example.com talking about how I am going to copy the work from the previous term and blind copy devin@example.com and mia@example.com",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "1-REC-ENT",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "S-1-BCC-ENT",
+            "S-1-BCC-ENT",
+            "1-BCC-ENT",
+            "O",
+            "2-BCC-ENT"
+        ]
+    },
+    {
+        "sentence": "could you draft an email to superior@example.com and developmentteam@example.com talking about how I am just about finished with the project and blind copy joan@example.com and george@example.com",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "1-REC-ENT",
+            "O",
+            "2-REC-ENT",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "S-1-BCC-ENT",
+            "S-1-BCC-ENT",
+            "1-BCC-ENT",
+            "O",
+            "2-BCC-ENT"
+        ]
+    },
+    {
+        "sentence": "could you draft an email to jennifer@example.com and sally@example.com discussing how I am just about finished with the project and blind carbon copy joan@example.com and george@example.com",
+        "labels": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "1-REC-ENT",
+            "O",
+            "2-REC-ENT",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "S-1-BCC-ENT",
+            "S-1-BCC-ENT",
+            "S-1-BCC-ENT",
+            "1-BCC-ENT",
+            "O",
+            "2-BCC-ENT"
+        ]
+    },
+    {
+        "sentence": "can you blind copy hellen@example.com and austin@example.com in an email to my supervisor about the quarterly earnings",
+        "labels": [
+            "O",
+            "O",
+            "S-1-BCC-ENT",
+            "S-1-BCC-ENT",
+            "1-BCC-ENT",
+            "O",
+            "2-BCC-ENT",
+            "O",
+            "O",
+            "O",
+            "O",
+            "1-REC-ENT",
+            "1-REC-ENT",
+            "O",
+            "O",
+            "O",
+            "O"
+        ]
+    },
+    {
+        "sentence": "can you carbon copy gabriel@example.com and fernando@example.com to an email to my supervisor and the product department about this week's progress on the project",
+        "labels": [
+            "O",
+            "O",
+            "S-1-CC-ENT",
+            "S-1-CC-ENT",
+            "1-CC-ENT",
+            "O",
+            "2-CC-ENT",
+            "O",
+            "O",
+            "O",
+            "O",
+            "1-REC-ENT",
+            "1-REC-ENT",
+            "O",
+            "2-REC-ENT",
+            "2-REC-ENT",
+            "2-REC-ENT",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O"
+        ]
     }
 ]

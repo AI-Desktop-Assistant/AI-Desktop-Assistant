@@ -93,10 +93,15 @@ function switchModule(moduleId) {
 
     }
     if (moduleId === 'chat') {
+        document.getElementById("chat").style.display = 'flex'
         document.getElementById("chat").classList.remove("sidebar")
         document.getElementById("chat").classList.add("main")
     } 
+    else if (moduleId === 'settings') {
+        document.getElementById("chat").style.display = 'none'
+    }
     else {
+        document.getElementById("chat").style.display = 'flex'
         document.getElementById("chat").classList.add("sidebar")
         document.getElementById("chat").classList.remove("main")
     }

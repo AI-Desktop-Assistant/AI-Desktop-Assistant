@@ -7,8 +7,14 @@ from user_config import get_user_id
 from datetime import datetime
 
 def insert_sent_email(subject, body, recipients, cc, timestamp):
-    recipients_str = ', '.join(recipients)
-    cc_str = ', '.join(cc)
+    if isinstance(recipients, list):
+        recipients_str = ', '.join(recipients)
+    else:
+        recipients_str = recipients
+    if isinstance(cc, list):
+        cc_str = ', '.join(cc)
+    else:
+        cc_str = cc
     with sqlite3.connect('users.db') as conn:
         query = 'INSERT INTO sent_emails (user_id, subject, body, recipient, cc, timestamp) VALUES (?, ?, ?, ?, ?, ?)' 
         user_id = get_user_id()

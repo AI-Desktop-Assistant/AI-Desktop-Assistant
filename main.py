@@ -126,10 +126,13 @@ def handle_message(data):
     elif data['purpose'] == 'set-task':
         task_date = data['taskDate']
         task_time = data['taskTime']
+        hour = int(task_time.split(':')[0])
+        print(f'Task Date from UI: {task_date}')
+        print(f'Task Time from UI: {task_time}')
         date = datetime.strptime(task_date, '%Y-%m-%d')
         time = datetime.strptime(task_time, '%H:%M')
-        print(f"Setting Task With: {data['taskDetails']}, {date}, {time}, {True if 'AM' in data['taskTime'] else False}")
-        set_task(data['taskDetails'], date, time, '', True if 'AM' in data['taskTime'] else False)
+        print(f"Setting Task With: {data['taskDetails']}, {date}, {time}, {True if time.hour < 12 else False}")
+        set_task(data['taskDetails'], date, time, '', True if time.hour < 12 else False)
         socketio.emit('response', {'purpose': 'task-set-response', 'success': True, 'message': 'Task Successfully Set'})
     elif data['purpose'] == 'update-task':
         task_date = data['taskDate']

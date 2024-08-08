@@ -448,14 +448,15 @@ def time_to_string(time, is_am):
 def check_task_not_exist(intent):
     tasks, confidence = get_task_intent(intent)
     update = False
-    if len(tasks) != 0:
-        response = ask_update_or_insert(intent)
-        y_or_n = get_y_or_n(response)
-        if y_or_n == 'yes':
-            prompt_updating_task(intent)
-            update = True
-        else:
-            prompt_setting_new_task(intent)
+    if confidence == 1:
+        if len(tasks) != 0:
+            response = ask_update_or_insert(intent)
+            y_or_n = get_y_or_n(response)
+            if y_or_n == 'yes':
+                prompt_updating_task(intent)
+                update = True
+            else:
+                prompt_setting_new_task(intent)
     return update
 
 def set_task(intent, date, time, day_reapeat, is_am):
@@ -543,6 +544,7 @@ def get_ordered_tasks():
         rows = cursor.fetchall()
         now = datetime.now()
         tasks_after_now = []
+        print(f'Ordered Rows: {rows}')
         for task in rows:
             print(f'Task: {task}')
             task_datetime = datetime.strptime(' '.join([task[2], task[3]]), '%m/%d/%Y %I:%M %p')
@@ -554,7 +556,8 @@ def get_ordered_tasks():
             if diff > zero:
                 print(f'Appending Task: {task}')
                 tasks_after_now.append(task)
-    return tasks_after_now
+        sorted_tasks = sorted(tasks_after_now, key=convert_time)
+    return sorted_tasks
 
 def get_next_tasks(num=-1):
     print(f'Getting Next {num} tasks')
@@ -770,10 +773,14 @@ def output_tasks_today():
 def get_task_proximity(date):
     now = datetime.now()
     proximity = date - now
-    print(f'Proximity: {proximity}')
+    print(f'Proximity: {proximity}, Date: {date}, Now: {now}')
     return proximity
 
 def remind_task(tasks, when):
+    if len(tasks) == 0:
+        set_next_task_datetime('')
+        set_next_task_list('')
+        return
     init_task = tasks[0]
     print(f'Reminding task in {when}: {init_task}')
     if when == 'now':
@@ -790,7 +797,8 @@ def remind_task(tasks, when):
         today = datetime.today()
         if date.month == today.month and date.day == today.day and date.year == today.year:
             proximity = date - task_date
-            hours_diff, min_diff = proximity.hour, proximity.minute
+            min_diff = proximity.seconds//60
+            hours_diff = min_diff//60
             if hours_diff != 0:
                 response += f'{hours_diff} hour'
                 if hours_diff != 1:
@@ -812,16 +820,27 @@ def check_remind_on_time(tasks, proximity):
     print('Checking task is now')
     remind_on_time = False
     zero = timedelta(0)
-    print(f'Proximity Seconds: {proximity.seconds}')
+    print(f'Proximity Seconds: {proximity}')
     if proximity <= zero:
         print('Task is occuring now')
         remind_on_time = True
         print('Reminding Task is now')
         remind_task(tasks, 'now') 
         if len(tasks) > 1:
-            set_next_task_datetime(tasks[1:])
-            next_three_tasks = get_next_tasks(4)[1:]
-            set_next_task_list(next_three_tasks)
+            print(f'Tasks not length 0: {tasks}')
+            next_tasks = tasks[1:]
+            if len(next_tasks) != 0:
+                print(f'Next Tasks Length Not 0: {next_tasks}')
+                next_task = next_tasks[0]
+                next_task_date = next_task[2]
+                next_task_time = next_task[3]
+                date_obj = datetime.strptime(' '.join([next_task_date, next_task_time]), '%m/%d/%Y %I:%M %p')
+                set_next_task_datetime(date_obj)
+                next_three_tasks = get_next_tasks(4)[1:]
+                set_next_task_list(next_three_tasks)
+            else:
+                set_next_task_datetime('')
+                set_next_task_list('')
         else:
             set_next_task_datetime('')
             set_next_task_list('')
@@ -852,6 +871,13 @@ def check_remind_two_hours(tasks, proximity):
             remind_task(tasks, '2 hours')
     print(f'Remind Two Hours: {remind_two_hours}')
     return remind_two_hours
+
+def convert_time(task):
+    date_str = task[2]
+    time_str = task[3]
+    datetime_str = f"{date_str} {time_str}"
+    datetime_obj = datetime.strptime(datetime_str, '%m/%d/%Y %I:%M %p')
+    return datetime_obj
 
 def remind_tasks():    
     global remind_two_hours

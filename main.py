@@ -87,6 +87,13 @@ def handle_message(data):
         if req != '':
             # module = classify_user_request(req)
             set_recieved_message(req)
+    elif data['purpose'] == 'generic-openai':
+        print("Main.py generic purpose recieved...")
+        req = data['data']
+        if req != '':
+            response = classify_user_request(req)
+            print("Emitting generic response...")
+            emit('response', {'data': response, 'purpose':'generic-openai'})
     elif data['purpose'] == 'email':
         print('Sending email')
         try:

@@ -6,6 +6,7 @@ from .module_layer.email.process_email_request import process_email_req
 from .module_layer.task.process_task_req import process_task_req
 from .module_layer.weather.process_weather_req import process_weather_request
 from .module_layer.spotify.process_spotify_req import process_spotify_request
+from .module_layer.generics.new_writing_agent import process_generic_req
 
 model_path = 'models\\module_classification_model.pth'
 model, tokenizer, device = load_model(model_path, 'classification')
@@ -45,6 +46,6 @@ def classify_user_request(req):
         process_task_req(req)
     elif module == 'spotify':
         process_spotify_request(req)
-    # elif module == 'generic':
-    #     process_generic_req(req)
+    elif module == 'generic':
+        process_generic_req(req)
     return module

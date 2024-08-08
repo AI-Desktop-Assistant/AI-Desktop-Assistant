@@ -957,6 +957,12 @@ window.electron.appendUserChat((event, data) => {
     appendChat('user', data)
 })
 
+window.electron.on("response", (event, response) => {
+    if (response.purpose === "generic-openai") {
+        appendChat("assistant", response.data);
+    }
+});
+
 const textarea = document.getElementById('body')
 
 textarea.addEventListener('input', function () {

@@ -6,6 +6,7 @@ import pygame
 import io
 import os
 import threading
+from classifying_layer.module_layer.history.history import user_command, user_response
 
 wake_word = 'hey computer'
 assistant_volume = 0.5
@@ -87,6 +88,7 @@ def say(text):
     except:
         py_tts(text)
         tts = "py"
+    user_response(text)
     return {"text": text, "tts": tts}
 
 def wait_for_message_from_ui():
@@ -172,6 +174,7 @@ def listen(timeout=10, phrase_time_limit=10, ready='', wake_word=False):
             print('Setting Use Audio: False')
             use_audio(False)
             print(f'Returning Message From UI: {received_message}')
+            user_command(received_message)
             return received_message
         else:
             print(f'Returning message from Microphone: {received_text}')
@@ -182,11 +185,13 @@ def listen(timeout=10, phrase_time_limit=10, ready='', wake_word=False):
                         use_audio(True)
                         socket = get_app_socket()[1]
                         socket.emit('response', {'purpose': 'chat-user', 'data': received_text})
+                        user_command(received_text)
                 else:
                     print('Setting Use Audio: True')
                     use_audio(True)
                     socket = get_app_socket()[1]
                     socket.emit('response', {'purpose': 'chat-user', 'data': received_text})
+                    user_command(received_text)
             return received_text
             
     except Exception as e:

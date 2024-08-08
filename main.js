@@ -659,7 +659,10 @@ app.whenReady().then(() => {
             }
             win.focus()
             openSpotifyLogin(data.data)
-        } else if (purpose == 'chat-assistant') {
+        } else if (data.purpose === 'command-user') {
+            console.log(`Sending data... ${data}`)
+            win.webContents.send('command-user', data)
+        }else if (purpose == 'chat-assistant') {
             win.webContents.send('chat-assistant', data.data)
         } else if (purpose == 'chat-user') {
             win.webContents.send('chat-user', data.data)

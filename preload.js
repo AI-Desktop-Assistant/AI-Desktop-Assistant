@@ -55,5 +55,6 @@ contextBridge.exposeInMainWorld('electron', {
   setTask: (taskDetails, taskDate, taskTime) => ipcRenderer.send('set-task', taskDetails, taskDate, taskTime),
   onSetTaskResponse: (callback) => ipcRenderer.on('set-task-response', callback),
   updateTask: (taskDate, taskTime, taskDetails, repeating) => ipcRenderer.send('update-task', taskDate, taskTime, taskDetails, repeating),
-  deleteTask: (taskDate, taskTime, taskDetails, repeating) => ipcRenderer.send('delete-task', taskDate, taskTime, taskDetails, repeating)
+  deleteTask: (taskDate, taskTime, taskDetails, repeating) => ipcRenderer.send('delete-task', taskDate, taskTime, taskDetails, repeating),
+  addHistoryRow: (data) => ipcRenderer.on('command-user', data)
 })

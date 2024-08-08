@@ -957,6 +957,33 @@ window.electron.appendUserChat((event, data) => {
     appendChat('user', data)
 })
 
+function createHistoryRow(response) {
+    console.log(`Creating history row...................... `, response)
+    const row = document.createElement('tr');
+
+    const cell = document.createElement('td');
+    cell.textContent = ''
+    row.appendChild(cell);
+    const commandCell = document.createElement('td');
+    commandCell.textContent = response.historyCommand
+    row.appendChild(commandCell);
+    const responseCell = document.createElement('td');
+    responseCell.textContent = response.historyResponse
+    row.appendChild(responseCell);
+
+    return row;
+}
+
+window.electron.addHistoryRow((event, response) => {
+    console.log(`Received response from main: ${response}`)
+    if (response.success) {
+        console.log(`Created a row for history table: ${response}`)
+        const tbody = document.getElementById('historyTable')
+        const row = createHistoryRow(response);
+        tbody.appendChild(row);
+    }
+})
+
 const textarea = document.getElementById('body')
 
 textarea.addEventListener('input', function () {

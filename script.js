@@ -635,7 +635,7 @@ function signout() {
     console.log('Going back to login page')
     document.getElementById('login-signup-screen').style.display = 'flex'
     document.getElementById('main-app').style.display = 'none'
-    document.getElementById('chat-history').textContent = ''
+    document.querySelector('.chat-history').innerHTML = ''
 }
 
 function sendEmail() {

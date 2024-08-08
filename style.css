@@ -101,7 +101,6 @@ header nav {
     flex-grow: 1;
     justify-content: center;
     padding: 20px;
-    overflow: hidden;
 }
 .module {
     background: #333333;
@@ -112,8 +111,23 @@ header nav {
     width: 50%;
     display: flex;
     flex-direction: column;
-    overflow: hidden; 
-    max-height: 75vh; /* a */
+}
+.main {
+    width: 50%;
+}
+.sidebar {
+    width: 25%;
+    margin-right: 50px;
+}
+.moduleforchat {
+    background: #333333;
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    display: flex;
+    flex-direction: column;
+    max-height: 75vh;
 }
 .chat-history {
     flex: 1;
@@ -341,7 +355,6 @@ button:hover {
 }
 /*Weather Widget*/
 #customWeatherWidget {
-    background: #333;
     border-radius: 8px;
     margin-top: 10px;
     padding: 20px;
@@ -454,8 +467,8 @@ button:hover {
 }
 
 .weather-module {
-    background-color: white;
-    color: black;
+    background-color: #333333;
+    color: white;
     padding: 20px;
     border-radius: 10px;
 }

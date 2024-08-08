@@ -27,7 +27,8 @@ def predict_tokens(req, model, tokenizer):
 def process_weather_request(req):
     weather_model, tokenizer, device = load_weather_intent_model(weather_model_path)
     tokens, predicted_token_classes = predict_tokens(req, weather_model, tokenizer)
-    result = sift_output(tokens, predicted_token_classes)
+    sifted_result = sift_output(tokens, predicted_token_classes)
+    result = ' '.join(sifted_result)
     send_sift_data(result)
 
 def load_weather_intent_model(model_path):
@@ -51,7 +52,7 @@ def send_sift_data(sift):
     if sift:
         print(f'Sending weather data: {sift}')
         app, socketio = get_app_socket()
-        socketio.emit("get-weather", {"data": sift[0], "purpose": "get-weather-info"})
+        socketio.emit("get-weather", {"data": sift, "purpose": "get-weather-info"})
 
 def receive_weather_data(weatherData):
     print(weatherData)

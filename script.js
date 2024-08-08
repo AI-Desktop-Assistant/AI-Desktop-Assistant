@@ -92,6 +92,14 @@ function switchModule(moduleId) {
         content.forEach(cont => cont.classList.add('active'))
 
     }
+    if (moduleId === 'chat') {
+        document.getElementById("chat").classList.remove("sidebar")
+        document.getElementById("chat").classList.add("main")
+    } 
+    else {
+        document.getElementById("chat").classList.add("sidebar")
+        document.getElementById("chat").classList.remove("main")
+    }
 }
 
 function switchTab(tabId) {

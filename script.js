@@ -353,8 +353,8 @@ window.electron.onFillSentEmailResponse((event, response) => {
         const timestamps = response.timestamps
         const snippets = bodies.map(body => body.slice(0, 38) + (body.length > 38 ? '...' : ''));
         for (let i = 0; i < recipients.length; i++) {
-            const row = createEmailRow(recipients[i], subjects[i], snippets[i], bodies[i], timestamps[i]);
-            tbody.appendChild(row);
+            const row = createEmailRow(recipients[i], subjects[i], snippets[i], bodies[i], timestamps[i])
+            tbody.appendChild(row)
         }
     }
 })

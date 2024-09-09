@@ -35,7 +35,7 @@ def predict_tokens(req, model):
 
 def format_to_email(response):
     email = ''
-    if '@' not in response:
+    if '@' not in response and 'at' not in response:
         return ''
     for word in response.split():
         if word == 'at':
